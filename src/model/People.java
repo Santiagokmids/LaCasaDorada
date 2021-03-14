@@ -1,6 +1,6 @@
 package model;
 
-public class People {
+public abstract class People {
 	
 	//Attributes
 	
