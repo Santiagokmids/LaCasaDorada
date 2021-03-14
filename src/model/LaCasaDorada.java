@@ -1,6 +1,10 @@
 package model;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
+=======
+import java.io.IOException;
+>>>>>>> 9dbc3920482ab4664a4446abe59ed56970591ae0
 
 public class LaCasaDorada {
 	
@@ -56,6 +60,7 @@ public class LaCasaDorada {
 		return order;
 	}
 
+<<<<<<< HEAD
 	public void setOrder(ArrayList<Order> order) {
 		this.order = order;
 	}
@@ -68,4 +73,11 @@ public class LaCasaDorada {
 	
 	
 	
+=======
+	public boolean loadData()  throws IOException, ClassNotFoundException{
+	
+		return false;
+	}
+
+>>>>>>> 9dbc3920482ab4664a4446abe59ed56970591ae0
 }
