@@ -1,6 +1,6 @@
 package model;
 
-public class PorductType {
+public class ProductType {
 	
 	//Attributes
 	
@@ -9,7 +9,7 @@ public class PorductType {
 	/**
 	 * @param name
 	 */
-	public PorductType(String name) {
+	public ProductType(String name) {
 		
 		this.name = name;
 	}
