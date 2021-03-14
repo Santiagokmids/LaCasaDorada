@@ -3,6 +3,7 @@ package model;
 public class Client extends People{
 	
 	//Attributes
+	
 	private String address;
 	private String telephone;
 	private String fieldOfObservations;

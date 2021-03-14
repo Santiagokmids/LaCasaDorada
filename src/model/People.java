@@ -3,6 +3,7 @@ package model;
 public class People {
 	
 	//Attributes
+	
 	private String name;
 	private String lastName;
 	private String id;

@@ -6,6 +6,7 @@ import java.util.Date;
 public class Order {
 	
 	//Attributes
+	
 	private String code;
 	private StateOrder state;
 	private ArrayList<Integer> amount;
@@ -13,6 +14,7 @@ public class Order {
 	private String fieldOfObservations;
 	
 	//Relations
+	
 	private Client orderClient;
 	private ArrayList<Product> products;
 	private Employee orderEmployee;

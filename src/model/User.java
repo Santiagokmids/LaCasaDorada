@@ -1,11 +1,12 @@
 package model;
 
 public class User extends Employee {
-	
+
 	//Attributes
-		private String userName;
-		private String password; 
-		
+	
+	private String userName;
+	private String password; 
+
 	public User(String name, String lastName, String id, String userName, String password, State state) {
 		super(name, lastName, id, state);
 		this.userName = userName;
@@ -27,5 +28,5 @@ public class User extends Employee {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
 }
