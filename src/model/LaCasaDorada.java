@@ -22,8 +22,68 @@ public class LaCasaDorada {
 	
 	
 	//Gestionar personas, cliente.
-	public void create(String name, String lastName, String id, State state, String address, String telephone, String fieldOfObservations) {
+	public boolean create(String name, String lastName, String id, State state, String address, String telephone, String fieldOfObservations) {
+		boolean clients = true;
 		
+		if(!findEmploy(id)) {
+			Client client = new Client(name, lastName, id, state, address, telephone, fieldOfObservations);
+			people.add(client);
+			
+		}else {
+			clients = false;
+		}
+		return clients;
+	}
+	
+	public void update(String name, String lastName, String id, State state, String address, String telephone, String fieldOfObservations,int index) {
+		people.get(index).setName(name);
+		people.get(index).setLastName(lastName);
+		people.get(index).setId(id);
+		people.get(index).setState(state);
+	}
+	
+	public boolean delete(String id){
+		boolean delete = false;
+		int pos = findPosition(id);
+		
+		if(pos != -1) {
+			people.remove(pos);
+			delete = true;
+		}
+		return delete;	
+	}
+	
+	public boolean setState(String id) {
+		boolean state = false;
+		int pos = findPosition(id);
+		if(pos != -1) {
+			people.get(pos).setState(State.DISABLED);
+			state = true;
+		}
+		return state;
+		
+	}
+	
+	public int findPosition(String idEmploy){
+		int position = -1;
+		for (int j = 0; j < people.size(); j++) {
+			
+			if(idEmploy.equalsIgnoreCase(people.get(j).getId())) {
+				position = j;
+			}
+		}
+		return position;
+	}
+	
+	public boolean findEmploy(String idEmploy){
+		boolean find = false;
+		for (int j = 0; j < people.size(); j++) {
+			
+			if(idEmploy.equalsIgnoreCase(people.get(j).getId())) {
+				find = true;
+			}
+		}
+		return find;
 	}
 	
 	public boolean loadData()  throws IOException, ClassNotFoundException{
