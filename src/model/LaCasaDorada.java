@@ -12,8 +12,7 @@ public class LaCasaDorada {
 	private ArrayList<Ingredient> ingredient;
 	private ArrayList<Order> order;
 	
-	public LaCasaDorada(ArrayList<People> people, ArrayList<Product> product, ArrayList<ProductType> productType,
-			ArrayList<Ingredient> ingredient, ArrayList<Order> order) {
+	public LaCasaDorada() {
 		people = new ArrayList<>();
 		product = new ArrayList<>();
 		productType = new ArrayList<>();
