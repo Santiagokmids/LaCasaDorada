@@ -7,9 +7,4 @@ public class LaCasaDoradaGUI {
 	public LaCasaDoradaGUI(LaCasaDorada laCasaDorada) {
 
 	}
-
-	public static void main(String[] args) {
-		
-	}
-
 }
