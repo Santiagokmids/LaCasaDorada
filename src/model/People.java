@@ -12,7 +12,7 @@ public class People {
 		this.name = name;
 		this.lastName = lastName;
 		this.id = id;
-		this.state = ENABLE;
+		this.state = state;
 	}
 
 	public String getName() {
@@ -43,6 +43,14 @@ public class People {
 		String message = "";
 		
 		return message;
+	}
+
+	public State getState() {
+		return state;
+	}
+
+	public void setState(State state) {
+		this.state = state;
 	}
 	
 	
