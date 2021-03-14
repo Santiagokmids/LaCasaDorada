@@ -41,10 +41,7 @@ public class Main extends Application{
 	}
 	
 	public static void main(String[] args) {
-<<<<<<< HEAD
 		
-=======
-
 		launch(args);
 	}
 
@@ -62,7 +59,7 @@ public class Main extends Application{
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("La Casa Dorada");
 		primaryStage.show();
->>>>>>> 9dbc3920482ab4664a4446abe59ed56970591ae0
+
 	}
 
 }

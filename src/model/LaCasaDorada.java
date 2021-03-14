@@ -20,6 +20,17 @@ public class LaCasaDorada {
 		ingredient = new ArrayList<>();
 		order = new ArrayList<>();
 	}
+	
+	
+	//Gestionar personas, cliente.
+	public void create(String name, String lastName, String id, State state, String address, String telephone, String fieldOfObservations) {
+		
+	}
+	
+	public boolean loadData()  throws IOException, ClassNotFoundException{
+	
+		return false;
+	}
 
 	public ArrayList<People> getPeople() {
 		return people;
@@ -60,18 +71,4 @@ public class LaCasaDorada {
 	public void setOrder(ArrayList<Order> order) {
 		this.order = order;
 	}
-	
-	//Gestionar personas, cliente
-	public void create(String name, String lastName, String id, State state, String address, String telephone, String fieldOfObservations) {
-		
-	}
-	
-	
-	
-	
-	public boolean loadData()  throws IOException, ClassNotFoundException{
-	
-		return false;
-	}
-
 }
