@@ -12,7 +12,7 @@ public class Product {
 	//Relations
 	
 	private ArrayList<Ingredient> ingredients;
-	private ProductType ingredientType;
+	private ProductType productType;
 	
 	/**
 	 * @param name
@@ -20,12 +20,12 @@ public class Product {
 	 * @param ingredients
 	 * @param ingredientType
 	 */
-	public Product(String name, String price, ProductType ingredientType) {
+	public Product(String name, String price, ProductType productType) {
 
 		this.name = name;
 		this.price = price;
 		ingredients = new ArrayList<>(); 
-		this.ingredientType = ingredientType;
+		this.productType = productType;
 	}
 
 	public String getName() {
@@ -53,10 +53,10 @@ public class Product {
 	}
 
 	public ProductType getIngredientType() {
-		return ingredientType;
+		return productType;
 	}
 
 	public void setIngredientType(ProductType ingredientType) {
-		this.ingredientType = ingredientType;
+		this.productType = ingredientType;
 	}
 }
