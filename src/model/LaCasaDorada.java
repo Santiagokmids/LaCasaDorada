@@ -36,7 +36,6 @@ public class LaCasaDorada {
 	}
 
 	//Gestionar personas, cliente.
-<<<<<<< HEAD
 	public boolean create(String name, String lastName, String id, State state, String address, String telephone, String fieldOfObservations) {
 		boolean clients = true;
 		
@@ -99,9 +98,6 @@ public class LaCasaDorada {
 			}
 		}
 		return find;
-=======
-	public void create(String name, String lastName, String id, State state, String address, String telephone, String fieldOfObservations) {
-
 	}
 
 	public void importData(String fileName) throws IOException {
@@ -130,6 +126,7 @@ public class LaCasaDorada {
 	
 	public void exportData(String fileName) throws FileNotFoundException {
 		
+		@SuppressWarnings("resource")
 		PrintWriter pw = new PrintWriter(fileName);
 		
 		for (int i = 0; i < people.size(); i++) {
@@ -140,9 +137,6 @@ public class LaCasaDorada {
 				pw.println(client.getName()+client.getLastName()+client.getId()+client.getState()+client.getAddress()+client.getTelephone()+client.getFieldOfObservations());
 			}
 		}
-		
-		pw.close();
->>>>>>> 5083e9cb6d6d0b2e38e8f882868d4fc032db43f1
 	}
 	
 	public void saveData() throws IOException {
