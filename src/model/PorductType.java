@@ -1,16 +1,15 @@
 package model;
 
-public class Ingredient {
+public class PorductType {
 	
 	//Attributes
 	
 	private String name;
 
 	/**
-	 * <b>name: <>
 	 * @param name
 	 */
-	public Ingredient(String name) {
+	public PorductType(String name) {
 		
 		this.name = name;
 	}
