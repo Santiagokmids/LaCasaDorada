@@ -1,6 +1,8 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Random;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -123,6 +125,51 @@ public class LaCasaDorada {
 		}
 		return state;
 		
+	}
+	
+	//create order
+	public boolean create(StateOrder state, ArrayList<Integer> amount, Date date, String fieldOfObservations, Client orderClient,
+			ArrayList<Product>products, Employee ordEmployee) {
+		
+		boolean orders = true, validation = true;
+		int aleatorio = 0;
+		Random r = new Random();
+		String code = "";
+		
+		while(validation) {
+			
+			aleatorio = (int)(r.nextDouble() * 1000000);
+			code = "LCD"+aleatorio;
+			validation = findOrders(code);
+			
+			if(!validation) {
+				Order newOrder = new Order(code, state, amount, date, fieldOfObservations, orderClient, products, ordEmployee);
+				order.add(newOrder);
+
+			}else {
+				orders = false;
+			}
+		}
+		return orders;
+	}
+	
+	//public boolean updateOrder(StateOrder state,int index) {
+		//boolean find = false;	
+		//if()
+		//order.get(index).setState(state);;
+		//return false;
+	//}
+	
+	public boolean findOrders(String code){
+		boolean find = false;
+		
+		for (int j = 0; j < order.size(); j++) {
+			
+			if(code.equalsIgnoreCase(order.get(j).getCode())) {
+				find = true;
+			}
+		}
+		return find;
 	}
 	
 	public int findPosition(String idPeople){

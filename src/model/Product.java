@@ -8,12 +8,9 @@ public class Product {
 	
 	private String name;
 	private String price;
-	
-	//Relations
-	
 	private ArrayList<Ingredient> ingredients;
 	private ProductType productType;
-	
+
 	/**
 	 * @param name
 	 * @param price

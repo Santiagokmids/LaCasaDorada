@@ -12,20 +12,21 @@ public class Order {
 	private ArrayList<Integer> amount;
 	private Date date;
 	private String fieldOfObservations;
-	
-	//Relations
-	
 	private Client orderClient;
 	private ArrayList<Product> products;
 	private Employee orderEmployee;
 	
-	public Order(String code, StateOrder state, ArrayList<Integer> amount, Date date, String fieldOfObservations) {
+	public Order(String code, StateOrder state, ArrayList<Integer> amount, Date date, String fieldOfObservations, Client orderClient,
+			ArrayList<Product>products, Employee ordEmployee) {
+		
 		this.code = code;
 		this.state = state;
-		products = new ArrayList<>();
 		this.amount = amount;
 		this.date = date;
 		this.fieldOfObservations = fieldOfObservations;
+		this.orderClient = orderClient;
+		this.products = products;
+		this.orderEmployee = ordEmployee;
 	}
 
 	public String getCode() {
