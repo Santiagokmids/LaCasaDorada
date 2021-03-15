@@ -14,7 +14,7 @@ import java.io.PrintWriter;
 
 public class LaCasaDorada {
 
-	//Attribute
+	//COntants
 
 	public final static String SAVE_PATH_FILE = "";
 	public final static String SEPARATOR = ";";
