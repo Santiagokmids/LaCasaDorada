@@ -48,7 +48,7 @@ public class Main extends Application{
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(""));
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("main-pane.fxml"));
 		
 		fxmlLoader.setController(laCasaDoradaGUI);
 		
@@ -58,7 +58,9 @@ public class Main extends Application{
 		
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("La Casa Dorada");
+		//primaryStage.setResizable(false);
 		primaryStage.show();
+		laCasaDoradaGUI.loadBanner();
 	}
 
 }
