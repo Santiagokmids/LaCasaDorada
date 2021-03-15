@@ -35,11 +35,11 @@ public class LaCasaDorada {
 		order = new ArrayList<>();
 	}
 
-	//Gestionar personas, cliente.
+	//create client
 	public boolean create(String name, String lastName, String id, State state, String address, String telephone, String fieldOfObservations) {
 		boolean clients = true;
 		
-		if(!findEmploy(id)) {
+		if(!findPeople(id)) {
 			Client client = new Client(name, lastName, id, state, address, telephone, fieldOfObservations);
 			people.add(client);
 			
@@ -49,6 +49,7 @@ public class LaCasaDorada {
 		return clients;
 	}
 	
+	//update client
 	public void update(String name, String lastName, String id, State state, String address, String telephone, String fieldOfObservations,int index) {
 		people.get(index).setName(name);
 		people.get(index).setLastName(lastName);
@@ -56,6 +57,51 @@ public class LaCasaDorada {
 		people.get(index).setState(state);
 	}
 	
+	//create employee
+	public boolean create(String name, String lastName, String id, State state) {
+		boolean employees = true;
+		
+		if(!findPeople(id)) {
+			Employee employee = new Employee(name, lastName, id, state);
+			people.add(employee);
+			
+		}else {
+			employees = false;
+		}
+		return employees;
+	}
+	
+	//update employee
+	public void update(String name, String lastName, String id, State state,int index) {
+		people.get(index).setName(name);
+		people.get(index).setLastName(lastName);
+		people.get(index).setId(id);
+		people.get(index).setState(state);
+	}
+	
+	//create User
+		public boolean create(String name, String lastName, String id, String userName, String password, State state) {
+			boolean users = true;
+			
+			if(!findPeople(id)) {
+				User user = new User(name, lastName, id, userName, password, state);
+				people.add(user);
+				
+			}else {
+				users = false;
+			}
+			return users;
+		}
+		
+		//update user
+		public void update(String name, String lastName, String id, String userName, String password, State state,int index) {
+			people.get(index).setName(name);
+			people.get(index).setLastName(lastName);
+			people.get(index).setId(id);
+			people.get(index).setState(state);
+		}
+	
+	//delete people
 	public boolean delete(String id){
 		boolean delete = false;
 		int pos = findPosition(id);
@@ -67,6 +113,7 @@ public class LaCasaDorada {
 		return delete;	
 	}
 	
+	//change people
 	public boolean setState(String id) {
 		boolean state = false;
 		int pos = findPosition(id);
@@ -78,22 +125,22 @@ public class LaCasaDorada {
 		
 	}
 	
-	public int findPosition(String idEmploy){
+	public int findPosition(String idPeople){
 		int position = -1;
 		for (int j = 0; j < people.size(); j++) {
 			
-			if(idEmploy.equalsIgnoreCase(people.get(j).getId())) {
+			if(idPeople.equalsIgnoreCase(people.get(j).getId())) {
 				position = j;
 			}
 		}
 		return position;
 	}
 	
-	public boolean findEmploy(String idEmploy){
+	public boolean findPeople(String idPeople){
 		boolean find = false;
 		for (int j = 0; j < people.size(); j++) {
 			
-			if(idEmploy.equalsIgnoreCase(people.get(j).getId())) {
+			if(idPeople.equalsIgnoreCase(people.get(j).getId())) {
 				find = true;
 			}
 		}
