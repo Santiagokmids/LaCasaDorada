@@ -65,5 +65,4 @@ public class LaCasaDoradaGUI {
 	public void incializateProgram(ActionEvent event) throws IOException {
 		loadLogin();
 	}
-	//Faas
 }
