@@ -11,12 +11,17 @@
    <center>
       <Pane prefHeight="740.0" prefWidth="740.0" BorderPane.alignment="CENTER">
          <children>
+<<<<<<< HEAD
+            <ImageView fx:id="imageView" fitHeight="738.0" fitWidth="738.0" pickOnBounds="true" preserveRatio="true" />
+            <Button layoutX="304.0" layoutY="518.0" mnemonicParsing="false" onAction="#incializateProgram" prefHeight="59.0" prefWidth="131.0" style="-fx-background-color: e6c169; -fx-background-radius: 30; -fx-border-radius: 30; -fx-border-color: c2a663;" text="Iniciar">
+=======
             <ImageView fx:id="imageView" fitHeight="740.0" fitWidth="740.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
                <cursor>
                   <Cursor fx:constant="DEFAULT" />
                </cursor>
             </ImageView>
             <Button layoutX="305.0" layoutY="518.0" mnemonicParsing="false" onAction="#incializateProgram" prefHeight="59.0" prefWidth="131.0" style="-fx-background-color: e6c169; -fx-background-radius: 30; -fx-border-radius: 30; -fx-border-color: c2a663;" text="Iniciar">
+>>>>>>> 58ebe7b2e69e136c7e96ea78653a6efb05c9ffe2
                <font>
                   <Font name="System Bold" size="28.0" />
                </font>
