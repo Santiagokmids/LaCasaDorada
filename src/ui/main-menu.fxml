@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<VBox prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <MenuBar VBox.vgrow="ALWAYS">
+        <menus>
+          <Menu mnemonicParsing="false" text="Nuevo">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Añadir Cliente" />
+                  <MenuItem mnemonicParsing="false" text="Añadir Empleado" />
+                  <MenuItem mnemonicParsing="false" text="Añadir Usuario" />
+                  <MenuItem mnemonicParsing="false" text="Crear Pedido" />
+                  <MenuItem mnemonicParsing="false" text="Añadir Producto" />
+                  <MenuItem mnemonicParsing="false" text="Añadir Tipo de Producto" />
+                  <MenuItem mnemonicParsing="false" text="Añadir Ingrediente" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Eliminar">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Eliminar Cliente" />
+                  <MenuItem mnemonicParsing="false" text="Eliminar Empleado" />
+                  <MenuItem mnemonicParsing="false" text="Eliminar Usuario" />
+                  <MenuItem mnemonicParsing="false" text="Eliminar Producto" />
+                  <MenuItem mnemonicParsing="false" text="Eliminar Tipo de Producto" />
+                  <MenuItem mnemonicParsing="false" text="Eliminar Ingrediente" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Deshabilitar">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Deshabilitar Cliente" />
+                  <MenuItem mnemonicParsing="false" text="Deshabilitar Empleado" />
+                  <MenuItem mnemonicParsing="false" text="Deshabilitar Usuario" />
+                  <MenuItem mnemonicParsing="false" text="Deshabilitar Producto" />
+                  <MenuItem mnemonicParsing="false" text="Deshabilitar Tipo de Producto" />
+                  <MenuItem mnemonicParsing="false" text="Deshabilitar Ingrediente" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Actualizar">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Actualizar Cliente" />
+                  <MenuItem mnemonicParsing="false" text="Actualzar Empleado" />
+                  <MenuItem mnemonicParsing="false" text="Actualizar Usuario" />
+                  <MenuItem mnemonicParsing="false" text="Actualizar Producto" />
+                  <MenuItem mnemonicParsing="false" text="Actualizar Tipo de Producto" />
+                  <MenuItem mnemonicParsing="false" text="Actualizar Ingrediente" />
+               </items>
+            </Menu>
+        </menus>
+      </MenuBar>
+      <BorderPane style="-fx-background-color: black;" VBox.vgrow="ALWAYS">
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+         <bottom>
+            <Label alignment="CENTER" contentDisplay="BOTTOM" graphicTextGap="5.0" prefHeight="38.0" prefWidth="141.0" textFill="#e6c169" textOverrun="WORD_ELLIPSIS" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="Bernard MT Condensed" size="30.0" />
+               </font>
+               <effect>
+                  <Lighting bumpInput="$null" diffuseConstant="2.0" specularConstant="0.09" specularExponent="40.0" surfaceScale="4.29">
+                     <light>
+                        <Light.Distant />
+                     </light>
+                  </Lighting>
+               </effect>
+            </Label>
+         </bottom>
+         <top>
+            <ImageView fx:id="imageBanner" fitHeight="122.0" fitWidth="545.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets top="80.0" />
+               </BorderPane.margin>
+            </ImageView>
+         </top>
+      </BorderPane>
+   </children>
+</VBox>
