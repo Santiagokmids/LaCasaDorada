@@ -1,8 +1,6 @@
 package ui;
 
 import java.io.IOException;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -42,7 +40,6 @@ public class LaCasaDoradaGUI {
 		  
 		  Image image = new Image("/images/Banner.jpg");
 		  imageView.setImage(image);
-		  waitScreen();
 	  } 
 	 
 	 @FXML
@@ -53,22 +50,9 @@ public class LaCasaDoradaGUI {
 		  Parent load = loader.load();
 	    	
 		  mainPane.getChildren().clear();
-		  mainPane.setCenter(load);
+		  mainPane.setTop(load);
 	  } 	
 
-	 public void waitScreen() {
-		 Timer timer = new Timer();
-		 TimerTask work = new TimerTask(){
-			 @Override
-			 public void run(){
-				 
-			 }
-
-		 };
-		 timer.schedule(work, 4000);
-
-	 }
-
-
+	 
 	
 }
