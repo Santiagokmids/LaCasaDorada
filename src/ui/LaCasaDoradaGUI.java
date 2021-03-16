@@ -25,6 +25,7 @@ public class LaCasaDoradaGUI {
 	}
 
 	public void initialize() {
+<<<<<<< HEAD
 		//the method (initialize) is called several times by diferents fxml file loads 
 	}
 
@@ -55,4 +56,36 @@ public class LaCasaDoradaGUI {
 		mainPane.setCenter(load);
 	} 	
 
+=======
+    	//the method (initialize) is called several times by diferents fxml file loads 
+    }
+	
+	 @FXML
+	  public void loadBanner() throws IOException {
+		  FXMLLoader loader = new FXMLLoader(getClass().getResource("main-image.fxml"));
+		  
+		  loader.setController(this);
+		  Parent load = loader.load();
+	    	
+		  mainPane.getChildren().clear();
+		  mainPane.setCenter(load);
+		  
+		  Image image = new Image("/images/Banner.jpg");
+		  imageView.setImage(image);
+	  } 
+	 
+	 @FXML
+	  public void loadLogin() throws IOException {
+		  FXMLLoader loader = new FXMLLoader(getClass().getResource("main-menu.fxml"));
+		  
+		  loader.setController(this);
+		  Parent load = loader.load();
+	    	
+		  mainPane.getChildren().clear();
+		  mainPane.setTop(load);
+	  } 	
+
+	 
+	
+>>>>>>> bd91b0b9599d8d3926cadd4e227f4c39ad501fff
 }

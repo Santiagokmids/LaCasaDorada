@@ -14,12 +14,23 @@
         <menus>
           <Menu mnemonicParsing="false" text="Nuevo">
             <items>
-              <MenuItem mnemonicParsing="false" />
+              <MenuItem mnemonicParsing="false" text="Añadir Cliente" />
+                  <MenuItem mnemonicParsing="false" text="Añadir Empleado" />
+                  <MenuItem mnemonicParsing="false" text="Añadir Usuario" />
+                  <MenuItem mnemonicParsing="false" text="Crear Pedido" />
+                  <MenuItem mnemonicParsing="false" text="Añadir Producto" />
+                  <MenuItem mnemonicParsing="false" text="Añadir Tipo de Producto" />
+                  <MenuItem mnemonicParsing="false" text="Añadir Ingrediente" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
+          <Menu mnemonicParsing="false" text="Eliminar">
             <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
+              <MenuItem mnemonicParsing="false" text="Eliminar Cliente" />
+                  <MenuItem mnemonicParsing="false" text="Eliminar Empleado" />
+                  <MenuItem mnemonicParsing="false" text="Eliminar Usuario" />
+                  <MenuItem mnemonicParsing="false" text="Eliminar Producto" />
+                  <MenuItem mnemonicParsing="false" text="Eliminar Tipo de Producto" />
+                  <MenuItem mnemonicParsing="false" text="Eliminar Ingrediente" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
@@ -29,7 +40,7 @@
           </Menu>
         </menus>
       </MenuBar>
-      <BorderPane prefHeight="173.0" prefWidth="600.0" style="-fx-background-color: black;" VBox.vgrow="ALWAYS">
+      <BorderPane style="-fx-background-color: black;" VBox.vgrow="ALWAYS">
          <cursor>
             <Cursor fx:constant="DEFAULT" />
          </cursor>
