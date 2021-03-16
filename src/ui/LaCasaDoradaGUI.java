@@ -57,7 +57,7 @@ public class LaCasaDoradaGUI {
 
 		mainPane.getChildren().clear();
 		mainPane.setCenter(load);
-	} 		
+	}
 
 	@FXML
 	public void incializateProgram(ActionEvent event) throws IOException {

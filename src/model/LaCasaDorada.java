@@ -18,7 +18,7 @@ public class LaCasaDorada {
 
 	//COntants
 
-	public final static String SAVE_PATH_FILE = "data/data.txt";
+	public final static String SAVE_PATH_FILE = "";
 	public final static String SEPARATOR = ";";
 
 	//Relations
