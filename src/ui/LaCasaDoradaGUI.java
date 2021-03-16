@@ -18,6 +18,10 @@ public class LaCasaDoradaGUI {
 	@FXML
 	private ImageView imageView;
 	
+	@FXML
+    private ImageView imageBanner;
+
+	
 	private LaCasaDorada laCasaDorada;
 
 	public LaCasaDoradaGUI(LaCasaDorada laCasaDorada) {
@@ -51,6 +55,8 @@ public class LaCasaDoradaGUI {
 	    	
 		  mainPane.getChildren().clear();
 		  mainPane.setTop(load);
+		  Image image = new Image("/images/BannerCasaDorada.jpg");
+		  imageBanner.setImage(image);
 	  } 	
 
 	 
