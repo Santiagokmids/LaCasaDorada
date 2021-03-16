@@ -38,7 +38,7 @@ public class LaCasaDoradaGUI {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("main-image.fxml"));
 
 		loader.setController(this);
-		Parent load = loader.load();
+		Parent load = loader.load();  
 
 		mainPane.getChildren().clear();
 		mainPane.setCenter(load);
@@ -56,7 +56,9 @@ public class LaCasaDoradaGUI {
 		Parent load = loader.load();
 
 		mainPane.getChildren().clear();
-		mainPane.setCenter(load);
+		mainPane.setTop(load);
+		Image image = new Image("/images/BannerCasaDorada.jpg");
+		imageBanner.setImage(image);
 	} 		
 
 	@FXML
