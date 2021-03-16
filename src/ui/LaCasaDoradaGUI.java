@@ -38,7 +38,7 @@ public class LaCasaDoradaGUI {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("main-image.fxml"));
 
 		loader.setController(this);
-		Parent load = loader.load();
+		Parent load = loader.load();  
 
 		mainPane.getChildren().clear();
 		mainPane.setCenter(load);
@@ -56,8 +56,15 @@ public class LaCasaDoradaGUI {
 		Parent load = loader.load();
 
 		mainPane.getChildren().clear();
+<<<<<<< HEAD
 		mainPane.setCenter(load);
 	}
+=======
+		mainPane.setTop(load);
+		Image image = new Image("/images/BannerCasaDorada.jpg");
+		imageBanner.setImage(image);
+	} 		
+>>>>>>> 58ebe7b2e69e136c7e96ea78653a6efb05c9ffe2
 
 	@FXML
 	public void incializateProgram(ActionEvent event) throws IOException {
