@@ -22,6 +22,10 @@ public class LaCasaDoradaGUI {
 	@FXML
     private ImageView imageBanner;
 
+    @FXML
+    private ImageView imageWall;
+
+
 	private LaCasaDorada laCasaDorada;
 
 	public LaCasaDoradaGUI(LaCasaDorada laCasaDorada) {
@@ -50,15 +54,17 @@ public class LaCasaDoradaGUI {
 	@FXML
 	public void loadLogin() throws IOException {
 		
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("main-menu.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("login-pane.fxml"));
 
 		loader.setController(this);
 		Parent load = loader.load();
 
 		mainPane.getChildren().clear();
 		mainPane.setTop(load);
-		Image image = new Image("/images/BannerCasaDorada.jpg");
-		imageBanner.setImage(image);
+		Image image = new Image("/images/Banner.jpg");
+		imageWall.setImage(image);
+		Image image2 = new Image("/images/BannerCasaDorada.jpg");
+		imageBanner.setImage(image2);
 	} 		
 
 	@FXML
