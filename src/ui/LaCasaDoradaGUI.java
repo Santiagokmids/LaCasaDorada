@@ -6,6 +6,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -24,7 +28,12 @@ public class LaCasaDoradaGUI {
 
     @FXML
     private ImageView imageWall;
+    
+    @FXML
+    private TextField txtUser;
 
+    @FXML
+    private PasswordField txtPassword;
 
 	private LaCasaDorada laCasaDorada;
 
@@ -71,4 +80,37 @@ public class LaCasaDoradaGUI {
 	public void incializateProgram(ActionEvent event) throws IOException {
 		loadLogin();
 	}
+	
+	@FXML
+	public void loginUsers(ActionEvent event)throws IOException {
+
+		if(!txtUser.getText().equals("") && !txtPassword.getText().equals("")) {
+
+			if(!laCasaDorada.searchUser(txtUser.getText(), txtPassword.getText())){
+
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("main-menu.fxml"));
+
+				loader.setController(this);
+				Parent loginUser = loader.load();
+
+				mainPane.getChildren().clear();
+				mainPane.setCenter(loginUser);
+
+			}else
+				showAlert();
+		}else
+			showAlert();
+	}
+
+	@FXML
+	public void showAlert() {
+
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.setTitle("ERROR");
+		alert.setHeaderText("Nombre de usuario o contraseña INVALIDO");
+		alert.setContentText("Tu nombre de usuario o contraseña son incorrectos, por favor intente de nuevo. ");
+
+		alert.showAndWait();  
+	}
+	
 }

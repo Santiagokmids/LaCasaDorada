@@ -171,7 +171,22 @@ public class LaCasaDorada {
 		}
 		return find;
 	}
-	
+
+	public boolean searchUser(String userName, String password) {
+		boolean find = true;  
+
+		for(int i = 0;i < people.size();i++) {
+			if(people.get(i) instanceof User) {
+				User user = (User) people.get(i);
+
+				if(user.getUserName().equals(userName) && user.getPassword().equalsIgnoreCase(password)){
+					find = false;
+				}
+			}
+		}
+		return find;
+	}
+
 	public int findPosition(String idPeople){
 		int position = -1;
 		for (int j = 0; j < people.size(); j++) {
