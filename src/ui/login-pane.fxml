@@ -17,7 +17,7 @@
             <Insets top="20.0" />
          </BorderPane.margin></ImageView>
    </top>
-   <left>
+   <center>
       <Pane prefHeight="740.0" prefWidth="740.0" BorderPane.alignment="CENTER">
          <children>
             <ImageView fx:id="imageWall" fitHeight="511.0" fitWidth="564.0" layoutX="88.0" layoutY="-1.0" opacity="0.09" pickOnBounds="true" />
@@ -54,5 +54,5 @@
             </Button>
          </children>
       </Pane>
-   </left>
+   </center>
 </BorderPane>

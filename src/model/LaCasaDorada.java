@@ -18,7 +18,7 @@ public class LaCasaDorada {
 
 	//COntants
 
-	public final static String SAVE_PATH_FILE = "data/data.txt";
+	public final static String SAVE_PATH_FILE = "/data/data.txt";
 	public final static String SEPARATOR = ";";
 
 	//Relations
@@ -261,12 +261,15 @@ public class LaCasaDorada {
 		File f = new File(SAVE_PATH_FILE);
 		boolean loaded = false;
 		
+		System.out.println("xdxdxd antes");
+		
 		if(f.exists()) {
 			
 			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
 			people = (ArrayList<People>)ois.readObject();
 			ois.close();
 			loaded = true;
+			System.out.println("xdxdxddx");
 		}
 		return loaded;
 	}

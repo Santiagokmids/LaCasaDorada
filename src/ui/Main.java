@@ -25,6 +25,7 @@ public class Main extends Application{
 		
 		try {
 			loadInformation = laCasaDorada.loadData();
+			System.out.println("Load information:"+loadInformation);
 		} catch (ClassNotFoundException | IOException e) {
 			e.printStackTrace();
 			loadInformation = false;
