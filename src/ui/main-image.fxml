@@ -16,7 +16,7 @@
                   <Cursor fx:constant="DEFAULT" />
                </cursor>
             </ImageView>
-            <Button layoutX="305.0" layoutY="518.0" mnemonicParsing="false" onAction="#incializateProgram" prefHeight="59.0" prefWidth="131.0" style="-fx-background-color: e6c169; -fx-background-radius: 30; -fx-border-radius: 30; -fx-border-color: c2a663;" text="Iniciar">
+            <Button layoutX="305.0" layoutY="518.0" mnemonicParsing="false" onAction="#inicializateProgram" prefHeight="59.0" prefWidth="131.0" style="-fx-background-color: e6c169; -fx-background-radius: 30; -fx-border-radius: 30; -fx-border-color: c2a663;" text="Iniciar">
                <font>
                   <Font name="System Bold" size="28.0" />
                </font>
