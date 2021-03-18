@@ -13,7 +13,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <VBox prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <MenuBar VBox.vgrow="ALWAYS">
@@ -66,7 +65,7 @@
             <Cursor fx:constant="DEFAULT" />
          </cursor>
          <bottom>
-            <Label alignment="CENTER" contentDisplay="BOTTOM" graphicTextGap="5.0" prefHeight="38.0" prefWidth="141.0" textFill="#e6c169" textOverrun="WORD_ELLIPSIS" BorderPane.alignment="CENTER">
+            <Label alignment="CENTER" contentDisplay="BOTTOM" graphicTextGap="5.0" prefHeight="38.0" prefWidth="141.0" textFill="#e6c169" textOverrun="WORD_ELLIPSIS" BorderPane.alignment="TOP_CENTER">
                <font>
                   <Font name="Bernard MT Condensed" size="30.0" />
                </font>
@@ -77,6 +76,9 @@
                      </light>
                   </Lighting>
                </effect>
+               <BorderPane.margin>
+                  <Insets bottom="20.0" right="-470.0" />
+               </BorderPane.margin>
             </Label>
          </bottom>
          <top>

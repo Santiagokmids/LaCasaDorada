@@ -166,19 +166,27 @@ public class LaCasaDoradaGUI {
 		if(!txtUser.getText().equals("") && !txtPassword.getText().equals("")) {
 
 			if(!laCasaDorada.searchUser(txtUser.getText(), txtPassword.getText())){
-
-				FXMLLoader loader = new FXMLLoader(getClass().getResource("main-menu.fxml"));
-
-				loader.setController(this);
-				Parent loginUser = loader.load();
-
-				mainPane.getChildren().clear();
-				mainPane.setCenter(loginUser);
-
+				mainMenu();
 			}else
 				showAlert();
 		}else
 			showAlert();
+	}
+	
+	@FXML
+	public void mainMenu() throws IOException {
+		
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("main-menu.fxml"));
+
+		loader.setController(this);
+		
+		Parent loginUser = loader.load();
+
+		mainPane.getChildren().clear();
+		mainPane.setCenter(loginUser);
+		
+		Image image = new Image("/images/BannerCasaDorada.jpg");
+		imageBanner.setImage(image);
 	}
 
 	@FXML

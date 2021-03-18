@@ -154,9 +154,10 @@ public class LaCasaDorada {
 	}
 	
 	public boolean findOrders(String code){
+		
 		boolean find = false;
 		
-		for (int j = 0; j < order.size(); j++) {
+		for (int j = 0; j < order.size() && !find; j++) {
 			
 			if(code.equalsIgnoreCase(order.get(j).getCode())) {
 				find = true;
@@ -166,11 +167,13 @@ public class LaCasaDorada {
 	}
 
 	public boolean searchUser(String userName, String password) {
+		
 		boolean find = true;  
 
-		for(int i = 0;i < people.size();i++) {
+		for(int i = 0;i < people.size() && find;i++) {
 			if(people.get(i) instanceof User) {
-				User user = (User) people.get(i);
+				
+				User user = (User)people.get(i);
 
 				if(user.getUserName().equals(userName) && user.getPassword().equalsIgnoreCase(password)){
 					find = false;
@@ -181,19 +184,25 @@ public class LaCasaDorada {
 	}
 
 	public int findPosition(String idPeople){
+		
 		int position = -1;
-		for (int j = 0; j < people.size(); j++) {
+		boolean find = false;
+		
+		for (int j = 0; j < people.size() && !find; j++) {
 			
 			if(idPeople.equalsIgnoreCase(people.get(j).getId())) {
 				position = j;
+				find = true;
 			}
 		}
 		return position;
 	}
 	
 	public boolean findPeople(String idPeople){
+		
 		boolean find = false;
-		for (int j = 0; j < people.size(); j++) {
+		
+		for (int j = 0; j < people.size() && !find; j++) {
 			
 			if(idPeople.equalsIgnoreCase(people.get(j).getId())) {
 				find = true;
