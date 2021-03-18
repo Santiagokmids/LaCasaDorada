@@ -149,6 +149,7 @@ public class LaCasaDoradaGUI {
 		alert.setTitle("ERROR");
 		alert.setHeaderText("Nombre de usuario o contraseña INVALIDO");
 		alert.setContentText("Su nombre de usuario o contraseña son incorrectos, por favor intente de nuevo. ");
+		alert.setContentText("Tu nombre de usuario o contraseña son incorrectos, por favor intente de nuevo. ");
 
 		alert.showAndWait();  
 	}
