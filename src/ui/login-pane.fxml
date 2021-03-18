@@ -47,7 +47,7 @@
                   <Font name="Franklin Gothic Demi" size="18.0" />
                </font>
             </Button>
-            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="385.0" layoutY="244.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="140.0" style="-fx-background-radius: 22; -fx-background-color: #dad57c;" text="REGISTRAR">
+            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="385.0" layoutY="244.0" mnemonicParsing="false" onAction="#registerUser" prefHeight="53.0" prefWidth="140.0" style="-fx-background-radius: 22; -fx-background-color: #dad57c;" text="REGISTRAR">
                <font>
                   <Font name="Franklin Gothic Demi" size="18.0" />
                </font>

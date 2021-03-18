@@ -1,6 +1,5 @@
 package ui;
 
-import java.io.File;
 import java.io.IOException;
 
 import javafx.event.ActionEvent;
@@ -15,6 +14,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import model.LaCasaDorada;
+import model.State;
 
 public class LaCasaDoradaGUI {
 
@@ -35,6 +35,35 @@ public class LaCasaDoradaGUI {
 
     @FXML
     private PasswordField txtPassword;
+    
+    @FXML
+    private ImageView imageBannerRegister;
+
+    @FXML
+    private ImageView imageWallRegister;
+
+    @FXML
+    private TextField nameUser;
+
+    @FXML
+    private TextField name;
+
+    @FXML
+    private TextField lastName;
+
+    @FXML
+    private TextField id;
+
+    @FXML
+    private PasswordField password;
+
+    @FXML
+    private PasswordField passwordTwo;
+
+    @FXML
+    void inicializateProgram(ActionEvent event) {
+
+    }
 
 	private LaCasaDorada laCasaDorada;
 
@@ -71,6 +100,7 @@ public class LaCasaDoradaGUI {
 
 		mainPane.getChildren().clear();
 		mainPane.setTop(load);
+		
 		Image image = new Image("/images/Banner.jpg");
 		imageWall.setImage(image);
 		Image image2 = new Image("/images/BannerCasaDorada.jpg");
@@ -80,6 +110,20 @@ public class LaCasaDoradaGUI {
 	@FXML
 	public void incializateProgram(ActionEvent event) throws IOException {
 		loadLogin();
+	}
+	
+	@FXML
+	public void loadRegister() throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("register-pane.fxml"));
+
+		loader.setController(this);
+		Parent load = loader.load();
+		mainPane.setTop(load);
+
+		Image image = new Image("/images/Banner.jpg");
+		imageWallRegister.setImage(image);
+		Image image2 = new Image("/images/BannerCasaDorada.jpg");
+		imageBannerRegister.setImage(image2);
 	}
 	
 	@FXML
@@ -94,13 +138,13 @@ public class LaCasaDoradaGUI {
 					
 					if(password.getText().equals(passwordTwo.getText())) {
 						
-						Alert alert = new Alert(AlertType.INFORMATION);
-					  	alert.setTitle("EXCELENTE");
-					  	alert.setHeaderText("Se ha registrado exitosamente.");
-					  	alert.setContentText("Se ha registrado exitosamente a "+nameUser.getText()+" exitosamente");
-					  	alert.showAndWait();
+						Alert alerts = new Alert(AlertType.INFORMATION);
+					  	alerts.setTitle("EXCELENTE");
+					  	alerts.setHeaderText("Se ha registrado exitosamente.");
+					  	alerts.setContentText("Se ha registrado exitosamente a "+nameUser.getText()+" exitosamente");
+					  	alerts.showAndWait();
 						
-						laCasaDorada.create(name.getText(), lastName.getText(), id.getText(), userName.getText());
+						laCasaDorada.create(name.getText(), lastName.getText(), id.getText(), nameUser.getText(), password.getText(), State.ENABLE);
 						loadLogin();
 						
 					}else {
