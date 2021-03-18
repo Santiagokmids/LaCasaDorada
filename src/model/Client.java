@@ -4,6 +4,10 @@ public class Client extends People{
 	
 	//Attributes
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1;
 	private String address;
 	private String telephone;
 	private String fieldOfObservations;

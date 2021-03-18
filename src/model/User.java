@@ -4,6 +4,10 @@ public class User extends Employee {
 
 	//Attributes
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1;
 	private String userName;
 	private String password; 
 

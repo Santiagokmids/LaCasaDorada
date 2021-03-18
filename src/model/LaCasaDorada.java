@@ -18,7 +18,7 @@ public class LaCasaDorada {
 
 	//COntants
 
-	public final static String SAVE_PATH_FILE = "";
+	public final static String SAVE_PATH_FILE = "data/data.lcd";
 	public final static String SEPARATOR = ";";
 
 	//Relations
@@ -153,13 +153,6 @@ public class LaCasaDorada {
 		return orders;
 	}
 	
-	//public boolean updateOrder(StateOrder state,int index) {
-		//boolean find = false;	
-		//if()
-		//order.get(index).setState(state);;
-		//return false;
-	//}
-	
 	public boolean findOrders(String code){
 		boolean find = false;
 		
@@ -171,7 +164,22 @@ public class LaCasaDorada {
 		}
 		return find;
 	}
-	
+
+	public boolean searchUser(String userName, String password) {
+		boolean find = true;  
+
+		for(int i = 0;i < people.size();i++) {
+			if(people.get(i) instanceof User) {
+				User user = (User) people.get(i);
+
+				if(user.getUserName().equals(userName) && user.getPassword().equalsIgnoreCase(password)){
+					find = false;
+				}
+			}
+		}
+		return find;
+	}
+
 	public int findPosition(String idPeople){
 		int position = -1;
 		for (int j = 0; j < people.size(); j++) {
@@ -247,7 +255,6 @@ public class LaCasaDorada {
 		boolean loaded = false;
 		
 		if(f.exists()) {
-			
 			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
 			people = (ArrayList<People>)ois.readObject();
 			ois.close();
@@ -255,7 +262,7 @@ public class LaCasaDorada {
 		}
 		return loaded;
 	}
-
+	
 	public ArrayList<People> getPeople() {
 		return people;
 	}

@@ -18,12 +18,12 @@ public class Main extends Application{
 	
 	public Main() {
 		
-		boolean loadInformation;
+		//boolean loadInformation;
 		
 		laCasaDorada = new LaCasaDorada();
 		laCasaDoradaGUI = new LaCasaDoradaGUI(laCasaDorada);
 		
-		try {
+		/*try {
 			loadInformation = laCasaDorada.loadData();
 		} catch (ClassNotFoundException | IOException e) {
 			e.printStackTrace();
@@ -37,7 +37,7 @@ public class Main extends Application{
 		    alert.setTitle("La Casa Dorada");
 		    alert.setContentText("Error cargando el archivo");
 		    alert.showAndWait();
-		}
+		}*/
 	}
 	
 	public static void main(String[] args) {
