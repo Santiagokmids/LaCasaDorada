@@ -18,7 +18,7 @@
    <center>
       <Pane prefHeight="280.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fx:id="imageWallRegister" fitHeight="390.0" fitWidth="631.0" layoutY="-1.0" opacity="0.44" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imageWallRegister" fitHeight="488.0" fitWidth="764.0" layoutY="-1.0" opacity="0.29" pickOnBounds="true" preserveRatio="true" />
             <Label layoutX="74.0" layoutY="90.0" text="Nombre de usuario:" textFill="#dad57c">
                <font>
                   <Font name="Berlin Sans FB" size="29.0" />

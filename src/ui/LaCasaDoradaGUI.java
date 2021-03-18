@@ -60,11 +60,6 @@ public class LaCasaDoradaGUI {
     @FXML
     private PasswordField passwordTwo;
 
-    @FXML
-    void inicializateProgram(ActionEvent event) {
-
-    }
-
 	private LaCasaDorada laCasaDorada;
 
 	public LaCasaDoradaGUI(LaCasaDorada laCasaDorada) {
@@ -108,7 +103,7 @@ public class LaCasaDoradaGUI {
 	} 		
 
 	@FXML
-	public void incializateProgram(ActionEvent event) throws IOException {
+	public void inicializateProgram(ActionEvent event) throws IOException {
 		loadLogin();
 	}
 	
