@@ -19,43 +19,43 @@
         <menus>
           <Menu mnemonicParsing="false" text="Nuevo">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#createClient" text="Añadir Cliente" />
-                  <MenuItem mnemonicParsing="false" onAction="#loadRegisterEmployee" text="Añadir Empleado" />
-                  <MenuItem mnemonicParsing="false" text="Añadir Usuario" />
-                  <MenuItem mnemonicParsing="false" text="Crear Pedido" />
-                  <MenuItem mnemonicParsing="false" text="Añadir Producto" />
-                  <MenuItem mnemonicParsing="false" text="Añadir Tipo de Producto" />
-                  <MenuItem mnemonicParsing="false" text="Añadir Ingrediente" />
+              <MenuItem mnemonicParsing="false" onAction="#createClient" text="Cliente" />
+                  <MenuItem mnemonicParsing="false" onAction="#loadRegisterEmployee" text="Empleado" />
+                  <MenuItem mnemonicParsing="false" text="Usuario" />
+                  <MenuItem mnemonicParsing="false" text="Pedido" />
+                  <MenuItem mnemonicParsing="false" text="Producto" />
+                  <MenuItem mnemonicParsing="false" text="Tipo de Producto" />
+                  <MenuItem mnemonicParsing="false" text="Ingrediente" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Eliminar">
             <items>
-              <MenuItem mnemonicParsing="false" text="Eliminar Cliente" />
-                  <MenuItem mnemonicParsing="false" text="Eliminar Empleado" />
-                  <MenuItem mnemonicParsing="false" text="Eliminar Usuario" />
-                  <MenuItem mnemonicParsing="false" text="Eliminar Producto" />
-                  <MenuItem mnemonicParsing="false" text="Eliminar Tipo de Producto" />
-                  <MenuItem mnemonicParsing="false" text="Eliminar Ingrediente" />
+              <MenuItem mnemonicParsing="false" text="Cliente" />
+                  <MenuItem mnemonicParsing="false" text="Empleado" />
+                  <MenuItem mnemonicParsing="false" text="Usuario" />
+                  <MenuItem mnemonicParsing="false" text="Producto" />
+                  <MenuItem mnemonicParsing="false" text="Tipo de Producto" />
+                  <MenuItem mnemonicParsing="false" text="Ingrediente" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Deshabilitar">
             <items>
-              <MenuItem mnemonicParsing="false" text="Deshabilitar Cliente" />
-                  <MenuItem mnemonicParsing="false" text="Deshabilitar Empleado" />
-                  <MenuItem mnemonicParsing="false" text="Deshabilitar Usuario" />
-                  <MenuItem mnemonicParsing="false" text="Deshabilitar Producto" />
-                  <MenuItem mnemonicParsing="false" text="Deshabilitar Tipo de Producto" />
-                  <MenuItem mnemonicParsing="false" text="Deshabilitar Ingrediente" />
+              <MenuItem mnemonicParsing="false" text="Cliente" />
+                  <MenuItem mnemonicParsing="false" text="Empleado" />
+                  <MenuItem mnemonicParsing="false" text="Usuario" />
+                  <MenuItem mnemonicParsing="false" text="Producto" />
+                  <MenuItem mnemonicParsing="false" text="Tipo de Producto" />
+                  <MenuItem mnemonicParsing="false" text="Ingrediente" />
             </items>
           </Menu>
             <Menu mnemonicParsing="false" text="Actualizar">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Actualizar Cliente" />
-                  <MenuItem mnemonicParsing="false" text="Actualzar Empleado" />
-                  <MenuItem mnemonicParsing="false" text="Actualizar Usuario" />
-                  <MenuItem mnemonicParsing="false" text="Actualizar Producto" />
-                  <MenuItem mnemonicParsing="false" text="Actualizar Tipo de Producto" />
-                  <MenuItem mnemonicParsing="false" text="Actualizar Ingrediente" />
+                  <MenuItem mnemonicParsing="false" text="Cliente" />
+                  <MenuItem mnemonicParsing="false" text="Empleado" />
+                  <MenuItem mnemonicParsing="false" text="Usuario" />
+                  <MenuItem mnemonicParsing="false" text="Producto" />
+                  <MenuItem mnemonicParsing="false" text="Tipo de Producto" />
+                  <MenuItem mnemonicParsing="false" text="Ingrediente" />
                </items>
             </Menu>
         </menus>
