@@ -19,8 +19,13 @@
         <menus>
           <Menu mnemonicParsing="false" text="Nuevo">
             <items>
+<<<<<<< HEAD
               <MenuItem mnemonicParsing="false" onAction="#createClient" text="Añadir Cliente" />
                   <MenuItem mnemonicParsing="false" text="Añadir Empleado" />
+=======
+              <MenuItem mnemonicParsing="false" text="Añadir Cliente" />
+                  <MenuItem mnemonicParsing="false" onAction="#loadRegisterEmployee" text="Añadir Empleado" />
+>>>>>>> 7145f1828a148c501ad12f0e2cca3d86b155dbf1
                   <MenuItem mnemonicParsing="false" text="Añadir Usuario" />
                   <MenuItem mnemonicParsing="false" text="Crear Pedido" />
                   <MenuItem mnemonicParsing="false" text="Añadir Producto" />

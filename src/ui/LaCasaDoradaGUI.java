@@ -18,45 +18,54 @@ import model.LaCasaDorada;
 import model.State;
 
 public class LaCasaDoradaGUI {
+	
+	@FXML
+    private ImageView imageWallEmployee;
+
+	@FXML
+	private ImageView imageBannerEmployee;
+
+	@FXML
+	private TextField nameEmployee;
+
+	@FXML
+	private TextField lastNameEmployee;
+
+	@FXML
+	private TextField idEmployee;
 
 	@FXML
 	private BorderPane mainPane;
 
 	@FXML
 	private ImageView imageView;
-	
+
 	@FXML
-    private ImageView imageBanner;
+	private ImageView imageBanner;
 
-    @FXML
-    private ImageView imageWall;
-    
-    @FXML
-    private TextField txtUser;
+	@FXML
+	private ImageView imageWall;
 
-    @FXML
-    private PasswordField txtPassword;
-    
-    @FXML
-    private ImageView imageBannerRegister;
+	@FXML
+	private TextField txtUser;
 
-    @FXML
-    private ImageView imageWallRegister;
+	@FXML
+	private PasswordField txtPassword;
 
-    @FXML
-    private TextField nameUser;
+	@FXML
+	private ImageView imageBannerRegister;
 
-    @FXML
-    private TextField name;
+	@FXML
+	private ImageView imageWallRegister;
 
-    @FXML
-    private TextField lastName;
+	@FXML
+	private TextField nameUser;
 
-    @FXML
-    private TextField id;
+	@FXML
+	private TextField name;
 
-    @FXML
-    private PasswordField password;
+	@FXML
+	private TextField lastName;
 
     @FXML
     private PasswordField passwordTwo;
@@ -83,6 +92,12 @@ public class LaCasaDoradaGUI {
     private TextField telephoneClient;
 
     @FXML
+	private TextField id;
+
+	@FXML
+	private PasswordField password;
+
+    @FXML
 	private LaCasaDorada laCasaDorada;
     
     @FXML
@@ -93,12 +108,12 @@ public class LaCasaDoradaGUI {
 	}
 
 	public void initialize() {
-    	//the method (initialize) is called several times by diferents fxml file loads 
-    }
+		//the method (initialize) is called several times by diferents fxml file loads 
+	}
 
 	@FXML
 	public void loadBanner() throws IOException {
-		
+
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("main-image.fxml"));
 
 		loader.setController(this);
@@ -113,7 +128,7 @@ public class LaCasaDoradaGUI {
 
 	@FXML
 	public void loadLogin() throws IOException {
-		
+
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("login-pane.fxml"));
 
 		loader.setController(this);
@@ -121,7 +136,7 @@ public class LaCasaDoradaGUI {
 
 		mainPane.getChildren().clear();
 		mainPane.setTop(load);
-		
+
 		Image image = new Image("/images/Banner.jpg");
 		imageWall.setImage(image);
 		Image image2 = new Image("/images/BannerCasaDorada.jpg");
@@ -132,7 +147,7 @@ public class LaCasaDoradaGUI {
 	public void inicializateProgram(ActionEvent event) throws IOException {
 		loadLogin();
 	}
-	
+
 	@FXML
 	public void loadRegister() throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("register-pane.fxml"));
@@ -146,46 +161,83 @@ public class LaCasaDoradaGUI {
 		Image image2 = new Image("/images/BannerCasaDorada.jpg");
 		imageBannerRegister.setImage(image2);
 	}
-	
+
 	@FXML
 	public void registerUser(ActionEvent event) throws IOException{
-		 Alert alert = new Alert(AlertType.ERROR);
-		 alert.setTitle("ERROR");
-		
+
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.setTitle("ERROR");
+
 		if(!name.getText().equals("") && !nameUser.getText().equals("") && !lastName.getText().equals("") && !password.getText().equals("") &&
 				!passwordTwo.getText().equals("") && !id.getText().equals("")) { 
-			 	
+
+			if(!laCasaDorada.findPeople(id.getText())) {
+
+				if(password.getText().equals(passwordTwo.getText())) {
+
+					Alert alerts = new Alert(AlertType.INFORMATION);
+					alerts.setTitle("EXCELENTE");
+					alerts.setHeaderText("Se ha registrado exitosamente.");
+					alerts.setContentText("Se ha registrado a "+nameUser.getText()+" exitosamente");
+					alerts.showAndWait();
+
+					laCasaDorada.create(name.getText(), lastName.getText(), id.getText(), nameUser.getText(), password.getText(), State.ENABLE);
+					loadLogin();
+
+				}else {
+
+					alert.setHeaderText("Las contraseñas no coinciden");
+					alert.setContentText("Las contraseñas deben ser iguales");
+					alert.showAndWait();
+				}
+
 				if(!laCasaDorada.findPeople(id.getText())) {
-					
+
 					if(password.getText().equals(passwordTwo.getText())) {
-						
+
 						Alert alerts = new Alert(AlertType.INFORMATION);
-					  	alerts.setTitle("EXCELENTE");
-					  	alerts.setHeaderText("Se ha registrado exitosamente.");
-					  	alerts.setContentText("Se ha registrado a "+nameUser.getText()+" exitosamente");
-					  	alerts.showAndWait();
-						
+						alerts.setTitle("EXCELENTE");
+						alerts.setHeaderText("Se ha registrado exitosamente.");
+						alerts.setContentText("Se ha registrado exitosamente a "+nameUser.getText()+" exitosamente");
+						alerts.showAndWait();
+
 						laCasaDorada.create(name.getText(), lastName.getText(), id.getText(), nameUser.getText(), password.getText(), State.ENABLE);
 						loadLogin();
-						
+
 					}else {
-						
-						 alert.setHeaderText("Las contraseñas no coinciden");
-						 alert.setContentText("Las contraseñas deben ser iguales");
-						 alert.showAndWait();
+
+						alert.setHeaderText("Las contraseñas no coinciden");
+						alert.setContentText("Las contraseñas deben ser iguales");
+						alert.showAndWait();
 					}
-					
+
 				}
-		  }
-		  else {
-			  
-			 alert.setHeaderText("No se pudo crear el Usuario");
-			 alert.setContentText("Debe llenar todos los campos para crear el usuario");
-			 alert.showAndWait();
-			 
-		 }
+				else {
+
+					alert.setHeaderText("No se pudo crear el Usuario");
+					alert.setContentText("Debe llenar todos los campos para crear el usuario");
+					alert.showAndWait();
+				}
+
+			}
+		}
 	}
-	
+
+	@FXML
+	public void loadRegisterEmployee(ActionEvent event) throws IOException {
+
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("registerEmployee-pane.fxml"));
+
+		loader.setController(this);
+		Parent load = loader.load();
+		mainPane.setTop(load);
+
+		Image image = new Image("/images/Banner.jpg");
+		imageWallEmployee.setImage(image);
+		Image image2 = new Image("/images/BannerCasaDorada.jpg");
+		imageBannerEmployee.setImage(image2);
+	}
+
 	@FXML
 	public void loginUsers(ActionEvent event)throws IOException {
 
@@ -198,19 +250,19 @@ public class LaCasaDoradaGUI {
 		}else
 			showAlert();
 	}
-	
+
 	@FXML
 	public void mainMenu() throws IOException {
-		
+
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("main-menu.fxml"));
 
 		loader.setController(this);
-		
+
 		Parent loginUser = loader.load();
 
 		mainPane.getChildren().clear();
 		mainPane.setCenter(loginUser);
-		
+
 		Image image = new Image("/images/Banner.jpg");
 		imageWallRegister.setImage(image);
 	}
@@ -274,6 +326,9 @@ public class LaCasaDoradaGUI {
 			 alert.showAndWait();
 
 		 }
+
+		Image image = new Image("/images/BannerCasaDorada.jpg");
+		imageBanner.setImage(image);
 	}
 
 	@FXML
@@ -287,5 +342,10 @@ public class LaCasaDoradaGUI {
 
 		alert.showAndWait();  
 	}
-	
+
+	@FXML
+	void createEmployee(ActionEvent event) {
+
+	}
+
 }
