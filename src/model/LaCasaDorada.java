@@ -189,6 +189,20 @@ public class LaCasaDorada {
 		}
 		return find;
 	}
+	
+	public boolean findClient(String name, String lastName){
+
+		boolean find = false;
+
+		for (int j = 0; j < people.size() && !find; j++) {
+
+			if(people.get(j) instanceof Client && people.get(j).getName().equalsIgnoreCase(name) && 
+					people.get(j).getLastName().equalsIgnoreCase(lastName)) {
+				find = true;
+			}
+		}
+		return find;
+	}
 
 	public void importData(String fileName) throws IOException {
 

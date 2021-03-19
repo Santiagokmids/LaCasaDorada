@@ -23,17 +23,17 @@
             <TextField fx:id="lastNameClient" layoutX="336.0" layoutY="137.0" prefHeight="31.0" prefWidth="279.0" />
             <TextField fx:id="idClient" layoutX="336.0" layoutY="184.0" prefHeight="31.0" prefWidth="277.0" />
             <TextField fx:id="adressClient" layoutX="334.0" layoutY="228.0" prefHeight="32.0" prefWidth="277.0" promptText="Opcional" />
-            <Label layoutX="220.0" layoutY="91.0" text="Nombre:" textFill="#dad57c">
+            <Label layoutX="217.0" layoutY="87.0" text="Nombre:" textFill="#dad57c">
                <font>
                   <Font name="Berlin Sans FB" size="29.0" />
                </font>
             </Label>
-            <Label layoutX="210.0" layoutY="134.0" text="Apellidos:" textFill="#dad57c">
+            <Label layoutX="208.0" layoutY="132.0" text="Apellidos:" textFill="#dad57c">
                <font>
                   <Font name="Berlin Sans FB" size="29.0" />
                </font>
             </Label>
-            <Label layoutX="86.0" layoutY="180.0" text="No. Identetificación:" textFill="#dad57c">
+            <Label layoutX="108.0" layoutY="180.0" text="No. Identificación:" textFill="#dad57c">
                <font>
                   <Font name="Berlin Sans FB" size="29.0" />
                </font>

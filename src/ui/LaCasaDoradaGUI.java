@@ -154,6 +154,7 @@ public class LaCasaDoradaGUI {
 
 		loader.setController(this);
 		Parent load = loader.load();
+		mainPane.getChildren().clear();
 		mainPane.setTop(load);
 
 		Image image = new Image("/images/Banner.jpg");
@@ -193,10 +194,15 @@ public class LaCasaDoradaGUI {
 			}	else {
 
 				alert.setHeaderText("No se pudo crear el Usuario");
-				alert.setContentText("Debe llenar todos los campos para crear el usuario");
+				alert.setContentText("Ya hay usuarios con ese numero de identificación.");
 				alert.showAndWait();
 			}
 
+		}else {
+
+			alert.setHeaderText("No se pudo crear el Usuario");
+			alert.setContentText("Debe llenar todos los campos para crear un usuario.");
+			alert.showAndWait();
 		}
 	}
 
@@ -208,6 +214,9 @@ public class LaCasaDoradaGUI {
 		loader.setController(this);
 		Parent load = loader.load();
 		mainPane.setCenter(load);
+
+				mainPane.getChildren().clear();
+		mainPane.setTop(load);
 
 		Image image = new Image("/images/Banner.jpg");
 		imageWallEmployee.setImage(image);
@@ -236,6 +245,7 @@ public class LaCasaDoradaGUI {
 		loader.setController(this);
 
 		Parent loginUser = loader.load();
+		mainPane.getChildren().clear();
 
 		mainPane.getChildren().clear();
 		mainPane.setCenter(loginUser);
@@ -265,10 +275,13 @@ public class LaCasaDoradaGUI {
 	@FXML
 	public void addClient(ActionEvent event)throws IOException {
 
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.setTitle("ERROR");
+
 		if(!nameClient.getText().equals("") && !lastNameClient.getText().equals("") && !adressClient.getText().equals("") && 
 				!telephoneClient.getText().equals("") && !fieldObservations.getText().equals("") && !idClient.getText().equals("")) { 
 
-			if(!laCasaDorada.findPeople(id.getText())) {
+			if(!laCasaDorada.findClient(nameClient.getText(), lastNameClient.getText())) {
 
 				Alert alerts = new Alert(AlertType.INFORMATION);
 				alerts.setTitle("EXCELENTE");
@@ -280,6 +293,11 @@ public class LaCasaDoradaGUI {
 						adressClient.getText(), telephoneClient.getText(), fieldObservations.getText());
 				mainMenu();
 
+			}else {
+
+				alert.setHeaderText("No se pudo crear el Cliente");
+				alert.setContentText("Ya hay clientes con ese nombre y apellido");
+				alert.showAndWait();
 			}
 
 		} else if(!nameClient.getText().equals("") && !lastNameClient.getText().equals("") && !adressClient.getText().equals("") && 
@@ -295,17 +313,11 @@ public class LaCasaDoradaGUI {
 			loadLogin();
 		}
 		else {
-
-			Alert alert = new Alert(AlertType.ERROR);
-			alert.setTitle("ERROR");
+			
 			alert.setHeaderText("No se pudo crear el Usuario");
 			alert.setContentText("Debe llenar todos los campos para crear el usuario");
 			alert.showAndWait();
-
 		}
-
-		Image image = new Image("/images/BannerCasaDorada.jpg");
-		imageBanner.setImage(image);
 	}
 
 	@FXML
@@ -313,10 +325,8 @@ public class LaCasaDoradaGUI {
 
 		Alert alert = new Alert(AlertType.ERROR);
 		alert.setTitle("ERROR");
-		alert.setHeaderText("Nombre de usuario o contraseña INVALIDO");
-		alert.setContentText("Nombre de usuario o contraseña son incorrectos");
-		alert.setContentText("Su nombre de usuario o contraseña son incorrectos, por favor intente de nuevo. ");
-
+		alert.setHeaderText("No es posible ingresar.");
+		alert.setContentText("Nombre de usuario o contraseña son incorrectos.");
 		alert.showAndWait();  
 	}
 
@@ -324,23 +334,23 @@ public class LaCasaDoradaGUI {
 	void createEmployee(ActionEvent event) throws IOException {
 
 		if(!nameEmployee.getText().equals("") && !lastNameEmployee.getText().equals("") && !idEmployee.getText().equals("")) {
-			
-			
+
+
 			boolean verific = laCasaDorada.findPeople(idEmployee.getText());
 
 			if(!verific) {
-				
+
 				Alert alerts = new Alert(AlertType.INFORMATION);
 				alerts.setTitle("EXCELENTE");
 				alerts.setHeaderText("Se ha registrado exitosamente.");
 				alerts.setContentText("Se ha registrado a "+nameEmployee.getText()+" exitosamente");
 				alerts.showAndWait();
-				
+
 				laCasaDorada.create(nameEmployee.getText(),lastNameEmployee.getText(),idEmployee.getText(),State.ENABLE);
 
 				mainMenu();
 			}else if(verific) {
-				
+
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("ERROR");
 				alert.setHeaderText("No se pudo crear el Empleado");

@@ -34,7 +34,7 @@
                   <Font name="Berlin Sans FB" size="29.0" />
                </font>
             </Label>
-            <Label layoutX="69.0" layoutY="250.0" text="No. Identetificación:" textFill="#dad57c">
+            <Label layoutX="95.0" layoutY="248.0" text="No. Identificación:" textFill="#dad57c">
                <font>
                   <Font name="Berlin Sans FB" size="29.0" />
                </font>
