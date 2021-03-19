@@ -207,8 +207,8 @@ public class LaCasaDoradaGUI {
 
 		loader.setController(this);
 		Parent load = loader.load();
-		mainPane.setTop(load);
-
+		mainPane.setCenter(load);
+	
 		Image image = new Image("/images/Banner.jpg");
 		imageWallEmployee.setImage(image);
 		Image image2 = new Image("/images/BannerCasaDorada.jpg");
@@ -240,8 +240,8 @@ public class LaCasaDoradaGUI {
 		mainPane.getChildren().clear();
 		mainPane.setCenter(loginUser);
 
-		Image image = new Image("/images/Banner.jpg");
-		imageWallRegister.setImage(image);
+		Image image = new Image("images/BannerCasaDorada.jpg");
+		imageBanner.setImage(image);
 	}
 	
 	@FXML
