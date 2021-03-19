@@ -19,7 +19,7 @@
         <menus>
           <Menu mnemonicParsing="false" text="Nuevo">
             <items>
-              <MenuItem mnemonicParsing="false" text="Añadir Cliente" />
+              <MenuItem mnemonicParsing="false" onAction="#createClient" text="Añadir Cliente" />
                   <MenuItem mnemonicParsing="false" text="Añadir Empleado" />
                   <MenuItem mnemonicParsing="false" text="Añadir Usuario" />
                   <MenuItem mnemonicParsing="false" text="Crear Pedido" />

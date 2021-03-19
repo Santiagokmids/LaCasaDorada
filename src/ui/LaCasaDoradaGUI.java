@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -59,8 +60,33 @@ public class LaCasaDoradaGUI {
 
     @FXML
     private PasswordField passwordTwo;
+    
+    @FXML
+    private ImageView imageBannerRegisterClient;
 
+    @FXML
+    private ImageView imageWallRegisterClient;
+
+    @FXML
+    private TextField nameClient;
+
+    @FXML
+    private TextField lastNameClient;
+
+    @FXML
+    private TextField idClient;
+
+    @FXML
+    private TextField adressClient;
+
+    @FXML
+    private TextField telephoneClient;
+
+    @FXML
 	private LaCasaDorada laCasaDorada;
+    
+    @FXML
+    private TextArea fieldObservations;
 
 	public LaCasaDoradaGUI(LaCasaDorada laCasaDorada) {
 		this.laCasaDorada = laCasaDorada;
@@ -136,7 +162,7 @@ public class LaCasaDoradaGUI {
 						Alert alerts = new Alert(AlertType.INFORMATION);
 					  	alerts.setTitle("EXCELENTE");
 					  	alerts.setHeaderText("Se ha registrado exitosamente.");
-					  	alerts.setContentText("Se ha registrado exitosamente a "+nameUser.getText()+" exitosamente");
+					  	alerts.setContentText("Se ha registrado a "+nameUser.getText()+" exitosamente");
 					  	alerts.showAndWait();
 						
 						laCasaDorada.create(name.getText(), lastName.getText(), id.getText(), nameUser.getText(), password.getText(), State.ENABLE);
@@ -185,8 +211,69 @@ public class LaCasaDoradaGUI {
 		mainPane.getChildren().clear();
 		mainPane.setCenter(loginUser);
 		
-		Image image = new Image("/images/BannerCasaDorada.jpg");
-		imageBanner.setImage(image);
+		Image image = new Image("/images/Banner.jpg");
+		imageWallRegister.setImage(image);
+	}
+	
+	@FXML
+	public void createClient(ActionEvent event) throws IOException {
+		
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("register-client.fxml"));
+
+		loader.setController(this);
+		
+		Parent loginUser = loader.load();
+
+		mainPane.getChildren().clear();
+		mainPane.setCenter(loginUser);
+		
+		Image image = new Image("/images/Banner.jpg");
+		imageWallRegisterClient.setImage(image);
+		Image image2 = new Image("/images/BannerCasaDorada.jpg");
+		imageBannerRegisterClient.setImage(image2);
+	}
+	
+	@FXML
+	public void addClient(ActionEvent event)throws IOException {
+		
+		if(!nameClient.getText().equals("") && !lastNameClient.getText().equals("") && !adressClient.getText().equals("") && 
+				!telephoneClient.getText().equals("") && !fieldObservations.getText().equals("") && !idClient.getText().equals("")) { 
+
+			if(!laCasaDorada.findPeople(id.getText())) {
+
+				Alert alerts = new Alert(AlertType.INFORMATION);
+				alerts.setTitle("EXCELENTE");
+				alerts.setHeaderText("Se ha registrado exitosamente.");
+				alerts.setContentText("Se ha registrado a "+nameClient.getText()+" exitosamente");
+				alerts.showAndWait();
+
+				laCasaDorada.create(nameClient.getText(), lastNameClient.getText(), idClient.getText(), State.ENABLE,
+						adressClient.getText(), telephoneClient.getText(), fieldObservations.getText());
+				mainMenu();
+
+			}
+
+		} else if(!nameClient.getText().equals("") && !lastNameClient.getText().equals("") && !adressClient.getText().equals("") && 
+				 !telephoneClient.getText().equals("") && !fieldObservations.getText().equals("")) {
+			 
+			 Alert alerts = new Alert(AlertType.INFORMATION);
+			 alerts.setTitle("EXCELENTE");
+			 alerts.setHeaderText("Se ha registrado exitosamente.");
+			 alerts.setContentText("Se ha registrado a "+nameClient.getText()+" exitosamente");
+			 alerts.showAndWait();
+
+			 laCasaDorada.create(name.getText(), lastName.getText(), null, nameUser.getText(), password.getText(), State.ENABLE);
+			 loadLogin();
+		 }
+		 else {
+
+			 Alert alert = new Alert(AlertType.ERROR);
+			 alert.setTitle("ERROR");
+			 alert.setHeaderText("No se pudo crear el Usuario");
+			 alert.setContentText("Debe llenar todos los campos para crear el usuario");
+			 alert.showAndWait();
+
+		 }
 	}
 
 	@FXML
@@ -195,8 +282,8 @@ public class LaCasaDoradaGUI {
 		Alert alert = new Alert(AlertType.ERROR);
 		alert.setTitle("ERROR");
 		alert.setHeaderText("Nombre de usuario o contraseña INVALIDO");
+		alert.setContentText("Nombre de usuario o contraseña son incorrectos");
 		alert.setContentText("Su nombre de usuario o contraseña son incorrectos, por favor intente de nuevo. ");
-		alert.setContentText("Tu nombre de usuario o contraseña son incorrectos, por favor intente de nuevo. ");
 
 		alert.showAndWait();  
 	}

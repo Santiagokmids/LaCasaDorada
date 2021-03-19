@@ -38,19 +38,12 @@ public class LaCasaDorada {
 	}
 
 	//create client
-	public boolean create(String name, String lastName, String id, State state, String address, String telephone, String fieldOfObservations) {
-		boolean clients = true;
-		
-		if(!findPeople(id)) {
-			Client client = new Client(name, lastName, id, state, address, telephone, fieldOfObservations);
-			people.add(client);
-			
-		}else {
-			clients = false;
-		}
-		return clients;
+	public void create(String name, String lastName, String id, State state, String address, String telephone, String fieldOfObservations) {
+
+		Client client = new Client(name, lastName, id, state, address, telephone, fieldOfObservations);
+		people.add(client);
 	}
-	
+
 	//update client
 	public void update(String name, String lastName, String id, State state, String address, String telephone, String fieldOfObservations,int index) {
 		people.get(index).setName(name);
@@ -58,21 +51,14 @@ public class LaCasaDorada {
 		people.get(index).setId(id);
 		people.get(index).setState(state);
 	}
-	
+
 	//create employee
-	public boolean create(String name, String lastName, String id, State state) {
-		boolean employees = true;
-		
-		if(!findPeople(id)) {
-			Employee employee = new Employee(name, lastName, id, state);
-			people.add(employee);
-			
-		}else {
-			employees = false;
-		}
-		return employees;
+	public void create(String name, String lastName, String id, State state) {
+
+		Employee employee = new Employee(name, lastName, id, state);
+		people.add(employee);
 	}
-	
+
 	//update employee
 	public void update(String name, String lastName, String id, State state,int index) {
 		people.get(index).setName(name);
@@ -80,41 +66,34 @@ public class LaCasaDorada {
 		people.get(index).setId(id);
 		people.get(index).setState(state);
 	}
-	
+
 	//create User
-		public boolean create(String name, String lastName, String id, String userName, String password, State state) {
-			boolean users = true;
-			
-			if(!findPeople(id)) {
-				User user = new User(name, lastName, id, userName, password, state);
-				people.add(user);
-				
-			}else {
-				users = false;
-			}
-			return users;
-		}
-		
-		//update user
-		public void update(String name, String lastName, String id, String userName, String password, State state,int index) {
-			people.get(index).setName(name);
-			people.get(index).setLastName(lastName);
-			people.get(index).setId(id);
-			people.get(index).setState(state);
-		}
-	
+	public void create(String name, String lastName, String id, String userName, String password, State state) {
+
+		User user = new User(name, lastName, id, userName, password, state);
+		people.add(user);
+	}
+
+	//update user
+	public void update(String name, String lastName, String id, String userName, String password, State state,int index) {
+		people.get(index).setName(name);
+		people.get(index).setLastName(lastName);
+		people.get(index).setId(id);
+		people.get(index).setState(state);
+	}
+
 	//delete people
 	public boolean delete(String id){
 		boolean delete = false;
 		int pos = findPosition(id);
-		
+
 		if(pos != -1) {
 			people.remove(pos);
 			delete = true;
 		}
 		return delete;	
 	}
-	
+
 	//change people
 	public boolean setState(String id) {
 		boolean state = false;
@@ -124,24 +103,24 @@ public class LaCasaDorada {
 			state = true;
 		}
 		return state;
-		
+
 	}
-	
+
 	//create order
 	public boolean create(StateOrder state, ArrayList<Integer> amount, Date date, String fieldOfObservations, Client orderClient,
 			ArrayList<Product>products, Employee ordEmployee) {
-		
+
 		boolean orders = true, validation = true;
 		int aleatorio = 0;
 		Random r = new Random();
 		String code = "";
-		
+
 		while(validation) {
-			
+
 			aleatorio = (int)(r.nextDouble() * 1000000);
 			code = "LCD"+aleatorio;
 			validation = findOrders(code);
-			
+
 			if(!validation) {
 				Order newOrder = new Order(code, state, amount, date, fieldOfObservations, orderClient, products, ordEmployee);
 				order.add(newOrder);
@@ -152,13 +131,13 @@ public class LaCasaDorada {
 		}
 		return orders;
 	}
-	
+
 	public boolean findOrders(String code){
-		
+
 		boolean find = false;
-		
+
 		for (int j = 0; j < order.size() && !find; j++) {
-			
+
 			if(code.equalsIgnoreCase(order.get(j).getCode())) {
 				find = true;
 			}
@@ -167,12 +146,12 @@ public class LaCasaDorada {
 	}
 
 	public boolean searchUser(String userName, String password) {
-		
+
 		boolean find = true;  
 
 		for(int i = 0;i < people.size() && find;i++) {
 			if(people.get(i) instanceof User) {
-				
+
 				User user = (User)people.get(i);
 
 				if(user.getUserName().equals(userName) && user.getPassword().equalsIgnoreCase(password)){
@@ -184,12 +163,12 @@ public class LaCasaDorada {
 	}
 
 	public int findPosition(String idPeople){
-		
+
 		int position = -1;
 		boolean find = false;
-		
+
 		for (int j = 0; j < people.size() && !find; j++) {
-			
+
 			if(idPeople.equalsIgnoreCase(people.get(j).getId())) {
 				position = j;
 				find = true;
@@ -197,13 +176,13 @@ public class LaCasaDorada {
 		}
 		return position;
 	}
-	
+
 	public boolean findPeople(String idPeople){
-		
+
 		boolean find = false;
-		
+
 		for (int j = 0; j < people.size() && !find; j++) {
-			
+
 			if(idPeople.equalsIgnoreCase(people.get(j).getId())) {
 				find = true;
 			}
@@ -234,35 +213,35 @@ public class LaCasaDorada {
 
 		br.close();
 	}
-	
+
 	public void exportData(String fileName) throws FileNotFoundException {
-		
+
 		@SuppressWarnings("resource")
 		PrintWriter pw = new PrintWriter(fileName);
-		
+
 		for (int i = 0; i < people.size(); i++) {
-			
+
 			if(people.get(i) instanceof Client) {
-				
+
 				Client client = (Client) people.get(i);
 				pw.println(client.getName()+client.getLastName()+client.getId()+client.getState()+client.getAddress()+client.getTelephone()+client.getFieldOfObservations());
 			}
 		}
 	}
-	
+
 	public void saveData() throws IOException {
-		
+
 		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(SAVE_PATH_FILE));
 		oos.writeObject(people);
 		oos.close();
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public boolean loadData()  throws IOException, ClassNotFoundException{
 
 		File f = new File(SAVE_PATH_FILE);
 		boolean loaded = false;
-		
+
 		if(f.exists()) {
 			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
 			people = (ArrayList<People>)ois.readObject();
@@ -271,7 +250,7 @@ public class LaCasaDorada {
 		}
 		return loaded;
 	}
-	
+
 	public ArrayList<People> getPeople() {
 		return people;
 	}
