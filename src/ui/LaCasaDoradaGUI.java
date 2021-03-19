@@ -20,6 +20,15 @@ import model.State;
 public class LaCasaDoradaGUI {
 
 	@FXML
+	private ImageView imageBannerIngredient;
+
+	@FXML
+	private ImageView imageWallIngredient;
+
+	@FXML
+	private TextField nameIngredient;
+
+	@FXML
 	private ImageView imageWallEmployee;
 
 	@FXML
@@ -215,7 +224,7 @@ public class LaCasaDoradaGUI {
 		Parent load = loader.load();
 		mainPane.setCenter(load);
 
-				mainPane.getChildren().clear();
+		mainPane.getChildren().clear();
 		mainPane.setTop(load);
 
 		Image image = new Image("/images/Banner.jpg");
@@ -313,7 +322,7 @@ public class LaCasaDoradaGUI {
 			loadLogin();
 		}
 		else {
-			
+
 			alert.setHeaderText("No se pudo crear el Usuario");
 			alert.setContentText("Debe llenar todos los campos para crear el usuario");
 			alert.showAndWait();
@@ -366,5 +375,59 @@ public class LaCasaDoradaGUI {
 			alert.showAndWait();
 		}
 	}
+	
+	@FXML
+	public void addIngredient(ActionEvent event) throws IOException {
 
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("addIngredient-pane.fxml"));
+
+		loader.setController(this);
+		Parent load = loader.load();
+		mainPane.setCenter(load);
+
+		mainPane.getChildren().clear();
+		mainPane.setTop(load);
+
+		Image image = new Image("/images/Banner.jpg");
+		imageWallIngredient.setImage(image);
+		Image image2 = new Image("/images/BannerCasaDorada.jpg");
+		imageBannerIngredient.setImage(image2);
+	}
+
+	@FXML
+	public void createIngredient(ActionEvent event) throws IOException {
+		
+		if(!nameIngredient.getText().equals("")) {
+			
+			boolean verific = laCasaDorada.findIngredien(nameIngredient.getText());
+			
+			if(!verific) {
+				
+				Alert alerts = new Alert(AlertType.INFORMATION);
+				alerts.setTitle("EXCELENTE");
+				alerts.setHeaderText("Se ha agregado exitosamente.");
+				alerts.setContentText("Se ha agregado el ingrediente "+nameIngredient.getText()+" exitosamente");
+				alerts.showAndWait();
+
+				laCasaDorada.create(nameIngredient.getText());
+
+				mainMenu();
+			}
+			else if(verific) {
+	
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("ERROR");
+				alert.setHeaderText("No se pudo añadir el ingrediente");
+				alert.setContentText("Ya se encuentra agregado un ingrediente con ese nombre");
+				alert.showAndWait();
+			}
+		}
+		else {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("ERROR");
+			alert.setHeaderText("No se pudo crear el empleado");
+			alert.setContentText("Debe llenar todos los campos para crear el empleado");
+			alert.showAndWait();
+		}
+	}
 }

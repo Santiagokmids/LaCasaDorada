@@ -25,7 +25,7 @@
                   <MenuItem mnemonicParsing="false" text="Pedido" />
                   <MenuItem mnemonicParsing="false" text="Producto" />
                   <MenuItem mnemonicParsing="false" text="Tipo de Producto" />
-                  <MenuItem mnemonicParsing="false" text="Ingrediente" />
+                  <MenuItem mnemonicParsing="false" onAction="#addIngredient" text="Ingrediente" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Eliminar">

@@ -16,7 +16,7 @@ import java.io.PrintWriter;
 
 public class LaCasaDorada {
 
-	//COntants
+	//Contants
 
 	public final static String SAVE_PATH_FILE = "data/data.lcd";
 	public final static String SEPARATOR = ";";
@@ -80,6 +80,18 @@ public class LaCasaDorada {
 		people.get(index).setLastName(lastName);
 		people.get(index).setId(id);
 		people.get(index).setState(state);
+	}
+	
+	//Create ingredient
+	public void create(String name) {
+
+		Ingredient user = new Ingredient(name);
+		ingredient.add(user);
+	}
+	
+	//Update Ingredient
+	public void update(String name, int index) {
+		ingredient.get(index).setName(name);
 	}
 
 	//delete people
@@ -198,6 +210,19 @@ public class LaCasaDorada {
 
 			if(people.get(j) instanceof Client && people.get(j).getName().equalsIgnoreCase(name) && 
 					people.get(j).getLastName().equalsIgnoreCase(lastName)) {
+				find = true;
+			}
+		}
+		return find;
+	}
+	
+	public boolean findIngredien(String name){
+
+		boolean find = false;
+
+		for (int j = 0; j < ingredient.size() && !find; j++) {
+
+			if(ingredient.get(j).getName().equals(name) ) {
 				find = true;
 			}
 		}
