@@ -18,9 +18,9 @@ import model.LaCasaDorada;
 import model.State;
 
 public class LaCasaDoradaGUI {
-	
+
 	@FXML
-    private ImageView imageWallEmployee;
+	private ImageView imageWallEmployee;
 
 	@FXML
 	private ImageView imageBannerEmployee;
@@ -67,41 +67,41 @@ public class LaCasaDoradaGUI {
 	@FXML
 	private TextField lastName;
 
-    @FXML
-    private PasswordField passwordTwo;
-    
-    @FXML
-    private ImageView imageBannerRegisterClient;
+	@FXML
+	private PasswordField passwordTwo;
 
-    @FXML
-    private ImageView imageWallRegisterClient;
+	@FXML
+	private ImageView imageBannerRegisterClient;
 
-    @FXML
-    private TextField nameClient;
+	@FXML
+	private ImageView imageWallRegisterClient;
 
-    @FXML
-    private TextField lastNameClient;
+	@FXML
+	private TextField nameClient;
 
-    @FXML
-    private TextField idClient;
+	@FXML
+	private TextField lastNameClient;
 
-    @FXML
-    private TextField adressClient;
+	@FXML
+	private TextField idClient;
 
-    @FXML
-    private TextField telephoneClient;
+	@FXML
+	private TextField adressClient;
 
-    @FXML
+	@FXML
+	private TextField telephoneClient;
+
+	@FXML
 	private TextField id;
 
 	@FXML
 	private PasswordField password;
 
-    @FXML
+	@FXML
 	private LaCasaDorada laCasaDorada;
-    
-    @FXML
-    private TextArea fieldObservations;
+
+	@FXML
+	private TextArea fieldObservations;
 
 	public LaCasaDoradaGUI(LaCasaDorada laCasaDorada) {
 		this.laCasaDorada = laCasaDorada;
@@ -208,7 +208,7 @@ public class LaCasaDoradaGUI {
 		loader.setController(this);
 		Parent load = loader.load();
 		mainPane.setCenter(load);
-	
+
 		Image image = new Image("/images/Banner.jpg");
 		imageWallEmployee.setImage(image);
 		Image image2 = new Image("/images/BannerCasaDorada.jpg");
@@ -243,28 +243,28 @@ public class LaCasaDoradaGUI {
 		Image image = new Image("images/BannerCasaDorada.jpg");
 		imageBanner.setImage(image);
 	}
-	
+
 	@FXML
 	public void createClient(ActionEvent event) throws IOException {
-		
+
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("register-client.fxml"));
 
 		loader.setController(this);
-		
+
 		Parent loginUser = loader.load();
 
 		mainPane.getChildren().clear();
 		mainPane.setCenter(loginUser);
-		
+
 		Image image = new Image("/images/Banner.jpg");
 		imageWallRegisterClient.setImage(image);
 		Image image2 = new Image("/images/BannerCasaDorada.jpg");
 		imageBannerRegisterClient.setImage(image2);
 	}
-	
+
 	@FXML
 	public void addClient(ActionEvent event)throws IOException {
-		
+
 		if(!nameClient.getText().equals("") && !lastNameClient.getText().equals("") && !adressClient.getText().equals("") && 
 				!telephoneClient.getText().equals("") && !fieldObservations.getText().equals("") && !idClient.getText().equals("")) { 
 
@@ -283,26 +283,26 @@ public class LaCasaDoradaGUI {
 			}
 
 		} else if(!nameClient.getText().equals("") && !lastNameClient.getText().equals("") && !adressClient.getText().equals("") && 
-				 !telephoneClient.getText().equals("") && !fieldObservations.getText().equals("")) {
-			 
-			 Alert alerts = new Alert(AlertType.INFORMATION);
-			 alerts.setTitle("EXCELENTE");
-			 alerts.setHeaderText("Se ha registrado exitosamente.");
-			 alerts.setContentText("Se ha registrado a "+nameClient.getText()+" exitosamente");
-			 alerts.showAndWait();
+				!telephoneClient.getText().equals("") && !fieldObservations.getText().equals("")) {
 
-			 laCasaDorada.create(name.getText(), lastName.getText(), null, nameUser.getText(), password.getText(), State.ENABLE);
-			 loadLogin();
-		 }
-		 else {
+			Alert alerts = new Alert(AlertType.INFORMATION);
+			alerts.setTitle("EXCELENTE");
+			alerts.setHeaderText("Se ha registrado exitosamente.");
+			alerts.setContentText("Se ha registrado a "+nameClient.getText()+" exitosamente");
+			alerts.showAndWait();
 
-			 Alert alert = new Alert(AlertType.ERROR);
-			 alert.setTitle("ERROR");
-			 alert.setHeaderText("No se pudo crear el Usuario");
-			 alert.setContentText("Debe llenar todos los campos para crear el usuario");
-			 alert.showAndWait();
+			laCasaDorada.create(name.getText(), lastName.getText(), null, nameUser.getText(), password.getText(), State.ENABLE);
+			loadLogin();
+		}
+		else {
 
-		 }
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("ERROR");
+			alert.setHeaderText("No se pudo crear el Usuario");
+			alert.setContentText("Debe llenar todos los campos para crear el usuario");
+			alert.showAndWait();
+
+		}
 
 		Image image = new Image("/images/BannerCasaDorada.jpg");
 		imageBanner.setImage(image);
@@ -321,8 +321,40 @@ public class LaCasaDoradaGUI {
 	}
 
 	@FXML
-	void createEmployee(ActionEvent event) {
+	void createEmployee(ActionEvent event) throws IOException {
 
+		if(!nameEmployee.getText().equals("") && !lastNameEmployee.getText().equals("") && !idEmployee.getText().equals("")) {
+			
+			
+			boolean verific = laCasaDorada.findPeople(idEmployee.getText());
+
+			if(!verific) {
+				
+				Alert alerts = new Alert(AlertType.INFORMATION);
+				alerts.setTitle("EXCELENTE");
+				alerts.setHeaderText("Se ha registrado exitosamente.");
+				alerts.setContentText("Se ha registrado a "+nameEmployee.getText()+" exitosamente");
+				alerts.showAndWait();
+				
+				laCasaDorada.create(nameEmployee.getText(),lastNameEmployee.getText(),idEmployee.getText(),State.ENABLE);
+
+				mainMenu();
+			}else if(verific) {
+				
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("ERROR");
+				alert.setHeaderText("No se pudo crear el Empleado");
+				alert.setContentText("Ya se encuentra un empleado con ese número de identificación");
+				alert.showAndWait();
+			}
+		}
+		else {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("ERROR");
+			alert.setHeaderText("No se pudo crear el empleado");
+			alert.setContentText("Debe llenar todos los campos para crear el empleado");
+			alert.showAndWait();
+		}
 	}
 
 }
