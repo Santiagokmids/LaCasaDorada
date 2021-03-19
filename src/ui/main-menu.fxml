@@ -24,7 +24,7 @@
                   <MenuItem mnemonicParsing="false" onAction="#loadRegisterMain" text="Usuario" />
                   <MenuItem mnemonicParsing="false" text="Pedido" />
                   <MenuItem mnemonicParsing="false" text="Producto" />
-                  <MenuItem mnemonicParsing="false" text="Tipo de Producto" />
+                  <MenuItem mnemonicParsing="false" onAction="#addTypeIngredient" text="Tipo de Producto" />
                   <MenuItem mnemonicParsing="false" onAction="#addIngredient" text="Ingrediente" />
             </items>
           </Menu>

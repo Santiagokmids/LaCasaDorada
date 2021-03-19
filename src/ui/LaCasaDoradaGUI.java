@@ -18,6 +18,15 @@ import model.LaCasaDorada;
 import model.State;
 
 public class LaCasaDoradaGUI {
+	
+	@FXML
+    private ImageView imegeBannerProduct;
+
+    @FXML
+    private ImageView imageWallProduct;
+
+    @FXML
+    private TextField typeProduct;
 
 	@FXML
 	private ImageView imageBannerIngredient;
@@ -487,8 +496,61 @@ public class LaCasaDoradaGUI {
 		else {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("ERROR");
-			alert.setHeaderText("No se pudo crear el empleado");
-			alert.setContentText("Debe llenar todos los campos para crear el empleado");
+			alert.setHeaderText("No se pudo agregar el ingrediente");
+			alert.setContentText("Debe llenar el campo para añadir el ingrediente");
+			alert.showAndWait();
+		}
+	}
+	
+	public void addTypeIngredient(ActionEvent event) throws IOException {
+
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("addTypeProduct-pane.fxml"));
+
+		loader.setController(this);
+		Parent load = loader.load();
+		mainPane.setCenter(load);
+
+		mainPane.getChildren().clear();
+		mainPane.setTop(load);
+
+		Image image = new Image("/images/Banner.jpg");
+		imageWallProduct.setImage(image);
+		Image image2 = new Image("/images/BannerCasaDorada.jpg");
+		imegeBannerProduct.setImage(image2);
+	}
+	
+	@FXML
+	public void createTypeProduct(ActionEvent event) throws IOException {
+		
+		if(!typeProduct.getText().equals("")) {
+			
+			boolean verific = laCasaDorada.findTypeIngredient(typeProduct.getText());
+			
+			if(!verific) {
+				
+				Alert alerts = new Alert(AlertType.INFORMATION);
+				alerts.setTitle("EXCELENTE");
+				alerts.setHeaderText("Se ha agregado exitosamente.");
+				alerts.setContentText("Se ha agregado el tipo de producto "+typeProduct.getText()+" exitosamente");
+				alerts.showAndWait();
+
+				laCasaDorada.createTypeProduct(typeProduct.getText());
+				mainMenu();
+			}
+			else if(verific) {
+	
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("ERROR");
+				alert.setHeaderText("No se pudo añadir el tipo de producto");
+				alert.setContentText("Ya se encuentra agregado un tipo de producto con ese nombre");
+				alert.showAndWait();
+			}
+		}
+		else {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("ERROR");
+			alert.setHeaderText("No se pudo añadir el tipo de producto");
+			alert.setContentText("Debe llenar el campo para añadir el tipo de producto");
 			alert.showAndWait();
 		}
 	}

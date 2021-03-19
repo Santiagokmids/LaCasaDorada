@@ -93,7 +93,15 @@ public class LaCasaDorada {
 	public void update(String name, int index) {
 		ingredient.get(index).setName(name);
 	}
+	
+	//Create type product
 
+	public void createTypeProduct(String name) {
+
+		ProductType typeProduct = new ProductType(name);
+		productType.add(typeProduct);
+	}
+	
 	//delete people
 	public boolean delete(String id){
 		boolean delete = false;
@@ -223,6 +231,19 @@ public class LaCasaDorada {
 		for (int j = 0; j < ingredient.size() && !find; j++) {
 
 			if(ingredient.get(j).getName().equals(name) ) {
+				find = true;
+			}
+		}
+		return find;
+	}
+	
+	public boolean findTypeIngredient(String name){
+
+		boolean find = false;
+
+		for (int j = 0; j < productType.size() && !find; j++) {
+
+			if(productType.get(j).getName().equals(name) ) {
 				find = true;
 			}
 		}
