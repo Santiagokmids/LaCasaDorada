@@ -21,7 +21,7 @@
             <items>
               <MenuItem mnemonicParsing="false" onAction="#createClient" text="Cliente" />
                   <MenuItem mnemonicParsing="false" onAction="#loadRegisterEmployee" text="Empleado" />
-                  <MenuItem mnemonicParsing="false" text="Usuario" />
+                  <MenuItem mnemonicParsing="false" onAction="#loadRegisterMain" text="Usuario" />
                   <MenuItem mnemonicParsing="false" text="Pedido" />
                   <MenuItem mnemonicParsing="false" text="Producto" />
                   <MenuItem mnemonicParsing="false" text="Tipo de Producto" />
@@ -56,6 +56,12 @@
                   <MenuItem mnemonicParsing="false" text="Producto" />
                   <MenuItem mnemonicParsing="false" text="Tipo de Producto" />
                   <MenuItem mnemonicParsing="false" text="Ingrediente" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Acerca de" />
+            <Menu mnemonicParsing="false" text="Salir">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#logout" text="Cerrar Sesión" />
                </items>
             </Menu>
         </menus>

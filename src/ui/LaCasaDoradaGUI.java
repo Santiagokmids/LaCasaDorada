@@ -147,10 +147,30 @@ public class LaCasaDoradaGUI {
 	public void inicializateProgram(ActionEvent event) throws IOException {
 		loadLogin();
 	}
+	
+	@FXML
+	public void logout(ActionEvent event) throws IOException {
+		loadLogin();
+	}
 
 	@FXML
 	public void loadRegister() throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("register-pane.fxml"));
+
+		loader.setController(this);
+		Parent load = loader.load();
+		mainPane.getChildren().clear();
+		mainPane.setTop(load);
+
+		Image image = new Image("/images/Banner.jpg");
+		imageWallRegister.setImage(image);
+		Image image2 = new Image("/images/BannerCasaDorada.jpg");
+		imageBannerRegister.setImage(image2);
+	}
+	
+	@FXML
+	public void loadRegisterMain(ActionEvent event) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("register-main.fxml"));
 
 		loader.setController(this);
 		Parent load = loader.load();
@@ -185,6 +205,49 @@ public class LaCasaDoradaGUI {
 					laCasaDorada.create(name.getText(), lastName.getText(), id.getText(), nameUser.getText(), password.getText(), State.ENABLE);
 					loadLogin();
 
+				}else {
+
+					alert.setHeaderText("Las contraseñas no coinciden");
+					alert.setContentText("Las contraseñas deben ser iguales");
+					alert.showAndWait();
+				}
+			}	else {
+
+				alert.setHeaderText("No se pudo crear el Usuario");
+				alert.setContentText("Ya hay usuarios con ese numero de identificación.");
+				alert.showAndWait();
+			}
+
+		}else {
+
+			alert.setHeaderText("No se pudo crear el Usuario");
+			alert.setContentText("Debe llenar todos los campos para crear un usuario.");
+			alert.showAndWait();
+		}
+	}
+	
+	@FXML
+	public void registerUserMain(ActionEvent event) throws IOException{
+
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.setTitle("ERROR");
+
+		if(!name.getText().equals("") && !nameUser.getText().equals("") && !lastName.getText().equals("") && !password.getText().equals("") &&
+				!passwordTwo.getText().equals("") && !id.getText().equals("")) { 
+
+			if(!laCasaDorada.findPeople(id.getText())) {
+
+				if(password.getText().equals(passwordTwo.getText())) {
+
+					Alert alerts = new Alert(AlertType.INFORMATION);
+					alerts.setTitle("EXCELENTE");
+					alerts.setHeaderText("Se ha registrado exitosamente.");
+					alerts.setContentText("Se ha registrado a "+nameUser.getText()+" exitosamente");
+					alerts.showAndWait();
+
+					laCasaDorada.create(name.getText(), lastName.getText(), id.getText(), nameUser.getText(), password.getText(), State.ENABLE);
+					mainMenu();
+					
 				}else {
 
 					alert.setHeaderText("Las contraseñas no coinciden");
@@ -331,7 +394,7 @@ public class LaCasaDoradaGUI {
 	}
 
 	@FXML
-	void createEmployee(ActionEvent event) throws IOException {
+	public void createEmployee(ActionEvent event) throws IOException {
 
 		if(!nameEmployee.getText().equals("") && !lastNameEmployee.getText().equals("") && !idEmployee.getText().equals("")) {
 
@@ -366,5 +429,7 @@ public class LaCasaDoradaGUI {
 			alert.showAndWait();
 		}
 	}
+	
+	
 
 }
