@@ -190,36 +190,13 @@ public class LaCasaDoradaGUI {
 					alert.setContentText("Las contraseñas deben ser iguales");
 					alert.showAndWait();
 				}
+			}	else {
 
-				if(!laCasaDorada.findPeople(id.getText())) {
-
-					if(password.getText().equals(passwordTwo.getText())) {
-
-						Alert alerts = new Alert(AlertType.INFORMATION);
-						alerts.setTitle("EXCELENTE");
-						alerts.setHeaderText("Se ha registrado exitosamente.");
-						alerts.setContentText("Se ha registrado exitosamente a "+nameUser.getText()+" exitosamente");
-						alerts.showAndWait();
-
-						laCasaDorada.create(name.getText(), lastName.getText(), id.getText(), nameUser.getText(), password.getText(), State.ENABLE);
-						loadLogin();
-
-					}else {
-
-						alert.setHeaderText("Las contraseñas no coinciden");
-						alert.setContentText("Las contraseñas deben ser iguales");
-						alert.showAndWait();
-					}
-
-				}
-				else {
-
-					alert.setHeaderText("No se pudo crear el Usuario");
-					alert.setContentText("Debe llenar todos los campos para crear el usuario");
-					alert.showAndWait();
-				}
-
+				alert.setHeaderText("No se pudo crear el Usuario");
+				alert.setContentText("Debe llenar todos los campos para crear el usuario");
+				alert.showAndWait();
 			}
+
 		}
 	}
 
