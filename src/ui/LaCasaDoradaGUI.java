@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -18,15 +19,45 @@ import model.LaCasaDorada;
 import model.State;
 
 public class LaCasaDoradaGUI {
-	
+
 	@FXML
-    private ImageView imegeBannerProduct;
+	private ImageView imageBannerUser;
 
-    @FXML
-    private ImageView imageWallProduct;
+	@FXML
+	private ImageView imageWallUser;
 
-    @FXML
-    private TextField typeProduct;
+	@FXML
+	private TableView<?> tvUser;
+
+	@FXML
+	private TextField updateName;
+
+	@FXML
+	private TextField updateLasName;
+
+	@FXML
+	private TextField updateId;
+
+	@FXML
+	private TextField updateUser;
+
+	@FXML
+	private PasswordField lastPassword;
+
+	@FXML
+	private PasswordField newPassword;
+
+	@FXML
+	private PasswordField confirmPassword;
+
+	@FXML
+	private ImageView imegeBannerProduct;
+
+	@FXML
+	private ImageView imageWallProduct;
+
+	@FXML
+	private TextField typeProduct;
 
 	@FXML
 	private ImageView imageBannerIngredient;
@@ -165,7 +196,7 @@ public class LaCasaDoradaGUI {
 	public void inicializateProgram(ActionEvent event) throws IOException {
 		loadLogin();
 	}
-	
+
 	@FXML
 	public void logout(ActionEvent event) throws IOException {
 		loadLogin();
@@ -185,7 +216,7 @@ public class LaCasaDoradaGUI {
 		Image image2 = new Image("/images/BannerCasaDorada.jpg");
 		imageBannerRegister.setImage(image2);
 	}
-	
+
 	@FXML
 	public void loadRegisterMain(ActionEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("register-main.fxml"));
@@ -243,7 +274,7 @@ public class LaCasaDoradaGUI {
 			alert.showAndWait();
 		}
 	}
-	
+
 	@FXML
 	public void registerUserMain(ActionEvent event) throws IOException{
 
@@ -265,7 +296,7 @@ public class LaCasaDoradaGUI {
 
 					laCasaDorada.create(name.getText(), lastName.getText(), id.getText(), nameUser.getText(), password.getText(), State.ENABLE);
 					mainMenu();
-					
+
 				}else {
 
 					alert.setHeaderText("Las contraseñas no coinciden");
@@ -447,7 +478,7 @@ public class LaCasaDoradaGUI {
 			alert.showAndWait();
 		}
 	}
-	
+
 	@FXML
 	public void addIngredient(ActionEvent event) throws IOException {
 
@@ -468,13 +499,13 @@ public class LaCasaDoradaGUI {
 
 	@FXML
 	public void createIngredient(ActionEvent event) throws IOException {
-		
+
 		if(!nameIngredient.getText().equals("")) {
-			
+
 			boolean verific = laCasaDorada.findIngredien(nameIngredient.getText());
-			
+
 			if(!verific) {
-				
+
 				Alert alerts = new Alert(AlertType.INFORMATION);
 				alerts.setTitle("EXCELENTE");
 				alerts.setHeaderText("Se ha agregado exitosamente.");
@@ -485,7 +516,7 @@ public class LaCasaDoradaGUI {
 				mainMenu();
 			}
 			else if(verific) {
-	
+
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("ERROR");
 				alert.setHeaderText("No se pudo añadir el ingrediente");
@@ -501,7 +532,7 @@ public class LaCasaDoradaGUI {
 			alert.showAndWait();
 		}
 	}
-	
+
 	public void addTypeIngredient(ActionEvent event) throws IOException {
 
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("addTypeProduct-pane.fxml"));
@@ -518,16 +549,16 @@ public class LaCasaDoradaGUI {
 		Image image2 = new Image("/images/BannerCasaDorada.jpg");
 		imegeBannerProduct.setImage(image2);
 	}
-	
+
 	@FXML
 	public void createTypeProduct(ActionEvent event) throws IOException {
-		
+
 		if(!typeProduct.getText().equals("")) {
-			
+
 			boolean verific = laCasaDorada.findTypeIngredient(typeProduct.getText());
-			
+
 			if(!verific) {
-				
+
 				Alert alerts = new Alert(AlertType.INFORMATION);
 				alerts.setTitle("EXCELENTE");
 				alerts.setHeaderText("Se ha agregado exitosamente.");
@@ -538,7 +569,7 @@ public class LaCasaDoradaGUI {
 				mainMenu();
 			}
 			else if(verific) {
-	
+
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("ERROR");
 				alert.setHeaderText("No se pudo añadir el tipo de producto");
@@ -553,5 +584,28 @@ public class LaCasaDoradaGUI {
 			alert.setContentText("Debe llenar el campo para añadir el tipo de producto");
 			alert.showAndWait();
 		}
+	}
+
+	@FXML
+	public void listUsers(ActionEvent event) throws IOException {
+
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("listUser-pane.fxml"));
+
+		loader.setController(this);
+		Parent load = loader.load();
+		mainPane.setCenter(load);
+
+		mainPane.getChildren().clear();
+		mainPane.setTop(load);
+
+		Image image = new Image("/images/Banner.jpg");
+		imageWallUser.setImage(image);
+		Image image2 = new Image("/images/BannerCasaDorada.jpg");
+		imageBannerUser.setImage(image2);
+	}
+
+	@FXML
+	public void modify(ActionEvent event) {
+
 	}
 }
