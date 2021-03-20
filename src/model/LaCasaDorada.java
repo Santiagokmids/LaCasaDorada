@@ -203,6 +203,35 @@ public class LaCasaDorada {
 		}
 		return find;
 	}
+	
+	public boolean findProduct(String name){
+
+		boolean find = false;
+
+		for (int j = 0; j < product.size() && !find; j++) {
+
+			if(product.get(j).getName().equalsIgnoreCase(name)) {
+				find = true;
+			}
+		}
+		return find;
+	}
+	
+	public Product findObjectProduct(String name){
+
+		Product products = null;
+		boolean find = false;
+
+		for (int j = 0; j < product.size() && !find; j++) {
+
+			if(product.get(j).getName().equalsIgnoreCase(name)) {
+				find = true;
+				products = product.get(j);
+			}
+		}
+		return products;
+	}
+
 
 	public void importData(String fileName) throws IOException {
 

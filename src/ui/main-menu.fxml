@@ -22,7 +22,7 @@
               <MenuItem mnemonicParsing="false" onAction="#createClient" text="Cliente" />
                   <MenuItem mnemonicParsing="false" onAction="#loadRegisterEmployee" text="Empleado" />
                   <MenuItem mnemonicParsing="false" onAction="#loadRegisterMain" text="Usuario" />
-                  <MenuItem mnemonicParsing="false" text="Pedido" />
+                  <MenuItem mnemonicParsing="false" onAction="#ordersPane" text="Pedido" />
                   <MenuItem mnemonicParsing="false" text="Producto" />
                   <MenuItem mnemonicParsing="false" text="Tipo de Producto" />
                   <MenuItem mnemonicParsing="false" text="Ingrediente" />

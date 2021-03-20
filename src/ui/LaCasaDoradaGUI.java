@@ -1,21 +1,35 @@
 package ui;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import model.Client;
+import model.Employee;
 import model.LaCasaDorada;
+import model.Order;
+import model.Product;
 import model.State;
+import model.StateOrder;
 
 public class LaCasaDoradaGUI {
 
@@ -103,6 +117,38 @@ public class LaCasaDoradaGUI {
 	@FXML
 	private TextArea fieldObservations;
 
+	@FXML
+	private ComboBox<StateOrder> stateOrder;
+
+	@FXML
+	private ComboBox<Product> selectProduct;
+
+	@FXML
+	private TextField amount;
+
+	@FXML
+	private TableView<Product> tvOrder;
+
+	@FXML
+	private TextArea txtFieldOrder;
+
+	@FXML
+	private TextField txtEmployeeOrder;
+
+	@FXML
+	private TextField txtClientOrder;
+	
+	@FXML
+    private TableColumn<Product, String> colName;
+
+    @FXML
+    private TableColumn<Order, Integer> colAmount;
+
+	@FXML
+	private ImageView imageBannerOrders;
+	
+	static ObservableList<Product> observableList;
+	
 	public LaCasaDoradaGUI(LaCasaDorada laCasaDorada) {
 		this.laCasaDorada = laCasaDorada;
 	}
@@ -276,10 +322,8 @@ public class LaCasaDoradaGUI {
 
 		loader.setController(this);
 		Parent load = loader.load();
+		mainPane.getChildren().clear();
 		mainPane.setCenter(load);
-
-				mainPane.getChildren().clear();
-		mainPane.setTop(load);
 
 		Image image = new Image("/images/Banner.jpg");
 		imageWallEmployee.setImage(image);
@@ -307,11 +351,9 @@ public class LaCasaDoradaGUI {
 
 		loader.setController(this);
 
-		Parent loginUser = loader.load();
+		Parent mainMenu = loader.load();
 		mainPane.getChildren().clear();
-
-		mainPane.getChildren().clear();
-		mainPane.setCenter(loginUser);
+		mainPane.setCenter(mainMenu);
 
 		Image image = new Image("images/BannerCasaDorada.jpg");
 		imageBanner.setImage(image);
@@ -324,10 +366,10 @@ public class LaCasaDoradaGUI {
 
 		loader.setController(this);
 
-		Parent loginUser = loader.load();
+		Parent loginClient = loader.load();
 
 		mainPane.getChildren().clear();
-		mainPane.setCenter(loginUser);
+		mainPane.setCenter(loginClient);
 
 		Image image = new Image("/images/Banner.jpg");
 		imageWallRegisterClient.setImage(image);
@@ -430,6 +472,86 @@ public class LaCasaDoradaGUI {
 		}
 	}
 	
+	@FXML
+	public void ordersPane(ActionEvent event) throws IOException {
+
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("order-pane.fxml"));
+
+		loader.setController(this);
+
+		Parent addOrder = loader.load();
+		mainPane.getChildren().clear();
+		mainPane.setCenter(addOrder);
+
+		Image image = new Image("images/BannerCasaDorada.jpg");
+		imageBannerOrders.setImage(image);
+		Image image2 = new Image("/images/BannerCasaDorada.jpg");
+		imageBannerOrders.setImage(image2);
+		
+		initializeTableView();
+		ArrayList<Product> products = laCasaDorada.getProduct();
+		selectProduct.setPromptText("Seleccione el producto");
+		
+		for (int i = 0; i < products.size(); i++) {
+			selectProduct.getItems().add(products.get(i));
+		}
+	}
 	
+	@FXML
+	public void addOrder(ActionEvent event)throws IOException {
+		
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.setTitle("ERROR");
+		ArrayList<Product> products = new ArrayList<>();
+		ordersProducts(event, selectProduct.getValue(),amount.getText());
+		
+		if(!txtEmployeeOrder.getText().equals("") && !txtClientOrder.getText().equals("") && !txtFieldOrder.getText().equals("") && 
+				stateOrder.getValue() != null && selectProduct.getValue() != null){
+			
+			try {
+				Alert alerts = new Alert(AlertType.INFORMATION);
+				alerts.setTitle("EXCELENTE!");
+				alerts.setHeaderText("Se ha añadido.");
+				alerts.setContentText("Se ha añadido a exitosamente el pedido.");
+				alerts.showAndWait();
+
+				laCasaDorada.create(stateOrder.getValue(), ArrayList<Integer> amount, Date date, String fieldOfObservations, Client orderClient,
+						ArrayList<Product>products, Employee ordEmployee);
+				mainMenu();
+
+			} catch (NumberFormatException nfe) {
+
+				Alert alert1 = new Alert(AlertType.ERROR);
+				alert1.setTitle("ERROR");
+				alert1.setHeaderText("You should enter numbers in weidth and height");
+				alert1.setContentText(null);
+
+				alert.showAndWait();
+			}
+
+		}else {
+
+			alert.setHeaderText("No se pudo Añadir el pedido");
+			alert.setContentText("Debe llenar todos los campos para añadir el pedido");
+			alert.showAndWait();
+		}
+	}
+	
+	@FXML
+	public ArrayList<Product> ordersProducts(ActionEvent event, Product product, String amount)throws IOException {
+		observableList.add(new Product(product),new Order(amount));
+		return null;
+		
+	}	
+	
+	 private void initializeTableView() {
+		    
+	    	observableList = FXCollections.observableArrayList(laCasaDorada.getProduct());
+	    
+			tvOrder.setItems(observableList);
+			
+			colName.setCellValueFactory(new PropertyValueFactory<Product,String>("Name")); 
+			colAmount.setCellValueFactory(new PropertyValueFactory<Order,Integer>("Amount"));
+	  }
 
 }
