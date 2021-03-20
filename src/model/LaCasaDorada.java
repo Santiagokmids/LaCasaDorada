@@ -37,6 +37,7 @@ public class LaCasaDorada {
 		productType = new ArrayList<>();
 		ingredient = new ArrayList<>();
 		order = new ArrayList<>();
+		sizes = new ArrayList<>();
 		setPreorder(new ArrayList<>());
 	}
 
@@ -93,9 +94,9 @@ public class LaCasaDorada {
 	}
 	
 	//Create product
-	public void create(String name, ArrayList<Ingredient> ingredients, ProductType productType, Size sizes) {
+	public void create(String name, ArrayList<Ingredient> ingredients, ProductType productType, Size sizes, double price) {
 		
-		Product products = new Product(name,ingredients,productType, sizes);
+		Product products = new Product(name,ingredients,productType, sizes, price);
 		product.add(products);
 	}
 	
@@ -169,9 +170,9 @@ public class LaCasaDorada {
 	}
 	
 	//create size
-	public void create(String size, double price) {
+	public void createSize(String size) {
 
-		Size allSizes = new Size(size, price);
+		Size allSizes = new Size(size);
 		sizes.add(allSizes);
 	}
 	

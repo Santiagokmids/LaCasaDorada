@@ -26,6 +26,7 @@
                   <MenuItem mnemonicParsing="false" onAction="#productPane" text="Producto" />
                   <MenuItem mnemonicParsing="false" onAction="#addTypeIngredient" text="Tipo de Producto" />
                   <MenuItem mnemonicParsing="false" onAction="#addIngredient" text="Ingrediente" />
+                  <MenuItem mnemonicParsing="false" onAction="#addSize" text="Tamaño de Producto" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Eliminar">
