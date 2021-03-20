@@ -21,7 +21,7 @@
    <center>
       <Pane prefHeight="280.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="681.0" fitWidth="733.0" opacity="0.09" pickOnBounds="true" />
+            <ImageView fx:id="imageWallOrders" fitHeight="681.0" fitWidth="733.0" opacity="0.09" pickOnBounds="true" />
             <Label layoutX="97.0" layoutY="70.0" text="Estado del pedido:" textFill="#dad57c">
                <font>
                   <Font name="Berlin Sans FB" size="29.0" />
@@ -35,7 +35,7 @@
             <ComboBox fx:id="stateOrder" layoutX="327.0" layoutY="71.0" prefHeight="31.0" prefWidth="243.0" style="-fx-background-color: white;" visibleRowCount="20" />
             <ComboBox fx:id="selectProduct" layoutX="143.0" layoutY="310.0" prefHeight="31.0" prefWidth="225.0" style="-fx-background-color: white;" visibleRowCount="20" />
             <TextField fx:id="amount" alignment="CENTER" layoutX="439.0" layoutY="309.0" prefHeight="34.0" prefWidth="114.0" />
-            <TableView fx:id="tvOrder" layoutX="118.0" layoutY="130.0" prefHeight="133.0" prefWidth="416.0">
+            <TableView fx:id="tvOrder" layoutX="118.0" layoutY="130.0" onMouseClicked="#mouseClickedOrder" prefHeight="133.0" prefWidth="416.0">
               <columns>
                 <TableColumn fx:id="colName" editable="false" prefWidth="309.0" sortable="false" text="Producto" />
                   <TableColumn fx:id="colAmount" editable="false" prefWidth="105.0" sortable="false" text="Cantidad" />
@@ -44,7 +44,7 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <Button layoutX="550.0" layoutY="137.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="145.0" style="-fx-background-color: #dad57c; -fx-background-radius: 22;" text="Añadir producto">
+            <Button layoutX="550.0" layoutY="137.0" mnemonicParsing="false" onAction="#ordersProducts" prefHeight="31.0" prefWidth="145.0" style="-fx-background-color: #dad57c; -fx-background-radius: 22;" text="Añadir producto">
                <font>
                   <Font name="Franklin Gothic Demi" size="16.0" />
                </font>
@@ -59,7 +59,7 @@
                   <Font name="Berlin Sans FB" size="21.0" />
                </font>
             </Label>
-            <Button layoutX="550.0" layoutY="182.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="145.0" style="-fx-background-color: #dad57c; -fx-background-radius: 22;" text="Borrar Producto">
+            <Button layoutX="550.0" layoutY="182.0" mnemonicParsing="false" onAction="#removeProduct" prefHeight="31.0" prefWidth="145.0" style="-fx-background-color: #dad57c; -fx-background-radius: 22;" text="Borrar Producto">
                <font>
                   <Font name="Franklin Gothic Demi" size="16.0" />
                </font>
@@ -74,7 +74,7 @@
                   <Font name="Berlin Sans FB" size="24.0" />
                </font>
             </Label>
-            <Button layoutX="547.0" layoutY="226.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="152.0" style="-fx-background-color: #dad57c; -fx-background-radius: 22;" text="Cambiar Producto">
+            <Button layoutX="547.0" layoutY="226.0" mnemonicParsing="false" onAction="#modifyProduct" prefHeight="31.0" prefWidth="152.0" style="-fx-background-color: #dad57c; -fx-background-radius: 22;" text="Cambiar Producto">
                <font>
                   <Font name="Franklin Gothic Demi" size="16.0" />
                </font>

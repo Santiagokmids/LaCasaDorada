@@ -29,6 +29,7 @@ public class LaCasaDorada {
 	private ArrayList<Ingredient> ingredient;
 	private ArrayList<Order> order;
 	private ArrayList<PreOrder> preorder;
+	private ArrayList<Size> sizes;
 
 	public LaCasaDorada() {
 		people = new ArrayList<>();
@@ -92,9 +93,9 @@ public class LaCasaDorada {
 	}
 	
 	//Create product
-	public void create(String name,ArrayList<Ingredient>ingredients ,ProductType productsTypes, Integer price, Size sizes) {
-
-		Product products = new Product(name,ingredients,productsTypes,price, sizes);
+	public void create(String name, ArrayList<Ingredient> ingredients, ProductType productType, Size sizes) {
+		
+		Product products = new Product(name,ingredients,productType, sizes);
 		product.add(products);
 	}
 	
@@ -111,7 +112,6 @@ public class LaCasaDorada {
 	}
 
 	//Create type product
-
 	public void createTypeProduct(String name) {
 
 		ProductType typeProduct = new ProductType(name);
@@ -166,6 +166,26 @@ public class LaCasaDorada {
 			}
 		}
 		return orders;
+	}
+	
+	//create size
+	public void create(String size, double price) {
+
+		Size allSizes = new Size(size, price);
+		sizes.add(allSizes);
+	}
+	
+	public boolean findSizes(String size){
+
+		boolean find = false;
+
+		for (int j = 0; j < sizes.size() && !find; j++) {
+
+			if(size.equalsIgnoreCase(sizes.get(j).getSize())) {
+				find = true;
+			}
+		}
+		return find;
 	}
 
 	public boolean findOrders(String code){
@@ -240,30 +260,34 @@ public class LaCasaDorada {
 		return find;
 	}
 	
-	public boolean findClient(String name){
+	public Client findClient(String name){
 
+		Client client = null;
 		boolean find = false;
 
 		for (int j = 0; j < people.size() && !find; j++) {
 
 			if(people.get(j) instanceof Client && people.get(j).getName().equalsIgnoreCase(name)) {
 				find = true;
+				client = (Client) people.get(j); 
 			}
 		}
-		return find;
+		return client;
 	}
 	
-	public boolean findEmployee(String name){
-
+	public Employee findEmployee(String name){
+		
+		Employee employee = null;
 		boolean find = false;
 
 		for (int j = 0; j < people.size() && !find; j++) {
 
 			if(people.get(j) instanceof Employee && people.get(j).getName().equalsIgnoreCase(name)) {
 				find = true;
+				employee = (Employee) people.get(j);
 			}
 		}
-		return find;
+		return employee;
 	}
 
 	public boolean findProduct(String name){
@@ -278,6 +302,7 @@ public class LaCasaDorada {
 		}
 		return find;
 	}
+	
 	public boolean findIngredien(String name){
 
 		boolean find = false;
@@ -289,6 +314,81 @@ public class LaCasaDorada {
 			}
 		}
 		return find;
+	}
+	
+	public Ingredient findIngredient(String name){
+
+		boolean find = false;
+		Ingredient ingredients = null;
+
+		for (int j = 0; j < ingredient.size() && !find; j++) {
+
+			if(ingredient.get(j).getName().equals(name) ) {
+				find = true;
+				ingredients = ingredient.get(j);
+			}
+		}
+		return ingredients;
+	}
+	
+	public Product findProducts(String name){
+
+		boolean find = false;
+		Product products = null;
+
+		for (int j = 0; j <product.size() && !find; j++) {
+
+			if(product.get(j).getName().equals(name) ) {
+				find = true;
+				products = product.get(j);
+			}
+		}
+		return products;
+	}
+	
+	public PreOrder findPreOrders(String name, Integer amount){
+
+		boolean find = false;
+		PreOrder preOrder= null;
+
+		for (int j = 0; j <preorder.size() && !find; j++) {
+
+			if(preorder.get(j).getProduct().getName().equals(name) && preorder.get(j).getAmount() == amount) {
+				find = true;
+				preOrder = preorder.get(j);
+			}
+		}
+		return preOrder;
+	}
+	
+	public ProductType findType(String name){
+
+		boolean find = false;
+		ProductType type= null;
+
+		for (int j = 0; j <productType.size() && !find; j++) {
+
+			if(productType.get(j).getName().equals(name)) {
+				find = true;
+				type= productType.get(j);
+			}
+		}
+		return type;
+	}
+
+	public Size findSize(String size){
+
+		boolean find = false;
+		Size allSizes = null;
+
+		for (int j = 0; j < sizes.size() && !find; j++) {
+
+			if(sizes.get(j).getSize().equals(size)) {
+				find = true;
+				allSizes = sizes.get(j);
+			}
+		}
+		return allSizes;
 	}
 
 	public Product findObjectProduct(String name){
@@ -459,5 +559,13 @@ public class LaCasaDorada {
 
 	public void setPreorder(ArrayList<PreOrder> preorder) {
 		this.preorder = preorder;
+	}
+
+	public ArrayList<Size> getSizes() {
+		return sizes;
+	}
+
+	public void setSizes(ArrayList<Size> sizes) {
+		this.sizes = sizes;
 	}
 }
