@@ -2,8 +2,6 @@ package ui;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,14 +20,14 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.TouchEvent;
 import javafx.scene.layout.BorderPane;
-import model.Client;
-import model.Employee;
 import model.LaCasaDorada;
 import model.Order;
 import model.Product;
 import model.State;
 import model.StateOrder;
+import model.User;
 
 public class LaCasaDoradaGUI {
 
@@ -40,7 +38,19 @@ public class LaCasaDoradaGUI {
 	private ImageView imageWallUser;
 
 	@FXML
-	private TableView<?> tvUser;
+	private TableView<User> tvUser;
+
+	@FXML
+	private TableColumn<User, String> tcName;
+
+	@FXML
+	private TableColumn<User, String> tcLastName;
+
+	@FXML
+	private TableColumn<User, String> tcId;
+
+	@FXML
+	private TableColumn<User, String> tcUser;
 
 	@FXML
 	private TextField updateName;
@@ -185,24 +195,32 @@ public class LaCasaDoradaGUI {
 
 	@FXML
 	private TextField txtClientOrder;
-	
-	@FXML
-    private TableColumn<Product, String> colName;
 
-    @FXML
-    private TableColumn<Order, Integer> colAmount;
+	@FXML
+	private TableColumn<Product, String> colName;
+
+	@FXML
+	private TableColumn<Order, Integer> colAmount;
 
 	@FXML
 	private ImageView imageBannerOrders;
-	
-	static ObservableList<Product> observableList;
-	
+
+	public static ObservableList<Product> listProduct;
+	public static ObservableList<User> listUsers;
+
 	public LaCasaDoradaGUI(LaCasaDorada laCasaDorada) {
 		this.laCasaDorada = laCasaDorada;
 	}
 
-	public void initialize() {
-		//the method (initialize) is called several times by diferents fxml file loads 
+	public void initializateTableViewUsers() {
+
+		listUsers = FXCollections.observableArrayList(laCasaDorada.getUsers());
+
+		tvUser.setItems(listUsers);
+		tcName.setCellValueFactory(new PropertyValueFactory<User,String>("name"));
+		tcLastName.setCellValueFactory(new PropertyValueFactory<User,String>("lastName"));
+		tcId.setCellValueFactory(new PropertyValueFactory<User,String>("id"));
+		tcUser.setCellValueFactory(new PropertyValueFactory<User,String>("userName"));
 	}
 
 	@FXML
@@ -522,7 +540,7 @@ public class LaCasaDoradaGUI {
 			alert.showAndWait();
 		}
 	}
-	
+
 	@FXML
 	public void ordersPane(ActionEvent event) throws IOException {
 
@@ -538,72 +556,14 @@ public class LaCasaDoradaGUI {
 		imageBannerOrders.setImage(image);
 		Image image2 = new Image("/images/BannerCasaDorada.jpg");
 		imageBannerOrders.setImage(image2);
-		
-		initializeTableView();
+
 		ArrayList<Product> products = laCasaDorada.getProduct();
 		selectProduct.setPromptText("Seleccione el producto");
-		
+
 		for (int i = 0; i < products.size(); i++) {
 			selectProduct.getItems().add(products.get(i));
 		}
 	}
-	
-	@FXML
-	public void addOrder(ActionEvent event)throws IOException {
-		
-		Alert alert = new Alert(AlertType.ERROR);
-		alert.setTitle("ERROR");
-		ArrayList<Product> products = new ArrayList<>();
-		ordersProducts(event, selectProduct.getValue(),amount.getText());
-		
-		if(!txtEmployeeOrder.getText().equals("") && !txtClientOrder.getText().equals("") && !txtFieldOrder.getText().equals("") && 
-				stateOrder.getValue() != null && selectProduct.getValue() != null){
-			
-			try {
-				Alert alerts = new Alert(AlertType.INFORMATION);
-				alerts.setTitle("EXCELENTE!");
-				alerts.setHeaderText("Se ha añadido.");
-				alerts.setContentText("Se ha añadido a exitosamente el pedido.");
-				alerts.showAndWait();
-
-				laCasaDorada.create(stateOrder.getValue(), ArrayList<Integer> amount, Date date, String fieldOfObservations, Client orderClient,
-						ArrayList<Product>products, Employee ordEmployee);
-				mainMenu();
-
-			} catch (NumberFormatException nfe) {
-
-				Alert alert1 = new Alert(AlertType.ERROR);
-				alert1.setTitle("ERROR");
-				alert1.setHeaderText("You should enter numbers in weidth and height");
-				alert1.setContentText(null);
-
-				alert.showAndWait();
-			}
-
-		}else {
-
-			alert.setHeaderText("No se pudo Añadir el pedido");
-			alert.setContentText("Debe llenar todos los campos para añadir el pedido");
-			alert.showAndWait();
-		}
-	}
-	
-	@FXML
-	public ArrayList<Product> ordersProducts(ActionEvent event, Product product, String amount)throws IOException {
-		observableList.add(new Product(product),new Order(amount));
-		return null;
-		
-	}	
-	
-	 private void initializeTableView() {
-		    
-	    	observableList = FXCollections.observableArrayList(laCasaDorada.getProduct());
-	    
-			tvOrder.setItems(observableList);
-			
-			colName.setCellValueFactory(new PropertyValueFactory<Product,String>("Name")); 
-			colAmount.setCellValueFactory(new PropertyValueFactory<Order,Integer>("Amount"));
-	  }
 
 	@FXML
 	public void addIngredient(ActionEvent event) throws IOException {
@@ -728,10 +688,66 @@ public class LaCasaDoradaGUI {
 		imageWallUser.setImage(image);
 		Image image2 = new Image("/images/BannerCasaDorada.jpg");
 		imageBannerUser.setImage(image2);
+
+		initializateTableViewUsers();
 	}
 
 	@FXML
 	public void modify(ActionEvent event) {
 
+		if(tvUser.getSelectionModel().isEmpty()) {
+
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("ERROR");
+			alert.setHeaderText("No se pudo actualizar el usuario");
+			alert.setContentText("Debe seleccionar uno de la lista");
+			alert.showAndWait();
+		}
+		else {
+
+			String name = listUsers.get(tvUser.getSelectionModel().getSelectedIndex()).getName();
+			String lastName = listUsers.get(tvUser.getSelectionModel().getSelectedIndex()).getLastName();
+			String id = listUsers.get(tvUser.getSelectionModel().getSelectedIndex()).getId();
+			String userName = listUsers.get(tvUser.getSelectionModel().getSelectedIndex()).getUserName();
+
+			User user = laCasaDorada.findUser(name,lastName,id,userName);
+
+			if(!updateName.getText().isEmpty()) {
+				name = updateName.getText();
+			}
+			if(!updateLasName.getText().isEmpty()) {
+				lastName = updateLasName.getText();
+			}
+			if(!updateId.getText().isEmpty()) {
+				id = updateId.getText();
+			}
+			if(!updateUser.getText().isEmpty()) {
+				userName = updateUser.getText();
+			}
+			if(!lastPassword.getText().isEmpty() && lastPassword.getText().equals(user.getPassword())) {
+
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("ERROR");
+				alert.setHeaderText("No se puede actualizar la contraseña");
+				alert.setContentText("La contraseña anterior no coincide con la que se está ingresando");
+				alert.showAndWait();
+
+				if(!newPassword.getText().isEmpty() && !confirmPassword.getText().isEmpty() && newPassword.getText().equals(confirmPassword.getText())) {
+					user.setPassword(newPassword.getText());
+				}
+			}
+
+			user.setName(name);
+			user.setLastName(lastName);
+			user.setId(id);
+			user.setUserName(userName);
+
+			listUsers.set(tvUser.getSelectionModel().getSelectedIndex(),new User(name,lastName,id,userName,user.getPassword(),user.getState()));
+		}
+	}
+
+	@FXML
+	void press(TouchEvent event) {
+		System.out.println("xdxdxdxdxd");
 	}
 }

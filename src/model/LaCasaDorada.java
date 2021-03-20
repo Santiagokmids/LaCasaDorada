@@ -16,7 +16,7 @@ import java.io.PrintWriter;
 
 public class LaCasaDorada {
 
-	//Contants
+	//Constants
 
 	public final static String SAVE_PATH_FILE = "data/data.lcd";
 	public final static String SEPARATOR = ";";
@@ -275,6 +275,39 @@ public class LaCasaDorada {
 			}
 		}
 		return find;
+	}
+	
+	public ArrayList<User> getUsers(){
+		
+		ArrayList<User> users = new ArrayList<>();
+
+		for (int j = 0; j < people.size(); j++) {
+
+			if(people.get(j) instanceof User ) {
+				
+				users.add((User)people.get(j));
+			}
+		}
+		return users;
+	}
+	
+	public User findUser(String name, String lastName, String id, String userName) {
+		
+		User user = null;
+		User validation = null;
+		boolean verific = false;
+		
+		for (int i = 0; i < people.size() && !verific; i++) {
+			if(people.get(i) instanceof User) {
+				
+				user = (User)people.get(i);
+				if(user.getName().equals(name) && user.getLastName().equals(lastName) && user.getId().equals(id) && user.getUserName().equals(userName)) {
+					validation = user;
+				}
+			}
+		}
+		
+		return validation;
 	}
 
 	public void importData(String fileName) throws IOException {
