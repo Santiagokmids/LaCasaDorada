@@ -24,6 +24,7 @@ import javafx.scene.input.TouchEvent;
 import javafx.scene.layout.BorderPane;
 import model.LaCasaDorada;
 import model.Order;
+import model.PreOrder;
 import model.Product;
 import model.State;
 import model.StateOrder;
@@ -185,7 +186,10 @@ public class LaCasaDoradaGUI {
 	private TextField amount;
 
 	@FXML
-	private TableView<Product> tvOrder;
+	private TableView<PreOrder> tvOrder;
+
+	@FXML
+	private TableColumn<PreOrder, Integer> colAmount;
 
 	@FXML
 	private TextArea txtFieldOrder;
@@ -197,6 +201,7 @@ public class LaCasaDoradaGUI {
 	private TextField txtClientOrder;
 
 	@FXML
+<<<<<<< HEAD
 	private TableColumn<Product, String> colName;
 
 	@FXML
@@ -208,6 +213,15 @@ public class LaCasaDoradaGUI {
 	public static ObservableList<Product> listProduct;
 	public static ObservableList<User> listUsers;
 
+=======
+    private TableColumn<PreOrder, Product> colName;
+
+	@FXML
+	private ImageView imageBannerOrders;
+	
+	static ObservableList<PreOrder> observableList;
+	
+>>>>>>> 3d4cbf15a0ce4b1b57b0fea2c038474a952ce4f5
 	public LaCasaDoradaGUI(LaCasaDorada laCasaDorada) {
 		this.laCasaDorada = laCasaDorada;
 	}
@@ -564,6 +578,67 @@ public class LaCasaDoradaGUI {
 			selectProduct.getItems().add(products.get(i));
 		}
 	}
+<<<<<<< HEAD
+=======
+	
+	@FXML
+	public void addOrder(ActionEvent event)throws IOException {
+
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.setTitle("ERROR");
+		
+		int amounts = Integer.parseInt(amount.getText());
+		ordersProducts(event, selectProduct.getValue(), amounts);
+		
+		if(!txtEmployeeOrder.getText().equals("") && !txtClientOrder.getText().equals("") && !txtFieldOrder.getText().equals("") && 
+				stateOrder.getValue() != null && !observableList.isEmpty()){
+
+			try {
+				Alert alerts = new Alert(AlertType.INFORMATION);
+				alerts.setTitle("EXCELENTE!");
+				alerts.setHeaderText("Se ha añadido.");
+				alerts.setContentText("Se ha añadido a exitosamente el pedido.");
+				alerts.showAndWait();
+
+				/*laCasaDorada.create(stateOrder.getValue(), ArrayList<Integer> amount, Date date, String fieldOfObservations, Client orderClient,
+							ArrayList<Product>products, Employee ordEmployee);
+					mainMenu();*/
+
+			} catch (NumberFormatException nfe) {
+
+				Alert alert1 = new Alert(AlertType.ERROR);
+				alert1.setTitle("ERROR");
+				alert1.setHeaderText("You should enter numbers in weidth and height");
+				alert1.setContentText(null);
+
+				alert.showAndWait();
+			}
+
+		}else {
+
+			alert.setHeaderText("No se pudo Añadir el pedido");
+			alert.setContentText("Debe llenar todos los campos para añadir el pedido");
+			alert.showAndWait();
+		}
+	}
+	
+	@FXML
+	public ArrayList<Product> ordersProducts(ActionEvent event, Product product, Integer amount)throws IOException {
+		observableList.add(new PreOrder(product,amount));
+		return null;
+		
+	}	
+	
+	 private void initializeTableView() {
+		    
+	    	observableList = FXCollections.observableArrayList(laCasaDorada.getPreorder());
+	    
+			tvOrder.setItems(observableList);
+			
+			colName.setCellValueFactory(new PropertyValueFactory<PreOrder,Product>("Name")); 
+			colAmount.setCellValueFactory(new PropertyValueFactory<PreOrder,Integer>("Amount"));
+	  }
+>>>>>>> 3d4cbf15a0ce4b1b57b0fea2c038474a952ce4f5
 
 	@FXML
 	public void addIngredient(ActionEvent event) throws IOException {
