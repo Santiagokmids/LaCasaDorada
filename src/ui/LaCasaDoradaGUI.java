@@ -201,24 +201,15 @@ public class LaCasaDoradaGUI {
 	private TextField txtClientOrder;
 
 	@FXML
-	private TableColumn<Product, String> colName;
-
-	@FXML
-	private TableColumn<Order, Integer> colAmount;
+	private TableColumn<PreOrder, Product> colName;
 
 	@FXML
 	private ImageView imageBannerOrders;
 
 	public static ObservableList<Product> listProduct;
 	public static ObservableList<User> listUsers;
+	public static ObservableList<PreOrder> observableList;
 
-    private TableColumn<PreOrder, Product> colName;
-
-	@FXML
-	private ImageView imageBannerOrders;
-	
-	static ObservableList<PreOrder> observableList;
-	
 	public LaCasaDoradaGUI(LaCasaDorada laCasaDorada) {
 		this.laCasaDorada = laCasaDorada;
 	}
@@ -569,22 +560,23 @@ public class LaCasaDoradaGUI {
 		imageBannerOrders.setImage(image2);
 
 		ArrayList<Product> products = laCasaDorada.getProduct();
+		inicializateTableView();
 		selectProduct.setPromptText("Seleccione el producto");
 
 		for (int i = 0; i < products.size(); i++) {
 			selectProduct.getItems().add(products.get(i));
 		}
 	}
-	
+
 	@FXML
 	public void addOrder(ActionEvent event)throws IOException {
 
 		Alert alert = new Alert(AlertType.ERROR);
 		alert.setTitle("ERROR");
-		
+
 		int amounts = Integer.parseInt(amount.getText());
 		ordersProducts(event, selectProduct.getValue(), amounts);
-		
+
 		if(!txtEmployeeOrder.getText().equals("") && !txtClientOrder.getText().equals("") && !txtFieldOrder.getText().equals("") && 
 				stateOrder.getValue() != null && !observableList.isEmpty()){
 
@@ -616,23 +608,23 @@ public class LaCasaDoradaGUI {
 			alert.showAndWait();
 		}
 	}
-	
+
 	@FXML
 	public ArrayList<Product> ordersProducts(ActionEvent event, Product product, Integer amount)throws IOException {
 		observableList.add(new PreOrder(product,amount));
 		return null;
-		
+
 	}	
-	
-	 private void initializeTableView() {
-		    
-	    	observableList = FXCollections.observableArrayList(laCasaDorada.getPreorder());
-	    
-			tvOrder.setItems(observableList);
-			
-			colName.setCellValueFactory(new PropertyValueFactory<PreOrder,Product>("Name")); 
-			colAmount.setCellValueFactory(new PropertyValueFactory<PreOrder,Integer>("Amount"));
-	  }
+
+	private void inicializateTableView() {
+
+		observableList = FXCollections.observableArrayList(laCasaDorada.getPreorder());
+
+		tvOrder.setItems(observableList);
+
+		colName.setCellValueFactory(new PropertyValueFactory<PreOrder,Product>("Name")); 
+		colAmount.setCellValueFactory(new PropertyValueFactory<PreOrder,Integer>("Amount"));
+	}
 
 	@FXML
 	public void addIngredient(ActionEvent event) throws IOException {
@@ -813,10 +805,5 @@ public class LaCasaDoradaGUI {
 
 			listUsers.set(tvUser.getSelectionModel().getSelectedIndex(),new User(name,lastName,id,userName,user.getPassword(),user.getState()));
 		}
-	}
-
-	@FXML
-	void press(TouchEvent event) {
-		System.out.println("xdxdxdxdxd");
 	}
 }
