@@ -21,8 +21,8 @@
             <ImageView fx:id="imageWallRegisterClient" fitHeight="675.0" fitWidth="740.0" layoutY="-15.0" nodeOrientation="INHERIT" opacity="0.09" pickOnBounds="true" />
             <TextField fx:id="nameClient" layoutX="335.0" layoutY="93.0" prefHeight="31.0" prefWidth="280.0" />
             <TextField fx:id="lastNameClient" layoutX="336.0" layoutY="137.0" prefHeight="31.0" prefWidth="279.0" />
-            <TextField fx:id="idClient" layoutX="336.0" layoutY="184.0" prefHeight="31.0" prefWidth="277.0" />
-            <TextField fx:id="adressClient" layoutX="334.0" layoutY="228.0" prefHeight="32.0" prefWidth="277.0" promptText="Opcional" />
+            <TextField fx:id="idClient" layoutX="336.0" layoutY="184.0" prefHeight="31.0" prefWidth="277.0" promptText="Opcional" />
+            <TextField fx:id="adressClient" layoutX="335.0" layoutY="228.0" prefHeight="32.0" prefWidth="277.0" />
             <Label layoutX="217.0" layoutY="87.0" text="Nombre:" textFill="#dad57c">
                <font>
                   <Font name="Berlin Sans FB" size="29.0" />
@@ -68,7 +68,7 @@
       </Pane>
    </center>
    <bottom>
-      <HBox prefHeight="82.0" prefWidth="740.0" BorderPane.alignment="CENTER">
+      <HBox prefHeight="51.0" prefWidth="740.0" BorderPane.alignment="CENTER">
          <children>
             <Button mnemonicParsing="false" onAction="#addClient" prefHeight="53.0" prefWidth="140.0" style="-fx-background-color: #dad57c; -fx-background-radius: 22;" text="Crear Cliente">
                <font>

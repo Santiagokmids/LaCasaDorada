@@ -4,9 +4,11 @@ public class Size {
 	
 	//Attributes
 	private String size;
+	private double price;
 
-	public Size(String size) {
+	public Size(String size, double price) {
 		this.size = size;
+		this.price = price;
 	}
 	
 	public String getSize() {
@@ -16,6 +18,15 @@ public class Size {
 	public void setSize(String size) {
 		this.size = size;
 	}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
 	
 	
 }
