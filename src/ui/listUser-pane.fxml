@@ -19,7 +19,7 @@
       <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
             <ImageView fx:id="imageWallUser" fitHeight="751.0" fitWidth="740.0" opacity="0.09" pickOnBounds="true" preserveRatio="true" />
-            <TableView fx:id="tvUser" onTouchPressed="#press" prefHeight="566.0" prefWidth="478.0">
+            <TableView fx:id="tvUser" onMouseClicked="#mouseClicked" prefHeight="566.0" prefWidth="478.0">
               <columns>
                 <TableColumn fx:id="tcName" prefWidth="132.0" text="Nombre" />
                 <TableColumn fx:id="tcLastName" minWidth="0.0" prefWidth="102.0" text="Apellidos" />

@@ -21,10 +21,10 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import model.Ingredient;
 import model.LaCasaDorada;
-import model.Order;
 import model.PreOrder;
 import model.Product;
 import model.ProductType;
@@ -868,6 +868,9 @@ public class LaCasaDoradaGUI {
 
 	@FXML
 	public void modify(ActionEvent event) {
+		
+		boolean verific = false;
+		boolean verificPassword = false;
 
 		if(tvUser.getSelectionModel().isEmpty()) {
 
@@ -886,29 +889,55 @@ public class LaCasaDoradaGUI {
 
 			User user = laCasaDorada.findUser(name,lastName,id,userName);
 
-			if(!updateName.getText().isEmpty()) {
+			if(!updateName.getText().isEmpty() && !updateName.getText().equals(name)) {
 				name = updateName.getText();
+				verific = true;
 			}
-			if(!updateLasName.getText().isEmpty()) {
+			if(!updateLasName.getText().isEmpty() && !updateLasName.getText().equals(lastName)) {
 				lastName = updateLasName.getText();
+				verific = true;
 			}
-			if(!updateId.getText().isEmpty()) {
+			if(!updateId.getText().isEmpty() && !updateId.getText().equals(id)) {
 				id = updateId.getText();
+				verific = true;
 			}
-			if(!updateUser.getText().isEmpty()) {
+			if(!updateUser.getText().isEmpty() && !updateUser.getText().equals(userName)) {
 				userName = updateUser.getText();
+				verific = true;
 			}
-			if(!lastPassword.getText().isEmpty() && lastPassword.getText().equals(user.getPassword())) {
+			if(!lastPassword.getText().isEmpty() && !lastPassword.getText().equals(user.getPassword())) {
 
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("ERROR");
 				alert.setHeaderText("No se puede actualizar la contraseña");
 				alert.setContentText("La contraseña anterior no coincide con la que se está ingresando");
 				alert.showAndWait();
-
-				if(!newPassword.getText().isEmpty() && !confirmPassword.getText().isEmpty() && newPassword.getText().equals(confirmPassword.getText())) {
-					user.setPassword(newPassword.getText());
-				}
+				
+			}else if(!newPassword.getText().isEmpty() && !confirmPassword.getText().isEmpty() && newPassword.getText().equals(confirmPassword.getText())){
+				user.setPassword(newPassword.getText());
+				verificPassword = true;
+			}
+			
+			if(verific && verificPassword) {
+				Alert alerts = new Alert(AlertType.INFORMATION);
+				alerts.setTitle("EXCELENTE");
+				alerts.setHeaderText("Se ha actualizado toda la información.");
+				alerts.setContentText("Se ha actualizado la contraseña y los demás datos del usuario exitosamente");
+				alerts.showAndWait();
+			}
+			else if(verific) {
+				Alert alerts = new Alert(AlertType.INFORMATION);
+				alerts.setTitle("EXCELENTE");
+				alerts.setHeaderText("Se ha actualizado toda la información.");
+				alerts.setContentText("Los datos del usuario han sido actualizados exitosamente");
+				alerts.showAndWait();
+			}
+			else if(verificPassword) {
+				Alert alerts = new Alert(AlertType.INFORMATION);
+				alerts.setTitle("EXCELENTE");
+				alerts.setHeaderText("Se ha actualizado la contraseña.");
+				alerts.setContentText("La contraseña del usuario ha sido actualizada exitosamente");
+				alerts.showAndWait();
 			}
 
 			user.setName(name);
@@ -917,8 +946,28 @@ public class LaCasaDoradaGUI {
 			user.setUserName(userName);
 
 			listUsers.set(tvUser.getSelectionModel().getSelectedIndex(),new User(name,lastName,id,userName,user.getPassword(),user.getState()));
+			
+			updateName.setText("");
+			updateLasName.setText("");
+			updateId.setText("");
+			updateUser.setText("");
+			lastPassword.setText("");
+			newPassword.setText("");
+			confirmPassword.setText("");
 		}
 	}
 	
-	
+	@FXML
+    void mouseClicked(MouseEvent event) {
+		
+		String name = listUsers.get(tvUser.getSelectionModel().getSelectedIndex()).getName();
+		String lastName = listUsers.get(tvUser.getSelectionModel().getSelectedIndex()).getLastName();
+		String id = listUsers.get(tvUser.getSelectionModel().getSelectedIndex()).getId();
+		String userName = listUsers.get(tvUser.getSelectionModel().getSelectedIndex()).getUserName();
+		
+		updateName.setText(name);
+		updateLasName.setText(lastName);
+		updateId.setText(id);
+		updateUser.setText(userName);
+    }
 }
