@@ -27,6 +27,7 @@ import model.Client;
 import model.Employee;
 import model.LaCasaDorada;
 import model.Order;
+import model.PreOrder;
 import model.Product;
 import model.State;
 import model.StateOrder;
@@ -175,7 +176,10 @@ public class LaCasaDoradaGUI {
 	private TextField amount;
 
 	@FXML
-	private TableView<Product> tvOrder;
+	private TableView<PreOrder> tvOrder;
+
+	@FXML
+	private TableColumn<PreOrder, Integer> colAmount;
 
 	@FXML
 	private TextArea txtFieldOrder;
@@ -187,15 +191,12 @@ public class LaCasaDoradaGUI {
 	private TextField txtClientOrder;
 	
 	@FXML
-    private TableColumn<Product, String> colName;
-
-    @FXML
-    private TableColumn<Order, Integer> colAmount;
+    private TableColumn<PreOrder, Product> colName;
 
 	@FXML
 	private ImageView imageBannerOrders;
 	
-	static ObservableList<Product> observableList;
+	static ObservableList<PreOrder> observableList;
 	
 	public LaCasaDoradaGUI(LaCasaDorada laCasaDorada) {
 		this.laCasaDorada = laCasaDorada;
@@ -550,15 +551,16 @@ public class LaCasaDoradaGUI {
 	
 	@FXML
 	public void addOrder(ActionEvent event)throws IOException {
-		
+
 		Alert alert = new Alert(AlertType.ERROR);
 		alert.setTitle("ERROR");
-		ArrayList<Product> products = new ArrayList<>();
-		ordersProducts(event, selectProduct.getValue(),amount.getText());
+		
+		int amounts = Integer.parseInt(amount.getText());
+		ordersProducts(event, selectProduct.getValue(), amounts);
 		
 		if(!txtEmployeeOrder.getText().equals("") && !txtClientOrder.getText().equals("") && !txtFieldOrder.getText().equals("") && 
-				stateOrder.getValue() != null && selectProduct.getValue() != null){
-			
+				stateOrder.getValue() != null && !observableList.isEmpty()){
+
 			try {
 				Alert alerts = new Alert(AlertType.INFORMATION);
 				alerts.setTitle("EXCELENTE!");
@@ -566,9 +568,9 @@ public class LaCasaDoradaGUI {
 				alerts.setContentText("Se ha añadido a exitosamente el pedido.");
 				alerts.showAndWait();
 
-				laCasaDorada.create(stateOrder.getValue(), ArrayList<Integer> amount, Date date, String fieldOfObservations, Client orderClient,
-						ArrayList<Product>products, Employee ordEmployee);
-				mainMenu();
+				/*laCasaDorada.create(stateOrder.getValue(), ArrayList<Integer> amount, Date date, String fieldOfObservations, Client orderClient,
+							ArrayList<Product>products, Employee ordEmployee);
+					mainMenu();*/
 
 			} catch (NumberFormatException nfe) {
 
@@ -589,20 +591,20 @@ public class LaCasaDoradaGUI {
 	}
 	
 	@FXML
-	public ArrayList<Product> ordersProducts(ActionEvent event, Product product, String amount)throws IOException {
-		observableList.add(new Product(product),new Order(amount));
+	public ArrayList<Product> ordersProducts(ActionEvent event, Product product, Integer amount)throws IOException {
+		observableList.add(new PreOrder(product,amount));
 		return null;
 		
 	}	
 	
 	 private void initializeTableView() {
 		    
-	    	observableList = FXCollections.observableArrayList(laCasaDorada.getProduct());
+	    	observableList = FXCollections.observableArrayList(laCasaDorada.getPreorder());
 	    
 			tvOrder.setItems(observableList);
 			
-			colName.setCellValueFactory(new PropertyValueFactory<Product,String>("Name")); 
-			colAmount.setCellValueFactory(new PropertyValueFactory<Order,Integer>("Amount"));
+			colName.setCellValueFactory(new PropertyValueFactory<PreOrder,Product>("Name")); 
+			colAmount.setCellValueFactory(new PropertyValueFactory<PreOrder,Integer>("Amount"));
 	  }
 
 	@FXML

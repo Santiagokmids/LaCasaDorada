@@ -28,6 +28,7 @@ public class LaCasaDorada {
 	private ArrayList<ProductType> productType;
 	private ArrayList<Ingredient> ingredient;
 	private ArrayList<Order> order;
+	private ArrayList<PreOrder> preorder;
 
 	public LaCasaDorada() {
 		people = new ArrayList<>();
@@ -35,6 +36,7 @@ public class LaCasaDorada {
 		productType = new ArrayList<>();
 		ingredient = new ArrayList<>();
 		order = new ArrayList<>();
+		setPreorder(new ArrayList<>());
 	}
 
 	//create client
@@ -376,5 +378,13 @@ public class LaCasaDorada {
 
 	public void setOrder(ArrayList<Order> order) {
 		this.order = order;
+	}
+
+	public ArrayList<PreOrder> getPreorder() {
+		return preorder;
+	}
+
+	public void setPreorder(ArrayList<PreOrder> preorder) {
+		this.preorder = preorder;
 	}
 }

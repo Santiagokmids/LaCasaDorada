@@ -35,10 +35,10 @@
             <ComboBox fx:id="stateOrder" layoutX="327.0" layoutY="71.0" prefHeight="31.0" prefWidth="243.0" style="-fx-background-color: white;" visibleRowCount="20" />
             <ComboBox fx:id="selectProduct" layoutX="143.0" layoutY="310.0" prefHeight="31.0" prefWidth="225.0" style="-fx-background-color: white;" visibleRowCount="20" />
             <TextField fx:id="amount" alignment="CENTER" layoutX="439.0" layoutY="309.0" prefHeight="34.0" prefWidth="114.0" />
-            <TableView fx:id="tvOrder" layoutX="142.0" layoutY="130.0" prefHeight="126.0" prefWidth="421.0">
+            <TableView fx:id="tvOrder" layoutX="142.0" layoutY="130.0" prefHeight="133.0" prefWidth="416.0">
               <columns>
-                <TableColumn fx:id="colName" prefWidth="326.0" text="Producto" />
-                <TableColumn fx:id="colAmount" prefWidth="93.0" text="Cantidad" />
+                <TableColumn fx:id="colName" editable="false" prefWidth="309.0" sortable="false" text="Producto" />
+                  <TableColumn fx:id="colAmount" editable="false" prefWidth="105.0" sortable="false" text="Cantidad" />
               </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
