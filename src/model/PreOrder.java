@@ -7,7 +7,15 @@ public class PreOrder {
 	private Integer amount;
 	
 	public PreOrder(Product product, Integer amount) {
-		this.product = product;
+		this.setProduct(product);
+		this.amount = amount;
+	}
+
+	public Integer getAmount() {
+		return amount;
+	}
+
+	public void setAmount(Integer amount) {
 		this.amount = amount;
 	}
 
@@ -19,13 +27,6 @@ public class PreOrder {
 		this.product = product;
 	}
 
-	public Integer getAmount() {
-		return amount;
-	}
-
-	public void setAmount(Integer amount) {
-		this.amount = amount;
-	}
 
 	
 }

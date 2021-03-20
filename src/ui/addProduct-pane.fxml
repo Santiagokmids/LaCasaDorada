@@ -20,7 +20,7 @@
    <center>
       <Pane prefHeight="280.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fx:id="imageWallRegister" fitHeight="675.0" fitWidth="740.0" layoutY="-15.0" nodeOrientation="INHERIT" opacity="0.09" pickOnBounds="true" />
+            <ImageView fx:id="imageWallProduct" fitHeight="675.0" fitWidth="740.0" layoutY="-15.0" nodeOrientation="INHERIT" opacity="0.09" pickOnBounds="true" />
             <Label layoutX="45.0" layoutY="90.0" text="Nombre del producto:" textFill="#dad57c">
                <font>
                   <Font name="Berlin Sans FB" size="29.0" />
@@ -37,14 +37,14 @@
                   <Font name="Bernard MT Condensed" size="36.0" />
                </font>
             </Label>
-            <ComboBox fx:id="selectType" layoutX="335.0" layoutY="149.0" prefHeight="31.0" prefWidth="280.0" style="-fx-background-color: white;" />
+            <ComboBox fx:id="selectType" layoutX="333.0" layoutY="149.0" prefHeight="31.0" prefWidth="280.0" style="-fx-background-color: white;" />
             <ComboBox fx:id="selectIngredient" layoutX="193.0" layoutY="373.0" prefHeight="31.0" prefWidth="225.0" style="-fx-background-color: white;" visibleRowCount="20" />
             <TableView fx:id="tvProduct" layoutX="108.0" layoutY="201.0" prefHeight="133.0" prefWidth="405.0">
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
                <columns>
-                  <TableColumn fx:id="colName" editable="false" prefWidth="309.0" sortable="false" text="Ingrediente" />
+                  <TableColumn fx:id="colIngredient" editable="false" prefWidth="309.0" sortable="false" text="Ingrediente" />
                </columns>
             </TableView>
             <Button layoutX="529.0" layoutY="207.0" mnemonicParsing="false" onAction="#registerUserMain" prefHeight="31.0" prefWidth="159.0" style="-fx-background-color: #dad57c; -fx-background-radius: 22;" text="Añadir Ingrediente">

@@ -87,8 +87,22 @@ public class LaCasaDorada {
 	//Create ingredient
 	public void create(String name) {
 
-		Ingredient user = new Ingredient(name);
-		ingredient.add(user);
+		Ingredient ingredients = new Ingredient(name);
+		ingredient.add(ingredients);
+	}
+	
+	//Create product
+	public void create(String name,ArrayList<Ingredient>ingredients ,ProductType productsTypes, Integer price, Size sizes) {
+
+		Product products = new Product(name,ingredients,productsTypes,price, sizes);
+		product.add(products);
+	}
+	
+	//Create preorder
+	public void create(Product product,Integer amount) {
+
+		PreOrder preOrder = new PreOrder(product,amount);
+		preorder.add(preOrder);
 	}
 
 	//Update Ingredient
@@ -220,6 +234,32 @@ public class LaCasaDorada {
 
 			if(people.get(j) instanceof Client && people.get(j).getName().equalsIgnoreCase(name) && 
 					people.get(j).getLastName().equalsIgnoreCase(lastName)) {
+				find = true;
+			}
+		}
+		return find;
+	}
+	
+	public boolean findClient(String name){
+
+		boolean find = false;
+
+		for (int j = 0; j < people.size() && !find; j++) {
+
+			if(people.get(j) instanceof Client && people.get(j).getName().equalsIgnoreCase(name)) {
+				find = true;
+			}
+		}
+		return find;
+	}
+	
+	public boolean findEmployee(String name){
+
+		boolean find = false;
+
+		for (int j = 0; j < people.size() && !find; j++) {
+
+			if(people.get(j) instanceof Employee && people.get(j).getName().equalsIgnoreCase(name)) {
 				find = true;
 			}
 		}
