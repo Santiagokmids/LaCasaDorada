@@ -92,14 +92,14 @@ public class LaCasaDorada {
 		Ingredient ingredients = new Ingredient(name);
 		ingredient.add(ingredients);
 	}
-	
+
 	//Create product
 	public void create(String name, ArrayList<Ingredient> ingredients, ProductType productType, Size sizes, double price) {
 		
 		Product products = new Product(name,ingredients,productType, sizes, price);
 		product.add(products);
 	}
-	
+
 	//Create preorder
 	public void create(Product product,Integer amount) {
 
@@ -260,7 +260,7 @@ public class LaCasaDorada {
 		}
 		return find;
 	}
-	
+
 	public Client findClient(String name){
 
 		Client client = null;
@@ -275,7 +275,7 @@ public class LaCasaDorada {
 		}
 		return client;
 	}
-	
+
 	public Employee findEmployee(String name){
 		
 		Employee employee = null;
@@ -419,37 +419,51 @@ public class LaCasaDorada {
 		}
 		return find;
 	}
-	
+
 	public ArrayList<User> getUsers(){
-		
+
 		ArrayList<User> users = new ArrayList<>();
 
 		for (int j = 0; j < people.size(); j++) {
 
 			if(people.get(j) instanceof User ) {
-				
+
 				users.add((User)people.get(j));
 			}
 		}
 		return users;
 	}
-	
+
+	public ArrayList<Client> getClients(){
+
+		ArrayList<Client> clients = new ArrayList<>();
+
+		for (int j = 0; j < people.size(); j++) {
+
+			if(people.get(j) instanceof Client ) {
+
+				clients.add((Client)people.get(j));
+			}
+		}
+		return clients;
+	}
+
 	public User findUser(String name, String lastName, String id, String userName) {
-		
+
 		User user = null;
 		User validation = null;
 		boolean verific = false;
-		
+
 		for (int i = 0; i < people.size() && !verific; i++) {
 			if(people.get(i) instanceof User) {
-				
+
 				user = (User)people.get(i);
 				if(user.getName().equals(name) && user.getLastName().equals(lastName) && user.getId().equals(id) && user.getUserName().equals(userName)) {
 					validation = user;
 				}
 			}
 		}
-		
+
 		return validation;
 	}
 
