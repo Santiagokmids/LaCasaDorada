@@ -95,7 +95,7 @@ public class LaCasaDorada {
 
 	//Create product
 	public void create(String name, ArrayList<Ingredient> ingredients, ProductType productType, Size sizes, double price) {
-		
+
 		Product products = new Product(name,ingredients,productType, sizes, price);
 		product.add(products);
 	}
@@ -168,14 +168,14 @@ public class LaCasaDorada {
 		}
 		return orders;
 	}
-	
+
 	//create size
 	public void createSize(String size) {
 
 		Size allSizes = new Size(size);
 		sizes.add(allSizes);
 	}
-	
+
 	public boolean findSizes(String size){
 
 		boolean find = false;
@@ -277,7 +277,7 @@ public class LaCasaDorada {
 	}
 
 	public Employee findEmployee(String name){
-		
+
 		Employee employee = null;
 		boolean find = false;
 
@@ -303,20 +303,20 @@ public class LaCasaDorada {
 		}
 		return find;
 	}
-	
+
 	public boolean findIngredien(String name){
 
 		boolean find = false;
 
 		for (int j = 0; j < ingredient.size() && !find; j++) {
 
-			if(ingredient.get(j).getName().equals(name) ) {
+			if(ingredient.get(j).getName().equalsIgnoreCase(name) ) {
 				find = true;
 			}
 		}
 		return find;
 	}
-	
+
 	public Ingredient findIngredient(String name){
 
 		boolean find = false;
@@ -324,14 +324,14 @@ public class LaCasaDorada {
 
 		for (int j = 0; j < ingredient.size() && !find; j++) {
 
-			if(ingredient.get(j).getName().equals(name) ) {
+			if(ingredient.get(j).getName().equalsIgnoreCase(name) ) {
 				find = true;
 				ingredients = ingredient.get(j);
 			}
 		}
 		return ingredients;
 	}
-	
+
 	public Product findProducts(String name){
 
 		boolean find = false;
@@ -339,14 +339,14 @@ public class LaCasaDorada {
 
 		for (int j = 0; j <product.size() && !find; j++) {
 
-			if(product.get(j).getName().equals(name) ) {
+			if(product.get(j).getName().equalsIgnoreCase(name) ) {
 				find = true;
 				products = product.get(j);
 			}
 		}
 		return products;
 	}
-	
+
 	public PreOrder findPreOrders(String name, Integer amount){
 
 		boolean find = false;
@@ -354,14 +354,14 @@ public class LaCasaDorada {
 
 		for (int j = 0; j <preorder.size() && !find; j++) {
 
-			if(preorder.get(j).getProduct().getName().equals(name) && preorder.get(j).getAmount() == amount) {
+			if(preorder.get(j).getProduct().getName().equalsIgnoreCase(name) && preorder.get(j).getAmount() == amount) {
 				find = true;
 				preOrder = preorder.get(j);
 			}
 		}
 		return preOrder;
 	}
-	
+
 	public ProductType findType(String name){
 
 		boolean find = false;
@@ -369,7 +369,7 @@ public class LaCasaDorada {
 
 		for (int j = 0; j <productType.size() && !find; j++) {
 
-			if(productType.get(j).getName().equals(name)) {
+			if(productType.get(j).getName().equalsIgnoreCase(name)) {
 				find = true;
 				type= productType.get(j);
 			}
@@ -384,7 +384,7 @@ public class LaCasaDorada {
 
 		for (int j = 0; j < sizes.size() && !find; j++) {
 
-			if(sizes.get(j).getSize().equals(size)) {
+			if(sizes.get(j).getSize().equalsIgnoreCase(size)) {
 				find = true;
 				allSizes = sizes.get(j);
 			}
@@ -413,7 +413,7 @@ public class LaCasaDorada {
 
 		for (int j = 0; j < productType.size() && !find; j++) {
 
-			if(productType.get(j).getName().equals(name) ) {
+			if(productType.get(j).getName().equalsIgnoreCase(name) ) {
 				find = true;
 			}
 		}
@@ -458,7 +458,7 @@ public class LaCasaDorada {
 			if(people.get(i) instanceof User) {
 
 				user = (User)people.get(i);
-				if(user.getName().equals(name) && user.getLastName().equals(lastName) && user.getId().equals(id) && user.getUserName().equals(userName)) {
+				if(user.getName().equalsIgnoreCase(name) && user.getLastName().equalsIgnoreCase(lastName) && user.getId().equals(id) && user.getUserName().equalsIgnoreCase(userName)) {
 					validation = user;
 				}
 			}

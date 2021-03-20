@@ -792,7 +792,6 @@ public class LaCasaDoradaGUI {
 
 		ArrayList<Ingredient> ingredient = laCasaDorada.getIngredient();
 		ArrayList<ProductType> productType = laCasaDorada.getProductType();
-		inicializateTableViewProducts();
 
 		selectIngredient.setPromptText("Seleccione el Ingrediente");
 
@@ -807,7 +806,7 @@ public class LaCasaDoradaGUI {
 		}
 		
 		ArrayList<Size> size = laCasaDorada.getSizes();
-		selectType.setPromptText("Seleccione el tamaño del producto");
+		selectSize.setPromptText("Seleccione el tamaño del producto");
 		
 		for (int i = 0; i < size.size(); i++) {
 			selectSize.getItems().addAll(size.get(i).getSize());
@@ -817,6 +816,7 @@ public class LaCasaDoradaGUI {
 
 	@FXML
 	public void ingredientProduct(ActionEvent event)throws IOException {
+		inicializateTableViewProducts();
 		listIngredients.add(laCasaDorada.findIngredient(selectIngredient.getValue()));
 	}
 

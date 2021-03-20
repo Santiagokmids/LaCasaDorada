@@ -21,12 +21,12 @@
                   <Font name="Bernard MT Condensed" size="36.0" />
                </font>
             </Label>
-            <Label layoutX="155.0" layoutY="194.0" text="Nombre:" textFill="#dad57c">
+            <Label layoutX="155.0" layoutY="197.0" text="Nombre:" textFill="#dad57c">
                <font>
                   <Font name="Berlin Sans FB" size="29.0" />
                </font>
             </Label>
-            <TextField fx:id="nameIngredient" layoutX="277.0" layoutY="202.0" prefHeight="25.0" prefWidth="275.0" />
+            <TextField fx:id="nameIngredient" layoutX="277.0" layoutY="199.0" prefHeight="31.0" prefWidth="275.0" />
             <Button layoutX="171.0" layoutY="379.0" mnemonicParsing="false" onAction="#createIngredient" prefHeight="53.0" prefWidth="179.0" style="-fx-background-color: #dad57c; -fx-background-radius: 22;" text="Añadir Ingrediente">
                <font>
                   <Font name="Franklin Gothic Demi" size="18.0" />
