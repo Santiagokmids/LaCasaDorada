@@ -201,7 +201,6 @@ public class LaCasaDoradaGUI {
 	private TextField txtClientOrder;
 
 	@FXML
-<<<<<<< HEAD
 	private TableColumn<Product, String> colName;
 
 	@FXML
@@ -213,7 +212,6 @@ public class LaCasaDoradaGUI {
 	public static ObservableList<Product> listProduct;
 	public static ObservableList<User> listUsers;
 
-=======
     private TableColumn<PreOrder, Product> colName;
 
 	@FXML
@@ -221,7 +219,6 @@ public class LaCasaDoradaGUI {
 	
 	static ObservableList<PreOrder> observableList;
 	
->>>>>>> 3d4cbf15a0ce4b1b57b0fea2c038474a952ce4f5
 	public LaCasaDoradaGUI(LaCasaDorada laCasaDorada) {
 		this.laCasaDorada = laCasaDorada;
 	}
@@ -578,8 +575,6 @@ public class LaCasaDoradaGUI {
 			selectProduct.getItems().add(products.get(i));
 		}
 	}
-<<<<<<< HEAD
-=======
 	
 	@FXML
 	public void addOrder(ActionEvent event)throws IOException {
@@ -638,7 +633,6 @@ public class LaCasaDoradaGUI {
 			colName.setCellValueFactory(new PropertyValueFactory<PreOrder,Product>("Name")); 
 			colAmount.setCellValueFactory(new PropertyValueFactory<PreOrder,Integer>("Amount"));
 	  }
->>>>>>> 3d4cbf15a0ce4b1b57b0fea2c038474a952ce4f5
 
 	@FXML
 	public void addIngredient(ActionEvent event) throws IOException {
