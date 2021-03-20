@@ -16,7 +16,7 @@ import java.io.PrintWriter;
 
 public class LaCasaDorada {
 
-	//COntants
+	//Contants
 
 	public final static String SAVE_PATH_FILE = "data/data.lcd";
 	public final static String SEPARATOR = ";";
@@ -80,6 +80,26 @@ public class LaCasaDorada {
 		people.get(index).setLastName(lastName);
 		people.get(index).setId(id);
 		people.get(index).setState(state);
+	}
+
+	//Create ingredient
+	public void create(String name) {
+
+		Ingredient user = new Ingredient(name);
+		ingredient.add(user);
+	}
+
+	//Update Ingredient
+	public void update(String name, int index) {
+		ingredient.get(index).setName(name);
+	}
+
+	//Create type product
+
+	public void createTypeProduct(String name) {
+
+		ProductType typeProduct = new ProductType(name);
+		productType.add(typeProduct);
 	}
 
 	//delete people
@@ -189,7 +209,7 @@ public class LaCasaDorada {
 		}
 		return find;
 	}
-	
+
 	public boolean findClient(String name, String lastName){
 
 		boolean find = false;
@@ -203,7 +223,7 @@ public class LaCasaDorada {
 		}
 		return find;
 	}
-	
+
 	public boolean findProduct(String name){
 
 		boolean find = false;
@@ -216,7 +236,19 @@ public class LaCasaDorada {
 		}
 		return find;
 	}
-	
+	public boolean findIngredien(String name){
+
+		boolean find = false;
+
+		for (int j = 0; j < ingredient.size() && !find; j++) {
+
+			if(ingredient.get(j).getName().equals(name) ) {
+				find = true;
+			}
+		}
+		return find;
+	}
+
 	public Product findObjectProduct(String name){
 
 		Product products = null;
@@ -232,6 +264,18 @@ public class LaCasaDorada {
 		return products;
 	}
 
+	public boolean findTypeIngredient(String name){
+
+		boolean find = false;
+
+		for (int j = 0; j < productType.size() && !find; j++) {
+
+			if(productType.get(j).getName().equals(name) ) {
+				find = true;
+			}
+		}
+		return find;
+	}
 
 	public void importData(String fileName) throws IOException {
 

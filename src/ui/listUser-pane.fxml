@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="740.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <ImageView fx:id="imageBannerUser" fitHeight="135.0" fitWidth="744.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+   </top>
+   <center>
+      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fx:id="imageWallUser" fitHeight="751.0" fitWidth="740.0" opacity="0.09" pickOnBounds="true" preserveRatio="true" />
+            <TableView fx:id="tvUser" prefHeight="566.0" prefWidth="478.0">
+              <columns>
+                <TableColumn prefWidth="132.0" text="Nombre" />
+                <TableColumn minWidth="0.0" prefWidth="102.0" text="Apellidos" />
+                  <TableColumn minWidth="0.0" prefWidth="126.0" text="Identificación" />
+                  <TableColumn minWidth="0.0" prefWidth="117.0" text="Usuario" />
+              </columns>
+            </TableView>
+            <Label layoutX="488.0" layoutY="5.0" text="Nombre:" textFill="#dad57c">
+               <font>
+                  <Font name="Berlin Sans FB" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="updateName" layoutX="487.0" layoutY="32.0" prefHeight="25.0" prefWidth="240.0" />
+            <Label layoutX="488.0" layoutY="64.0" text="Apellidos:" textFill="#dad57c">
+               <font>
+                  <Font name="Berlin Sans FB" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="updateLasName" layoutX="487.0" layoutY="91.0" prefHeight="25.0" prefWidth="240.0" />
+            <Label layoutX="488.0" layoutY="123.0" text="No. Identificación:" textFill="#dad57c">
+               <font>
+                  <Font name="Berlin Sans FB" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="updateId" layoutX="487.0" layoutY="149.0" prefHeight="25.0" prefWidth="240.0" />
+            <Label layoutX="488.0" layoutY="181.0" text="Usuario:" textFill="#dad57c">
+               <font>
+                  <Font name="Berlin Sans FB" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="updateUser" layoutX="487.0" layoutY="206.0" prefHeight="25.0" prefWidth="240.0" />
+            <Label layoutX="488.0" layoutY="240.0" text="Contraseña anterior:" textFill="#dad57c">
+               <font>
+                  <Font name="Berlin Sans FB" size="18.0" />
+               </font>
+            </Label>
+            <PasswordField fx:id="lastPassword" layoutX="487.0" layoutY="264.0" prefHeight="25.0" prefWidth="240.0" />
+            <Label layoutX="488.0" layoutY="297.0" text="Contraseña nueva:" textFill="#dad57c">
+               <font>
+                  <Font name="Berlin Sans FB" size="18.0" />
+               </font>
+            </Label>
+            <PasswordField fx:id="newPassword" layoutX="487.0" layoutY="324.0" prefHeight="25.0" prefWidth="240.0" />
+            <Label layoutX="488.0" layoutY="355.0" text="Confirmar contraseña:" textFill="#dad57c">
+               <font>
+                  <Font name="Berlin Sans FB" size="18.0" />
+               </font>
+            </Label>
+            <PasswordField fx:id="confirmPassword" layoutX="487.0" layoutY="380.0" prefHeight="25.0" prefWidth="240.0" />
+            <Button layoutX="518.0" layoutY="451.0" mnemonicParsing="false" onAction="#modify" prefHeight="53.0" prefWidth="179.0" style="-fx-background-color: #dad57c; -fx-background-radius: 22;" text="Modificar">
+               <font>
+                  <Font name="Franklin Gothic Demi" size="18.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+   </center>
+</BorderPane>
