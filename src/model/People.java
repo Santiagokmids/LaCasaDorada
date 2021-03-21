@@ -15,11 +15,15 @@ public abstract class People implements Serializable{
 	private String id;
 	private State state;
 	
-	public People(String name, String lastName, String id, State state) {
+	//Relations
+	private Modifiers usersCreators;
+	
+	public People(String name, String lastName, String id, State state, Modifiers usersCreators) {
 		this.name = name;
 		this.lastName = lastName;
 		this.id = id;
 		this.state = state;
+		this.usersCreators = usersCreators;
 	}
 
 	public String getName() {
@@ -58,6 +62,14 @@ public abstract class People implements Serializable{
 
 	public void setState(State state) {
 		this.state = state;
+	}
+
+	public Modifiers getUsersCreators() {
+		return usersCreators;
+	}
+
+	public void setUsersCreators(Modifiers usersCreators) {
+		this.usersCreators = usersCreators;
 	}
 	
 	

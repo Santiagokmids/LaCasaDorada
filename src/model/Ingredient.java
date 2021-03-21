@@ -10,8 +10,12 @@ public class Ingredient {
 	 * <b>name: <>
 	 * @param name
 	 */
-	public Ingredient(String name) {
-		
+	
+	//Relations
+	private Modifiers usersCreators;
+	
+	public Ingredient(String name, Modifiers usersCreators) {
+		this.usersCreators = usersCreators;
 		this.name = name;
 	}
 
@@ -21,5 +25,13 @@ public class Ingredient {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Modifiers getUsersCreators() {
+		return usersCreators;
+	}
+
+	public void setUsersCreators(Modifiers usersCreators) {
+		this.usersCreators = usersCreators;
 	}
 }

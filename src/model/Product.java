@@ -13,20 +13,23 @@ public class Product {
 	
 	//Relations
 	private Size sizes;
+	private Modifiers usersCreators;
 	
 	/**
 	 * @param name
 	 * @param price
 	 * @param ingredients
+	 * @param usersCreators 
 	 * @param ingredientType
 	 */
-	public Product(String name, ArrayList<Ingredient> ingredients, ProductType productType, Size sizes, double price) {
+	public Product(String name, ArrayList<Ingredient> ingredients, ProductType productType, Size sizes, double price, Modifiers usersCreators) {
 
 		this.name = name;
 		this.ingredients = ingredients;
 		this.productType = productType;
 		this.sizes = sizes; 
 		this.price = price;
+		this.usersCreators = usersCreators;
 	}
 
 	public String getName() {
@@ -67,6 +70,14 @@ public class Product {
 
 	public void setPrice(Double price) {
 		this.price = price;
+	}
+
+	public Modifiers getUsersCreators() {
+		return usersCreators;
+	}
+
+	public void setUsersCreators(Modifiers usersCreators) {
+		this.usersCreators = usersCreators;
 	}
 
 
