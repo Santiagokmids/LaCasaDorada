@@ -500,7 +500,7 @@ public class LaCasaDoradaGUI {
 		Parent load = loader.load();  
 
 		mainPane.getChildren().clear();
-		mainPane.setCenter(load);
+		mainPane.setTop(load);
 
 		Image image = new Image("/images/Banner.jpg");
 		imageView.setImage(image);
@@ -1651,7 +1651,7 @@ public class LaCasaDoradaGUI {
 	@FXML
 	public void listProduct(ActionEvent event) throws IOException {
 
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("listProduct-pane.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("listProduct.fxml"));
 
 		loader.setController(this);
 		Parent load = loader.load();
@@ -1737,8 +1737,6 @@ public class LaCasaDoradaGUI {
 					product.setSizes(laCasaDorada.findSize(size));
 					product.setPrice(priceNum);
 
-					System.out.println(name+" "+laCasaDorada.findType(type).getName()+" "+laCasaDorada.findSize(size).getSize()+" "+priceNum);
-
 					listOfProducts.set(tvListProduct.getSelectionModel().getSelectedIndex(),new Product(name,ingredients,laCasaDorada.findType(type),laCasaDorada.findSize(size),priceNum,product.getUsersCreators()));
 
 					updateNameProduct.setText("");
@@ -1762,7 +1760,6 @@ public class LaCasaDoradaGUI {
 
 		String[] partsIngredients = ingredient.split(";");
 
-		System.out.println(partsIngredients[0]+" "+partsIngredients[1]);
 		boolean verific = false;
 
 		for (int i = 0; i < partsIngredients.length && !verific; i++) {
@@ -1771,7 +1768,6 @@ public class LaCasaDoradaGUI {
 
 			if(objIngredient != null) {
 
-				System.out.println(partsIngredients[i]);
 				listIngredient.add(objIngredient);
 			}
 			else {
