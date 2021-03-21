@@ -93,16 +93,12 @@
                   </Button>
                </children>
             </HBox>
-            <Label layoutX="371.0" layoutY="418.0" text="Precio del producto" textFill="#dad57c">
+            <Label layoutX="415.0" layoutY="418.0" text="Precio del producto" textFill="#dad57c">
                <font>
                   <Font name="Berlin Sans FB" size="21.0" />
                </font>
             </Label>
-            <Label fx:id="labelPrice" layoutX="371.0" layoutY="453.0" style="-fx-background-color: #dad57c;">
-               <font>
-                  <Font name="Berlin Sans FB" size="21.0" />
-               </font>
-            </Label>
+            <TextField fx:id="priceProduct" alignment="CENTER" layoutX="360.0" layoutY="450.0" prefHeight="32.0" prefWidth="280.0" />
          </children>
       </Pane>
    </center>
