@@ -48,14 +48,6 @@ public class Product {
 		this.ingredients = ingredients;
 	}
 
-	public ProductType getIngredientType() {
-		return productType;
-	}
-
-	public void setIngredientType(ProductType ingredientType) {
-		this.productType = ingredientType;
-	}
-
 	public Size getSizes() {
 		return sizes;
 	}
