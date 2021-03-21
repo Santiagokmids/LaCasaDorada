@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="740.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="831.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <ImageView fx:id="imageBannerSIZE" fitHeight="112.0" fitWidth="766.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
    </top>
@@ -16,23 +16,23 @@
       <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
             <ImageView fx:id="imageWallISize" fitHeight="741.0" fitWidth="831.0" opacity="0.09" pickOnBounds="true" preserveRatio="true" />
-            <Label layoutX="170.0" layoutY="58.0" text="Agregar un Tamaño de Producto" textFill="#dad57c">
+            <Label layoutX="247.0" layoutY="59.0" text="Agregar un Tamaño de Producto" textFill="#dad57c">
                <font>
                   <Font name="Bernard MT Condensed" size="36.0" />
                </font>
             </Label>
-            <Label layoutX="30.0" layoutY="171.0" text="Tamaño del Producto:" textFill="#dad57c">
+            <Label layoutX="132.0" layoutY="173.0" text="Tamaño del Producto:" textFill="#dad57c">
                <font>
                   <Font name="Berlin Sans FB" size="29.0" />
                </font>
             </Label>
-            <TextField fx:id="txtSize" layoutX="310.0" layoutY="173.0" prefHeight="31.0" prefWidth="275.0" promptText="Ej: Mediano" />
-            <Button layoutX="170.0" layoutY="294.0" mnemonicParsing="false" onAction="#addSizes" prefHeight="53.0" prefWidth="179.0" style="-fx-background-color: #dad57c; -fx-background-radius: 22;" text="Añadir Tamaño">
+            <TextField fx:id="txtSize" layoutX="412.0" layoutY="175.0" prefHeight="31.0" prefWidth="275.0" promptText="Ej: Mediano" />
+            <Button layoutX="256.0" layoutY="296.0" mnemonicParsing="false" onAction="#addSizes" prefHeight="53.0" prefWidth="179.0" style="-fx-background-color: #dad57c; -fx-background-radius: 22;" text="Añadir Tamaño">
                <font>
                   <Font name="Franklin Gothic Demi" size="18.0" />
                </font>
             </Button>
-            <Button layoutX="411.0" layoutY="294.0" mnemonicParsing="false" onAction="#mainMenu" prefHeight="53.0" prefWidth="140.0" style="-fx-background-color: #dad57c; -fx-background-radius: 22;" text="Cancelar">
+            <Button layoutX="480.0" layoutY="296.0" mnemonicParsing="false" onAction="#mainMenu" prefHeight="53.0" prefWidth="140.0" style="-fx-background-color: #dad57c; -fx-background-radius: 22;" text="Cancelar">
                <font>
                   <Font name="Franklin Gothic Demi" size="18.0" />
                </font>

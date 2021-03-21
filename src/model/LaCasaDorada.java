@@ -284,7 +284,7 @@ public class LaCasaDorada {
 		return client;
 	}
 	
-	public Client findObjByNameClient(String name){
+	public Client findObjClient(String name){
 
 		Client client = null;
 		boolean find = false;
@@ -528,14 +528,16 @@ public class LaCasaDorada {
 			String[] parts = line.split(SEPARATOR);
 			State state = null;
 
-			if(parts[3] == (State.ENABLE).toString()) {
+			if(parts[5] == (State.ENABLE).toString()) {
 				state = State.ENABLE;
 			}
-			else if(parts[3] == (State.DISABLED).toString()) {
+			else if(parts[5] == (State.DISABLED).toString()) {
 				state = State.DISABLED;
 			}
-
-			//create(parts[0],parts[1],parts[2],state,parts[4],parts[5],parts[6]);
+			
+			Client client = findObjClient(parts[0]);
+			
+			create(parts[0],parts[1],parts[2],state,parts[4],parts[5],parts[6],client.getUsersCreators());
 			line = br.readLine();
 		}
 

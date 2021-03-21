@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="740.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="831.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <ImageView fx:id="imageBannerIngredient" fitHeight="112.0" fitWidth="766.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
    </top>
@@ -16,23 +16,23 @@
       <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
             <ImageView fx:id="imageWallIngredient" fitHeight="741.0" fitWidth="831.0" opacity="0.09" pickOnBounds="true" preserveRatio="true" />
-            <Label layoutX="208.0" layoutY="63.0" text="Agregar un Ingrediente" textFill="#dad57c">
+            <Label layoutX="266.0" layoutY="61.0" text="Agregar un Ingrediente" textFill="#dad57c">
                <font>
                   <Font name="Bernard MT Condensed" size="36.0" />
                </font>
             </Label>
-            <Label layoutX="155.0" layoutY="197.0" text="Nombre:" textFill="#dad57c">
+            <Label layoutX="213.0" layoutY="196.0" text="Nombre:" textFill="#dad57c">
                <font>
                   <Font name="Berlin Sans FB" size="29.0" />
                </font>
             </Label>
-            <TextField fx:id="nameIngredient" layoutX="277.0" layoutY="199.0" prefHeight="31.0" prefWidth="275.0" />
-            <Button layoutX="171.0" layoutY="379.0" mnemonicParsing="false" onAction="#createIngredient" prefHeight="53.0" prefWidth="179.0" style="-fx-background-color: #dad57c; -fx-background-radius: 22;" text="Añadir Ingrediente">
+            <TextField fx:id="nameIngredient" layoutX="333.0" layoutY="197.0" prefHeight="31.0" prefWidth="275.0" />
+            <Button layoutX="229.0" layoutY="377.0" mnemonicParsing="false" onAction="#createIngredient" prefHeight="53.0" prefWidth="179.0" style="-fx-background-color: #dad57c; -fx-background-radius: 22;" text="Añadir Ingrediente">
                <font>
                   <Font name="Franklin Gothic Demi" size="18.0" />
                </font>
             </Button>
-            <Button layoutX="421.0" layoutY="379.0" mnemonicParsing="false" onAction="#mainMenu" prefHeight="53.0" prefWidth="140.0" style="-fx-background-color: #dad57c; -fx-background-radius: 22;" text="Cancelar">
+            <Button layoutX="479.0" layoutY="377.0" mnemonicParsing="false" onAction="#mainMenu" prefHeight="53.0" prefWidth="140.0" style="-fx-background-color: #dad57c; -fx-background-radius: 22;" text="Cancelar">
                <font>
                   <Font name="Franklin Gothic Demi" size="18.0" />
                </font>

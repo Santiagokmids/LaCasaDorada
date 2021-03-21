@@ -3,18 +3,18 @@ package model;
 import java.util.ArrayList;
 
 public class Product {
-	
+
 	//Attributes
-	
+
 	private String name;
 	private ArrayList<Ingredient> ingredients;
 	private ProductType productType;
 	private Double price;
-	
+
 	//Relations
 	private Size sizes;
 	private Modifiers usersCreators;
-	
+
 	/**
 	 * @param name
 	 * @param price
@@ -78,5 +78,29 @@ public class Product {
 
 	public void setProductType(ProductType productType) {
 		this.productType = productType;
+	}
+
+	public String getNameIngredient() {
+
+		String message = "";
+
+		for (int i = 0; i < ingredients.size(); i++) {
+
+			if(i != ingredients.size()-1) {
+				message += ingredients.get(i).getName()+"\n";
+			}
+			else {
+				message += ingredients.get(i).getName();
+			}
+		}
+		return message;
+	}
+	
+	public String getNameType() {
+		return productType.getName();
+	}
+	
+	public String getNameSize() {
+		return sizes.getSize();
 	}
 }
