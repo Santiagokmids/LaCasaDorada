@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="listOrderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="761.0" prefWidth="831.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <ImageView fx:id="imageBannerListOrder" fitHeight="135.0" fitWidth="744.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+   </top>
+   <center>
+      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fx:id="imageWallListOrder" fitHeight="751.0" fitWidth="740.0" opacity="0.09" pickOnBounds="true" preserveRatio="true" />
+            <TableView fx:id="tvListOrders" onMouseClicked="#mouseClickedProduct" prefHeight="566.0" prefWidth="548.0">
+               <columns>
+                  <TableColumn fx:id="nameOrder" prefWidth="86.0" resizable="false" text="Código" />
+                  <TableColumn fx:id="estateOrder" editable="false" minWidth="0.0" prefWidth="77.0" resizable="false" text="Estado" />
+                  <TableColumn fx:id="productOrder" editable="false" minWidth="0.0" prefWidth="81.0" resizable="false" text="Productos" />
+                  <TableColumn fx:id="amountOrder" editable="false" minWidth="0.0" prefWidth="65.0" resizable="false" text="Cantidad" />
+                  <TableColumn fx:id="clientOrder" editable="false" minWidth="0.0" prefWidth="79.0" resizable="false" text="Cliente" />
+                  <TableColumn fx:id="employeeOrder" editable="false" minWidth="0.0" prefWidth="85.0" resizable="false" text="Empleado" />
+                  <TableColumn fx:id="employeeOrder1" editable="false" minWidth="0.0" prefWidth="74.0" resizable="false" text="Creación" />
+               </columns>
+            </TableView>
+            <Label layoutX="566.0" layoutY="-6.0" text="Nombre:" textFill="#dad57c">
+               <font>
+                  <Font name="Berlin Sans FB" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="updateNameOrder" layoutX="565.0" layoutY="21.0" prefHeight="25.0" prefWidth="240.0" />
+            <Label layoutX="566.0" layoutY="53.0" text="Productos:" textFill="#dad57c">
+               <font>
+                  <Font name="Berlin Sans FB" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="updateProductsOrder" layoutX="565.0" layoutY="80.0" prefHeight="81.0" prefWidth="240.0" />
+            <Label layoutX="567.0" layoutY="339.0" text="Cliente:" textFill="#dad57c">
+               <font>
+                  <Font name="Berlin Sans FB" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="nameClientList" layoutX="566.0" layoutY="365.0" prefHeight="25.0" prefWidth="240.0" />
+            <Button layoutX="596.0" layoutY="455.0" mnemonicParsing="false" onAction="#modifyListProduct" prefHeight="53.0" prefWidth="179.0" style="-fx-background-color: #dad57c; -fx-background-radius: 22;" text="Modificar">
+               <font>
+                  <Font name="Franklin Gothic Demi" size="18.0" />
+               </font>
+            </Button>
+            <Button layoutX="594.0" layoutY="520.0" mnemonicParsing="false" onAction="#mainMenu" prefHeight="53.0" prefWidth="179.0" style="-fx-background-color: #dad57c; -fx-background-radius: 22;" text="Cancelar">
+               <font>
+                  <Font name="Franklin Gothic Demi" size="18.0" />
+               </font>
+            </Button>
+            <Label layoutX="566.0" layoutY="169.0" text="Cantidad:" textFill="#dad57c">
+               <font>
+                  <Font name="Berlin Sans FB" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="updateAmountOrder" layoutX="565.0" layoutY="196.0" prefHeight="81.0" prefWidth="240.0" />
+            <Label layoutX="566.0" layoutY="286.0" text="Estado:" textFill="#dad57c">
+               <font>
+                  <Font name="Berlin Sans FB" size="18.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="stateOrderList" layoutX="565.0" layoutY="308.0" prefHeight="23.0" prefWidth="236.0" style="-fx-background-color: white;" />
+            <Label layoutX="566.0" layoutY="390.0" text="Empleado:" textFill="#dad57c">
+               <font>
+                  <Font name="Berlin Sans FB" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="nameEmployeeList" layoutX="565.0" layoutY="416.0" prefHeight="22.0" prefWidth="240.0" />
+         </children>
+      </Pane>
+   </center>
+</BorderPane>
