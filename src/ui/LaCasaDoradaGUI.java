@@ -367,25 +367,6 @@ public class LaCasaDoradaGUI {
 		tcIdEmployee.setCellValueFactory(new PropertyValueFactory<Employee,String>("Id"));
 	}
 
-	private void inicializateTableView() {
-
-		observableList = FXCollections.observableArrayList(laCasaDorada.getPreorder());
-
-		tvOrder.setItems(observableList);
-
-		colName.setCellValueFactory(new PropertyValueFactory<PreOrder,Product>("Name")); 
-		colAmount.setCellValueFactory(new PropertyValueFactory<PreOrder,Integer>("Amount"));
-	}
-
-	private void inicializateTableViewProducts(ArrayList<Ingredient> ingre) {
-
-		listIngredients = FXCollections.observableArrayList(ingre);
-
-		tvProduct.setItems(listIngredients);
-
-		colIngredient.setCellValueFactory(new PropertyValueFactory<Ingredient,String>("Name")); 
-	}
-
 	@FXML
 	public void loadBanner() throws IOException {
 
@@ -997,9 +978,37 @@ public class LaCasaDoradaGUI {
 		selectIngredient.setValue(name);
 	}
 
+	private void inicializateTableViewProducts(ArrayList<Ingredient> ingre) {
+
+		listIngredients = FXCollections.observableArrayList(ingre);
+
+		tvProduct.setItems(listIngredients);
+
+		colIngredient.setCellValueFactory(new PropertyValueFactory<Ingredient,String>("Name")); 
+	}
+	
+	private void inicializateTableView() {
+
+		observableList = FXCollections.observableArrayList(laCasaDorada.getPreorder());
+
+		tvOrder.setItems(observableList);
+
+		colName.setCellValueFactory(new PropertyValueFactory<PreOrder,Product>("Name")); 
+		colAmount.setCellValueFactory(new PropertyValueFactory<PreOrder,Integer>("Amount"));
+	}
+
 	@FXML
 	public void ordersProducts(ActionEvent event)throws IOException {
-		int amounts = Integer.parseInt(amount.getText());
+		
+		int amounts = 0;
+		
+		if(!amount.getText().equals("")) {
+			amounts = Integer.parseInt(amount.getText());
+			
+		}else {
+			amounts = 1;
+		}
+	
 		Product products = laCasaDorada.findProducts(selectProduct.getValue());
 		observableList.add(new PreOrder(products,amounts));
 	}
