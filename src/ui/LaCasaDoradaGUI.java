@@ -28,6 +28,7 @@ import model.Employee;
 import model.Ingredient;
 import model.LaCasaDorada;
 import model.Modifiers;
+import model.Order;
 import model.PreOrder;
 import model.Product;
 import model.ProductType;
@@ -213,6 +214,9 @@ public class LaCasaDoradaGUI {
 	private ImageView imageWallEmployee;
 
 	@FXML
+	private BorderPane listOrderPane;
+
+	@FXML
 	private ImageView imageBannerEmployee;
 
 	@FXML
@@ -362,7 +366,54 @@ public class LaCasaDoradaGUI {
 	@FXML
 	private TextField priceProduct;
 
+	@FXML
+	private ImageView imageBannerListOrder;
+
+	@FXML
+	private ImageView imageWallListOrder;
+
+	@FXML
+	private TableView<Order> tvListOrders;
+
+	@FXML
+	private TableColumn<Order, String> nameOrder;
+
+	@FXML
+	private TableColumn<Order, String> estateOrder;
+
+	@FXML
+	private TableColumn<Order, String> productOrder;
+
+	@FXML
+	private TableColumn<Order, Integer> amountOrder;
+
+	@FXML
+	private TableColumn<Order, String> clientOrder;
+
+	@FXML
+	private TableColumn<Order, String> employeeOrder;
+
+	@FXML
+	private TextField updateNameOrder;
+
+	@FXML
+	private TextField updateProductsOrder;
+
+	@FXML
+	private TextField nameClientList;
+
+	@FXML
+	private TextField updateAmountOrder;
+
+	@FXML
+	private ComboBox<?> stateOrderList;
+
+	@FXML
+	private TextField nameEmployeeList;
+
+
 	public static ObservableList<Product> listProduct;
+	public static ObservableList<Order> listOrders;
 	public static ObservableList<User> listUsers;
 	public static ObservableList<PreOrder> observableList;
 	public static ObservableList<Ingredient> listIngredients;
@@ -457,7 +508,6 @@ public class LaCasaDoradaGUI {
 
 	@FXML
 	public void loadLogin() throws IOException {
-
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("login-pane.fxml"));
 
 		loader.setController(this);
@@ -1265,8 +1315,8 @@ public class LaCasaDoradaGUI {
 
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("listUser-pane.fxml"));
 
-		loader.setController(this);
 		Parent load = loader.load();
+		loader.setController(this);
 		mainPane.setCenter(load);
 
 		mainPane.getChildren().clear();
@@ -1567,6 +1617,38 @@ public class LaCasaDoradaGUI {
 	}
 
 	@FXML
+	public void listOrderStart(ActionEvent event) throws IOException {
+
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("listOrders.fxml"));
+		loader.setController(this);
+		Parent load = loader.load();
+		mainPane.setCenter(load);
+
+		mainPane.getChildren().clear();
+		mainPane.setTop(load);
+		Image image = new Image("/images/Banner.jpg");
+		imageWallListOrder.setImage(image);
+		Image image2 = new Image("/images/BannerCasaDorada.jpg");
+		imageBannerListOrder.setImage(image2);
+
+		inicializateTableViewEmployee();
+
+	}
+
+	public void inicializateTableViewOrders() {
+
+		listOrders = FXCollections.observableArrayList(laCasaDorada.getOrder());
+
+		tvListOrders.setItems(listOrders);
+		nameOrder.setCellValueFactory(new PropertyValueFactory<Order,String>("Name"));
+		estateOrder.setCellValueFactory(new PropertyValueFactory<Order,String>("State"));
+		productOrder.setCellValueFactory(new PropertyValueFactory<Order,String>("product"));
+		amountOrder.setCellValueFactory(new PropertyValueFactory<Order,Integer>("integer"));
+		clientOrder.setCellValueFactory(new PropertyValueFactory<Order,String>("client"));
+		employeeOrder.setCellValueFactory(new PropertyValueFactory<Order,String>("employee"));
+	}
+
+	@FXML
 	public void listProduct(ActionEvent event) throws IOException {
 
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("listProduct-pane.fxml"));
@@ -1622,8 +1704,9 @@ public class LaCasaDoradaGUI {
 			String size = listOfProducts.get(tvListProduct.getSelectionModel().getSelectedIndex()).getSizes().getSize();
 			String price = listOfProducts.get(tvListProduct.getSelectionModel().getSelectedIndex()).getPrice().toString();
 			double priceNum = listOfProducts.get(tvListProduct.getSelectionModel().getSelectedIndex()).getPrice();
+
 			Product product = laCasaDorada.findProducts(name);
-			
+
 
 			if(!updateNameProduct.getText().isEmpty() && !updateNameProduct.getText().equals(name)) {
 				name = updateNameProduct.getText();
@@ -1632,42 +1715,43 @@ public class LaCasaDoradaGUI {
 			if(!updateIngredientProduct.getText().isEmpty() && objListIngredients(updateIngredientProduct.getText()).size() != 0 ) {
 				ingredients = objListIngredients(updateIngredientProduct.getText());
 				product.getUsersCreators().setLastModifier(usersModifiers.getCreateObject());
-			}
-			if(updateTypeProduct.getValue() != null && updateTypeProduct.getValue().equals(type)) {
-				type = updateTypeProduct.getValue();
-				product.getUsersCreators().setLastModifier(usersModifiers.getCreateObject());
-			}
-			if(comboSizeProduct.getValue() != null && comboSizeProduct.getValue().equals(size)) {
-				size = comboSizeProduct.getValue();
-				product.getUsersCreators().setLastModifier(usersModifiers.getCreateObject());
-			}
-			try {
 
-				if(!updatePriceProduct.getText().isEmpty() && !updatePriceProduct.getText().equals(price)) {
-
-					priceNum = Double.parseDouble(updatePriceProduct.getText());
+				if(updateTypeProduct.getValue() != null && updateTypeProduct.getValue().equals(type)) {
+					type = updateTypeProduct.getValue();
+					product.getUsersCreators().setLastModifier(usersModifiers.getCreateObject());
 				}
+				if(comboSizeProduct.getValue() != null && comboSizeProduct.getValue().equals(size)) {
+					size = comboSizeProduct.getValue();
+					product.getUsersCreators().setLastModifier(usersModifiers.getCreateObject());
+				}
+				try {
 
-				product.setName(name);
-				product.setIngredients(ingredients);
-				product.setProductType(laCasaDorada.findType(type));
-				product.setSizes(laCasaDorada.findSize(size));
-				product.setPrice(priceNum);
-				
-				System.out.println(name+" "+laCasaDorada.findType(type).getName()+" "+laCasaDorada.findSize(size).getSize()+" "+priceNum);
+					if(!updatePriceProduct.getText().isEmpty() && !updatePriceProduct.getText().equals(price)) {
 
-				listProduct.set(tvListProduct.getSelectionModel().getSelectedIndex(),new Product(name,ingredients,laCasaDorada.findType(type),laCasaDorada.findSize(size),priceNum,product.getUsersCreators()));
-				
-				updateNameProduct.setText("");
-				updateIngredientProduct.setText("");
-				updateTypeProduct.setValue("");
-				comboSizeProduct.setValue("");
-				updatePriceProduct.setText("");
-			} catch (NumberFormatException e) {
-				Alert alert = new Alert(AlertType.ERROR);
-				alert.setHeaderText("No ingresó un número");
-				alert.setContentText("Debe ingresar un valor númerico en el campo de precio del producto");
-				alert.showAndWait();
+						priceNum = Double.parseDouble(updatePriceProduct.getText());
+					}
+
+					product.setName(name);
+					product.setIngredients(ingredients);
+					product.setProductType(laCasaDorada.findType(type));
+					product.setSizes(laCasaDorada.findSize(size));
+					product.setPrice(priceNum);
+
+					System.out.println(name+" "+laCasaDorada.findType(type).getName()+" "+laCasaDorada.findSize(size).getSize()+" "+priceNum);
+
+					listProduct.set(tvListProduct.getSelectionModel().getSelectedIndex(),new Product(name,ingredients,laCasaDorada.findType(type),laCasaDorada.findSize(size),priceNum,product.getUsersCreators()));
+
+					updateNameProduct.setText("");
+					updateIngredientProduct.setText("");
+					updateTypeProduct.setValue("");
+					comboSizeProduct.setValue("");
+					updatePriceProduct.setText("");
+				} catch (NumberFormatException e) {
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setHeaderText("No ingresó un número");
+					alert.setContentText("Debe ingresar un valor númerico en el campo de precio del producto");
+					alert.showAndWait();
+				}
 			}
 		}
 	}
@@ -1677,16 +1761,16 @@ public class LaCasaDoradaGUI {
 		ArrayList<Ingredient> listIngredient = new ArrayList<>();
 
 		String[] partsIngredients = ingredient.split(";");
-		
+
 		System.out.println(partsIngredients[0]+" "+partsIngredients[1]);
 		boolean verific = false;
 
 		for (int i = 0; i < partsIngredients.length && !verific; i++) {
-			
+
 			Ingredient objIngredient = laCasaDorada.findIngredient(partsIngredients[i]);
 
 			if(objIngredient != null) {
-				
+
 				System.out.println(partsIngredients[i]);
 				listIngredient.add(objIngredient);
 			}
@@ -1705,10 +1789,10 @@ public class LaCasaDoradaGUI {
 
 		return listIngredient;
 	}
-	
+
 	@FXML
 	public void mouseClickedListProduct(MouseEvent event) {
-		
+
 		ArrayList<Ingredient> ingredients = new ArrayList<>();
 
 		String name = listOfProducts.get(tvListProduct.getSelectionModel().getSelectedIndex()).getName();
@@ -1716,24 +1800,24 @@ public class LaCasaDoradaGUI {
 		String type = listOfProducts.get(tvListProduct.getSelectionModel().getSelectedIndex()).getProductType().getName();
 		String size = listOfProducts.get(tvListProduct.getSelectionModel().getSelectedIndex()).getSizes().getSize();
 		String price = listOfProducts.get(tvListProduct.getSelectionModel().getSelectedIndex()).getPrice().toString();
-		
+
 		String ingredientMessage = ingredientsToMessage(ingredients);
-		
+
 		updateNameProduct.setText(name);
 		updateIngredientProduct.setText(ingredientMessage);
 		updateTypeProduct.setValue(type);
 		comboSizeProduct.setValue(size);
 		updatePriceProduct.setText(price);
 	}
-	
+
 	public String ingredientsToMessage(ArrayList<Ingredient> ingredient) {
-		
+
 		String message = "";
-		
+
 		for (int i = 0; i < ingredient.size(); i++) {
-			
+
 			if(i != ingredient.size()-1) {
-				
+
 				message += ingredient.get(i).getName()+"-";
 			}
 			else {
