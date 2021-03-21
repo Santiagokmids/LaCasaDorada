@@ -42,7 +42,7 @@ public class LaCasaDorada {
 
 	//create client
 	public void create(String name, String lastName, String id, State state, String address, String telephone, String fieldOfObservations) {
-
+		
 		Client client = new Client(name, lastName, id, state, address, telephone, fieldOfObservations);
 		people.add(client);
 	}
@@ -259,8 +259,23 @@ public class LaCasaDorada {
 		}
 		return find;
 	}
+	
+	public Client findObjClient(String name, String lastName){
 
-	public Client findClient(String name){
+		Client client = null;
+		boolean find = false;
+
+		for (int j = 0; j < people.size() && !find; j++) {
+
+			if(people.get(j) instanceof Client && people.get(j).getName().equalsIgnoreCase(name) && people.get(j).getLastName().equalsIgnoreCase(lastName)) {
+				find = true;
+				client = (Client) people.get(j); 
+			}
+		}
+		return client;
+	}
+	
+	public Client findObjByNameClient(String name){
 
 		Client client = null;
 		boolean find = false;
@@ -462,7 +477,6 @@ public class LaCasaDorada {
 				}
 			}
 		}
-
 		return validation;
 	}
 

@@ -13,6 +13,7 @@ public class Client extends People{
 	private String fieldOfObservations;
 
 	public Client(String name, String lastName, String id, State state, String address, String telephone, String fieldOfObservations) {
+		
 		super(name, lastName, id, state);
 		this.address = address;
 		this.telephone = telephone;

@@ -50,7 +50,7 @@
           </Menu>
             <Menu mnemonicParsing="false" text="Listar">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Cliente" />
+                  <MenuItem mnemonicParsing="false" onAction="#listClient" text="Cliente" />
                   <MenuItem mnemonicParsing="false" text="Empleado" />
                   <MenuItem mnemonicParsing="false" onAction="#listUsers" text="Usuario" />
                   <MenuItem mnemonicParsing="false" text="Producto" />
