@@ -39,6 +39,45 @@ import model.User;
 public class LaCasaDoradaGUI {
 	
 	@FXML
+    private ImageView imageBannerListProduct;
+
+    @FXML
+    private ImageView imageWallListProduct;
+
+    @FXML
+    private TableView<Product> tvListProduct;
+
+    @FXML
+    private TableColumn<Product, String> tcNameProduct;
+
+    @FXML
+    private TableColumn<Product, String> tcIngredientProduct;
+
+    @FXML
+    private TableColumn<Product, String> tcTypeProduct;
+
+    @FXML
+    private TableColumn<Product, String> tcSizeProduct;
+
+    @FXML
+    private TableColumn<Product, Double> tcPriceProduct;
+
+    @FXML
+    private TextField updateNameProduct;
+
+    @FXML
+    private TextField updateIngredientProduct;
+
+    @FXML
+    private TextField updateTypeProduct;
+
+    @FXML
+    private ComboBox<String> comboSizeProduct;
+
+    @FXML
+    private TextField updatePriceProduct;
+	
+	@FXML
     private ImageView imageBannerListEmployee;
 
     @FXML
@@ -330,6 +369,7 @@ public class LaCasaDoradaGUI {
 	public static ObservableList<Client> listClient;
 	public static ObservableList<Employee> listEmployee;
 	public static Modifiers usersModifiers;
+	public static ObservableList<Product> listOfProducts;
 	
 	public LaCasaDoradaGUI(LaCasaDorada laCasaDorada) {
 		this.laCasaDorada = laCasaDorada;
@@ -367,6 +407,18 @@ public class LaCasaDoradaGUI {
 		tcNameEmployee.setCellValueFactory(new PropertyValueFactory<Employee,String>("Name"));
 		tcLastNameEmployee.setCellValueFactory(new PropertyValueFactory<Employee,String>("LastName"));
 		tcIdEmployee.setCellValueFactory(new PropertyValueFactory<Employee,String>("Id"));
+	}
+	
+	public void inicializateTableViewProduct() {
+
+		listOfProducts = FXCollections.observableArrayList(laCasaDorada.getProduct());
+
+		tvListProduct.setItems(listOfProducts);
+		tcNameProduct.setCellValueFactory(new PropertyValueFactory<Product,String>("Name"));
+		tcIngredientProduct.setCellValueFactory(new PropertyValueFactory<Product,String>("LastName"));
+		tcTypeProduct.setCellValueFactory(new PropertyValueFactory<Product,String>("productType"));
+		tcSizeProduct.setCellValueFactory(new PropertyValueFactory<Product,String>("size"));
+		tcPriceProduct.setCellValueFactory(new PropertyValueFactory<Product,Double>("price"));
 	}
 
 	@FXML
@@ -1512,5 +1564,25 @@ public class LaCasaDoradaGUI {
 		updateNameEmployee.setText(name);
 		updateLastNameEmployee.setText(lastName);
 		updateIdEmployee.setText(id);
+	}
+	
+	@FXML
+	public void listProduct(ActionEvent event) throws IOException {
+
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("listProduct-pane.fxml"));
+
+		loader.setController(this);
+		Parent load = loader.load();
+		mainPane.setCenter(load);
+
+		mainPane.getChildren().clear();
+		mainPane.setTop(load);
+
+		Image image = new Image("/images/Banner.jpg");
+		imageWallProduct.setImage(image);
+		Image image2 = new Image("/images/BannerCasaDorada.jpg");
+		imageBannerProduct.setImage(image2);
+
+		inicializateTableViewProduct();
 	}
 }

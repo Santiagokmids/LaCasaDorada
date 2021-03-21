@@ -54,7 +54,7 @@
                   <MenuItem mnemonicParsing="false" onAction="#listClient" text="Cliente" />
                   <MenuItem mnemonicParsing="false" onAction="#listEmployee" text="Empleado" />
                   <MenuItem mnemonicParsing="false" onAction="#listUsers" text="Usuario" />
-                  <MenuItem mnemonicParsing="false" text="Producto" />
+                  <MenuItem mnemonicParsing="false" onAction="#listProduct" text="Producto" />
                   <MenuItem mnemonicParsing="false" text="Tipo de Producto" />
                   <MenuItem mnemonicParsing="false" text="Ingrediente" />
                </items>
