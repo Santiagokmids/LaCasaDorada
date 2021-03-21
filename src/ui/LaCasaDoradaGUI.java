@@ -317,7 +317,7 @@ public class LaCasaDoradaGUI {
 	private TextField txtClientOrder;
 
 	@FXML
-	private TableColumn<PreOrder, Product> colName;
+	private TableColumn<PreOrder, String> colName;
 
 	@FXML
 	private ImageView imageBannerProduct;
@@ -796,13 +796,12 @@ public class LaCasaDoradaGUI {
 		mainPane.getChildren().clear();
 		mainPane.setTop(addOrder);
 
-		Image image = new Image("images/BannerCasaDorada.jpg");
-		imageBannerOrders.setImage(image);
+		Image image = new Image("images/Banner.jpg");
+		imageWallOrders.setImage(image);
 		Image image2 = new Image("/images/BannerCasaDorada.jpg");
-		imageWallOrders.setImage(image2);
+		imageBannerOrders.setImage(image2);
 
 		ArrayList<Product> products = laCasaDorada.getProduct();
-		inicializateTableView();
 		selectProduct.setPromptText("Seleccione el producto");
 
 		for (int i = 0; i < products.size(); i++) {
@@ -811,6 +810,7 @@ public class LaCasaDoradaGUI {
 
 		stateOrder.setPromptText("Seleccione el estado del pedido");
 		stateOrder.getItems().addAll(StateOrder.SOLICITADO,StateOrder.EN_PROCESO,StateOrder.ENVIADO,StateOrder.ENTREGADO,StateOrder.CANCELADO);
+		inicializateTableView();
 	}
 
 	@FXML
@@ -935,10 +935,10 @@ public class LaCasaDoradaGUI {
 		mainPane.getChildren().clear();
 		mainPane.setTop(addOrder);
 
-		Image image = new Image("images/BannerCasaDorada.jpg");
-		imageBannerProduct.setImage(image);
+		Image image = new Image("images/Banner.jpg");
+		imageWallProduct.setImage(image);
 		Image image2 = new Image("/images/BannerCasaDorada.jpg");
-		imageWallProduct.setImage(image2);
+		imageBannerProduct.setImage(image2);
 
 		ArrayList<Ingredient> ingredient = laCasaDorada.getIngredient();
 		ArrayList<ProductType> productType = laCasaDorada.getProductType();
@@ -1038,31 +1038,31 @@ public class LaCasaDoradaGUI {
 
 		colIngredient.setCellValueFactory(new PropertyValueFactory<Ingredient,String>("Name")); 
 	}
-	
-	private void inicializateTableView() {
 
+	private void inicializateTableView() {
+		
 		observableList = FXCollections.observableArrayList(laCasaDorada.getPreorder());
 
 		tvOrder.setItems(observableList);
 
-		colName.setCellValueFactory(new PropertyValueFactory<PreOrder,Product>("Name")); 
+		colName.setCellValueFactory(new PropertyValueFactory<PreOrder,String>("nameProduct")); 
 		colAmount.setCellValueFactory(new PropertyValueFactory<PreOrder,Integer>("Amount"));
 	}
 
 	@FXML
 	public void ordersProducts(ActionEvent event)throws IOException {
-		
+
 		int amounts = 0;
-		
+
 		if(!amount.getText().equals("")) {
 			amounts = Integer.parseInt(amount.getText());
-			
+
 		}else {
 			amounts = 1;
 		}
-	
-		Product products = laCasaDorada.findProducts(selectProduct.getValue());
-		observableList.add(new PreOrder(products,amounts));
+		
+		Product product = laCasaDorada.findProducts(selectProduct.getValue());
+		observableList.add(new PreOrder(product, amounts));
 	}
 
 	@FXML
