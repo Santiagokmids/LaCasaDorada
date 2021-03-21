@@ -1739,7 +1739,7 @@ public class LaCasaDoradaGUI {
 
 					System.out.println(name+" "+laCasaDorada.findType(type).getName()+" "+laCasaDorada.findSize(size).getSize()+" "+priceNum);
 
-					listProduct.set(tvListProduct.getSelectionModel().getSelectedIndex(),new Product(name,ingredients,laCasaDorada.findType(type),laCasaDorada.findSize(size),priceNum,product.getUsersCreators()));
+					listOfProducts.set(tvListProduct.getSelectionModel().getSelectedIndex(),new Product(name,ingredients,laCasaDorada.findType(type),laCasaDorada.findSize(size),priceNum,product.getUsersCreators()));
 
 					updateNameProduct.setText("");
 					updateIngredientProduct.setText("");
