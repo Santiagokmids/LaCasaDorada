@@ -10,9 +10,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="462.0" prefWidth="740.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="831.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <top>
-      <ImageView fx:id="imageBanner" fitHeight="114.0" fitWidth="600.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+      <ImageView fx:id="imageBanner" fitHeight="117.0" fitWidth="831.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets top="20.0" />
          </BorderPane.margin></ImageView>
@@ -20,34 +20,34 @@
    <left>
       <Pane prefHeight="740.0" prefWidth="740.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fx:id="imageWall" fitHeight="597.0" fitWidth="752.0" layoutX="-9.0" layoutY="-1.0" opacity="0.09" pickOnBounds="true" />
-            <Label alignment="CENTER" layoutX="224.0" layoutY="25.0" prefHeight="45.0" prefWidth="292.0" text="Iniciar Sesión" textFill="#dad57c">
+            <ImageView fx:id="imageWall" fitHeight="621.0" fitWidth="841.0" layoutX="-9.0" layoutY="-1.0" opacity="0.09" pickOnBounds="true" />
+            <Label alignment="CENTER" layoutX="282.0" layoutY="26.0" prefHeight="45.0" prefWidth="292.0" text="Iniciar Sesión" textFill="#dad57c">
                <font>
                   <Font name="Bernard MT Condensed" size="36.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" layoutX="25.0" layoutY="110.0" prefHeight="34.0" prefWidth="241.0" text="Nombre de Usuario:" textFill="#dad57c">
+            <Label alignment="CENTER" layoutX="83.0" layoutY="111.0" prefHeight="34.0" prefWidth="241.0" text="Nombre de Usuario:" textFill="#dad57c">
                <font>
                   <Font name="Berlin Sans FB" size="29.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" layoutX="72.0" layoutY="168.0" prefHeight="34.0" prefWidth="241.0" text="Contraseña:" textFill="#dad57c">
+            <Label alignment="CENTER" layoutX="130.0" layoutY="169.0" prefHeight="34.0" prefWidth="241.0" text="Contraseña:" textFill="#dad57c">
                <font>
                   <Font name="Berlin Sans FB" size="29.0" />
                </font>
             </Label>
-            <TextField fx:id="txtUser" layoutX="277.0" layoutY="113.0" prefHeight="32.0" prefWidth="322.0" promptText="UserName">
+            <TextField fx:id="txtUser" layoutX="335.0" layoutY="114.0" prefHeight="32.0" prefWidth="322.0" promptText="UserName">
                <font>
                   <Font name="Book Antiqua" size="13.0" />
                </font>
             </TextField>
-            <PasswordField fx:id="txtPassword" layoutX="276.0" layoutY="169.0" prefHeight="32.0" prefWidth="322.0" promptText="*************" />
-            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="207.0" layoutY="244.0" mnemonicParsing="false" onAction="#loginUsers" prefHeight="53.0" prefWidth="140.0" style="-fx-background-radius: 22; -fx-background-color: #dad57c;" text="ACCEDER">
+            <PasswordField fx:id="txtPassword" layoutX="334.0" layoutY="170.0" prefHeight="32.0" prefWidth="322.0" promptText="*************" />
+            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="265.0" layoutY="245.0" mnemonicParsing="false" onAction="#loginUsers" prefHeight="53.0" prefWidth="140.0" style="-fx-background-radius: 22; -fx-background-color: #dad57c;" text="ACCEDER">
                <font>
                   <Font name="Franklin Gothic Demi" size="18.0" />
                </font>
             </Button>
-            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="385.0" layoutY="244.0" mnemonicParsing="false" onAction="#loadRegister" prefHeight="53.0" prefWidth="140.0" style="-fx-background-radius: 22; -fx-background-color: #dad57c;" text="REGISTRAR">
+            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="443.0" layoutY="245.0" mnemonicParsing="false" onAction="#loadRegister" prefHeight="53.0" prefWidth="140.0" style="-fx-background-radius: 22; -fx-background-color: #dad57c;" text="REGISTRAR">
                <font>
                   <Font name="Franklin Gothic Demi" size="18.0" />
                </font>
