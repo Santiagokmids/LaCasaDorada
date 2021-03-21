@@ -15,7 +15,7 @@
    <center>
       <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fx:id="imageWallISize" fitHeight="741.0" fitWidth="792.0" opacity="0.09" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imageWallISize" fitHeight="741.0" fitWidth="831.0" opacity="0.09" pickOnBounds="true" preserveRatio="true" />
             <Label layoutX="170.0" layoutY="58.0" text="Agregar un Tamaño de Producto" textFill="#dad57c">
                <font>
                   <Font name="Bernard MT Condensed" size="36.0" />

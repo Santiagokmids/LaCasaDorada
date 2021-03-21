@@ -15,7 +15,7 @@
    <center>
       <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fx:id="imageWallProduct" fitHeight="740.0" fitWidth="740.0" layoutY="-7.0" opacity="0.09" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imageWallProduct" fitHeight="740.0" fitWidth="831.0" layoutY="-7.0" opacity="0.09" pickOnBounds="true" preserveRatio="true" />
             <Label layoutX="174.0" layoutY="79.0" text="Agregar un tipo de producto" textFill="#dad57c">
                <font>
                   <Font name="Bernard MT Condensed" size="36.0" />

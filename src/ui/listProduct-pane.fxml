@@ -11,14 +11,14 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="740.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="742.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <ImageView fx:id="imageBannerListProduct" fitHeight="135.0" fitWidth="744.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
    </top>
    <center>
       <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fx:id="imageWallListProduct" fitHeight="751.0" fitWidth="740.0" opacity="0.09" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imageWallListProduct" fitHeight="751.0" fitWidth="831.0" opacity="0.09" pickOnBounds="true" preserveRatio="true" />
             <TableView fx:id="tvProduct" onMouseClicked="#mouseClickedProduct" prefHeight="566.0" prefWidth="478.0">
                <columns>
                   <TableColumn fx:id="tcNameProduct" prefWidth="99.0" resizable="false" text="Nombre" />

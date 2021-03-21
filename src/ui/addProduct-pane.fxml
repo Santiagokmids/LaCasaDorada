@@ -20,7 +20,7 @@
    <center>
       <Pane prefHeight="280.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fx:id="imageWallProduct" fitHeight="675.0" fitWidth="740.0" layoutY="-15.0" nodeOrientation="INHERIT" opacity="0.09" pickOnBounds="true" />
+            <ImageView fx:id="imageWallProduct" fitHeight="675.0" fitWidth="831.0" layoutY="-15.0" nodeOrientation="INHERIT" opacity="0.09" pickOnBounds="true" />
             <Label layoutX="45.0" layoutY="90.0" text="Nombre del producto:" textFill="#dad57c">
                <font>
                   <Font name="Berlin Sans FB" size="29.0" />

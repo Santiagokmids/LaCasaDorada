@@ -15,7 +15,7 @@
    <center>
       <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fx:id="imageWallIngredient" fitHeight="741.0" fitWidth="792.0" opacity="0.09" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imageWallIngredient" fitHeight="741.0" fitWidth="831.0" opacity="0.09" pickOnBounds="true" preserveRatio="true" />
             <Label layoutX="208.0" layoutY="63.0" text="Agregar un Ingrediente" textFill="#dad57c">
                <font>
                   <Font name="Bernard MT Condensed" size="36.0" />

@@ -17,7 +17,7 @@
    <center>
       <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fx:id="imageWallListEmployee" fitHeight="751.0" fitWidth="740.0" opacity="0.09" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imageWallListEmployee" fitHeight="751.0" fitWidth="831.0" opacity="0.09" pickOnBounds="true" preserveRatio="true" />
             <TableView fx:id="tvEmployee" onMouseClicked="#mouseClickedEmployee" prefHeight="566.0" prefWidth="478.0">
                <columns>
                   <TableColumn fx:id="tcNameEmployee" prefWidth="168.0" resizable="false" text="Nombre" />

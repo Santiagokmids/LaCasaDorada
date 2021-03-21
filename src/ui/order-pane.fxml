@@ -21,7 +21,7 @@
    <center>
       <Pane prefHeight="280.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fx:id="imageWallOrders" fitHeight="681.0" fitWidth="733.0" opacity="0.09" pickOnBounds="true" />
+            <ImageView fx:id="imageWallOrders" fitHeight="681.0" fitWidth="831.0" opacity="0.09" pickOnBounds="true" />
             <Label layoutX="97.0" layoutY="70.0" text="Estado del pedido:" textFill="#dad57c">
                <font>
                   <Font name="Berlin Sans FB" size="29.0" />
