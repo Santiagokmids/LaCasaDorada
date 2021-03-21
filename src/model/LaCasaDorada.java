@@ -42,9 +42,10 @@ public class LaCasaDorada {
 	}
 
 	//create client
-	public void create(String name, String lastName, String id, State state, String address, String telephone, String fieldOfObservations) {
+	public void create(String name, String lastName, String id, State state, String address, String telephone, String fieldObservations,
+			Modifiers modifiers) {
 		
-		Client client = new Client(name, lastName, id, state, address, telephone, fieldOfObservations);
+		Client client = new Client(name, lastName, id, state, address, telephone, fieldObservations, modifiers);
 		people.add(client);
 	}
 
@@ -57,9 +58,9 @@ public class LaCasaDorada {
 	}
 
 	//create employee
-	public void create(String name, String lastName, String id, State state) {
+	public void create(String name, String lastName, String id, State state, Modifiers usersModifiers) {
 
-		Employee employee = new Employee(name, lastName, id, state);
+		Employee employee = new Employee(name, lastName, id, state, usersModifiers);
 		people.add(employee);
 	}
 
@@ -72,9 +73,9 @@ public class LaCasaDorada {
 	}
 
 	//create User
-	public void create(String name, String lastName, String id, String userName, String password, State state) {
+	public void create(String name, String lastName, String id, String userName, String password, State state, Modifiers usersModifiers) {
 
-		User user = new User(name, lastName, id, userName, password, state);
+		User user = new User(name, lastName, id, userName, password, state, usersModifiers);
 		people.add(user);
 	}
 
@@ -87,16 +88,16 @@ public class LaCasaDorada {
 	}
 
 	//Create ingredient
-	public void create(String name) {
+	public void create(String name, Modifiers userModifiers) {
 
-		Ingredient ingredients = new Ingredient(name);
+		Ingredient ingredients = new Ingredient(name, userModifiers);
 		ingredient.add(ingredients);
 	}
 
 	//Create product
-	public void create(String name, ArrayList<Ingredient> ingredients, ProductType productType, Size sizes, double price) {
+	public void create(String name, ArrayList<Ingredient> ingredients, ProductType productType, Size sizes, double price, Modifiers userModifiers) {
 
-		Product products = new Product(name,ingredients,productType, sizes, price);
+		Product products = new Product(name,ingredients,productType, sizes, price, userModifiers);
 		product.add(products);
 	}
 
@@ -113,9 +114,9 @@ public class LaCasaDorada {
 	}
 
 	//Create type product
-	public void createTypeProduct(String name) {
+	public void createTypeProduct(String name, Modifiers userModifiers) {
 
-		ProductType typeProduct = new ProductType(name);
+		ProductType typeProduct = new ProductType(name, userModifiers);
 		productType.add(typeProduct);
 	}
 
@@ -142,10 +143,17 @@ public class LaCasaDorada {
 		return state;
 
 	}
+	
+	//Create preorder
+	public Modifiers create(User creator, User modifier) {
+
+		Modifiers modifiers = new Modifiers(creator, modifier);
+		return modifiers;
+	}
 
 	//create order
 	public boolean create(StateOrder state, ArrayList<Integer> amount, Date date, String fieldOfObservations, Client orderClient,
-			ArrayList<Product>products, Employee ordEmployee) {
+			ArrayList<Product>products, Employee ordEmployee, Modifiers userModifiers) {
 
 		boolean orders = true, validation = true;
 		int aleatorio = 0;
@@ -159,7 +167,7 @@ public class LaCasaDorada {
 			validation = findOrders(code);
 
 			if(!validation) {
-				Order newOrder = new Order(code, state, amount, date, fieldOfObservations, orderClient, products, ordEmployee);
+				Order newOrder = new Order(code, state, amount, date, fieldOfObservations, orderClient, products, ordEmployee, userModifiers);
 				order.add(newOrder);
 
 			}else {
@@ -527,7 +535,7 @@ public class LaCasaDorada {
 				state = State.DISABLED;
 			}
 
-			create(parts[0],parts[1],parts[2],state,parts[4],parts[5],parts[6]);
+			//create(parts[0],parts[1],parts[2],state,parts[4],parts[5],parts[6]);
 			line = br.readLine();
 		}
 

@@ -6,6 +6,9 @@ public class PreOrder {
 	private Product product;
 	private Integer amount;
 	
+	//Relations
+	private Modifiers usersCreators;
+
 	public PreOrder(Product product, Integer amount) {
 		this.setProduct(product);
 		this.amount = amount;
@@ -29,6 +32,14 @@ public class PreOrder {
 
 	public String getNameProduct() {
 		return product.getName();
+	}
+
+	public Modifiers getUsersCreators() {
+		return usersCreators;
+	}
+
+	public void setUsersCreators(Modifiers usersCreators) {
+		this.usersCreators = usersCreators;
 	}
 	
 }

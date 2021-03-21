@@ -16,8 +16,11 @@ public class Order {
 	private ArrayList<Product> products;
 	private Employee orderEmployee;
 	
+	//Relations
+	private Modifiers usersCreators;
+
 	public Order(String code, StateOrder state, ArrayList<Integer> amount, Date date, String fieldOfObservations, Client orderClient,
-			ArrayList<Product>products, Employee ordEmployee) {
+			ArrayList<Product>products, Employee ordEmployee, Modifiers userCreators) {
 		
 		this.code = code;
 		this.state = state;
@@ -27,6 +30,7 @@ public class Order {
 		this.orderClient = orderClient;
 		this.products = products;
 		this.orderEmployee = ordEmployee;
+		this.usersCreators = userCreators;
 	}
 
 	public String getCode() {
@@ -91,6 +95,14 @@ public class Order {
 
 	public void setProducts(ArrayList<Product> products) {
 		this.products = products;
+	}
+
+	public Modifiers getUsersCreators() {
+		return usersCreators;
+	}
+
+	public void setUsersCreators(Modifiers usersCreators) {
+		this.usersCreators = usersCreators;
 	}
 	
 }
