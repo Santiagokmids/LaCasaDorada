@@ -20,8 +20,13 @@
    <center>
       <Pane prefHeight="280.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
+<<<<<<< HEAD
             <ImageView fx:id="imageWallOrders" fitHeight="681.0" fitWidth="733.0" opacity="0.09" pickOnBounds="true" />
             <Label layoutX="160.0" layoutY="70.0" text="Estado del pedido:" textFill="#dad57c">
+=======
+            <ImageView fx:id="imageWallOrders" fitHeight="681.0" fitWidth="831.0" opacity="0.09" pickOnBounds="true" />
+            <Label layoutX="97.0" layoutY="70.0" text="Estado del pedido:" textFill="#dad57c">
+>>>>>>> 7adb03a9e3a52d5f0cd6f48d188b9adc55fa5168
                <font>
                   <Font name="Berlin Sans FB" size="29.0" />
                </font>

@@ -12,8 +12,16 @@
    <center>
       <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
+<<<<<<< HEAD
             <ImageView fx:id="imageWallEmployee" fitHeight="664.0" fitWidth="740.0" layoutY="-2.0" opacity="0.09" pickOnBounds="true" />
             <Label layoutX="252.0" layoutY="36.0" text="Registrar Empleado" textFill="#dad57c">
+=======
+            <ImageView fx:id="imageWallEmployee" fitHeight="700.0" fitWidth="831.0" layoutX="-35.0" layoutY="-38.0" opacity="0.09" pickOnBounds="true">
+               <image>
+                  <Image url="@../../../../Downloads/WhatsApp%20Image%202021-03-18%20at%2017.29.46.jpeg" />
+               </image></ImageView>
+            <Label layoutX="252.0" layoutY="21.0" text="Registrar Empleado" textFill="#dad57c">
+>>>>>>> 7adb03a9e3a52d5f0cd6f48d188b9adc55fa5168
                <font>
                   <Font name="Bernard MT Condensed" size="36.0" />
                </font></Label>

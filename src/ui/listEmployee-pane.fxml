@@ -10,45 +10,45 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="740.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="831.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <ImageView fx:id="imageBannerListEmployee" fitHeight="135.0" fitWidth="744.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
    </top>
    <center>
       <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fx:id="imageWallListEmployee" fitHeight="751.0" fitWidth="740.0" opacity="0.09" pickOnBounds="true" preserveRatio="true" />
-            <TableView fx:id="tvEmployee" onMouseClicked="#mouseClickedEmployee" prefHeight="566.0" prefWidth="478.0">
+            <ImageView fx:id="imageWallListEmployee" fitHeight="751.0" fitWidth="831.0" opacity="0.09" pickOnBounds="true" preserveRatio="true" />
+            <TableView fx:id="tvEmployee" onMouseClicked="#mouseClickedEmployee" prefHeight="566.0" prefWidth="560.0">
                <columns>
                   <TableColumn fx:id="tcNameEmployee" prefWidth="168.0" resizable="false" text="Nombre" />
-                  <TableColumn fx:id="tcLastNameEmployee" editable="false" minWidth="0.0" prefWidth="160.0" resizable="false" text="Apellidos" />
-                  <TableColumn fx:id="tcIdEmployee" editable="false" minWidth="0.0" prefWidth="149.0" resizable="false" text="Identificación" />
+                  <TableColumn fx:id="tcLastNameEmployee" editable="false" minWidth="0.0" prefWidth="204.0" resizable="false" text="Apellidos" />
+                  <TableColumn fx:id="tcIdEmployee" editable="false" minWidth="0.0" prefWidth="187.0" resizable="false" text="Identificación" />
                </columns>
             </TableView>
-            <Label layoutX="488.0" layoutY="5.0" text="Nombre:" textFill="#dad57c">
+            <Label layoutX="566.0" text="Nombre:" textFill="#dad57c">
                <font>
                   <Font name="Berlin Sans FB" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="updateNameEmployee" layoutX="487.0" layoutY="32.0" prefHeight="25.0" prefWidth="240.0" />
-            <Label layoutX="488.0" layoutY="64.0" text="Apellidos:" textFill="#dad57c">
+            <TextField fx:id="updateNameEmployee" layoutX="565.0" layoutY="27.0" prefHeight="25.0" prefWidth="240.0" />
+            <Label layoutX="566.0" layoutY="59.0" text="Apellidos:" textFill="#dad57c">
                <font>
                   <Font name="Berlin Sans FB" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="updateLastNameEmployee" layoutX="487.0" layoutY="91.0" prefHeight="25.0" prefWidth="240.0" />
-            <Label layoutX="488.0" layoutY="123.0" text="No. Identificación:" textFill="#dad57c">
+            <TextField fx:id="updateLastNameEmployee" layoutX="565.0" layoutY="86.0" prefHeight="25.0" prefWidth="240.0" />
+            <Label layoutX="566.0" layoutY="118.0" text="No. Identificación:" textFill="#dad57c">
                <font>
                   <Font name="Berlin Sans FB" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="updateIdEmployee" layoutX="487.0" layoutY="149.0" prefHeight="25.0" prefWidth="240.0" />
-            <Button layoutX="518.0" layoutY="302.0" mnemonicParsing="false" onAction="#modifyEmployee" prefHeight="53.0" prefWidth="179.0" style="-fx-background-color: #dad57c; -fx-background-radius: 22;" text="Modificar">
+            <TextField fx:id="updateIdEmployee" layoutX="565.0" layoutY="144.0" prefHeight="25.0" prefWidth="240.0" />
+            <Button layoutX="609.0" layoutY="299.0" mnemonicParsing="false" onAction="#modifyEmployee" prefHeight="53.0" prefWidth="179.0" style="-fx-background-color: #dad57c; -fx-background-radius: 22;" text="Modificar">
                <font>
                   <Font name="Franklin Gothic Demi" size="18.0" />
                </font>
             </Button>
-            <Button layoutX="518.0" layoutY="385.0" mnemonicParsing="false" onAction="#mainMenu" prefHeight="53.0" prefWidth="179.0" style="-fx-background-color: #dad57c; -fx-background-radius: 22;" text="Cancelar">
+            <Button layoutX="609.0" layoutY="382.0" mnemonicParsing="false" onAction="#mainMenu" prefHeight="53.0" prefWidth="179.0" style="-fx-background-color: #dad57c; -fx-background-radius: 22;" text="Cancelar">
                <font>
                   <Font name="Franklin Gothic Demi" size="18.0" />
                </font>

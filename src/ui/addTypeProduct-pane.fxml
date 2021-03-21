@@ -8,31 +8,31 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="740.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="831.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <ImageView fx:id="imegeBannerProduct" fitHeight="127.0" fitWidth="745.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
    </top>
    <center>
       <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fx:id="imageWallProduct" fitHeight="740.0" fitWidth="740.0" layoutY="-7.0" opacity="0.09" pickOnBounds="true" preserveRatio="true" />
-            <Label layoutX="174.0" layoutY="79.0" text="Agregar un tipo de producto" textFill="#dad57c">
+            <ImageView fx:id="imageWallProduct" fitHeight="740.0" fitWidth="831.0" layoutY="-7.0" opacity="0.09" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="244.0" layoutY="88.0" text="Agregar un tipo de producto" textFill="#dad57c">
                <font>
                   <Font name="Bernard MT Condensed" size="36.0" />
                </font>
             </Label>
-            <Label layoutX="98.0" layoutY="213.0" text="Tipo de producto:" textFill="#dad57c">
+            <Label layoutX="168.0" layoutY="222.0" text="Tipo de producto:" textFill="#dad57c">
                <font>
                   <Font name="Berlin Sans FB" size="29.0" />
                </font>
             </Label>
-            <TextField fx:id="typeProduct" layoutX="319.0" layoutY="215.0" prefHeight="32.0" prefWidth="275.0" />
-            <Button layoutX="140.0" layoutY="363.0" mnemonicParsing="false" onAction="#createTypeProduct" prefHeight="53.0" prefWidth="179.0" style="-fx-background-color: #dad57c; -fx-background-radius: 22;" text="Añadir Tipo">
+            <TextField fx:id="typeProduct" layoutX="389.0" layoutY="224.0" prefHeight="32.0" prefWidth="275.0" />
+            <Button layoutX="244.0" layoutY="367.0" mnemonicParsing="false" onAction="#createTypeProduct" prefHeight="53.0" prefWidth="179.0" style="-fx-background-color: #dad57c; -fx-background-radius: 22;" text="Añadir Tipo">
                <font>
                   <Font name="Franklin Gothic Demi" size="18.0" />
                </font>
             </Button>
-            <Button layoutX="447.0" layoutY="363.0" mnemonicParsing="false" onAction="#mainMenu" prefHeight="53.0" prefWidth="140.0" style="-fx-background-color: #dad57c; -fx-background-radius: 22;" text="Cancelar">
+            <Button layoutX="457.0" layoutY="367.0" mnemonicParsing="false" onAction="#mainMenu" prefHeight="53.0" prefWidth="140.0" style="-fx-background-color: #dad57c; -fx-background-radius: 22;" text="Cancelar">
                <font>
                   <Font name="Franklin Gothic Demi" size="18.0" />
                </font>
