@@ -1567,4 +1567,72 @@ public class LaCasaDoradaGUI {
 
 		inicializateTableViewProduct();
 	}
+	
+	@FXML
+	public void modifyListProduct(ActionEvent event) {
+
+		if(tvListProduct.getSelectionModel().isEmpty()) {
+
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("ERROR");
+			alert.setHeaderText("No se pudo actualizar el usuario");
+			alert.setContentText("Debe seleccionar uno de la lista");
+			alert.showAndWait();
+		}
+		else {
+			
+			ArrayList<Ingredient> ingredients = new ArrayList<>();
+
+			String name = listOfProducts.get(tvListProduct.getSelectionModel().getSelectedIndex()).getName();
+			ingredients = listOfProducts.get(tvListProduct.getSelectionModel().getSelectedIndex()).getIngredients();
+			ProductType type = listOfProducts.get(tvListProduct.getSelectionModel().getSelectedIndex()).getProductType();
+			Size size = listOfProducts.get(tvListProduct.getSelectionModel().getSelectedIndex()).getSizes();
+			Double price = listOfProducts.get(tvListProduct.getSelectionModel().getSelectedIndex()).getPrice();
+			
+			Product product = laCasaDorada.findProducts(name);
+
+			if(!updateNameProduct.getText().isEmpty() && !updateNameProduct.getText().equals(name)) {
+				name = updateNameProduct.getText();
+			}
+			if(!updateIngredientProduct.getText().isEmpty() && verificIngredients(ingredients,objListIngredients(updateIngredientProduct.getText()))) {
+				ingredients = objListIngredients(ingredients);
+			}
+			if(!updateTypeProduct.getText().isEmpty() && !updateTypeProduct.getText().equals(type)) {
+				type = updateTypeProduct.get;
+			}
+
+			employee.setName(name);
+			employee.setLastName(lastName);
+			employee.setId(id);
+
+			listEmployee.set(tvEmployee.getSelectionModel().getSelectedIndex(),new Employee(name,lastName,id,employee.getState()));
+
+			updateNameEmployee.setText("");
+			updateLastNameEmployee.setText("");
+			updateIdEmployee.setText("");
+		}
+	}
+	
+	public ArrayList<Ingredient> objListIngredients(String ingredient){
+		
+		ArrayList<Ingredient> listIngredient = new ArrayList<>();
+		
+		String[] partsIngredients = ingredient.split("-");
+		
+		for (int i = 0; i < partsIngredients.length; i++) {
+			
+			
+		}
+		
+		return listIngredient;
+	}
+	
+	public boolean verificIngredients(ArrayList<Ingredient> ingredients, ArrayList<Ingredient> ingredientsMessage) {
+		
+		boolean verific = false;
+		
+		
+		
+		return verific;
+	}
 }
