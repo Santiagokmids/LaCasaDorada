@@ -993,7 +993,7 @@ public class LaCasaDoradaGUI {
 
 		tvOrder.setItems(observableList);
 
-		colName.setCellValueFactory(new PropertyValueFactory<PreOrder,String>("name")); 
+		colName.setCellValueFactory(new PropertyValueFactory<PreOrder,String>("nameProduct")); 
 		colAmount.setCellValueFactory(new PropertyValueFactory<PreOrder,Integer>("Amount"));
 	}
 
@@ -1010,8 +1010,7 @@ public class LaCasaDoradaGUI {
 		}
 		
 		Product product = laCasaDorada.findProducts(selectProduct.getValue());
-		laCasaDorada.create(product, amounts);
-		observableList.add(new PreOrder(product,amounts));
+		observableList.add(new PreOrder(product, amounts));
 	}
 
 	@FXML

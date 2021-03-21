@@ -27,6 +27,8 @@ public class PreOrder {
 		this.product = product;
 	}
 
-
+	public String getNameProduct() {
+		return product.getName();
+	}
 	
 }

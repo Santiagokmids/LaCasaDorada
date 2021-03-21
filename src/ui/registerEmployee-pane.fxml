@@ -36,9 +36,9 @@
                   <Font name="Berlin Sans FB" size="29.0" />
                </font>
             </Label>
-            <TextField fx:id="nameEmployee" layoutX="359.0" layoutY="101.0" prefHeight="25.0" prefWidth="250.0" />
-            <TextField fx:id="lastNameEmployee" layoutX="360.0" layoutY="157.0" prefHeight="25.0" prefWidth="248.0" />
-            <TextField fx:id="idEmployee" layoutX="359.0" layoutY="219.0" prefHeight="25.0" prefWidth="249.0" />
+            <TextField fx:id="nameEmployee" layoutX="359.0" layoutY="99.0" prefHeight="33.0" prefWidth="250.0" />
+            <TextField fx:id="lastNameEmployee" layoutX="360.0" layoutY="154.0" prefHeight="37.0" prefWidth="248.0" />
+            <TextField fx:id="idEmployee" layoutX="359.0" layoutY="211.0" prefHeight="37.0" prefWidth="249.0" />
             <Button layoutX="175.0" layoutY="325.0" mnemonicParsing="false" onAction="#createEmployee" prefHeight="53.0" prefWidth="179.0" style="-fx-background-color: #dad57c; -fx-background-radius: 22;" text="Añadir Empleado">
                <font>
                   <Font name="Franklin Gothic Demi" size="18.0" />
