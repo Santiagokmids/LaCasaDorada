@@ -98,7 +98,7 @@
                   <Font name="Berlin Sans FB" size="21.0" />
                </font>
             </Label>
-            <TextField fx:id="priceProduct" layoutX="360.0" layoutY="450.0" prefHeight="32.0" prefWidth="280.0" />
+            <TextField fx:id="priceProduct" alignment="CENTER" layoutX="360.0" layoutY="450.0" prefHeight="32.0" prefWidth="280.0" />
          </children>
       </Pane>
    </center>

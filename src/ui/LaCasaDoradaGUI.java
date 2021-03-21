@@ -644,7 +644,7 @@ public class LaCasaDoradaGUI {
 
 		Parent addOrder = loader.load();
 		mainPane.getChildren().clear();
-		mainPane.setCenter(addOrder);
+		mainPane.setTop(addOrder);
 
 		Image image = new Image("images/BannerCasaDorada.jpg");
 		imageBannerOrders.setImage(image);
@@ -740,7 +740,7 @@ public class LaCasaDoradaGUI {
 					Alert alerts = new Alert(AlertType.INFORMATION);
 					alerts.setTitle("EXCELENTE!");
 					alerts.setHeaderText("Se ha añadido.");
-					alerts.setContentText("Se ha añadido a exitosamente el pedido.");
+					alerts.setContentText("Se ha añadido exitosamente el producto.");
 					alerts.showAndWait();
 
 					ArrayList<Ingredient>ingredients = new ArrayList<>();
@@ -783,7 +783,7 @@ public class LaCasaDoradaGUI {
 
 		Parent addOrder = loader.load();
 		mainPane.getChildren().clear();
-		mainPane.setCenter(addOrder);
+		mainPane.setTop(addOrder);
 
 		Image image = new Image("images/BannerCasaDorada.jpg");
 		imageBannerProduct.setImage(image);
@@ -811,12 +811,14 @@ public class LaCasaDoradaGUI {
 		for (int i = 0; i < size.size(); i++) {
 			selectSize.getItems().addAll(size.get(i).getSize());
 		}
+		
+		ArrayList<Ingredient> ingre = new ArrayList<>();
+		inicializateTableViewProducts(ingre);
 
 	}
 
 	@FXML
 	public void ingredientProduct(ActionEvent event)throws IOException {
-		inicializateTableViewProducts();
 		listIngredients.add(laCasaDorada.findIngredient(selectIngredient.getValue()));
 	}
 
@@ -878,9 +880,9 @@ public class LaCasaDoradaGUI {
 		selectIngredient.setValue(name);
 	}
 
-	private void inicializateTableViewProducts() {
+	private void inicializateTableViewProducts(ArrayList<Ingredient> ingre) {
 
-		listIngredients = FXCollections.observableArrayList(laCasaDorada.getIngredient());
+		listIngredients = FXCollections.observableArrayList(ingre);
 
 		tvProduct.setItems(listIngredients);
 
