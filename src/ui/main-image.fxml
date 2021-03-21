@@ -11,7 +11,7 @@
    <center>
       <Pane prefHeight="740.0" prefWidth="740.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fx:id="imageView" fitHeight="799.0" fitWidth="831.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imageView" fitHeight="799.0" fitWidth="851.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
                <cursor>
                   <Cursor fx:constant="DEFAULT" />
                </cursor>
