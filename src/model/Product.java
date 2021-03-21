@@ -69,6 +69,11 @@ public class Product {
 		this.price = price;
 	}
 
+	public ProductType getProductType() {
+		return productType;
+	}
 
-
+	public void setProductType(ProductType productType) {
+		this.productType = productType;
+	}
 }
