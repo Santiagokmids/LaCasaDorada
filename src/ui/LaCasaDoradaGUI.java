@@ -38,6 +38,51 @@ import model.User;
 public class LaCasaDoradaGUI {
 
 	@FXML
+	private ImageView imageBannerClient;
+
+	@FXML
+	private ImageView imageWallClient;
+
+	@FXML
+	private TableView<Client> tvClient;
+
+	@FXML
+	private TableColumn<Client, String> tcNameClient;
+
+	@FXML
+	private TableColumn<Client, String> tcLastNameClient;
+
+	@FXML
+	private TableColumn<Client, String> tcIdClient;
+
+	@FXML
+	private TableColumn<Client, String> tcAddressClient;
+
+	@FXML
+	private TableColumn<Client, String> tcTelephoneClient;
+
+	@FXML
+	private TableColumn<Client, String> tcObsClient;
+
+	@FXML
+	private TextField updateNameClient;
+
+	@FXML
+	private TextField updateLasNameClient;
+
+	@FXML
+	private TextField updateIdClient;
+
+	@FXML
+	private TextField updateAddressClient;
+
+	@FXML
+	private TextField updateTelephoneClient;
+
+	@FXML
+	private TextField updateObsClient;
+
+	@FXML
 	private ImageView imageBannerUser;
 
 	@FXML
@@ -254,12 +299,13 @@ public class LaCasaDoradaGUI {
 	public static ObservableList<User> listUsers;
 	public static ObservableList<PreOrder> observableList;
 	public static ObservableList<Ingredient> listIngredients;
+	public static ObservableList<Client> listClient;
 
 	public LaCasaDoradaGUI(LaCasaDorada laCasaDorada) {
 		this.laCasaDorada = laCasaDorada;
 	}
 
-	public void initializateTableViewUsers() {
+	public void inicializateTableViewUsers() {
 
 		listUsers = FXCollections.observableArrayList(laCasaDorada.getUsers());
 
@@ -268,6 +314,19 @@ public class LaCasaDoradaGUI {
 		tcLastName.setCellValueFactory(new PropertyValueFactory<User,String>("lastName"));
 		tcId.setCellValueFactory(new PropertyValueFactory<User,String>("id"));
 		tcUser.setCellValueFactory(new PropertyValueFactory<User,String>("userName"));
+	}
+
+	public void inicializateTableViewClients() {
+
+		listClient = FXCollections.observableArrayList(laCasaDorada.getClients());
+
+		tvClient.setItems(listClient);
+		tcNameClient.setCellValueFactory(new PropertyValueFactory<Client,String>("Name"));
+		tcLastNameClient.setCellValueFactory(new PropertyValueFactory<Client,String>("LastName"));
+		tcIdClient.setCellValueFactory(new PropertyValueFactory<Client,String>("Id"));
+		tcAddressClient.setCellValueFactory(new PropertyValueFactory<Client,String>("Address"));
+		tcTelephoneClient.setCellValueFactory(new PropertyValueFactory<Client,String>("Telephone"));
+		tcObsClient.setCellValueFactory(new PropertyValueFactory<Client,String>("FieldOfObservations"));
 	}
 
 	@FXML
@@ -522,7 +581,7 @@ public class LaCasaDoradaGUI {
 			}
 
 		} else if(!nameClient.getText().equals("") && !lastNameClient.getText().equals("") && !adressClient.getText().equals("") && 
-				!telephoneClient.getText().equals("") && !fieldObservations.getText().equals("")) {
+				!telephoneClient.getText().equals("") && !fieldObservations.getText().equals("") && idClient.getText().equals("")) {
 
 			Alert alerts = new Alert(AlertType.INFORMATION);
 			alerts.setTitle("EXCELENTE");
@@ -530,7 +589,8 @@ public class LaCasaDoradaGUI {
 			alerts.setContentText("Se ha registrado a "+nameClient.getText()+" exitosamente");
 			alerts.showAndWait();
 
-			laCasaDorada.create(name.getText(), lastName.getText(), null, nameUser.getText(), password.getText(), State.ENABLE);
+			laCasaDorada.create(nameClient.getText(), lastNameClient.getText(), idClient.getText(), State.ENABLE,
+					adressClient.getText(), telephoneClient.getText(), fieldObservations.getText());
 			mainMenu();
 		}
 		else {
@@ -674,8 +734,8 @@ public class LaCasaDoradaGUI {
 
 			try {
 
-				Employee employee = laCasaDorada.findEmployee(txtEmployeeOrder.getText());
-				Client client = laCasaDorada.findClient(txtClientOrder.getText());
+				Employee employee = laCasaDorada.findEmployee(txtEmployeeOrder.getText());		
+				Client client = laCasaDorada.findObjByNameClient(txtClientOrder.getText());
 
 				if(employee != null && client != null) {
 
@@ -731,12 +791,12 @@ public class LaCasaDoradaGUI {
 				selectSize.getValue() != null && !priceProduct.getText().equals("") && !listIngredients.isEmpty()){
 
 			try {
-				 
+
 				double price = Double.parseDouble(priceProduct.getText()); 
-				
+
 				if(laCasaDorada.findSizes(selectSize.getValue()))  {
 					Size sizes = laCasaDorada.findSize(selectSize.getValue());
-					
+
 					Alert alerts = new Alert(AlertType.INFORMATION);
 					alerts.setTitle("EXCELENTE!");
 					alerts.setHeaderText("Se ha añadido.");
@@ -753,7 +813,7 @@ public class LaCasaDoradaGUI {
 					laCasaDorada.create(nameOfProduct.getText(), ingredients, type, sizes, price);
 
 					mainMenu();
-					
+
 				}else {
 					alert.setHeaderText("Ya hay un tamaño con ese precio");
 					alert.setContentText("Debe ingresar un valor númerico en el campo de precio del producto");
@@ -798,20 +858,20 @@ public class LaCasaDoradaGUI {
 		for (int i = 0; i < ingredient.size(); i++) {
 			selectIngredient.getItems().addAll(ingredient.get(i).getName());
 		}
-		
+
 		selectType.setPromptText("Seleccione el tipo de producto");
-		
+
 		for (int i = 0; i < productType.size(); i++) {
 			selectType.getItems().addAll(productType.get(i).getName());
 		}
-		
+
 		ArrayList<Size> size = laCasaDorada.getSizes();
 		selectSize.setPromptText("Seleccione el tamaño del producto");
-		
+
 		for (int i = 0; i < size.size(); i++) {
 			selectSize.getItems().addAll(size.get(i).getSize());
 		}
-		
+
 		ArrayList<Ingredient> ingre = new ArrayList<>();
 		inicializateTableViewProducts(ingre);
 
@@ -1050,7 +1110,7 @@ public class LaCasaDoradaGUI {
 			alert.showAndWait();
 		}
 	}
-	
+
 	@FXML
 	public void addTypeIngredient(ActionEvent event) throws IOException {
 
@@ -1122,11 +1182,11 @@ public class LaCasaDoradaGUI {
 		Image image2 = new Image("/images/BannerCasaDorada.jpg");
 		imageBannerUser.setImage(image2);
 
-		initializateTableViewUsers();
+		inicializateTableViewUsers();
 	}
 
 	@FXML
-	public void modify(ActionEvent event) {
+	public void modifyUser(ActionEvent event) {
 
 		boolean verific = false;
 		boolean verificPassword = false;
@@ -1217,7 +1277,7 @@ public class LaCasaDoradaGUI {
 	}
 
 	@FXML
-	public void mouseClicked(MouseEvent event) {
+	public void mouseClickedUser(MouseEvent event) {
 
 		String name = listUsers.get(tvUser.getSelectionModel().getSelectedIndex()).getName();
 		String lastName = listUsers.get(tvUser.getSelectionModel().getSelectedIndex()).getLastName();
@@ -1228,5 +1288,100 @@ public class LaCasaDoradaGUI {
 		updateLasName.setText(lastName);
 		updateId.setText(id);
 		updateUser.setText(userName);
+	}
+
+	@FXML
+	public void listClient(ActionEvent event) throws IOException {
+
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("listClient-pane.fxml"));
+
+		loader.setController(this);
+		Parent load = loader.load();
+		mainPane.setCenter(load);
+
+		mainPane.getChildren().clear();
+		mainPane.setTop(load);
+
+		Image image = new Image("/images/Banner.jpg");
+		imageWallClient.setImage(image);
+		Image image2 = new Image("/images/BannerCasaDorada.jpg");
+		imageBannerClient.setImage(image2);
+
+		inicializateTableViewClients();
+	}
+
+	@FXML
+	public void modifyClient(ActionEvent event) {
+
+		if(tvClient.getSelectionModel().isEmpty()) {
+
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("ERROR");
+			alert.setHeaderText("No se pudo actualizar el usuario");
+			alert.setContentText("Debe seleccionar uno de la lista");
+			alert.showAndWait();
+		}
+		else {
+
+			String name = listClient.get(tvClient.getSelectionModel().getSelectedIndex()).getName();
+			String lastName = listClient.get(tvClient.getSelectionModel().getSelectedIndex()).getLastName();
+			String id = listClient.get(tvClient.getSelectionModel().getSelectedIndex()).getId();
+			String address = listClient.get(tvClient.getSelectionModel().getSelectedIndex()).getAddress();
+			String telephone = listClient.get(tvClient.getSelectionModel().getSelectedIndex()).getTelephone();
+			String obsClient= listClient.get(tvClient.getSelectionModel().getSelectedIndex()).getFieldOfObservations();
+
+			Client client= laCasaDorada.findObjClient(name,lastName);
+
+			if(!updateNameClient.getText().isEmpty() && !updateNameClient.getText().equals(name)) {
+				name = updateNameClient.getText();
+			}
+			if(!updateLasNameClient.getText().isEmpty() && !updateLasNameClient.getText().equals(lastName)) {
+				lastName = updateLasNameClient.getText();
+			}
+			if(!updateIdClient.getText().isEmpty() && !updateIdClient.getText().equals(id)) {
+				id = updateIdClient.getText();
+			}
+			if(!updateAddressClient.getText().isEmpty() && !updateAddressClient.getText().equals(address)) {
+				address = updateAddressClient.getText();
+			}
+			if(!updateTelephoneClient.getText().isEmpty() && !updateTelephoneClient.getText().equals(telephone)) {
+				telephone = updateTelephoneClient.getText();
+			}
+			if(!updateObsClient.getText().isEmpty() && !updateObsClient.getText().equals(obsClient)) {
+				obsClient = updateObsClient.getText();
+			}
+
+			client.setName(name);
+			client.setLastName(lastName);
+			client.setId(id);
+			client.setAddress(address);
+
+			listClient.set(tvClient.getSelectionModel().getSelectedIndex(),new Client(name,lastName,id,client.getState(),address,telephone,obsClient));
+
+			updateNameClient.setText("");
+			updateLasNameClient.setText("");
+			updateIdClient.setText("");
+			updateAddressClient.setText("");
+			updateTelephoneClient.setText("");
+			updateObsClient.setText("");
+		}
+	}
+
+	@FXML
+	public void mouseClickedClient(MouseEvent event) {
+
+		String name = listClient.get(tvClient.getSelectionModel().getSelectedIndex()).getName();
+		String lastName = listClient.get(tvClient.getSelectionModel().getSelectedIndex()).getLastName();
+		String id = listClient.get(tvClient.getSelectionModel().getSelectedIndex()).getId();
+		String address = listClient.get(tvClient.getSelectionModel().getSelectedIndex()).getAddress();
+		String telephone = listClient.get(tvClient.getSelectionModel().getSelectedIndex()).getTelephone();
+		String obsClient= listClient.get(tvClient.getSelectionModel().getSelectedIndex()).getFieldOfObservations();
+
+		updateNameClient.setText(name);
+		updateLasNameClient.setText(lastName);
+		updateIdClient.setText(id);
+		updateAddressClient.setText(address);
+		updateTelephoneClient.setText(telephone);
+		updateObsClient.setText(obsClient);
 	}
 }
