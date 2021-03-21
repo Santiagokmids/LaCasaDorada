@@ -20,12 +20,12 @@
             <ImageView fx:id="imageWallClient" fitHeight="751.0" fitWidth="740.0" opacity="0.09" pickOnBounds="true" preserveRatio="true" />
             <TableView fx:id="tvClient" onMouseClicked="#mouseClickedClient" prefHeight="566.0" prefWidth="478.0">
                <columns>
-                  <TableColumn fx:id="tcNameClient" prefWidth="71.0" text="Nombre" />
-                  <TableColumn fx:id="tcLastNameClient" minWidth="0.0" prefWidth="63.0" text="Apellidos" />
-                  <TableColumn fx:id="tcIdClient" minWidth="0.0" prefWidth="91.0" text="Identificación" />
-                  <TableColumn fx:id="tcAddressClient" minWidth="0.0" prefWidth="63.0" text="Dirección" />
-                  <TableColumn fx:id="tcTelephoneClient" minWidth="0.0" prefWidth="64.0" text="Teléfono" />
-                  <TableColumn fx:id="tcObsClient" minWidth="0.0" prefWidth="125.0" text="Observaciones" />
+                  <TableColumn fx:id="tcNameClient" prefWidth="71.0" resizable="false" text="Nombre" />
+                  <TableColumn fx:id="tcLastNameClient" minWidth="0.0" prefWidth="63.0" resizable="false" text="Apellidos" />
+                  <TableColumn fx:id="tcIdClient" minWidth="0.0" prefWidth="91.0" resizable="false" text="Identificación" />
+                  <TableColumn fx:id="tcAddressClient" minWidth="0.0" prefWidth="63.0" resizable="false" text="Dirección" />
+                  <TableColumn fx:id="tcTelephoneClient" minWidth="0.0" prefWidth="64.0" resizable="false" text="Teléfono" />
+                  <TableColumn fx:id="tcObsClient" minWidth="0.0" prefWidth="125.0" resizable="false" text="Observaciones" />
                </columns>
             </TableView>
             <Label layoutX="488.0" layoutY="5.0" text="Nombre:" textFill="#dad57c">

@@ -21,10 +21,10 @@
             <ImageView fx:id="imageWallUser" fitHeight="751.0" fitWidth="740.0" opacity="0.09" pickOnBounds="true" preserveRatio="true" />
             <TableView fx:id="tvUser" onMouseClicked="#mouseClickedUser" prefHeight="566.0" prefWidth="478.0">
               <columns>
-                <TableColumn fx:id="tcName" prefWidth="132.0" text="Nombre" />
-                <TableColumn fx:id="tcLastName" minWidth="0.0" prefWidth="102.0" text="Apellidos" />
-                  <TableColumn fx:id="tcId" minWidth="0.0" prefWidth="126.0" text="Identificación" />
-                  <TableColumn fx:id="tcUser" minWidth="0.0" prefWidth="117.0" text="Usuario" />
+                <TableColumn fx:id="tcName" prefWidth="132.0" resizable="false" text="Nombre" />
+                <TableColumn fx:id="tcLastName" minWidth="0.0" prefWidth="102.0" resizable="false" text="Apellidos" />
+                  <TableColumn fx:id="tcId" minWidth="0.0" prefWidth="126.0" resizable="false" text="Identificación" />
+                  <TableColumn fx:id="tcUser" minWidth="0.0" prefWidth="117.0" resizable="false" text="Usuario" />
               </columns>
             </TableView>
             <Label layoutX="488.0" layoutY="5.0" text="Nombre:" textFill="#dad57c">
