@@ -72,7 +72,6 @@ public class Product {
 		this.price = price;
 	}
 
-<<<<<<< HEAD
 	public Modifiers getUsersCreators() {
 		return usersCreators;
 	}
@@ -81,11 +80,9 @@ public class Product {
 		this.usersCreators = usersCreators;
 	}
 
-=======
 	public ProductType getProductType() {
 		return productType;
 	}
->>>>>>> 825e66622e601fd7aebc055676ed43cd4e8463d5
 
 	public void setProductType(ProductType productType) {
 		this.productType = productType;
