@@ -36,6 +36,33 @@ import model.StateOrder;
 import model.User;
 
 public class LaCasaDoradaGUI {
+	
+	@FXML
+    private ImageView imageBannerListEmployee;
+
+    @FXML
+    private ImageView imageWallListEmployee;
+
+    @FXML
+    private TableView<Employee> tvEmployee;
+
+    @FXML
+    private TableColumn<Employee, String> tcNameEmployee;
+
+    @FXML
+    private TableColumn<Employee, String> tcLastNameEmployee;
+
+    @FXML
+    private TableColumn<Employee, String> tcIdEmployee;
+
+    @FXML
+    private TextField updateNameEmployee;
+
+    @FXML
+    private TextField updateLastNameEmployee;
+
+    @FXML
+    private TextField updateIdEmployee;
 
 	@FXML
 	private ImageView imageBannerClient;
@@ -300,7 +327,8 @@ public class LaCasaDoradaGUI {
 	public static ObservableList<PreOrder> observableList;
 	public static ObservableList<Ingredient> listIngredients;
 	public static ObservableList<Client> listClient;
-
+	public static ObservableList<Employee> listEmployee;
+	
 	public LaCasaDoradaGUI(LaCasaDorada laCasaDorada) {
 		this.laCasaDorada = laCasaDorada;
 	}
@@ -327,6 +355,16 @@ public class LaCasaDoradaGUI {
 		tcAddressClient.setCellValueFactory(new PropertyValueFactory<Client,String>("Address"));
 		tcTelephoneClient.setCellValueFactory(new PropertyValueFactory<Client,String>("Telephone"));
 		tcObsClient.setCellValueFactory(new PropertyValueFactory<Client,String>("FieldOfObservations"));
+	}
+	
+	public void inicializateTableViewEmployee() {
+
+		listEmployee = FXCollections.observableArrayList(laCasaDorada.getEmployee());
+
+		tvEmployee.setItems(listEmployee);
+		tcNameEmployee.setCellValueFactory(new PropertyValueFactory<Employee,String>("Name"));
+		tcLastNameEmployee.setCellValueFactory(new PropertyValueFactory<Employee,String>("LastName"));
+		tcIdEmployee.setCellValueFactory(new PropertyValueFactory<Employee,String>("Id"));
 	}
 
 	@FXML
@@ -1384,5 +1422,78 @@ public class LaCasaDoradaGUI {
 		updateAddressClient.setText(address);
 		updateTelephoneClient.setText(telephone);
 		updateObsClient.setText(obsClient);
+	}
+	
+	@FXML
+	public void listEmployee(ActionEvent event) throws IOException {
+
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("listEmployee-pane.fxml"));
+
+		loader.setController(this);
+		Parent load = loader.load();
+		mainPane.setCenter(load);
+
+		mainPane.getChildren().clear();
+		mainPane.setTop(load);
+
+		Image image = new Image("/images/Banner.jpg");
+		imageWallListEmployee.setImage(image);
+		Image image2 = new Image("/images/BannerCasaDorada.jpg");
+		imageBannerListEmployee.setImage(image2);
+
+		inicializateTableViewEmployee();
+	}
+	
+	@FXML
+	public void modifyEmployee(ActionEvent event) {
+
+		if(tvEmployee.getSelectionModel().isEmpty()) {
+
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("ERROR");
+			alert.setHeaderText("No se pudo actualizar el usuario");
+			alert.setContentText("Debe seleccionar uno de la lista");
+			alert.showAndWait();
+		}
+		else {
+
+			String name = listEmployee.get(tvEmployee.getSelectionModel().getSelectedIndex()).getName();
+			String lastName = listEmployee.get(tvEmployee.getSelectionModel().getSelectedIndex()).getLastName();
+			String id = listEmployee.get(tvEmployee.getSelectionModel().getSelectedIndex()).getId();
+
+			Employee employee= laCasaDorada.findObjEmployee(id);
+
+			if(!updateNameEmployee.getText().isEmpty() && !updateNameEmployee.getText().equals(name)) {
+				name = updateNameEmployee.getText();
+			}
+			if(!updateLastNameEmployee.getText().isEmpty() && !updateLastNameEmployee.getText().equals(lastName)) {
+				lastName = updateLastNameEmployee.getText();
+			}
+			if(!updateIdEmployee.getText().isEmpty() && !updateIdEmployee.getText().equals(id)) {
+				id = updateIdEmployee.getText();
+			}
+
+			employee.setName(name);
+			employee.setLastName(lastName);
+			employee.setId(id);
+
+			listEmployee.set(tvEmployee.getSelectionModel().getSelectedIndex(),new Employee(name,lastName,id,employee.getState()));
+
+			updateNameEmployee.setText("");
+			updateLastNameEmployee.setText("");
+			updateIdEmployee.setText("");
+		}
+	}
+	
+	@FXML
+	public void mouseClickedEmployee(MouseEvent event) {
+
+		String name = listEmployee.get(tvEmployee.getSelectionModel().getSelectedIndex()).getName();
+		String lastName = listEmployee.get(tvEmployee.getSelectionModel().getSelectedIndex()).getLastName();
+		String id = listEmployee.get(tvEmployee.getSelectionModel().getSelectedIndex()).getId();
+
+		updateNameEmployee.setText(name);
+		updateLastNameEmployee.setText(lastName);
+		updateIdEmployee.setText(id);
 	}
 }

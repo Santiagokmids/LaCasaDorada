@@ -305,6 +305,21 @@ public class LaCasaDorada {
 		}
 		return employee;
 	}
+	
+	public Employee findObjEmployee(String id){
+
+		Employee employee = null;
+		boolean find = false;
+
+		for (int j = 0; j < people.size() && !find; j++) {
+
+			if(people.get(j) instanceof Employee && people.get(j).getName().equalsIgnoreCase(id)) {
+				find = true;
+				employee = (Employee) people.get(j);
+			}
+		}
+		return employee;
+	}
 
 	public boolean findProduct(String name){
 
@@ -461,6 +476,20 @@ public class LaCasaDorada {
 			}
 		}
 		return clients;
+	}
+	
+	public ArrayList<Employee> getEmployee(){
+
+		ArrayList<Employee> employee = new ArrayList<>();
+
+		for (int j = 0; j < people.size(); j++) {
+
+			if(people.get(j) instanceof Employee ) {
+
+				employee.add((Employee)people.get(j));
+			}
+		}
+		return employee;
 	}
 
 	public User findUser(String name, String lastName, String id, String userName) {
