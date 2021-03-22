@@ -10,6 +10,7 @@ public class Product {
 	private ArrayList<Ingredient> ingredients;
 	private ProductType productType;
 	private Double price;
+	private State state;
 
 	//Relations
 	private Size sizes;
@@ -22,7 +23,7 @@ public class Product {
 	 * @param usersCreators 
 	 * @param ingredientType
 	 */
-	public Product(String name, ArrayList<Ingredient> ingredients, ProductType productType, Size sizes, double price, Modifiers usersCreators) {
+	public Product(String name, ArrayList<Ingredient> ingredients, ProductType productType, Size sizes, double price, Modifiers usersCreators, State state) {
 
 		this.name = name;
 		this.ingredients = ingredients;
@@ -30,6 +31,7 @@ public class Product {
 		this.sizes = sizes; 
 		this.price = price;
 		this.usersCreators = usersCreators;
+		this.state = state;
 	}
 
 	public String getName() {
@@ -102,5 +104,13 @@ public class Product {
 	
 	public String getNameSize() {
 		return sizes.getSize();
+	}
+
+	public State getState() {
+		return state;
+	}
+
+	public void setState(State state) {
+		this.state = state;
 	}
 }

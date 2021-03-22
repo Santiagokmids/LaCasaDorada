@@ -683,6 +683,19 @@ public class LaCasaDorada {
 			}
 		}
 	}
+	
+	public void disableIngredient(Ingredient ingredientDisable){
+
+		boolean verific = false;
+
+		for (int j = 0; j <ingredient.size() && !verific; j++) {
+
+			if(ingredient.get(j) == ingredientDisable) {
+				verific = true;
+				ingredient.set;
+			}
+		}
+	}
 
 	public ArrayList<User> getUsers(){
 

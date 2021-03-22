@@ -5,6 +5,7 @@ public class Ingredient {
 	//Attributes
 	
 	private String name;
+	private State state;
 
 	/**
 	 * <b>name: <>
@@ -14,9 +15,10 @@ public class Ingredient {
 	//Relations
 	private Modifiers usersCreators;
 	
-	public Ingredient(String name, Modifiers usersCreators) {
+	public Ingredient(String name, Modifiers usersCreators, State state) {
 		this.usersCreators = usersCreators;
 		this.name = name;
+		this.state = state;
 	}
 
 	public String getName() {
@@ -33,5 +35,13 @@ public class Ingredient {
 
 	public void setUsersCreators(Modifiers usersCreators) {
 		this.usersCreators = usersCreators;
+	}
+
+	public State getState() {
+		return state;
+	}
+
+	public void setState(State state) {
+		this.state = state;
 	}
 }
