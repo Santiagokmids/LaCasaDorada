@@ -63,7 +63,7 @@ public class Order {
 	
 	public String getDateDay() {
 		@SuppressWarnings("deprecation")
-		String message = date.getDate()+"/"+date.getMonth()+"/"+date.getYear()+" - "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
+		String message = date.getDate()+"/"+(date.getMonth() + 1)+"/"+(date.getYear() - 100)+" - "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
 		return message;
 	}
 	

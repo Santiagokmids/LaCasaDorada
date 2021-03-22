@@ -22,14 +22,14 @@
             <ImageView fx:id="imageWallListOrder" fitHeight="751.0" fitWidth="831.0" layoutY="6.0" opacity="0.09" pickOnBounds="true" preserveRatio="true" />
             <TableView fx:id="tvListOrders" onMouseClicked="#mouseClickedListOrder" prefHeight="566.0" prefWidth="566.0">
                <columns>
-                  <TableColumn fx:id="nameOrder" prefWidth="86.0" resizable="false" text="Código" />
-                  <TableColumn fx:id="estateOrder" editable="false" minWidth="0.0" prefWidth="77.0" resizable="false" text="Estado" />
-                  <TableColumn fx:id="productOrder" editable="false" minWidth="0.0" prefWidth="81.0" resizable="false" text="Productos" />
-                  <TableColumn fx:id="amountOrder" editable="false" minWidth="0.0" prefWidth="65.0" resizable="false" text="Cantidad" />
-                  <TableColumn fx:id="clientOrder" editable="false" minWidth="0.0" prefWidth="79.0" resizable="false" text="Cliente" />
-                  <TableColumn fx:id="employeeOrder" editable="false" minWidth="0.0" prefWidth="85.0" resizable="false" text="Empleado" />
-                  <TableColumn fx:id="dateOrder" editable="false" minWidth="0.0" prefWidth="93.0" resizable="false" text="Creación" />
-                  <TableColumn fx:id="obsOrdersList" editable="false" minWidth="0.0" prefWidth="55.0" resizable="false" text="Observaciones" />
+                  <TableColumn fx:id="nameOrder" prefWidth="74.0" resizable="false" text="Código" />
+                  <TableColumn fx:id="estateOrder" editable="false" minWidth="0.0" prefWidth="59.0" resizable="false" text="Estado" />
+                  <TableColumn fx:id="productOrder" editable="false" minWidth="0.0" prefWidth="84.0" resizable="false" text="Productos" />
+                  <TableColumn fx:id="amountOrder" editable="false" minWidth="0.0" prefWidth="73.0" resizable="false" text="Cantidad" />
+                  <TableColumn fx:id="clientOrder" editable="false" minWidth="0.0" prefWidth="77.0" resizable="false" text="Cliente" />
+                  <TableColumn fx:id="employeeOrder" editable="false" minWidth="0.0" prefWidth="86.0" resizable="false" text="Empleado" />
+                  <TableColumn fx:id="dateOrder" editable="false" minWidth="0.0" prefWidth="112.0" resizable="false" text="Creación" />
+                  <TableColumn fx:id="obsOrdersList" editable="false" minWidth="0.0" prefWidth="56.0" resizable="false" text="Observaciones" />
                </columns>
             </TableView>
             <Label layoutX="577.0" layoutY="14.0" text="Productos:" textFill="#dad57c">
@@ -44,7 +44,7 @@
                </font>
             </Label>
             <TextField fx:id="nameClientList" layoutX="577.0" layoutY="260.0" prefHeight="25.0" prefWidth="240.0" />
-            <Button layoutX="605.0" layoutY="451.0" mnemonicParsing="false" onAction="#modifyListProduct" prefHeight="53.0" prefWidth="179.0" style="-fx-background-color: #dad57c; -fx-background-radius: 22;" text="Modificar">
+            <Button layoutX="605.0" layoutY="451.0" mnemonicParsing="false" onAction="#modifyListOrders" prefHeight="53.0" prefWidth="179.0" style="-fx-background-color: #dad57c; -fx-background-radius: 22;" text="Modificar">
                <font>
                   <Font name="Franklin Gothic Demi" size="18.0" />
                </font>
@@ -65,7 +65,7 @@
                   <Font name="Berlin Sans FB" size="18.0" />
                </font>
             </Label>
-            <ComboBox fx:id="stateOrderList" layoutX="576.0" layoutY="194.0" prefHeight="23.0" prefWidth="236.0" style="-fx-background-color: white;" />
+            <ComboBox fx:id="stateOrderList" layoutX="576.0" layoutY="194.0" prefHeight="30.0" prefWidth="236.0" style="-fx-background-color: white;" />
             <Label layoutX="578.0" layoutY="297.0" text="Empleado:" textFill="#dad57c">
                <font>
                   <Font name="Berlin Sans FB" size="18.0" />

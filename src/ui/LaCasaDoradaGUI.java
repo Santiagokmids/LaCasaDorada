@@ -1157,7 +1157,7 @@ public class LaCasaDoradaGUI {
 
 		int amounts = 0;
 
-		if(!amount.getText().equals("")) {
+		if(!amount.getText().equals("") && amount.getText().equals("0")) {
 			amounts = Integer.parseInt(amount.getText());
 
 		}else {
@@ -1681,8 +1681,8 @@ public class LaCasaDoradaGUI {
 		Image image2 = new Image("/images/BannerCasaDorada.jpg");
 		imageBannerListOrder.setImage(image2);
 
-		stateOrder.setPromptText("Seleccione el estado del pedido");
-		stateOrder.getItems().addAll(StateOrder.SOLICITADO,StateOrder.EN_PROCESO,StateOrder.ENVIADO,StateOrder.ENTREGADO,StateOrder.CANCELADO);
+		stateOrderList.setPromptText("Seleccione el estado del pedido");
+		stateOrderList.getItems().addAll("SOLICITADO","EN PROCESO","ENVIADO","ENTREGADO","CANCELADO");
 
 		inicializateTableViewOrders();
 
@@ -1766,12 +1766,6 @@ public class LaCasaDoradaGUI {
 
 			Order order = laCasaDorada.findOrder(code);
 
-
-			if(!updateNameOrder.getText().isEmpty() && !updateNameOrder.getText().equals(code)) {
-				code = updateNameOrder.getText();
-				order.getUsersCreators().setLastModifier(usersModifiers.getCreateObject());
-				verify = true;
-			}
 
 			if(!stateOrderList.getValue().equals(state)) {
 
@@ -2049,7 +2043,7 @@ public class LaCasaDoradaGUI {
 		String productMessage = productsToMessage(products);
 		String amountMessage = amountsToMessage(amounts);
 
-		estateOrder.setText(state);
+		stateOrderList.setValue(state);
 		updateProductsOrder.setText(productMessage);
 		updateAmountOrder.setText(amountMessage);
 		nameClientList.setText(client);
