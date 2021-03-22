@@ -15,10 +15,10 @@ public class Ingredient {
 	//Relations
 	private Modifiers usersCreators;
 	
-	public Ingredient(String name, Modifiers usersCreators, State state) {
+	public Ingredient(String name, Modifiers usersCreators) {
 		this.usersCreators = usersCreators;
 		this.name = name;
-		this.state = state;
+		this.state = State.ENABLE;
 	}
 
 	public String getName() {

@@ -35,7 +35,6 @@ import model.PreOrder;
 import model.Product;
 import model.ProductType;
 import model.Size;
-import model.State;
 import model.StateOrder;
 import model.User;
 
@@ -714,7 +713,7 @@ public class LaCasaDoradaGUI {
 
 					User user = laCasaDorada.findUser(name.getText(), lastName.getText(), id.getText(), nameUser.getText());
 					usersModifiers = laCasaDorada.create(user, user);
-					laCasaDorada.create(name.getText(), lastName.getText(), id.getText(), nameUser.getText(), password.getText(), State.ENABLE,usersModifiers);
+					laCasaDorada.create(name.getText(), lastName.getText(), id.getText(), nameUser.getText(), password.getText(),usersModifiers);
 
 					loadLogin();
 
@@ -758,7 +757,7 @@ public class LaCasaDoradaGUI {
 					alerts.setContentText("Se ha registrado a "+nameUser.getText()+" exitosamente");
 					alerts.showAndWait();
 
-					laCasaDorada.create(name.getText(), lastName.getText(), id.getText(), nameUser.getText(), password.getText(), State.ENABLE, usersModifiers);
+					laCasaDorada.create(name.getText(), lastName.getText(), id.getText(), nameUser.getText(), password.getText(), usersModifiers);
 					mainMenu();
 
 				}else {
@@ -864,7 +863,7 @@ public class LaCasaDoradaGUI {
 				alerts.setContentText("Se ha registrado a "+nameClient.getText()+" exitosamente");
 				alerts.showAndWait();
 
-				laCasaDorada.create(nameClient.getText(), lastNameClient.getText(), idClient.getText(), State.ENABLE,
+				laCasaDorada.create(nameClient.getText(), lastNameClient.getText(), idClient.getText(),
 						adressClient.getText(), telephoneClient.getText(), fieldObservations.getText(),usersModifiers);
 				mainMenu();
 
@@ -884,7 +883,7 @@ public class LaCasaDoradaGUI {
 			alerts.setContentText("Se ha registrado a "+nameClient.getText()+" exitosamente");
 			alerts.showAndWait();
 
-			laCasaDorada.create(nameClient.getText(), lastNameClient.getText(), idClient.getText(), State.ENABLE,
+			laCasaDorada.create(nameClient.getText(), lastNameClient.getText(), idClient.getText(),
 					adressClient.getText(), telephoneClient.getText(), fieldObservations.getText(), usersModifiers);
 			mainMenu();
 		}
@@ -969,7 +968,7 @@ public class LaCasaDoradaGUI {
 				alerts.setContentText("Se ha registrado a "+nameEmployee.getText()+" exitosamente");
 				alerts.showAndWait();
 
-				laCasaDorada.create(nameEmployee.getText(),lastNameEmployee.getText(),idEmployee.getText(),State.ENABLE, usersModifiers);
+				laCasaDorada.create(nameEmployee.getText(),lastNameEmployee.getText(),idEmployee.getText(), usersModifiers);
 
 				mainMenu();
 			}else if(verific) {
@@ -1573,7 +1572,7 @@ public class LaCasaDoradaGUI {
 			}
 
 
-			listUsers.set(tvUser.getSelectionModel().getSelectedIndex(),new User(name,lastName,id,userName,user.getPassword(),user.getState(),user.getUsersCreators()));
+			listUsers.set(tvUser.getSelectionModel().getSelectedIndex(),new User(name,lastName,id,userName,user.getPassword(),user.getUsersCreators()));
 
 			updateName.setText("");
 			updateLasName.setText("");
@@ -1671,7 +1670,7 @@ public class LaCasaDoradaGUI {
 			client.setId(id);
 			client.setAddress(address);
 
-			listClient.set(tvClient.getSelectionModel().getSelectedIndex(),new Client(name,lastName,id,client.getState(),address,telephone,obsClient,client.getUsersCreators()));
+			listClient.set(tvClient.getSelectionModel().getSelectedIndex(),new Client(name,lastName,id,address,telephone,obsClient,client.getUsersCreators()));
 
 			updateNameClient.setText("");
 			updateLasNameClient.setText("");
@@ -1756,7 +1755,7 @@ public class LaCasaDoradaGUI {
 			employee.setLastName(lastName);
 			employee.setId(id);
 
-			listEmployee.set(tvEmployee.getSelectionModel().getSelectedIndex(),new Employee(name,lastName,id,employee.getState(),employee.getUsersCreators()));
+			listEmployee.set(tvEmployee.getSelectionModel().getSelectedIndex(),new Employee(name,lastName,id,employee.getUsersCreators()));
 
 			updateNameEmployee.setText("");
 			updateLastNameEmployee.setText("");
@@ -2978,7 +2977,7 @@ public class LaCasaDoradaGUI {
 	}
 	
 	@FXML
-    void disabledIngredient(ActionEvent event) {
+    void disabledIngredient(ActionEvent event) throws IOException {
 		
 		if(!nameDisabledIngredient.getText().isEmpty()) {
 			

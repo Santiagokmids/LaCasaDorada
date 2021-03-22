@@ -12,9 +12,9 @@ public class Client extends People{
 	private String telephone;
 	private String fieldOfObservations;
 
-	public Client(String name, String lastName, String id, State state, String address, String telephone, String fieldOfObservations, Modifiers modifiers) {
+	public Client(String name, String lastName, String id, String address, String telephone, String fieldOfObservations, Modifiers modifiers) {
 		
-		super(name, lastName, id, state, modifiers);
+		super(name, lastName, id, modifiers);
 		this.address = address;
 		this.telephone = telephone;
 		this.fieldOfObservations = fieldOfObservations;
