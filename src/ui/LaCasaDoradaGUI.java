@@ -2240,8 +2240,6 @@ public class LaCasaDoradaGUI {
 					alert.showAndWait();
 				}
 				else {
-					
-					laCasaDorada.deleteClient(client);
 
 					Alert alerts = new Alert(AlertType.INFORMATION);
 					alerts.setTitle("EXCELENTE");
@@ -2483,6 +2481,7 @@ public class LaCasaDoradaGUI {
 					alert.showAndWait();
 
 					if(order.getState() == StateOrder.CANCELADO || order.getState() == StateOrder.ENTREGADO) {
+						
 						laCasaDorada.deleteProduct(product);
 
 						Alert alerts = new Alert(AlertType.INFORMATION);
