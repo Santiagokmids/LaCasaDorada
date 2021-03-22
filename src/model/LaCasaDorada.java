@@ -267,7 +267,7 @@ public class LaCasaDorada {
 
 		if(state.equalsIgnoreCase("SOLICITADO")) {
 
-			if(state2.equalsIgnoreCase("EN_PROCESO")) {
+			if(state2.equalsIgnoreCase("EN PROCESO")) {
 				verific = enProceso;
 			}
 			else if(state2.equalsIgnoreCase("ENVIADO")) {
@@ -281,7 +281,7 @@ public class LaCasaDorada {
 			}
 		} 
 
-		else if(state.equalsIgnoreCase("EN_PROCESO")) {
+		else if(state.equalsIgnoreCase("EN PROCESO")) {
 
 			if(state2.equalsIgnoreCase("ENVIADO")) {
 				verific = enviado;
