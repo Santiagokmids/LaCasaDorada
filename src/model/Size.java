@@ -4,12 +4,14 @@ public class Size {
 	
 	//Attributes
 	private String size;
+	private State state;
 	
 	//Relations
 	private Modifiers usersCreators;
 
 	public Size(String size) {
 		this.size = size;
+		this.state = State.ENABLE;
 	}
 	
 	public String getSize() {
@@ -26,5 +28,13 @@ public class Size {
 
 	public void setUsersCreators(Modifiers usersCreators) {
 		this.usersCreators = usersCreators;
+	}
+
+	public State getState() {
+		return state;
+	}
+
+	public void setState(State state) {
+		this.state = state;
 	}
 }
