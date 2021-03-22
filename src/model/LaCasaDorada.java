@@ -350,7 +350,7 @@ public class LaCasaDorada {
 		boolean find = false;
 
 		for (int j = 0; j < people.size() && !find; j++) {
-			
+
 			if(people.get(j) instanceof Client) {
 				Client peopleClient = (Client)people.get(j);
 				if(peopleClient.getName().equalsIgnoreCase(name) && peopleClient.getLastName().equalsIgnoreCase(lastName) && peopleClient.getTelephone().equals(phone)) {
@@ -361,7 +361,7 @@ public class LaCasaDorada {
 		}
 		return client;
 	}
-	
+
 	public Client findObjClient(String name, String lastName){
 
 		Client client = null;
@@ -507,7 +507,7 @@ public class LaCasaDorada {
 		}
 		return type;
 	}
-	
+
 	public Product findTypeOfProduct(ProductType productType){
 
 		boolean find = false;
@@ -522,7 +522,7 @@ public class LaCasaDorada {
 		}
 		return type;
 	}
-	
+
 	public Size findSize(String size){
 
 		boolean find = false;
@@ -609,6 +609,21 @@ public class LaCasaDorada {
 		}
 	}
 
+
+	public void deleteOrder(Order orders) {
+
+		boolean verific = false;
+
+		for (int i = 0; i < order.size() && !verific; i++) {
+
+			if(order.get(i) == orders) {
+				verific = true;
+				order.remove(i);
+			}
+		}
+	}
+
+
 	public void deleteProduct(Product productToDelete) {
 
 		boolean verific = false;
@@ -620,7 +635,7 @@ public class LaCasaDorada {
 			}
 		}
 	}
-	
+
 	public void deleteProductType(ProductType productTypeDelete){
 
 		boolean verific = false;
@@ -633,7 +648,7 @@ public class LaCasaDorada {
 			}
 		}
 	}
-	
+
 	public void deleteIngredient(Ingredient ingredientDelete){
 
 		boolean verific = false;
@@ -646,7 +661,7 @@ public class LaCasaDorada {
 			}
 		}
 	}
-	
+
 	public void disableIngredient(Ingredient ingredientDisable){
 
 		boolean verific = false;
@@ -767,7 +782,7 @@ public class LaCasaDorada {
 		}
 		return clienInOrder;
 	}
-	
+
 	public Order findUserInOrder(User user) {
 
 		Order userInOrder = null;
@@ -781,7 +796,7 @@ public class LaCasaDorada {
 		}
 		return userInOrder;
 	}
-	
+
 	public Product findUserInProduct(User user) {
 
 		Product userInProduct = null;
@@ -794,7 +809,7 @@ public class LaCasaDorada {
 		}
 		return userInProduct;
 	}
-	
+
 	public Ingredient findUserInIngredient(User user) {
 
 		Ingredient userInIngredient = null;
@@ -807,7 +822,7 @@ public class LaCasaDorada {
 		}
 		return userInIngredient;
 	}
-	
+
 	public Size findUserInSize(User user) {
 
 		Size userInSize = null;
@@ -820,7 +835,7 @@ public class LaCasaDorada {
 		}
 		return userInSize;
 	}
-	
+
 	public ProductType findUserInProductType(User user) {
 
 		ProductType userInProductType = null;
@@ -833,7 +848,7 @@ public class LaCasaDorada {
 		}
 		return userInProductType;
 	}
-	
+
 	public Product findIngredientInProduct(Ingredient ingredientToFind) {
 
 		Product ingredientInProduct = null;
@@ -883,7 +898,7 @@ public class LaCasaDorada {
 			}
 		}
 	}
-	
+
 	public void saveData() throws IOException {
 
 		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(SAVE_PATH_FILE));
