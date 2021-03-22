@@ -40,6 +40,15 @@ import model.User;
 public class LaCasaDoradaGUI {
 	
 	@FXML
+    private ImageView imageDeleteWallProduct;
+
+    @FXML
+    private TextField nameDeleteProduct;
+
+    @FXML
+    private ImageView imageDeleteBannerProduct;
+	
+	@FXML
     private ImageView imageDeleteWallUser;
 
     @FXML
@@ -1916,7 +1925,7 @@ public class LaCasaDoradaGUI {
 
 		ArrayList<Ingredient> listIngredient = new ArrayList<>();
 
-		String[] partsIngredients = ingredient.split(";");
+		String[] partsIngredients = ingredient.split("-");
 
 		boolean verific = false;
 
@@ -2232,6 +2241,62 @@ public class LaCasaDoradaGUI {
 			
 			if(user != null) {
 				laCasaDorada.deleteUser(user);
+				
+				Alert alerts = new Alert(AlertType.INFORMATION);
+				alerts.setTitle("EXCELENTE");
+				alerts.setHeaderText("Se ha eliminado exitosamente.");
+				alerts.setContentText("Se ha eliminado el usuario "+nameDeleteUser.getText()+" exitosamente");
+				alerts.showAndWait();
+				
+				mainMenu();
+			}
+			else {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("ERROR");
+				alert.setHeaderText("No se pudo eliminar el usuario");
+				alert.setContentText("No existe un usuario con ese nombre de usuario y/o número de identificación");
+				alert.showAndWait();
+			}
+		}
+		else {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("ERROR");
+			alert.setHeaderText("No se pudo eliminar el usuario");
+			alert.setContentText("Debe llenar los campos para eliminar el usuario");
+			alert.showAndWait();
+		}
+    }
+	
+	@FXML
+	public void loadDeletedProduct() throws IOException {
+		
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("deleteUser-pane.fxml"));
+		loader.setController(this);
+		
+		Parent load = loader.load();
+		mainPane.setCenter(load);
+
+		mainPane.getChildren().clear();
+		mainPane.setTop(load);
+		Image image = new Image("/images/Banner.jpg");
+		imageDeleteWallUser.setImage(image);
+		Image image2 = new Image("/images/BannerCasaDorada.jpg");
+		imageDeleteBannerUser.setImage(image2);
+	}
+	
+	@FXML
+    public void deleteProduct(ActionEvent event) throws IOException {
+		
+		if(!nameDeleteProduct.getText().isEmpty() && !idDeleteUser.getText().isEmpty()) {
+			
+			Product product = laCasaDorada.findObjectProduct(nameDeleteProduct.getText());
+			
+			if(product != null) {
+				
+				if() {
+					
+				}
+				laCasaDorada.deleteProduct(product);
 				
 				Alert alerts = new Alert(AlertType.INFORMATION);
 				alerts.setTitle("EXCELENTE");
