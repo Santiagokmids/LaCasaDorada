@@ -44,7 +44,7 @@ public class LaCasaDorada {
 	//create client
 	public void create(String name, String lastName, String id, State state, String address, String telephone, String fieldObservations,
 			Modifiers modifiers) {
-		
+
 		Client client = new Client(name, lastName, id, state, address, telephone, fieldObservations, modifiers);
 		people.add(client);
 	}
@@ -143,7 +143,7 @@ public class LaCasaDorada {
 		return state;
 
 	}
-	
+
 	//Create preorder
 	public Modifiers create(User creator, User modifier) {
 
@@ -268,7 +268,7 @@ public class LaCasaDorada {
 		}
 		return find;
 	}
-	
+
 	public Client findObjClient(String name, String lastName){
 
 		Client client = null;
@@ -283,7 +283,7 @@ public class LaCasaDorada {
 		}
 		return client;
 	}
-	
+
 	public Client findObjClient(String name){
 
 		Client client = null;
@@ -313,7 +313,7 @@ public class LaCasaDorada {
 		}
 		return employee;
 	}
-	
+
 	public Employee findObjEmployee(String id){
 
 		Employee employee = null;
@@ -458,6 +458,30 @@ public class LaCasaDorada {
 		return find;
 	}
 
+	public void deleteClient(Client client) {
+
+		boolean verific = false;
+
+		for (int i = 0; i < people.size() && !verific; i++) {
+			if(people.get(i) instanceof Client && people.get(i).getName().equals(client.getName()) && 				people.get(i).getLastName().equals(client.getLastName())) {
+				verific = true;
+				people.remove(i);
+			}
+		}
+	}
+	
+	public void deleteEmployee(Employee employee) {
+
+		boolean verific = false;
+
+		for (int i = 0; i < people.size() && !verific; i++) {
+			if(people.get(i) instanceof Employee && people.get(i).getId().equals(employee.getId())) {
+				verific = true;
+				people.remove(i);
+			}
+		}
+	}
+
 	public ArrayList<User> getUsers(){
 
 		ArrayList<User> users = new ArrayList<>();
@@ -485,7 +509,7 @@ public class LaCasaDorada {
 		}
 		return clients;
 	}
-	
+
 	public ArrayList<Employee> getEmployee(){
 
 		ArrayList<Employee> employee = new ArrayList<>();
@@ -510,7 +534,7 @@ public class LaCasaDorada {
 			if(people.get(i) instanceof User) {
 
 				user = (User)people.get(i);
-				if(user.getName().equalsIgnoreCase(name) && user.getLastName().equalsIgnoreCase(lastName) && user.getId().equals(id) && user.getUserName().equalsIgnoreCase(userName)) {
+				if(user.getName().equalsIgnoreCase(name) && user.getLastName().equalsIgnoreCase(lastName) && user.getId().equals(id) && 					user.getUserName().equalsIgnoreCase(userName)) {
 					validation = user;
 				}
 			}
@@ -534,9 +558,9 @@ public class LaCasaDorada {
 			else if(parts[5] == (State.DISABLED).toString()) {
 				state = State.DISABLED;
 			}
-			
+
 			Client client = findObjClient(parts[0]);
-			
+
 			create(parts[0],parts[1],parts[2],state,parts[4],parts[5],parts[6],client.getUsersCreators());
 			line = br.readLine();
 		}
