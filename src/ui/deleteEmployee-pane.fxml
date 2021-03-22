@@ -18,7 +18,7 @@
                   <Font name="Bernard MT Condensed" size="36.0" />
                </font>
             </Label>
-            <Button layoutX="236.0" layoutY="304.0" mnemonicParsing="false" onAction="#deleteEmployee" prefHeight="53.0" prefWidth="179.0" style="-fx-background-color: #dad57c; -fx-background-radius: 22;" text="Eliminar Cliente">
+            <Button layoutX="236.0" layoutY="304.0" mnemonicParsing="false" onAction="#deleteEmployee" prefHeight="53.0" prefWidth="179.0" style="-fx-background-color: #dad57c; -fx-background-radius: 22;" text="Eliminar Empleado">
                <font>
                   <Font name="Franklin Gothic Demi" size="18.0" />
                </font>
