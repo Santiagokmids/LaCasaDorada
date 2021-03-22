@@ -1859,13 +1859,12 @@ public class LaCasaDoradaGUI {
 						alert.showAndWait();
 					}
 					else {
-
+						Alert alert1 = new Alert(AlertType.INFORMATION);
+						alert1.setTitle("EXCELENT");
+						alert1.setHeaderText("Se ha actualizado la información");
+						alert1.setContentText(null);
+						alert1.showAndWait();
 					}
-					Alert alert1 = new Alert(AlertType.INFORMATION);
-					alert1.setTitle("EXCELENT");
-					alert1.setHeaderText("Se ha actualizado la información");
-					alert1.setContentText(null);
-					alert1.showAndWait();
 
 				}
 
