@@ -60,6 +60,52 @@ public class Order {
 	public Date getDate() {
 		return date;
 	}
+	
+	public String getDateDay() {
+		@SuppressWarnings("deprecation")
+		String message = date.getDate()+"/"+date.getMonth()+"/"+date.getYear()+" - "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
+		return message;
+	}
+	
+	public String getNameProduct() {
+		String message = "";
+		
+		for (int i = 0; i < getProducts().size(); i++) {
+			
+			if(i != getProducts().size() - 1) {
+				message += getProducts().get(i).getName()+"\n";
+				
+			}else {
+				message += getProducts().get(i).getName();
+			}
+		}
+		
+		return message;
+	}
+	
+	public String getAmountProduct() {
+		String message = "";
+		
+		for (int i = 0; i < getAmount().size(); i++) {
+			
+			if(i != getAmount().size() - 1) {
+				message += getAmount().get(i)+"\n";
+				
+			}else {
+				message += getAmount().get(i);
+			}
+		}
+		
+		return message;
+	}
+	
+	public String getNameClient() {
+		return orderClient.getName();
+	}
+	
+	public String getNameEmployee() {
+		return orderEmployee.getName();
+	}
 
 	public void setDate(Date date) {
 		this.date = date;

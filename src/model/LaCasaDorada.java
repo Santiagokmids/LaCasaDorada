@@ -197,6 +197,22 @@ public class LaCasaDorada {
 		return find;
 	}
 
+	public Order findOrder(String code){
+
+		boolean find = false;
+		Order orders = null;
+
+		for (int j = 0; j < order.size() && !find; j++) {
+
+			if(code.equalsIgnoreCase(order.get(j).getCode())) {
+				find = true;
+				orders = order.get(j);
+			}
+		}
+		return orders;
+	}
+
+
 	public boolean findOrders(String code){
 
 		boolean find = false;
@@ -227,6 +243,84 @@ public class LaCasaDorada {
 		return find;
 	}
 
+	public int searchState(String state, String state2) {
+
+		int verific = -1;
+
+		int enProceso = 2, enviado = 3, entregado = 4, cancelado = 5;
+
+		if(state.equalsIgnoreCase("SOLICITADO")) {
+
+			if(state2.equalsIgnoreCase("EN_PROCESO")) {
+				verific = enProceso;
+			}
+			else if(state2.equalsIgnoreCase("ENVIADO")) {
+				verific = enviado;
+			}
+			else if(state2.equalsIgnoreCase("ENTREGADO")) {
+				verific = entregado;
+			}
+			else if(state2.equalsIgnoreCase("CANCELADO")) {
+				verific = cancelado;
+			}
+		} 
+
+		else if(state.equalsIgnoreCase("EN_PROCESO")) {
+
+			if(state2.equalsIgnoreCase("ENVIADO")) {
+				verific = enviado;
+			}
+			else if(state2.equalsIgnoreCase("ENTREGADO")) {
+				verific = entregado;
+			}
+			else if(state2.equalsIgnoreCase("CANCELADO")) {
+				verific = cancelado;
+			}
+		}
+
+		else if(state.equalsIgnoreCase("ENVIADO")) {
+
+			if(state2.equalsIgnoreCase("ENTREGADO")) {
+				verific = entregado;
+			}
+			else if(state2.equalsIgnoreCase("CANCELADO")) {
+				verific = cancelado;
+			}
+		}
+
+		else if(state.equalsIgnoreCase("ENTREGADO")) {
+
+			if(state2.equalsIgnoreCase("CANCELADO")) {
+				verific = cancelado;
+			}
+		}
+
+		return verific;
+	}
+
+	public StateOrder findState(String state) {
+
+		StateOrder stateOrder = null;
+
+		if(state.equalsIgnoreCase("SOLICITADO")) {
+			stateOrder = StateOrder.SOLICITADO;
+		}	
+		else if(state.equalsIgnoreCase("EN_PROCESO")) {
+			stateOrder = StateOrder.EN_PROCESO;
+		}
+		else if(state.equalsIgnoreCase("ENVIADO")) {
+			stateOrder = StateOrder.ENVIADO;
+		}
+		else if(state.equalsIgnoreCase("ENTREGADO")) {
+			stateOrder = StateOrder.ENTREGADO;
+		}
+		else if(state.equalsIgnoreCase("CANCELADO")) {
+			stateOrder = StateOrder.CANCELADO;
+		}
+		return stateOrder;
+	} 
+
+
 	public int findPosition(String idPeople){
 
 		int position = -1;
@@ -254,6 +348,8 @@ public class LaCasaDorada {
 		}
 		return find;
 	}
+
+
 
 	public boolean findClient(String name, String lastName){
 
