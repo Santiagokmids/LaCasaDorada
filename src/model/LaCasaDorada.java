@@ -488,7 +488,7 @@ public class LaCasaDorada {
 
 		for (int j = 0; j <preorder.size() && !find; j++) {
 
-			if(preorder.get(j).getProduct().getName().equalsIgnoreCase(name) && preorder.get(j).getAmount() == amount) {
+			if(preorder.get(j).getProduct().getName().equalsIgnoreCase(name) && preorder.get(j).getAmount() == 				amount) {
 				find = true;
 				preOrder = preorder.get(j);
 			}
@@ -554,6 +554,51 @@ public class LaCasaDorada {
 		return find;
 	}
 
+	public void deleteClient(Client client) {
+
+		boolean verific = false;
+
+		for (int i = 0; i < people.size() && !verific; i++) {
+			if(people.get(i) instanceof Client && people.get(i).getName().equals(client.getName()) && 				people.get(i).getLastName().equals(client.getLastName())) {
+				verific = true;
+				people.remove(i);
+			}
+		}
+	}
+	
+	public void deleteEmployee(Employee employee) {
+
+		boolean verific = false;
+
+		for (int i = 0; i < people.size() && !verific; i++) {
+			if(people.get(i) instanceof Employee && people.get(i).getId().equals(employee.getId())) {
+				verific = true;
+				people.remove(i);
+			}
+		}
+	}
+	
+	public void deleteUser(User user) {
+
+		boolean verific = false;
+		User validation = null;
+
+		for (int i = 0; i < people.size() && !verific; i++) {
+			
+			
+			
+			if(people.get(i) instanceof User) {
+				
+				validation = (User)people.get(i);
+				
+				if(validation.getUserName().equals(user.getUserName()) && 				validation.getId().equals(user.getId())) {
+					verific = true;
+					people.remove(i);
+				}
+			}
+		}
+	}
+
 	public ArrayList<User> getUsers(){
 
 		ArrayList<User> users = new ArrayList<>();
@@ -606,8 +651,28 @@ public class LaCasaDorada {
 			if(people.get(i) instanceof User) {
 
 				user = (User)people.get(i);
-				if(user.getName().equalsIgnoreCase(name) && user.getLastName().equalsIgnoreCase(lastName) && user.getId().equals(id) && user.getUserName().equalsIgnoreCase(userName)) {
+				if(user.getName().equalsIgnoreCase(name) && user.getLastName().equalsIgnoreCase(lastName) && 					user.getId().equals(id) && user.getUserName().equalsIgnoreCase(userName)) {
 					validation = user;
+					verific = true;
+				}
+			}
+		}
+		return validation;
+	}
+	
+	public User findUser(String userName, String id) {
+
+		User user = null;
+		User validation = null;
+		boolean verific = false;
+
+		for (int i = 0; i < people.size() && !verific; i++) {
+			if(people.get(i) instanceof User) {
+
+				user = (User)people.get(i);
+				if(user.getId().equals(id) && user.getUserName().equalsIgnoreCase(userName)) {
+					validation = user;
+					verific = true;
 				}
 			}
 		}

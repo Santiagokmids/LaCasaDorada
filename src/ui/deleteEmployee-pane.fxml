@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="740.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fx:id="imageDeleteWallEmployee" fitHeight="664.0" fitWidth="740.0" layoutY="-2.0" opacity="0.09" pickOnBounds="true" />
+            <Label layoutX="261.0" layoutY="92.0" text="Eliminar Empleado" textFill="#dad57c">
+               <font>
+                  <Font name="Bernard MT Condensed" size="36.0" />
+               </font>
+            </Label>
+            <Button layoutX="175.0" layoutY="304.0" mnemonicParsing="false" onAction="#deleteEmployee" prefHeight="53.0" prefWidth="179.0" style="-fx-background-color: #dad57c; -fx-background-radius: 22;" text="Eliminar Cliente">
+               <font>
+                  <Font name="Franklin Gothic Demi" size="18.0" />
+               </font>
+            </Button>
+            <Button layoutX="425.0" layoutY="304.0" mnemonicParsing="false" onAction="#mainMenu" prefHeight="53.0" prefWidth="140.0" style="-fx-background-color: #dad57c; -fx-background-radius: 22;" text="Cancelar">
+               <font>
+                  <Font name="Franklin Gothic Demi" size="18.0" />
+               </font>
+            </Button>
+            <Label layoutX="116.0" layoutY="211.0" text="No. Identificación:" textFill="#dad57c">
+               <font>
+                  <Font name="Berlin Sans FB" size="29.0" />
+               </font>
+            </Label>
+            <TextField fx:id="idDeleteEmployee" layoutX="344.0" layoutY="206.0" prefHeight="37.0" prefWidth="249.0" />
+         </children>
+      </Pane>
+   </center>
+   <top>
+      <ImageView fx:id="imageDeleteBannerEmployee" fitHeight="117.0" fitWidth="740.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+   </top>
+</BorderPane>

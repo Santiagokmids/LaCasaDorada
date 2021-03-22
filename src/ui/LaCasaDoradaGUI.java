@@ -38,6 +38,45 @@ import model.StateOrder;
 import model.User;
 
 public class LaCasaDoradaGUI {
+	
+	@FXML
+    private ImageView imageDeleteWallUser;
+
+    @FXML
+    private TextField idDeleteUser;
+
+    @FXML
+    private TextField nameDeleteUser;
+
+    @FXML
+    private ImageView imageDeleteBannerUser;
+	
+	@FXML
+    private ImageView imageDeleteWallEmployee;
+
+    @FXML
+    private TextField nameDeleteEmployee;
+
+    @FXML
+    private TextField lastNameDeleteEmployee;
+
+    @FXML
+    private TextField idDeleteEmployee;
+
+    @FXML
+    private ImageView imageDeleteBannerEmployee;
+	
+	@FXML
+    private ImageView imageDeleteWall;
+
+    @FXML
+    private TextField nameDeleteClient;
+
+    @FXML
+    private TextField lastNameDeleteClient;
+
+    @FXML
+    private ImageView imageDeleteBanner;
 
 	@FXML
 	private ImageView imageBannerListProduct;
@@ -1324,8 +1363,10 @@ public class LaCasaDoradaGUI {
 
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("listUser-pane.fxml"));
 
-		Parent load = loader.load();
+		
 		loader.setController(this);
+		
+		Parent load = loader.load();
 		mainPane.setCenter(load);
 
 		mainPane.getChildren().clear();
@@ -2066,4 +2107,160 @@ public class LaCasaDoradaGUI {
 		}
 		return message;
 	}
+	
+	@FXML
+	public void loadDeleteClient() throws IOException {
+		
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("deleteClient-pane.fxml"));
+		loader.setController(this);
+		
+		Parent load = loader.load();
+		mainPane.setCenter(load);
+
+		mainPane.getChildren().clear();
+		mainPane.setTop(load);
+		Image image = new Image("/images/Banner.jpg");
+		imageDeleteWall.setImage(image);
+		Image image2 = new Image("/images/BannerCasaDorada.jpg");
+		imageDeleteBanner.setImage(image2);
+	} 
+	
+	@FXML
+    public void deleteClient(ActionEvent event) throws IOException {
+		
+		if(!nameDeleteClient.getText().isEmpty() && !lastNameDeleteClient.getText().isEmpty()) {
+			
+			Client client = laCasaDorada.findObjClient(nameDeleteClient.getText(),lastNameDeleteClient.getText());
+			
+			if(client != null) {
+				laCasaDorada.deleteClient(client);
+				
+				Alert alerts = new Alert(AlertType.INFORMATION);
+				alerts.setTitle("EXCELENTE");
+				alerts.setHeaderText("Se ha eliminado exitosamente.");
+				alerts.setContentText("Se ha eliminado el cliente "+nameDeleteClient.getText()+" exitosamente");
+				alerts.showAndWait();
+				
+				mainMenu();
+			}
+			else {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("ERROR");
+				alert.setHeaderText("No se pudo eliminar el cliente");
+				alert.setContentText("No existe un cliente con ese nombre y/o apellido");
+				alert.showAndWait();
+			}
+		}
+		else {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("ERROR");
+			alert.setHeaderText("No se pudo eliminar el cliente");
+			alert.setContentText("Debe llenar los campos para eliminar el cliente");
+			alert.showAndWait();
+		}
+    }
+	
+	@FXML
+	public void loadDeleteEmployee() throws IOException {
+		
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("deleteEmployee-pane.fxml"));
+		loader.setController(this);
+		
+		Parent load = loader.load();
+		mainPane.setCenter(load);
+
+		mainPane.getChildren().clear();
+		mainPane.setTop(load);
+		Image image = new Image("/images/Banner.jpg");
+		imageDeleteWallEmployee.setImage(image);
+		Image image2 = new Image("/images/BannerCasaDorada.jpg");
+		imageDeleteBannerEmployee.setImage(image2);
+	}
+	
+	@FXML
+    public void deleteEmployee(ActionEvent event) throws IOException {
+		
+		if(!idDeleteEmployee.getText().isEmpty()) {
+			
+			Employee employee = laCasaDorada.findObjEmployee(idDeleteEmployee.getText());
+			
+			if(employee != null) {
+				laCasaDorada.deleteEmployee(employee);
+				
+				Alert alerts = new Alert(AlertType.INFORMATION);
+				alerts.setTitle("EXCELENTE");
+				alerts.setHeaderText("Se ha eliminado exitosamente.");
+				alerts.setContentText("Se ha eliminado el empleado con número de identificación: "+idDeleteEmployee.getText()+" exitosamente");
+				alerts.showAndWait();
+				
+				mainMenu();
+			}
+			else {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("ERROR");
+				alert.setHeaderText("No se pudo eliminar el empleado");
+				alert.setContentText("No existe un empleado con ese número de identificación");
+				alert.showAndWait();
+			}
+		}
+		else {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("ERROR");
+			alert.setHeaderText("No se pudo eliminar el empleado");
+			alert.setContentText("Debe llenar el campo para eliminar el cliente");
+			alert.showAndWait();
+		}
+    }
+	
+	@FXML
+	public void loadDeletedUser() throws IOException {
+		
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("deleteUser-pane.fxml"));
+		loader.setController(this);
+		
+		Parent load = loader.load();
+		mainPane.setCenter(load);
+
+		mainPane.getChildren().clear();
+		mainPane.setTop(load);
+		Image image = new Image("/images/Banner.jpg");
+		imageDeleteWallUser.setImage(image);
+		Image image2 = new Image("/images/BannerCasaDorada.jpg");
+		imageDeleteBannerUser.setImage(image2);
+	}
+	
+	@FXML
+    public void deleteUser(ActionEvent event) throws IOException {
+		
+		if(!nameDeleteUser.getText().isEmpty() && !idDeleteUser.getText().isEmpty()) {
+			
+			User user = laCasaDorada.findUser(nameDeleteUser.getText(),idDeleteUser.getText());
+			
+			if(user != null) {
+				laCasaDorada.deleteUser(user);
+				
+				Alert alerts = new Alert(AlertType.INFORMATION);
+				alerts.setTitle("EXCELENTE");
+				alerts.setHeaderText("Se ha eliminado exitosamente.");
+				alerts.setContentText("Se ha eliminado el usuario "+nameDeleteUser.getText()+" exitosamente");
+				alerts.showAndWait();
+				
+				mainMenu();
+			}
+			else {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("ERROR");
+				alert.setHeaderText("No se pudo eliminar el usuario");
+				alert.setContentText("No existe un usuario con ese nombre de usuario y/o número de identificación");
+				alert.showAndWait();
+			}
+		}
+		else {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("ERROR");
+			alert.setHeaderText("No se pudo eliminar el usuario");
+			alert.setContentText("Debe llenar los campos para eliminar el usuario");
+			alert.showAndWait();
+		}
+    }
 }
