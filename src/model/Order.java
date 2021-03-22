@@ -15,6 +15,7 @@ public class Order {
 	private Client orderClient;
 	private ArrayList<Product> products;
 	private Employee orderEmployee;
+	private State states;
 	
 	//Relations
 	private Modifiers usersCreators;
@@ -31,6 +32,7 @@ public class Order {
 		this.products = products;
 		this.orderEmployee = ordEmployee;
 		this.usersCreators = userCreators;
+		setStates(State.ENABLE);
 	}
 
 	public String getCode() {
@@ -149,6 +151,14 @@ public class Order {
 
 	public void setUsersCreators(Modifiers usersCreators) {
 		this.usersCreators = usersCreators;
+	}
+
+	public State getStates() {
+		return states;
+	}
+
+	public void setStates(State states) {
+		this.states = states;
 	}
 	
 }

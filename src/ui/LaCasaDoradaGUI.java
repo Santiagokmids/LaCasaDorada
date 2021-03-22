@@ -3,6 +3,7 @@ package ui;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,6 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
@@ -2267,16 +2269,26 @@ public class LaCasaDoradaGUI {
 					alert.showAndWait();
 				}
 				else {
-
-					laCasaDorada.deleteClient(client);
-
+					
 					Alert alerts = new Alert(AlertType.INFORMATION);
 					alerts.setTitle("EXCELENTE");
-					alerts.setHeaderText("Se ha eliminado exitosamente.");
-					alerts.setContentText("Se ha eliminado el cliente "+nameDeleteClient.getText()+" exitosamente");
-					alerts.showAndWait();
-
-					mainMenu();
+					
+					Alert alert1 = new Alert(AlertType.CONFIRMATION);
+					alert1.setHeaderText("¿Está seguro de eliminar al cliente "+nameDeleteClient.getText()+"?.");
+					Optional<ButtonType> result = alert1.showAndWait();
+					
+					if(result.get() == ButtonType.OK) {
+						
+						alerts.setHeaderText("Se ha eliminado exitosamente.");
+						alerts.showAndWait();
+						laCasaDorada.deleteClient(client);
+						mainMenu();
+						
+					}else {
+						alerts.setHeaderText("No se ha eliminado.");
+						alerts.showAndWait();
+						mainMenu();
+					}
 				}
 			}
 			else {
@@ -2332,15 +2344,21 @@ public class LaCasaDoradaGUI {
 					alert.showAndWait();
 				}
 				else {
-					laCasaDorada.deleteEmployee(employee);
-
+					
 					Alert alerts = new Alert(AlertType.INFORMATION);
 					alerts.setTitle("EXCELENTE");
-					alerts.setHeaderText("Se ha eliminado exitosamente.");
-					alerts.setContentText("Se ha eliminado el empleado con número de identificación: "+idDeleteEmployee.getText()+" exitosamente");
-					alerts.showAndWait();
-
-					mainMenu();
+					
+					Alert alert1 = new Alert(AlertType.CONFIRMATION);
+					alert1.setHeaderText("¿Está seguro de eliminar al empleado "+employee.getName()+"?.");
+					Optional<ButtonType> result = alert1.showAndWait();
+					
+					if(result.get() == ButtonType.OK) {
+						
+						alerts.setHeaderText("Se ha eliminado exitosamente.");
+						alerts.showAndWait();
+						laCasaDorada.deleteEmployee(employee);
+						mainMenu();
+					}
 				}
 			}
 			else {
@@ -2441,15 +2459,21 @@ public class LaCasaDoradaGUI {
 									alert.showAndWait();
 								}
 								else {
-									laCasaDorada.deleteUser(user);
-
+									
 									Alert alerts = new Alert(AlertType.INFORMATION);
 									alerts.setTitle("EXCELENTE");
-									alerts.setHeaderText("Se ha eliminado exitosamente.");
-									alerts.setContentText("Se ha eliminado el usuario "+nameDeleteUser.getText()+" exitosamente");
-									alerts.showAndWait();
-
-									mainMenu();
+									
+									Alert alert1 = new Alert(AlertType.CONFIRMATION);
+									alert1.setHeaderText("¿Está seguro de eliminar al usuario "+nameDeleteUser.getText()+"?.");
+									Optional<ButtonType> result = alert1.showAndWait();
+									
+									if(result.get() == ButtonType.OK) {
+										
+										alerts.setHeaderText("Se ha eliminado exitosamente.");
+										alerts.showAndWait();
+										laCasaDorada.deleteUser(user);
+										mainMenu();
+									}
 								}
 							}
 						}
@@ -2493,7 +2517,7 @@ public class LaCasaDoradaGUI {
 	@FXML
 	public void deleteProduct(ActionEvent event) throws IOException {
 
-		if(!nameDeleteProduct.getText().isEmpty() && !idDeleteUser.getText().isEmpty()) {
+		if(!nameDeleteProduct.getText().isEmpty()) {
 
 			Product product = laCasaDorada.findObjectProduct(nameDeleteProduct.getText());
 
@@ -2508,30 +2532,23 @@ public class LaCasaDoradaGUI {
 					alert.setHeaderText("No se pudo eliminar el producto");
 					alert.setContentText("No se puede eliminar porque el producto está activo en el sistema");
 					alert.showAndWait();
-
-					if(order.getState() == StateOrder.CANCELADO || order.getState() == StateOrder.ENTREGADO) {
-						laCasaDorada.deleteProduct(product);
-
-						Alert alerts = new Alert(AlertType.INFORMATION);
-						alerts.setTitle("EXCELENTE");
-						alerts.setHeaderText("Se ha eliminado exitosamente.");
-						alerts.setContentText("Se ha eliminado el producto "+nameDeleteProduct.getText()+" exitosamente");
-						alerts.showAndWait();
-
-						mainMenu();
-					}
 				}
 				else {
-
-					laCasaDorada.deleteProduct(product);
-
+					
 					Alert alerts = new Alert(AlertType.INFORMATION);
 					alerts.setTitle("EXCELENTE");
-					alerts.setHeaderText("Se ha eliminado exitosamente.");
-					alerts.setContentText("Se ha eliminado el producto "+nameDeleteProduct.getText()+" exitosamente");
-					alerts.showAndWait();
-
-					mainMenu();
+					
+					Alert alert1 = new Alert(AlertType.CONFIRMATION);
+					alert1.setHeaderText("¿Está seguro de eliminar el producto "+nameDeleteProduct.getText()+"?.");
+					Optional<ButtonType> result = alert1.showAndWait();
+					
+					if(result.get() == ButtonType.OK) {
+						
+						alerts.setHeaderText("Se ha eliminado exitosamente.");
+						alerts.showAndWait();
+						laCasaDorada.deleteProduct(product);
+						mainMenu();
+					}				
 				}
 			}
 			else {
@@ -2569,7 +2586,7 @@ public class LaCasaDoradaGUI {
 	}
 
 	@FXML
-	void deleteProductType(ActionEvent event) throws IOException {
+	public void deleteProductType(ActionEvent event) throws IOException {
 
 		if(!nameDeleteProductType.getText().isEmpty()) {
 
@@ -2587,16 +2604,22 @@ public class LaCasaDoradaGUI {
 					alert.showAndWait();
 				}
 				else {
-
-					laCasaDorada.deleteProductType(productType);
-
+					
 					Alert alerts = new Alert(AlertType.INFORMATION);
 					alerts.setTitle("EXCELENTE");
-					alerts.setHeaderText("Se ha eliminado exitosamente.");
-					alerts.setContentText("Se ha eliminado el tipo producto "+nameDeleteProductType.getText()+" exitosamente");
-					alerts.showAndWait();
-
-					mainMenu();
+					
+					Alert alert1 = new Alert(AlertType.CONFIRMATION);
+					alert1.setHeaderText("¿Está seguro de eliminar el tipo producto "+nameDeleteProductType.getText()+"?.");
+					Optional<ButtonType> result = alert1.showAndWait();
+					
+					if(result.get() == ButtonType.OK) {
+						
+						alerts.setHeaderText("Se ha eliminado exitosamente.");
+						alerts.showAndWait();
+						laCasaDorada.deleteProductType(productType);
+						mainMenu();
+					}				
+				
 				}
 			}
 			else {
@@ -2654,15 +2677,20 @@ public class LaCasaDoradaGUI {
 				}
 				else {
 					
-					laCasaDorada.deleteIngredient(ingredient);
-
 					Alert alerts = new Alert(AlertType.INFORMATION);
 					alerts.setTitle("EXCELENTE");
-					alerts.setHeaderText("Se ha eliminado exitosamente.");
-					alerts.setContentText("Se ha eliminado el ingrediente "+nameDeleteIngredient.getText()+" exitosamente");
-					alerts.showAndWait();
-
-					mainMenu();
+					
+					Alert alert1 = new Alert(AlertType.CONFIRMATION);
+					alert1.setHeaderText("¿Está seguro de eliminar el el ingrediente "+nameDeleteIngredient.getText()+"?.");
+					Optional<ButtonType> result = alert1.showAndWait();
+					
+					if(result.get() == ButtonType.OK) {
+						
+						alerts.setHeaderText("Se ha eliminado exitosamente.");
+						alerts.showAndWait();
+						laCasaDorada.deleteIngredient(ingredient);
+						mainMenu();
+					}			
 				}
 			}
 			else {

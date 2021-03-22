@@ -5,6 +5,7 @@ public class ProductType {
 	//Attributes
 	
 	private String name;
+	private State state;
 	
 	//Relations
 	private Modifiers usersCreators;
@@ -16,6 +17,7 @@ public class ProductType {
 	public ProductType(String name, Modifiers usersCreators) {
 		this.setUsersCreators(usersCreators);
 		this.name = name;
+		setState(State.ENABLE);
 	}
 
 	public String getName() {
@@ -32,5 +34,13 @@ public class ProductType {
 
 	public void setUsersCreators(Modifiers usersCreators) {
 		this.usersCreators = usersCreators;
+	}
+
+	public State getState() {
+		return state;
+	}
+
+	public void setState(State state) {
+		this.state = state;
 	}
 }
