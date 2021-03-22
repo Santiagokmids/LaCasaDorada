@@ -38,54 +38,54 @@ import model.StateOrder;
 import model.User;
 
 public class LaCasaDoradaGUI {
-	
+
 	@FXML
-    private ImageView imageDeleteWallProduct;
+	private ImageView imageDeleteWallProduct;
 
-    @FXML
-    private TextField nameDeleteProduct;
-
-    @FXML
-    private ImageView imageDeleteBannerProduct;
-	
 	@FXML
-    private ImageView imageDeleteWallUser;
+	private TextField nameDeleteProduct;
 
-    @FXML
-    private TextField idDeleteUser;
-
-    @FXML
-    private TextField nameDeleteUser;
-
-    @FXML
-    private ImageView imageDeleteBannerUser;
-	
 	@FXML
-    private ImageView imageDeleteWallEmployee;
+	private ImageView imageDeleteBannerProduct;
 
-    @FXML
-    private TextField nameDeleteEmployee;
-
-    @FXML
-    private TextField lastNameDeleteEmployee;
-
-    @FXML
-    private TextField idDeleteEmployee;
-
-    @FXML
-    private ImageView imageDeleteBannerEmployee;
-	
 	@FXML
-    private ImageView imageDeleteWall;
+	private ImageView imageDeleteWallUser;
 
-    @FXML
-    private TextField nameDeleteClient;
+	@FXML
+	private TextField idDeleteUser;
 
-    @FXML
-    private TextField lastNameDeleteClient;
+	@FXML
+	private TextField nameDeleteUser;
 
-    @FXML
-    private ImageView imageDeleteBanner;
+	@FXML
+	private ImageView imageDeleteBannerUser;
+
+	@FXML
+	private ImageView imageDeleteWallEmployee;
+
+	@FXML
+	private TextField nameDeleteEmployee;
+
+	@FXML
+	private TextField lastNameDeleteEmployee;
+
+	@FXML
+	private TextField idDeleteEmployee;
+
+	@FXML
+	private ImageView imageDeleteBannerEmployee;
+
+	@FXML
+	private ImageView imageDeleteWall;
+
+	@FXML
+	private TextField nameDeleteClient;
+
+	@FXML
+	private TextField lastNameDeleteClient;
+
+	@FXML
+	private ImageView imageDeleteBanner;
 
 	@FXML
 	private ImageView imageBannerListProduct;
@@ -1372,9 +1372,9 @@ public class LaCasaDoradaGUI {
 
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("listUser-pane.fxml"));
 
-		
+
 		loader.setController(this);
-		
+
 		Parent load = loader.load();
 		mainPane.setCenter(load);
 
@@ -2116,13 +2116,13 @@ public class LaCasaDoradaGUI {
 		}
 		return message;
 	}
-	
+
 	@FXML
 	public void loadDeleteClient() throws IOException {
-		
+
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("deleteClient-pane.fxml"));
 		loader.setController(this);
-		
+
 		Parent load = loader.load();
 		mainPane.setCenter(load);
 
@@ -2133,23 +2133,23 @@ public class LaCasaDoradaGUI {
 		Image image2 = new Image("/images/BannerCasaDorada.jpg");
 		imageDeleteBanner.setImage(image2);
 	} 
-	
+
 	@FXML
-    public void deleteClient(ActionEvent event) throws IOException {
-		
+	public void deleteClient(ActionEvent event) throws IOException {
+
 		if(!nameDeleteClient.getText().isEmpty() && !lastNameDeleteClient.getText().isEmpty()) {
-			
+
 			Client client = laCasaDorada.findObjClient(nameDeleteClient.getText(),lastNameDeleteClient.getText());
-			
+
 			if(client != null) {
 				laCasaDorada.deleteClient(client);
-				
+
 				Alert alerts = new Alert(AlertType.INFORMATION);
 				alerts.setTitle("EXCELENTE");
 				alerts.setHeaderText("Se ha eliminado exitosamente.");
 				alerts.setContentText("Se ha eliminado el cliente "+nameDeleteClient.getText()+" exitosamente");
 				alerts.showAndWait();
-				
+
 				mainMenu();
 			}
 			else {
@@ -2167,14 +2167,14 @@ public class LaCasaDoradaGUI {
 			alert.setContentText("Debe llenar los campos para eliminar el cliente");
 			alert.showAndWait();
 		}
-    }
-	
+	}
+
 	@FXML
 	public void loadDeleteEmployee() throws IOException {
-		
+
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("deleteEmployee-pane.fxml"));
 		loader.setController(this);
-		
+
 		Parent load = loader.load();
 		mainPane.setCenter(load);
 
@@ -2185,23 +2185,23 @@ public class LaCasaDoradaGUI {
 		Image image2 = new Image("/images/BannerCasaDorada.jpg");
 		imageDeleteBannerEmployee.setImage(image2);
 	}
-	
+
 	@FXML
-    public void deleteEmployee(ActionEvent event) throws IOException {
-		
+	public void deleteEmployee(ActionEvent event) throws IOException {
+
 		if(!idDeleteEmployee.getText().isEmpty()) {
-			
+
 			Employee employee = laCasaDorada.findObjEmployee(idDeleteEmployee.getText());
-			
+
 			if(employee != null) {
 				laCasaDorada.deleteEmployee(employee);
-				
+
 				Alert alerts = new Alert(AlertType.INFORMATION);
 				alerts.setTitle("EXCELENTE");
 				alerts.setHeaderText("Se ha eliminado exitosamente.");
 				alerts.setContentText("Se ha eliminado el empleado con número de identificación: "+idDeleteEmployee.getText()+" exitosamente");
 				alerts.showAndWait();
-				
+
 				mainMenu();
 			}
 			else {
@@ -2219,14 +2219,14 @@ public class LaCasaDoradaGUI {
 			alert.setContentText("Debe llenar el campo para eliminar el cliente");
 			alert.showAndWait();
 		}
-    }
-	
+	}
+
 	@FXML
 	public void loadDeletedUser() throws IOException {
-		
+
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("deleteUser-pane.fxml"));
 		loader.setController(this);
-		
+
 		Parent load = loader.load();
 		mainPane.setCenter(load);
 
@@ -2237,23 +2237,23 @@ public class LaCasaDoradaGUI {
 		Image image2 = new Image("/images/BannerCasaDorada.jpg");
 		imageDeleteBannerUser.setImage(image2);
 	}
-	
+
 	@FXML
-    public void deleteUser(ActionEvent event) throws IOException {
-		
+	public void deleteUser(ActionEvent event) throws IOException {
+
 		if(!nameDeleteUser.getText().isEmpty() && !idDeleteUser.getText().isEmpty()) {
-			
+
 			User user = laCasaDorada.findUser(nameDeleteUser.getText(),idDeleteUser.getText());
-			
+
 			if(user != null) {
 				laCasaDorada.deleteUser(user);
-				
+
 				Alert alerts = new Alert(AlertType.INFORMATION);
 				alerts.setTitle("EXCELENTE");
 				alerts.setHeaderText("Se ha eliminado exitosamente.");
 				alerts.setContentText("Se ha eliminado el usuario "+nameDeleteUser.getText()+" exitosamente");
 				alerts.showAndWait();
-				
+
 				mainMenu();
 			}
 			else {
@@ -2271,14 +2271,14 @@ public class LaCasaDoradaGUI {
 			alert.setContentText("Debe llenar los campos para eliminar el usuario");
 			alert.showAndWait();
 		}
-    }
-	
+	}
+
 	@FXML
 	public void loadDeletedProduct() throws IOException {
-		
+
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("deleteUser-pane.fxml"));
 		loader.setController(this);
-		
+
 		Parent load = loader.load();
 		mainPane.setCenter(load);
 
@@ -2289,28 +2289,44 @@ public class LaCasaDoradaGUI {
 		Image image2 = new Image("/images/BannerCasaDorada.jpg");
 		imageDeleteBannerUser.setImage(image2);
 	}
-	
+
 	@FXML
-    public void deleteProduct(ActionEvent event) throws IOException {
-		
+	public void deleteProduct(ActionEvent event) throws IOException {
+
 		if(!nameDeleteProduct.getText().isEmpty() && !idDeleteUser.getText().isEmpty()) {
-			
+
 			Product product = laCasaDorada.findObjectProduct(nameDeleteProduct.getText());
-			
+
 			if(product != null) {
 				
-				if() {
+				Order order = laCasaDorada.findProductInOrder(product);
+
+				if(order != null) {
 					
+					if(order.getState() == StateOrder.CANCELADO || order.getState() == StateOrder.ENTREGADO) {
+						laCasaDorada.deleteProduct(product);
+
+						Alert alerts = new Alert(AlertType.INFORMATION);
+						alerts.setTitle("EXCELENTE");
+						alerts.setHeaderText("Se ha eliminado exitosamente.");
+						alerts.setContentText("Se ha eliminado el producto "+nameDeleteProduct.getText()+" exitosamente");
+						alerts.showAndWait();
+
+						mainMenu();
+					}
 				}
-				laCasaDorada.deleteProduct(product);
-				
-				Alert alerts = new Alert(AlertType.INFORMATION);
-				alerts.setTitle("EXCELENTE");
-				alerts.setHeaderText("Se ha eliminado exitosamente.");
-				alerts.setContentText("Se ha eliminado el usuario "+nameDeleteUser.getText()+" exitosamente");
-				alerts.showAndWait();
-				
-				mainMenu();
+				else {
+					
+					laCasaDorada.deleteProduct(product);
+
+					Alert alerts = new Alert(AlertType.INFORMATION);
+					alerts.setTitle("EXCELENTE");
+					alerts.setHeaderText("Se ha eliminado exitosamente.");
+					alerts.setContentText("Se ha eliminado el usuario "+nameDeleteProduct.getText()+" exitosamente");
+					alerts.showAndWait();
+
+					mainMenu();
+				}
 			}
 			else {
 				Alert alert = new Alert(AlertType.ERROR);
@@ -2327,5 +2343,5 @@ public class LaCasaDoradaGUI {
 			alert.setContentText("Debe llenar los campos para eliminar el usuario");
 			alert.showAndWait();
 		}
-    }
+	}
 }

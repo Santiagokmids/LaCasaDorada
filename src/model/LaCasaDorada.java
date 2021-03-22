@@ -211,7 +211,23 @@ public class LaCasaDorada {
 		}
 		return orders;
 	}
+	
+	public Order findProductInOrder(Product product){
 
+		boolean find = false;
+		Order orderToSend = null;
+
+		for (int j = 0; j < order.size() && !find; j++) {
+			for (int i = 0; i < order.size(); i++) {
+				
+				if(order.get(i).getProducts().get(j) == product){
+					find = true;
+					orderToSend = order.get(i);
+				}
+			}
+		}
+		return orderToSend;
+	}
 
 	public boolean findOrders(String code){
 
@@ -584,8 +600,6 @@ public class LaCasaDorada {
 		User validation = null;
 
 		for (int i = 0; i < people.size() && !verific; i++) {
-
-
 
 			if(people.get(i) instanceof User) {
 
