@@ -29,7 +29,7 @@
                   <Font name="Franklin Gothic Demi" size="18.0" />
                </font>
             </Button>
-            <Button layoutX="471.0" layoutY="353.0" mnemonicParsing="false" onAction="#mainMenu" prefHeight="53.0" prefWidth="140.0" style="-fx-background-color: #dad57c; -fx-background-radius: 22;" text="Cancelar">
+            <Button layoutX="459.0" layoutY="353.0" mnemonicParsing="false" onAction="#mainMenu" prefHeight="53.0" prefWidth="140.0" style="-fx-background-color: #dad57c; -fx-background-radius: 22;" text="Cancelar">
                <font>
                   <Font name="Franklin Gothic Demi" size="18.0" />
                </font>

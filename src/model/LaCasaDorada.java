@@ -609,6 +609,21 @@ public class LaCasaDorada {
 		}
 	}
 
+
+	public void deleteOrder(Order orders) {
+
+		boolean verific = false;
+
+		for (int i = 0; i < order.size() && !verific; i++) {
+
+			if(order.get(i) == orders) {
+				verific = true;
+				order.remove(i);
+			}
+		}
+	}
+
+
 	public void deleteProduct(Product productToDelete) {
 
 		boolean verific = false;

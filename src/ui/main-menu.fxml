@@ -34,11 +34,11 @@
               <MenuItem mnemonicParsing="false" onAction="#loadDeleteClient" text="Cliente" />
                   <MenuItem mnemonicParsing="false" onAction="#loadDeleteEmployee" text="Empleado" />
                   <MenuItem mnemonicParsing="false" onAction="#loadDeletedUser" text="Usuario" />
-                  <MenuItem mnemonicParsing="false" onAction="#loadDeletedOrder" text="Pedido" />
+                  <MenuItem mnemonicParsing="false" onAction="#loadDeleteOrder" text="Pedido" />
                   <MenuItem mnemonicParsing="false" onAction="#loadDeletedProduct" text="Producto" />
                   <MenuItem mnemonicParsing="false" onAction="#loadDeletedTypeProduct" text="Tipo de Producto" />
                   <MenuItem mnemonicParsing="false" onAction="#loadDeleteIngredient" text="Ingrediente" />
-                  <MenuItem mnemonicParsing="false" onAction="#loadDeleteIngredient" text="Tamaño de Producto" />
+                  <MenuItem mnemonicParsing="false" text="Tamaño de Producto" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Deshabilitar">
@@ -46,6 +46,7 @@
               <MenuItem mnemonicParsing="false" text="Cliente" />
                   <MenuItem mnemonicParsing="false" text="Empleado" />
                   <MenuItem mnemonicParsing="false" text="Usuario" />
+                  <MenuItem mnemonicParsing="false" text="Pedido" />
                   <MenuItem mnemonicParsing="false" text="Producto" />
                   <MenuItem mnemonicParsing="false" text="Tipo de Producto" />
                   <MenuItem mnemonicParsing="false" onAction="#loadDisabledIngredient" text="Ingrediente" />
