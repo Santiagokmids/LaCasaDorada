@@ -469,7 +469,7 @@ public class LaCasaDorada {
 			}
 		}
 	}
-	
+
 	public void deleteEmployee(Employee employee) {
 
 		boolean verific = false;
@@ -481,24 +481,36 @@ public class LaCasaDorada {
 			}
 		}
 	}
-	
+
 	public void deleteUser(User user) {
 
 		boolean verific = false;
 		User validation = null;
 
 		for (int i = 0; i < people.size() && !verific; i++) {
-			
-			
-			
+
+
+
 			if(people.get(i) instanceof User) {
-				
+
 				validation = (User)people.get(i);
-				
+
 				if(validation.getUserName().equals(user.getUserName()) && 				validation.getId().equals(user.getId())) {
 					verific = true;
 					people.remove(i);
 				}
+			}
+		}
+	}
+	
+	public void deleteProduct(Product productToDelete) {
+
+		boolean verific = false;
+
+		for (int i = 0; i < people.size() && !verific; i++) {
+			if(product.get(i).getName().equals(productToDelete.getName())) {
+				verific = true;
+				product.remove(i);
 			}
 		}
 	}
@@ -563,7 +575,7 @@ public class LaCasaDorada {
 		}
 		return validation;
 	}
-	
+
 	public User findUser(String userName, String id) {
 
 		User user = null;
