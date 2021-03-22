@@ -23,7 +23,7 @@ public class Product {
 	 * @param usersCreators 
 	 * @param ingredientType
 	 */
-	public Product(String name, ArrayList<Ingredient> ingredients, ProductType productType, Size sizes, double price, Modifiers usersCreators, State state) {
+	public Product(String name, ArrayList<Ingredient> ingredients, ProductType productType, Size sizes, double price, Modifiers usersCreators) {
 
 		this.name = name;
 		this.ingredients = ingredients;
@@ -31,7 +31,7 @@ public class Product {
 		this.sizes = sizes; 
 		this.price = price;
 		this.usersCreators = usersCreators;
-		this.state = state;
+		this.state = State.ENABLE;
 	}
 
 	public String getName() {

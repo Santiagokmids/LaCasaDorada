@@ -42,49 +42,25 @@ public class LaCasaDorada {
 	}
 
 	//create client
-	public void create(String name, String lastName, String id, State state, String address, String telephone, String fieldObservations,
+	public void create(String name, String lastName, String id, String address, String telephone, String fieldObservations,
 			Modifiers modifiers) {
 
-		Client client = new Client(name, lastName, id, state, address, telephone, fieldObservations, modifiers);
+		Client client = new Client(name, lastName, id, address, telephone, fieldObservations, modifiers);
 		people.add(client);
 	}
 
-	//update client
-	public void update(String name, String lastName, String id, State state, String address, String telephone, String fieldOfObservations,int index) {
-		people.get(index).setName(name);
-		people.get(index).setLastName(lastName);
-		people.get(index).setId(id);
-		people.get(index).setState(state);
-	}
-
 	//create employee
-	public void create(String name, String lastName, String id, State state, Modifiers usersModifiers) {
+	public void create(String name, String lastName, String id, Modifiers usersModifiers) {
 
-		Employee employee = new Employee(name, lastName, id, state, usersModifiers);
+		Employee employee = new Employee(name, lastName, id, usersModifiers);
 		people.add(employee);
 	}
 
-	//update employee
-	public void update(String name, String lastName, String id, State state,int index) {
-		people.get(index).setName(name);
-		people.get(index).setLastName(lastName);
-		people.get(index).setId(id);
-		people.get(index).setState(state);
-	}
-
 	//create User
-	public void create(String name, String lastName, String id, String userName, String password, State state, Modifiers usersModifiers) {
+	public void create(String name, String lastName, String id, String userName, String password, Modifiers usersModifiers) {
 
-		User user = new User(name, lastName, id, userName, password, state, usersModifiers);
+		User user = new User(name, lastName, id, userName, password, usersModifiers);
 		people.add(user);
-	}
-
-	//update user
-	public void update(String name, String lastName, String id, String userName, String password, State state,int index) {
-		people.get(index).setName(name);
-		people.get(index).setLastName(lastName);
-		people.get(index).setId(id);
-		people.get(index).setState(state);
 	}
 
 	//Create ingredient
@@ -120,18 +96,6 @@ public class LaCasaDorada {
 		productType.add(typeProduct);
 	}
 
-	//delete people
-	public boolean delete(String id){
-		boolean delete = false;
-		int pos = findPosition(id);
-
-		if(pos != -1) {
-			people.remove(pos);
-			delete = true;
-		}
-		return delete;	
-	}
-
 	//change people
 	public boolean setState(String id) {
 		boolean state = false;
@@ -141,7 +105,6 @@ public class LaCasaDorada {
 			state = true;
 		}
 		return state;
-
 	}
 
 	//Create preorder
@@ -692,7 +655,7 @@ public class LaCasaDorada {
 
 			if(ingredient.get(j) == ingredientDisable) {
 				verific = true;
-				ingredient.set;
+				ingredient.get(j).setState(State.DISABLED);
 			}
 		}
 	}
@@ -895,18 +858,11 @@ public class LaCasaDorada {
 		while(line != null) {
 
 			String[] parts = line.split(SEPARATOR);
-			State state = null;
 
-			if(parts[5] == (State.ENABLE).toString()) {
-				state = State.ENABLE;
-			}
-			else if(parts[5] == (State.DISABLED).toString()) {
-				state = State.DISABLED;
-			}
 
 			Client client = findObjClient(parts[0]);
 
-			create(parts[0],parts[1],parts[2],state,parts[4],parts[5],parts[6],client.getUsersCreators());
+			create(parts[0],parts[1],parts[2],parts[3],parts[4],parts[5],client.getUsersCreators());
 			line = br.readLine();
 		}
 

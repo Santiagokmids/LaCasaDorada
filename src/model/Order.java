@@ -32,7 +32,7 @@ public class Order {
 		this.products = products;
 		this.orderEmployee = ordEmployee;
 		this.usersCreators = userCreators;
-		setStates(State.ENABLE);
+		this.states = State.ENABLE;
 	}
 
 	public String getCode() {
