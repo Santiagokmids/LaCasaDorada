@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="831.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <ImageView fx:id="imageBannerListIngredient" fitHeight="135.0" fitWidth="744.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+   </top>
+   <center>
+      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fx:id="imageWallListIngredient" fitHeight="751.0" fitWidth="831.0" opacity="0.09" pickOnBounds="true" preserveRatio="true" />
+            <TableView fx:id="tvListIngredient" layoutY="7.0" onMouseClicked="#mouseClickedListIngredient" prefHeight="568.0" prefWidth="533.0">
+               <columns>
+                  <TableColumn fx:id="tcNameIngredient" prefWidth="541.0" resizable="false" text="Ingrediente" />
+               </columns>
+            </TableView>
+            <Label layoutX="568.0" layoutY="53.0" prefHeight="31.0" prefWidth="122.0" text="Nombre:" textFill="#dad57c">
+               <font>
+                  <Font name="Berlin Sans FB" size="24.0" />
+               </font>
+            </Label>
+            <TextField fx:id="updateNameIngredient" layoutX="567.0" layoutY="90.0" prefHeight="31.0" prefWidth="240.0" />
+            <Button layoutX="598.0" layoutY="222.0" mnemonicParsing="false" onAction="#modifyListIngredient" prefHeight="53.0" prefWidth="179.0" style="-fx-background-color: #dad57c; -fx-background-radius: 22;" text="Modificar">
+               <font>
+                  <Font name="Franklin Gothic Demi" size="18.0" />
+               </font>
+            </Button>
+            <Button layoutX="598.0" layoutY="292.0" mnemonicParsing="false" onAction="#mainMenu" prefHeight="53.0" prefWidth="179.0" style="-fx-background-color: #dad57c; -fx-background-radius: 22;" text="Cancelar">
+               <font>
+                  <Font name="Franklin Gothic Demi" size="18.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+   </center>
+</BorderPane>

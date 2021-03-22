@@ -470,15 +470,47 @@ public class LaCasaDoradaGUI {
 
 	@FXML
 	private TextField nameEmployeeList;
+	
+	@FXML
+	private ImageView imageBannerListIngredient;
+
+	@FXML
+	private ImageView imageWallListIngredient;
+
+	@FXML
+	private TableView<Ingredient> tvListIngredient;
+
+	@FXML
+	private TableColumn<Ingredient, String> tcNameIngredient;
+
+	@FXML
+	private TextField updateNameIngredient;
+	
+	@FXML
+	private ImageView imageBannerListType;
+
+	@FXML
+	private ImageView imageWallListType;
+
+	@FXML
+	private TableView<ProductType> tvListType;
+
+	@FXML
+	private TableColumn<ProductType, String> tcNameType;
+
+	@FXML
+	private TextField updateNameType;
 
 
 	public static ObservableList<Product> listProduct;
+	public static ObservableList<Ingredient> listOfIngredient;
 	public static ObservableList<Order> listOrders;
 	public static ObservableList<User> listUsers;
 	public static ObservableList<PreOrder> observableList;
 	public static ObservableList<Ingredient> listIngredients;
 	public static ObservableList<Client> listClient;
 	public static ObservableList<Employee> listEmployee;
+	public static ObservableList<ProductType> listType;
 	public static Modifiers usersModifiers;
 	public static ObservableList<Product> listOfProducts;
 
@@ -1104,12 +1136,12 @@ public class LaCasaDoradaGUI {
 	@FXML
 	public void ingredientProduct(ActionEvent event)throws IOException {
 		if(selectIngredient.getValue() != null) {
-			listIngredients.add(laCasaDorada.findIngredient(selectIngredient.getValue()));
+			listIngredients.add(new Ingredient(laCasaDorada.findIngredient(selectIngredient.getValue()).getName(), usersModifiers));
 		}
 		else {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle("CUIDADO");
-			alert.setHeaderText("No se pudo aladir un ingrediente a la lista");
+			alert.setHeaderText("No se pudo añadir un ingrediente a la lista");
 			alert.setContentText("Necesita elegir un ingrediente para añadirlo a la lista");
 			alert.showAndWait();
 		}
@@ -1139,27 +1171,28 @@ public class LaCasaDoradaGUI {
 
 			Ingredient ingredient = laCasaDorada.findIngredient(name);
 
-			if(selectIngredient.getValue() != null) {
+			if(selectIngredient.getValue() != null && !selectIngredient.getValue().equalsIgnoreCase(name)) {
 				name = selectIngredient.getValue();
 				verific = true;
 			}
 
 			if(verific) {
+				
+				ingredient.setName(name);
+
+				listIngredients.set(tvProduct.getSelectionModel().getSelectedIndex(),new Ingredient(name, usersModifiers));
+				
 				Alert alerts = new Alert(AlertType.INFORMATION);
 				alerts.setTitle("EXCELENTE");
 				alerts.setHeaderText("Se ha reemplazado el ingrediente.");
 				alerts.setContentText(null);
 				alerts.showAndWait();
-
+				
 			}else {
 				alert.setHeaderText("No se pudo Cambiar");
-				alert.setContentText("Debe seleccionar un ingrediente de la lista");
+				alert.setContentText("Debe seleccionar un ingrediente de la lista que sea diferente al actual.");
 				alert.showAndWait();
 			}
-
-			ingredient.setName(name);
-
-			listIngredients.set(tvProduct.getSelectionModel().getSelectedIndex(),new Ingredient(name, usersModifiers));
 
 			selectIngredient.setValue(null);
 		}
@@ -1243,26 +1276,29 @@ public class LaCasaDoradaGUI {
 				alerts.setHeaderText("Se han reemplazado los datos.");
 				alerts.setContentText("Se ha reemplazado el producto y su cantidad.");
 				alerts.showAndWait();
+				
+				product.setName(name);
+				preorder.setAmount(amounts);
 
 			}else if(verific) {
 				alerts.setHeaderText("Se ha reemplazado el producto.");
 				alerts.setContentText(null);
 				alerts.showAndWait();
-
+				
+				product.setName(name);
+				
 			}else if(verificAmount) {
 				alerts.setHeaderText("Se ha reemplazado la cantidad del producto.");
 				alerts.setContentText(null);
 				alerts.showAndWait();
-
+				
+				preorder.setAmount(amounts);
 			}
 			else {
 				alert.setHeaderText("No se pudo Cambiar");
 				alert.setContentText("Debe seleccionar un producto de la lista y seleccionar su respectiva cantidad");
 				alert.showAndWait();
 			}
-
-			product.setName(name);
-			preorder.setAmount(amounts);
 
 			observableList.set(tvOrder.getSelectionModel().getSelectedIndex(),new PreOrder(product,amounts));
 
@@ -1438,21 +1474,29 @@ public class LaCasaDoradaGUI {
 				name = updateName.getText();
 				verific = true;
 				user.getUsersCreators().setLastModifier(usersModifiers.getCreateObject());
+				user.setName(name);
+
 			}
 			if(!updateLasName.getText().isEmpty() && !updateLasName.getText().equals(lastName)) {
 				lastName = updateLasName.getText();
 				verific = true;
 				user.getUsersCreators().setLastModifier(usersModifiers.getCreateObject());
+				user.setLastName(lastName);
+				
 			}
 			if(!updateId.getText().isEmpty() && !updateId.getText().equals(id)) {
 				id = updateId.getText();
 				verific = true;
 				user.getUsersCreators().setLastModifier(usersModifiers.getCreateObject());
+				user.setId(id);
+				
 			}
 			if(!updateUser.getText().isEmpty() && !updateUser.getText().equals(userName)) {
 				userName = updateUser.getText();
 				verific = true;
 				user.getUsersCreators().setLastModifier(usersModifiers.getCreateObject());
+				user.setUserName(userName);
+				
 			}
 			if(!lastPassword.getText().isEmpty() && !lastPassword.getText().equals(user.getPassword())) {
 
@@ -1489,10 +1533,6 @@ public class LaCasaDoradaGUI {
 				alerts.showAndWait();
 			}
 
-			user.setName(name);
-			user.setLastName(lastName);
-			user.setId(id);
-			user.setUserName(userName);
 
 			listUsers.set(tvUser.getSelectionModel().getSelectedIndex(),new User(name,lastName,id,userName,user.getPassword(),user.getState(),user.getUsersCreators()));
 
@@ -1807,25 +1847,25 @@ public class LaCasaDoradaGUI {
 				}
 			}
 
-			if(!updateProductsOrder.getText().isEmpty() && objListProducts(updateProductsOrder.getText()).size() != 0) {
+			if(!updateProductsOrder.getText().isEmpty() && objListProducts(updateProductsOrder.getText()).size() != 0 && products != objListProducts(updateProductsOrder.getText())) {
 				products = objListProducts(updateProductsOrder.getText());
 				order.getUsersCreators().setLastModifier(usersModifiers.getCreateObject());
 				verify = true;
 
-				if(!updateAmountOrder.getText().isEmpty() && (objListAmounts(updateAmountOrder.getText())).size() == products.size()) {
+				if(!updateAmountOrder.getText().isEmpty() && (objListAmounts(updateAmountOrder.getText())).size() == products.size() && amounts != objListAmounts(updateAmountOrder.getText())) {
 					amounts = objListAmounts(updateAmountOrder.getText());
 					order.getUsersCreators().setLastModifier(usersModifiers.getCreateObject());
 					verify = true;
 				}
 
 
-				if(!nameClientList.getText().isEmpty() && !nameClientList.getText().equals(client)) {
+				if(!nameClientList.getText().isEmpty() && !nameClientList.getText().equals(client) && laCasaDorada.findObjClient(nameClientList.getText()) != null) {
 					client = nameClientList.getText();
 					order.getUsersCreators().setLastModifier(usersModifiers.getCreateObject());
 					verify = true;
 				}
 
-				if(!nameEmployeeList.getText().isEmpty() && !nameEmployeeList.getText().equals(employee)) {
+				if(!nameEmployeeList.getText().isEmpty() && !nameEmployeeList.getText().equals(employee) && laCasaDorada.findEmployee(nameEmployeeList.getText()) != null) {
 					employee = nameClientList.getText();
 					order.getUsersCreators().setLastModifier(usersModifiers.getCreateObject());
 					verify = true;
@@ -1856,9 +1896,10 @@ public class LaCasaDoradaGUI {
 				obsOrdersList.setText("");
 
 				if(verify) {
+					
 					if(!states){
-						alert.setHeaderText("No se pudo actualizar la orden");
-						alert.setContentText("El estado del pedido no se puede cambiar a uno anterior.");
+						alert.setHeaderText("No se pudo cambiar el estado de la orden");
+						alert.setContentText("El estado del pedido no se actualizó, pero los demás datos sí fueron actualizados");
 						alert.showAndWait();
 					}
 					else {
@@ -1870,11 +1911,18 @@ public class LaCasaDoradaGUI {
 					}
 
 				}
-
 				else {
-					alert.setHeaderText("No se pudo actualizar la orden");
-					alert.setContentText("Ingresó los mismos datos anterioress o erróneos.");
-					alert.showAndWait();
+					
+					if(!states){
+						alert.setHeaderText("No se pudo actualizar la orden");
+						alert.setContentText("Ingresó los mismos datos anteriores o erróneos.");
+						alert.showAndWait();
+					}
+					else {
+						alert.setHeaderText("Se actualizó el estado de la orden");
+						alert.setContentText("Sólo se actualizó el estado de la orden.");
+						alert.showAndWait();
+					}
 				}
 
 			}
@@ -2491,5 +2539,170 @@ public class LaCasaDoradaGUI {
 		imageDeleteWallUser.setImage(image);
 		Image image2 = new Image("/images/BannerCasaDorada.jpg");
 		imageDeleteBannerUser.setImage(image2);
+	}
+	
+	@FXML
+	public void listIngredient(ActionEvent event) throws IOException {
+
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("listIngredient.fxml"));
+
+		loader.setController(this);
+		Parent load = loader.load();
+		
+		mainPane.getChildren().clear();
+		mainPane.setTop(load);
+
+		Image image = new Image("/images/Banner.jpg");
+		imageWallListIngredient.setImage(image);
+		Image image2 = new Image("/images/BannerCasaDorada.jpg");
+		imageBannerListIngredient.setImage(image2);
+
+		inicializateTableViewIngredient();
+	}
+	
+	public void inicializateTableViewIngredient() {
+		listOfIngredient = FXCollections.observableArrayList(laCasaDorada.getIngredient());
+
+		tvListIngredient.setItems(listOfIngredient);
+		tcNameIngredient.setCellValueFactory(new PropertyValueFactory<Ingredient,String>("name"));
+	}
+
+	@FXML
+	public void modifyListIngredient(ActionEvent event) {
+
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.setTitle("ERROR");
+
+		if(tvListIngredient.getSelectionModel().isEmpty()) {
+
+			alert.setHeaderText("No se pudo actualizar el ingrediente");
+			alert.setContentText("Debe seleccionar uno de la lista");
+			alert.showAndWait();
+		}
+		else {
+
+			boolean verify = false;
+
+			String name = listOfIngredient.get(tvListIngredient.getSelectionModel().getSelectedIndex()).getName();
+
+			Ingredient ingredient = laCasaDorada.findIngredient(name);
+
+
+			if(!updateNameIngredient.getText().isEmpty() && !updateNameIngredient.getText().equalsIgnoreCase(name)) {
+				name = updateNameIngredient.getText();
+				verify = true;
+				ingredient.getUsersCreators().setLastModifier(usersModifiers.getCreateObject());
+				ingredient.setName(name);
+			}
+			
+			listOfIngredient.set(tvListIngredient.getSelectionModel().getSelectedIndex(),new Ingredient(name,ingredient.getUsersCreators()));
+
+			updateNameIngredient.setText("");
+
+			if(!verify) {
+
+				alert.setTitle("ERROR");
+				alert.setHeaderText("No se pudo actualizar la información.");
+				alert.setContentText(null);
+			}
+			else {
+				Alert alert1 = new Alert(AlertType.INFORMATION);
+				alert1.setHeaderText("Se actualizó el ingrediente");
+				alert1.setContentText("El ingrediente cambió de nombre.");
+				alert1.showAndWait();
+			}
+
+		}
+	}
+	
+	@FXML
+	public void mouseClickedListIngredient(MouseEvent event) {
+
+		String name = listOfIngredient.get(tvListIngredient.getSelectionModel().getSelectedIndex()).getName();
+
+		updateNameIngredient.setText(name);
+	}
+	
+	@FXML
+	public void listType(ActionEvent event) throws IOException {
+
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("listType.fxml"));
+
+		loader.setController(this);
+		Parent load = loader.load();
+		
+		mainPane.getChildren().clear();
+		mainPane.setTop(load);
+
+		Image image = new Image("/images/Banner.jpg");
+		imageWallListType.setImage(image);
+		Image image2 = new Image("/images/BannerCasaDorada.jpg");
+		imageBannerListType.setImage(image2);
+
+		inicializateTableViewType();
+	}
+	
+	public void inicializateTableViewType() {
+		listType = FXCollections.observableArrayList(laCasaDorada.getProductType());
+
+		tvListType.setItems(listType);
+		tcNameType.setCellValueFactory(new PropertyValueFactory<ProductType,String>("name"));
+	}
+
+	@FXML
+	public void modifyListType(ActionEvent event) {
+
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.setTitle("ERROR");
+
+		if(tvListType.getSelectionModel().isEmpty()) {
+
+			alert.setHeaderText("No se pudo actualizar el Tipo de Producto");
+			alert.setContentText("Debe seleccionar uno de la lista");
+			alert.showAndWait();
+		}
+		else {
+
+			boolean verify = false;
+
+			String name = listType.get(tvListType.getSelectionModel().getSelectedIndex()).getName();
+
+			ProductType type = laCasaDorada.findType(name);
+
+
+			if(!updateNameType.getText().isEmpty() && !updateNameType.getText().equalsIgnoreCase(name)) {
+				name = updateNameType.getText();
+				verify = true;
+				type.getUsersCreators().setLastModifier(usersModifiers.getCreateObject());
+				type.setName(name);
+			}
+			
+			listType.set(tvListType.getSelectionModel().getSelectedIndex(),new ProductType(name,type.getUsersCreators()));
+
+			updateNameType.setText("");
+
+			if(!verify) {
+
+				alert.setTitle("ERROR");
+				alert.setHeaderText("No se pudo actualizar la información.");
+				alert.setContentText(null);
+				alert.showAndWait();
+			}
+			else {
+				Alert alert1 = new Alert(AlertType.INFORMATION);
+				alert1.setHeaderText("Se actualizó el tipo de producto");
+				alert1.setContentText("El tipo de producto actualizó el nombre.");
+				alert1.showAndWait();
+			}
+
+		}
+	}
+	
+	@FXML
+	public void mouseClickedListType(MouseEvent event) {
+
+		String name = listType.get(tvListType.getSelectionModel().getSelectedIndex()).getName();
+
+		updateNameType.setText(name);
 	}
 }
