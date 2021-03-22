@@ -8,36 +8,36 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="740.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="831.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fx:id="imageDeleteWallEmployee" fitHeight="664.0" fitWidth="740.0" layoutY="-2.0" opacity="0.09" pickOnBounds="true" />
-            <Label layoutX="188.0" layoutY="88.0" text="Eliminar Tipo de Producto" textFill="#dad57c">
+            <ImageView fx:id="imageDeleteWallProductType" fitHeight="723.0" fitWidth="831.0" layoutY="-2.0" opacity="0.09" pickOnBounds="true" />
+            <Label layoutX="249.0" layoutY="77.0" text="Eliminar Tipo de Producto" textFill="#dad57c">
                <font>
                   <Font name="Bernard MT Condensed" size="36.0" />
                </font>
             </Label>
-            <Button layoutX="195.0" layoutY="304.0" mnemonicParsing="false" onAction="#deleteEmployee" prefHeight="53.0" prefWidth="139.0" style="-fx-background-color: #dad57c; -fx-background-radius: 22;" text="Eliminar ">
+            <Button layoutX="256.0" layoutY="293.0" mnemonicParsing="false" onAction="#deleteProductType" prefHeight="53.0" prefWidth="139.0" style="-fx-background-color: #dad57c; -fx-background-radius: 22;" text="Eliminar ">
                <font>
                   <Font name="Franklin Gothic Demi" size="18.0" />
                </font>
             </Button>
-            <Button layoutX="405.0" layoutY="304.0" mnemonicParsing="false" onAction="#mainMenu" prefHeight="53.0" prefWidth="140.0" style="-fx-background-color: #dad57c; -fx-background-radius: 22;" text="Cancelar">
+            <Button layoutX="466.0" layoutY="293.0" mnemonicParsing="false" onAction="#mainMenu" prefHeight="53.0" prefWidth="140.0" style="-fx-background-color: #dad57c; -fx-background-radius: 22;" text="Cancelar">
                <font>
                   <Font name="Franklin Gothic Demi" size="18.0" />
                </font>
             </Button>
-            <Label layoutX="116.0" layoutY="208.0" text="Tipo de producto:" textFill="#dad57c">
+            <Label layoutX="177.0" layoutY="197.0" text="Tipo de producto:" textFill="#dad57c">
                <font>
                   <Font name="Berlin Sans FB" size="29.0" />
                </font>
             </Label>
-            <TextField fx:id="idDeleteEmployee" layoutX="344.0" layoutY="206.0" prefHeight="37.0" prefWidth="249.0" />
+            <TextField fx:id="nameDeleteProductType" layoutX="405.0" layoutY="195.0" prefHeight="37.0" prefWidth="249.0" />
          </children>
       </Pane>
    </center>
    <top>
-      <ImageView fx:id="imageDeleteBannerEmployee" fitHeight="117.0" fitWidth="740.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+      <ImageView fx:id="imageDeleteBannerProductType" fitHeight="129.0" fitWidth="832.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
    </top>
 </BorderPane>
