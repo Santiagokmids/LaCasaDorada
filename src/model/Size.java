@@ -27,6 +27,4 @@ public class Size {
 	public void setUsersCreators(Modifiers usersCreators) {
 		this.usersCreators = usersCreators;
 	}
-
-	
 }

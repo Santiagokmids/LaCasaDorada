@@ -83,6 +83,9 @@ public class LaCasaDoradaGUI {
 
 	@FXML
 	private TextField lastNameDeleteClient;
+	
+	@FXML
+    private TextField phoneDeleteClient;
 
 	@FXML
 	private ImageView imageDeleteBanner;
@@ -2131,20 +2134,33 @@ public class LaCasaDoradaGUI {
 	@FXML
 	public void deleteClient(ActionEvent event) throws IOException {
 
-		if(!nameDeleteClient.getText().isEmpty() && !lastNameDeleteClient.getText().isEmpty()) {
+		if(!nameDeleteClient.getText().isEmpty() && !lastNameDeleteClient.getText().isEmpty() && !phoneDeleteClient.getText().isEmpty()) {
 
-			Client client = laCasaDorada.findObjClient(nameDeleteClient.getText(),lastNameDeleteClient.getText());
+			Client client = laCasaDorada.findObjClient(nameDeleteClient.getText(),lastNameDeleteClient.getText(),phoneDeleteClient.getText());
 
 			if(client != null) {
-				laCasaDorada.deleteClient(client);
+				
+				Order order = laCasaDorada.findClientInOrder(client);
+				
+				if(order != null) {
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setTitle("ERROR");
+					alert.setHeaderText("No se pudo eliminar el cliente");
+					alert.setContentText("El cliente ya ha realizado un pedido");
+					alert.showAndWait();
+				}
+				else {
+					
+					laCasaDorada.deleteClient(client);
 
-				Alert alerts = new Alert(AlertType.INFORMATION);
-				alerts.setTitle("EXCELENTE");
-				alerts.setHeaderText("Se ha eliminado exitosamente.");
-				alerts.setContentText("Se ha eliminado el cliente "+nameDeleteClient.getText()+" exitosamente");
-				alerts.showAndWait();
+					Alert alerts = new Alert(AlertType.INFORMATION);
+					alerts.setTitle("EXCELENTE");
+					alerts.setHeaderText("Se ha eliminado exitosamente.");
+					alerts.setContentText("Se ha eliminado el cliente "+nameDeleteClient.getText()+" exitosamente");
+					alerts.showAndWait();
 
-				mainMenu();
+					mainMenu();
+				}
 			}
 			else {
 				Alert alert = new Alert(AlertType.ERROR);
@@ -2188,15 +2204,27 @@ public class LaCasaDoradaGUI {
 			Employee employee = laCasaDorada.findObjEmployee(idDeleteEmployee.getText());
 
 			if(employee != null) {
-				laCasaDorada.deleteEmployee(employee);
+				
+				Order order = laCasaDorada.findEmployeeInOrder(employee);
+				
+				if(order != null) {
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setTitle("ERROR");
+					alert.setHeaderText("No se pudo eliminar el empleado");
+					alert.setContentText("El empleado ya ha realizado un pedido");
+					alert.showAndWait();
+				}
+				else {
+					laCasaDorada.deleteEmployee(employee);
 
-				Alert alerts = new Alert(AlertType.INFORMATION);
-				alerts.setTitle("EXCELENTE");
-				alerts.setHeaderText("Se ha eliminado exitosamente.");
-				alerts.setContentText("Se ha eliminado el empleado con número de identificación: "+idDeleteEmployee.getText()+" exitosamente");
-				alerts.showAndWait();
+					Alert alerts = new Alert(AlertType.INFORMATION);
+					alerts.setTitle("EXCELENTE");
+					alerts.setHeaderText("Se ha eliminado exitosamente.");
+					alerts.setContentText("Se ha eliminado el empleado con número de identificación: "+idDeleteEmployee.getText()+" exitosamente");
+					alerts.showAndWait();
 
-				mainMenu();
+					mainMenu();
+				}
 			}
 			else {
 				Alert alert = new Alert(AlertType.ERROR);
@@ -2240,15 +2268,76 @@ public class LaCasaDoradaGUI {
 			User user = laCasaDorada.findUser(nameDeleteUser.getText(),idDeleteUser.getText());
 
 			if(user != null) {
-				laCasaDorada.deleteUser(user);
+				
+				Order order = laCasaDorada.findUserInOrder(user);
+				
+				if(order != null) {
+					
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setTitle("ERROR");
+					alert.setHeaderText("No se pudo eliminar el usuario");
+					alert.setContentText("No se puede eliminar porque el usuario está activo en el sistema");
+					alert.showAndWait();
+					
+				}
+				else {
+					Product product = laCasaDorada.findUserInProduct(user);
+					
+					if(product != null) {
+						
+						Alert alert = new Alert(AlertType.ERROR);
+						alert.setTitle("ERROR");
+						alert.setHeaderText("No se pudo eliminar el usuario");
+						alert.setContentText("No se puede eliminar porque el usuario está activo en el sistema");
+						alert.showAndWait();
+					}else {
+						
+						Ingredient ingredient = laCasaDorada.findUserInIngredient(user);
+						
+						if(ingredient != null) {
+							Alert alert = new Alert(AlertType.ERROR);
+							alert.setTitle("ERROR");
+							alert.setHeaderText("No se pudo eliminar el usuario");
+							alert.setContentText("No se puede eliminar porque el usuario está activo en el sistema");
+							alert.showAndWait();
+						}
+						else {
+							
+							Size size = laCasaDorada.findUserInSize(user);
+							
+							if(size != null) {
+								Alert alert = new Alert(AlertType.ERROR);
+								alert.setTitle("ERROR");
+								alert.setHeaderText("No se pudo eliminar el usuario");
+								alert.setContentText("No se puede eliminar porque el usuario está activo en el sistema");
+								alert.showAndWait();
+							}
+							else {
+								
+								ProductType PorductType = laCasaDorada.findUserInProductType(user);
+								
+								if(PorductType != null) {
+									Alert alert = new Alert(AlertType.ERROR);
+									alert.setTitle("ERROR");
+									alert.setHeaderText("No se pudo eliminar el usuario");
+									alert.setContentText("No se puede eliminar porque el usuario está activo en el sistema");
+									alert.showAndWait();
+								}
+								else {
+									laCasaDorada.deleteUser(user);
 
-				Alert alerts = new Alert(AlertType.INFORMATION);
-				alerts.setTitle("EXCELENTE");
-				alerts.setHeaderText("Se ha eliminado exitosamente.");
-				alerts.setContentText("Se ha eliminado el usuario "+nameDeleteUser.getText()+" exitosamente");
-				alerts.showAndWait();
+									Alert alerts = new Alert(AlertType.INFORMATION);
+									alerts.setTitle("EXCELENTE");
+									alerts.setHeaderText("Se ha eliminado exitosamente.");
+									alerts.setContentText("Se ha eliminado el usuario "+nameDeleteUser.getText()+" exitosamente");
+									alerts.showAndWait();
 
-				mainMenu();
+									mainMenu();
+								}
+							}
+						}
+					}
+				}
 			}
 			else {
 				Alert alert = new Alert(AlertType.ERROR);
@@ -2270,7 +2359,7 @@ public class LaCasaDoradaGUI {
 	@FXML
 	public void loadDeletedProduct() throws IOException {
 
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("deleteUser-pane.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("deleteProduct-pane.fxml"));
 		loader.setController(this);
 
 		Parent load = loader.load();
@@ -2297,17 +2386,11 @@ public class LaCasaDoradaGUI {
 
 				if(order != null) {
 					
-					if(order.getState() == StateOrder.CANCELADO || order.getState() == StateOrder.ENTREGADO) {
-						laCasaDorada.deleteProduct(product);
-
-						Alert alerts = new Alert(AlertType.INFORMATION);
-						alerts.setTitle("EXCELENTE");
-						alerts.setHeaderText("Se ha eliminado exitosamente.");
-						alerts.setContentText("Se ha eliminado el producto "+nameDeleteProduct.getText()+" exitosamente");
-						alerts.showAndWait();
-
-						mainMenu();
-					}
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setTitle("ERROR");
+					alert.setHeaderText("No se pudo eliminar el producto");
+					alert.setContentText("No se puede eliminar porque el producto está activo en el sistema");
+					alert.showAndWait();
 				}
 				else {
 					
@@ -2337,5 +2420,22 @@ public class LaCasaDoradaGUI {
 			alert.setContentText("Debe llenar los campos para eliminar el usuario");
 			alert.showAndWait();
 		}
+	}
+	
+	@FXML
+	public void loadDeletedTypeProduct() throws IOException {
+
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("delete-pane.fxml"));
+		loader.setController(this);
+
+		Parent load = loader.load();
+		mainPane.setCenter(load);
+
+		mainPane.getChildren().clear();
+		mainPane.setTop(load);
+		Image image = new Image("/images/Banner.jpg");
+		imageDeleteWallUser.setImage(image);
+		Image image2 = new Image("/images/BannerCasaDorada.jpg");
+		imageDeleteBannerUser.setImage(image2);
 	}
 }

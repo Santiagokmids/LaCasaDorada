@@ -211,7 +211,7 @@ public class LaCasaDorada {
 		}
 		return orders;
 	}
-	
+
 	public Order findProductInOrder(Product product){
 
 		boolean find = false;
@@ -219,7 +219,7 @@ public class LaCasaDorada {
 
 		for (int j = 0; j < order.size() && !find; j++) {
 			for (int i = 0; i < order.size(); i++) {
-				
+
 				if(order.get(i).getProducts().get(j) == product){
 					find = true;
 					orderToSend = order.get(i);
@@ -381,6 +381,24 @@ public class LaCasaDorada {
 		return find;
 	}
 
+	public Client findObjClient(String name, String lastName, String phone){
+
+		Client client = null;
+		boolean find = false;
+
+		for (int j = 0; j < people.size() && !find; j++) {
+			
+			if(people.get(j) instanceof Client) {
+				Client peopleClient = (Client)people.get(j);
+				if(peopleClient.getName().equalsIgnoreCase(name) && peopleClient.getLastName().equalsIgnoreCase(lastName) && peopleClient.getTelephone().equals(phone)) {
+					find = true;
+					client = (Client) people.get(j);
+				}
+			}
+		}
+		return client;
+	}
+	
 	public Client findObjClient(String name, String lastName){
 
 		Client client = null;
@@ -504,7 +522,7 @@ public class LaCasaDorada {
 
 		for (int j = 0; j <preorder.size() && !find; j++) {
 
-			if(preorder.get(j).getProduct().getName().equalsIgnoreCase(name) && preorder.get(j).getAmount() == 				amount) {
+			if(preorder.get(j).getProduct().getName().equalsIgnoreCase(name) && preorder.get(j).getAmount() == amount) {
 				find = true;
 				preOrder = preorder.get(j);
 			}
@@ -612,7 +630,7 @@ public class LaCasaDorada {
 			}
 		}
 	}
-	
+
 	public void deleteProduct(Product productToDelete) {
 
 		boolean verific = false;
@@ -703,6 +721,100 @@ public class LaCasaDorada {
 			}
 		}
 		return validation;
+	}
+
+	public Order findClientInOrder(Client client) {
+
+		Order clienInOrder = null;
+		boolean verific = false;
+
+		for (int i = 0; i < order.size() && !verific; i++) {
+			if(order.get(i).getOrderClient() == client) {
+				verific = true;
+				clienInOrder = order.get(i);
+			}
+		}
+		return clienInOrder;
+	}
+
+	public Order findEmployeeInOrder(Employee employee) {
+
+		Order clienInOrder = null;
+		boolean verific = false;
+
+		for (int i = 0; i < order.size() && !verific; i++) {
+			if(order.get(i).getOrderEmployee() == employee) {
+				verific = true;
+				clienInOrder = order.get(i);
+			}
+		}
+		return clienInOrder;
+	}
+	
+	public Order findUserInOrder(User user) {
+
+		Order userInOrder = null;
+		boolean verific = false;
+
+		for (int i = 0; i < order.size() && !verific; i++) {
+			if((order.get(i).getUsersCreators().getCreateObject() == user || order.get(i).getUsersCreators().getLastModifier() == user) || order.get(i).getOrderEmployee().getName().equals(user.getName()) && order.get(i).getOrderEmployee().getName().equals(user.getLastName()) && order.get(i).getOrderEmployee().getId().equals(user.getId())) {
+				verific = true;
+				userInOrder = order.get(i);
+			}
+		}
+		return userInOrder;
+	}
+	
+	public Product findUserInProduct(User user) {
+
+		Product userInProduct = null;
+		boolean verific = false;
+
+		for (int i = 0; i < product.size() && !verific; i++) {
+			if(product.get(i).getUsersCreators().getCreateObject() == user || product.get(i).getUsersCreators().getLastModifier() == user) {
+				userInProduct = product.get(i);
+			}
+		}
+		return userInProduct;
+	}
+	
+	public Ingredient findUserInIngredient(User user) {
+
+		Ingredient userInIngredient = null;
+		boolean verific = false;
+
+		for (int i = 0; i < ingredient.size() && !verific; i++) {
+			if(ingredient.get(i).getUsersCreators().getCreateObject() == user || ingredient.get(i).getUsersCreators().getLastModifier() == user) {
+				userInIngredient = ingredient.get(i);
+			}
+		}
+		return userInIngredient;
+	}
+	
+	public Size findUserInSize(User user) {
+
+		Size userInSize = null;
+		boolean verific = false;
+
+		for (int i = 0; i < sizes.size() && !verific; i++) {
+			if(sizes.get(i).getUsersCreators().getCreateObject() == user || sizes.get(i).getUsersCreators().getLastModifier() == user) {
+				userInSize = sizes.get(i);
+			}
+		}
+		return userInSize;
+	}
+	
+	public ProductType findUserInProductType(User user) {
+
+		ProductType userInProductType = null;
+		boolean verific = false;
+
+		for (int i = 0; i < productType.size() && !verific; i++) {
+			if(productType.get(i).getUsersCreators().getCreateObject() == user || productType.get(i).getUsersCreators().getLastModifier() == user) {
+				userInProductType = productType.get(i);
+			}
+		}
+		return userInProductType;
 	}
 
 	public void importData(String fileName) throws IOException {

@@ -35,7 +35,7 @@
                   <MenuItem mnemonicParsing="false" onAction="#loadDeleteEmployee" text="Empleado" />
                   <MenuItem mnemonicParsing="false" onAction="#loadDeletedUser" text="Usuario" />
                   <MenuItem mnemonicParsing="false" onAction="#loadDeletedProduct" text="Producto" />
-                  <MenuItem mnemonicParsing="false" text="Tipo de Producto" />
+                  <MenuItem mnemonicParsing="false" onAction="#loadDeletedTypeProduct" text="Tipo de Producto" />
                   <MenuItem mnemonicParsing="false" text="Ingrediente" />
             </items>
           </Menu>
