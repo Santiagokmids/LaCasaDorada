@@ -23,12 +23,12 @@
             <TableView fx:id="tvListOrders" onMouseClicked="#mouseClickedListOrder" prefHeight="566.0" prefWidth="566.0">
                <columns>
                   <TableColumn fx:id="nameOrder" prefWidth="74.0" resizable="false" text="Código" />
-                  <TableColumn fx:id="estateOrder" editable="false" minWidth="0.0" prefWidth="59.0" resizable="false" text="Estado" />
-                  <TableColumn fx:id="productOrder" editable="false" minWidth="0.0" prefWidth="84.0" resizable="false" text="Productos" />
-                  <TableColumn fx:id="amountOrder" editable="false" minWidth="0.0" prefWidth="73.0" resizable="false" text="Cantidad" />
-                  <TableColumn fx:id="clientOrder" editable="false" minWidth="0.0" prefWidth="77.0" resizable="false" text="Cliente" />
-                  <TableColumn fx:id="employeeOrder" editable="false" minWidth="0.0" prefWidth="86.0" resizable="false" text="Empleado" />
-                  <TableColumn fx:id="dateOrder" editable="false" minWidth="0.0" prefWidth="112.0" resizable="false" text="Creación" />
+                  <TableColumn fx:id="estateOrder" editable="false" minWidth="0.0" prefWidth="88.0" resizable="false" text="Estado" />
+                  <TableColumn fx:id="productOrder" editable="false" minWidth="0.0" resizable="false" text="Productos" />
+                  <TableColumn fx:id="amountOrder" editable="false" minWidth="0.0" prefWidth="58.0" resizable="false" text="Cantidad" />
+                  <TableColumn fx:id="clientOrder" editable="false" minWidth="0.0" prefWidth="74.0" resizable="false" text="Cliente" />
+                  <TableColumn fx:id="employeeOrder" editable="false" minWidth="0.0" prefWidth="84.0" resizable="false" text="Empleado" />
+                  <TableColumn fx:id="dateOrder" editable="false" minWidth="0.0" prefWidth="107.0" resizable="false" text="Creación" />
                   <TableColumn fx:id="obsOrdersList" editable="false" minWidth="0.0" prefWidth="56.0" resizable="false" text="Observaciones" />
                </columns>
             </TableView>

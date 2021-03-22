@@ -49,15 +49,15 @@
                   <MenuItem mnemonicParsing="false" text="Ingrediente" />
             </items>
           </Menu>
-            <Menu mnemonicParsing="false" text="Listar">
+            <Menu mnemonicParsing="false" text="Listar y Actualizar">
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#listClient" text="Cliente" />
                   <MenuItem mnemonicParsing="false" onAction="#listEmployee" text="Empleado" />
                   <MenuItem mnemonicParsing="false" onAction="#listUsers" text="Usuario" />
                   <MenuItem mnemonicParsing="false" onAction="#listOrderStart" text="Pedido" />
                   <MenuItem mnemonicParsing="false" onAction="#listProduct" text="Producto" />
-                  <MenuItem mnemonicParsing="false" text="Tipo de Producto" />
-                  <MenuItem mnemonicParsing="false" text="Ingrediente" />
+                  <MenuItem mnemonicParsing="false" onAction="#listType" text="Tipo de Producto" />
+                  <MenuItem mnemonicParsing="false" onAction="#listIngredient" text="Ingrediente" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Acerca de" />
