@@ -526,6 +526,16 @@ public class LaCasaDoradaGUI {
 
 	@FXML
 	private TableColumn<ProductType, String> tcNameType;
+	
+	@FXML
+	private ImageView imageDeleteWallOrder;
+
+	@FXML
+	private TextField codeDeleteOrder;
+
+	@FXML
+	private ImageView imageDeleteOrder;
+
 
 	@FXML
 	private TextField updateNameType;
@@ -2872,6 +2882,81 @@ public class LaCasaDoradaGUI {
 		String name = listType.get(tvListType.getSelectionModel().getSelectedIndex()).getName();
 
 		updateNameType.setText(name);
+	}
+	
+	@FXML
+	public void loadDeleteOrder() throws IOException {
+
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("deleteOrder.fxml"));
+		loader.setController(this);
+
+		Parent load = loader.load();
+		mainPane.setTop(load);
+
+		mainPane.getChildren().clear();
+		mainPane.setTop(load);
+		Image image = new Image("/images/Banner.jpg");
+		imageDeleteOrder.setImage(image);
+		Image image2 = new Image("/images/BannerCasaDorada.jpg");
+		imageDeleteWallOrder.setImage(image2);
+	} 
+
+	@FXML
+	public void deleteOrder(ActionEvent event) throws IOException {
+
+		if(!nameDeleteClient.getText().isEmpty()) {
+
+			Client client = laCasaDorada.findObjClient(nameDeleteClient.getText(),lastNameDeleteClient.getText(),phoneDeleteClient.getText());
+
+			if(client != null) {
+
+				Order order = laCasaDorada.findClientInOrder(client);
+
+				if(order != null) {
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setTitle("ERROR");
+					alert.setHeaderText("No se pudo eliminar el cliente");
+					alert.setContentText("El cliente ya ha realizado un pedido");
+					alert.showAndWait();
+				}
+				else {
+					
+					Alert alerts = new Alert(AlertType.INFORMATION);
+					alerts.setTitle("EXCELENTE");
+					
+					Alert alert1 = new Alert(AlertType.CONFIRMATION);
+					alert1.setHeaderText("¿Está seguro de eliminar al cliente "+nameDeleteClient.getText()+"?.");
+					Optional<ButtonType> result = alert1.showAndWait();
+					
+					if(result.get() == ButtonType.OK) {
+						
+						alerts.setHeaderText("Se ha eliminado exitosamente.");
+						alerts.showAndWait();
+						laCasaDorada.deleteClient(client);
+						mainMenu();
+						
+					}else {
+						alerts.setHeaderText("No se ha eliminado.");
+						alerts.showAndWait();
+						mainMenu();
+					}
+				}
+			}
+			else {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("ERROR");
+				alert.setHeaderText("No se pudo eliminar el cliente");
+				alert.setContentText("No existe un cliente con ese nombre y/o apellido");
+				alert.showAndWait();
+			}
+		}
+		else {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("ERROR");
+			alert.setHeaderText("No se pudo eliminar el cliente");
+			alert.setContentText("Debe llenar los campos para eliminar el cliente");
+			alert.showAndWait();
+		}
 	}
 	
 	@FXML
