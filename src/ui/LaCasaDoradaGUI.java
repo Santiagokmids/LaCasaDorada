@@ -394,6 +394,12 @@ public class LaCasaDoradaGUI {
 	private TableColumn<Order, String> employeeOrder;
 
 	@FXML
+	private TableColumn<Order, String> dateOrder;
+
+	@FXML
+	private TableColumn<?, ?> obsOrdersList;
+
+	@FXML
 	private TextField updateNameOrder;
 
 	@FXML
@@ -406,7 +412,10 @@ public class LaCasaDoradaGUI {
 	private TextField updateAmountOrder;
 
 	@FXML
-	private ComboBox<?> stateOrderList;
+	private ComboBox<String> stateOrderList;
+
+	@FXML
+	private TextArea obsOders;
 
 	@FXML
 	private TextField nameEmployeeList;
@@ -1631,7 +1640,10 @@ public class LaCasaDoradaGUI {
 		Image image2 = new Image("/images/BannerCasaDorada.jpg");
 		imageBannerListOrder.setImage(image2);
 
-		inicializateTableViewEmployee();
+		stateOrder.setPromptText("Seleccione el estado del pedido");
+		stateOrder.getItems().addAll(StateOrder.SOLICITADO,StateOrder.EN_PROCESO,StateOrder.ENVIADO,StateOrder.ENTREGADO,StateOrder.CANCELADO);
+
+		inicializateTableViewOrders();
 
 	}
 
@@ -1640,12 +1652,13 @@ public class LaCasaDoradaGUI {
 		listOrders = FXCollections.observableArrayList(laCasaDorada.getOrder());
 
 		tvListOrders.setItems(listOrders);
-		nameOrder.setCellValueFactory(new PropertyValueFactory<Order,String>("Name"));
+		nameOrder.setCellValueFactory(new PropertyValueFactory<Order,String>("code"));
 		estateOrder.setCellValueFactory(new PropertyValueFactory<Order,String>("State"));
-		productOrder.setCellValueFactory(new PropertyValueFactory<Order,String>("product"));
-		amountOrder.setCellValueFactory(new PropertyValueFactory<Order,Integer>("integer"));
-		clientOrder.setCellValueFactory(new PropertyValueFactory<Order,String>("client"));
-		employeeOrder.setCellValueFactory(new PropertyValueFactory<Order,String>("employee"));
+		productOrder.setCellValueFactory(new PropertyValueFactory<Order,String>("nameProduct"));
+		amountOrder.setCellValueFactory(new PropertyValueFactory<Order,Integer>("amountProduct"));
+		clientOrder.setCellValueFactory(new PropertyValueFactory<Order,String>("nameClient"));
+		employeeOrder.setCellValueFactory(new PropertyValueFactory<Order,String>("nameEmployee"));
+		dateOrder.setCellValueFactory(new PropertyValueFactory<Order,String>("dateDay"));
 	}
 
 	@FXML
@@ -1682,6 +1695,116 @@ public class LaCasaDoradaGUI {
 
 		inicializateTableViewProduct();
 	}
+
+	@FXML
+	public void modifyListOrders(ActionEvent event) {
+
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.setTitle("ERROR");
+
+		if(tvListOrders.getSelectionModel().isEmpty()) {
+
+			alert.setHeaderText("No se pudo actualizar el usuario");
+			alert.setContentText("Debe seleccionar uno de la lista");
+			alert.showAndWait();
+		}
+		else {
+
+			boolean verify = false;
+
+			ArrayList<Product> products = new ArrayList<>();
+			ArrayList<Integer> amounts = new ArrayList<>();
+
+			String code = listOrders.get(tvListOrders.getSelectionModel().getSelectedIndex()).getCode();
+			String state = listOrders.get(tvListOrders.getSelectionModel().getSelectedIndex()).getState().toString();
+			products = listOrders.get(tvListOrders.getSelectionModel().getSelectedIndex()).getProducts();
+			amounts = listOrders.get(tvListOrders.getSelectionModel().getSelectedIndex()).getAmount();
+			String client = listOrders.get(tvListOrders.getSelectionModel().getSelectedIndex()).getOrderClient().getName();
+			String employee = listOrders.get(tvListOrders.getSelectionModel().getSelectedIndex()).getOrderEmployee().getName();
+			String obsOrder = listOrders.get(tvListOrders.getSelectionModel().getSelectedIndex()).getFieldOfObservations();
+
+			Order order = laCasaDorada.findOrder(code);
+
+
+			if(!updateNameOrder.getText().isEmpty() && !updateNameOrder.getText().equals(code)) {
+				code = updateNameOrder.getText();
+				order.getUsersCreators().setLastModifier(usersModifiers.getCreateObject());
+				verify = true;
+			}
+
+			if(!stateOrderList.getValue().equals(state)) {
+
+				if(laCasaDorada.searchState(state,stateOrderList.getValue()) != -1) {
+					state = stateOrderList.getValue();
+					order.getUsersCreators().setLastModifier(usersModifiers.getCreateObject());
+					verify = true;
+				}
+			}
+
+			if(!updateProductsOrder.getText().isEmpty() && objListProducts(updateProductsOrder.getText()).size() != 0) {
+				products = objListProducts(updateProductsOrder.getText());
+				order.getUsersCreators().setLastModifier(usersModifiers.getCreateObject());
+				verify = true;
+			}
+
+			if(!updateAmountOrder.getText().isEmpty() && objListProducts(updateAmountOrder.getText()).size() != 0) {
+				amounts = objListAmounts(updateProductsOrder.getText(), products.size());
+				order.getUsersCreators().setLastModifier(usersModifiers.getCreateObject());
+				verify = true;
+			}
+
+
+			if(!nameClientList.getText().isEmpty() && !nameClientList.getText().equals(client)) {
+				client = nameClientList.getText();
+				order.getUsersCreators().setLastModifier(usersModifiers.getCreateObject());
+				verify = true;
+			}
+
+			if(!nameEmployeeList.getText().isEmpty() && !nameEmployeeList.getText().equals(employee)) {
+				employee = nameClientList.getText();
+				order.getUsersCreators().setLastModifier(usersModifiers.getCreateObject());
+				verify = true;
+			}
+
+			if(!obsOders.getText().isEmpty() && !obsOders.getText().equals(obsOrder)) {
+				obsOrder = obsOders.getText();
+				order.getUsersCreators().setLastModifier(usersModifiers.getCreateObject());
+				verify = true;
+			}
+
+			order.setCode(code);
+			order.setState(laCasaDorada.findState(state));
+			order.setProducts(products);
+			order.setAmount(amounts);
+			order.setOrderClient(laCasaDorada.findObjClient(client));
+			order.setOrderEmployee(laCasaDorada.findEmployee(employee));
+			order.setFieldOfObservations(obsOrder);
+
+			listOrders.set(tvListOrders.getSelectionModel().getSelectedIndex(),new Order(code,laCasaDorada.findState(state),amounts,
+					order.getDate(),obsOrder,laCasaDorada.findObjClient(client),products,laCasaDorada.findEmployee(employee),order.getUsersCreators()));
+
+			updateNameProduct.setText("");
+			updateIngredientProduct.setText("");
+			updateTypeProduct.setValue("");
+			comboSizeProduct.setValue("");
+			updatePriceProduct.setText("");
+
+			if(verify) {
+				Alert alert1 = new Alert(AlertType.INFORMATION);
+				alert1.setTitle("EXCELENT");
+				alert1.setHeaderText("Se ha actualizado la información");
+				alert1.setContentText(null);
+				alert1.showAndWait();
+
+			}else {
+				alert.setHeaderText("No se pudo actualizar el usuario");
+				alert.setContentText("Ingresó los mismos datos anteriores o erróneos.");
+				alert.showAndWait();
+			}
+
+		} 
+	}
+
 
 	@FXML
 	public void modifyListProduct(ActionEvent event) {
@@ -1786,6 +1909,69 @@ public class LaCasaDoradaGUI {
 		return listIngredient;
 	}
 
+	public ArrayList<Product> objListProducts(String product){
+
+		ArrayList<Product> listProduct = new ArrayList<>();
+
+		String[] partsProducts = product.split(";");
+
+		boolean verific = false;
+
+		for (int i = 0; i < partsProducts.length && !verific; i++) {
+
+			Product objProduct = laCasaDorada.findProducts(partsProducts[i]);
+
+			if(objProduct != null) {
+
+				listProduct.add(objProduct);
+			}
+			else {
+				verific = true;
+			}
+		}
+
+		if(verific) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("ERROR");
+			alert.setHeaderText("No se pudo actualizar la lista de productos");
+			alert.setContentText("Hay uno o más productos de la lista que no existen");
+			alert.showAndWait();
+		}
+
+		return listProduct;
+	}
+
+	public ArrayList<Integer> objListAmounts(String amount, int size){
+
+		ArrayList<Integer> listAmount = new ArrayList<>();
+		String[] partsAmounts = amount.split(";");
+
+		for (int i = 0; i < partsAmounts.length; i++) {
+
+			try {
+
+				int partsAmount = Integer.parseInt(partsAmounts[i]);
+				listAmount.add(partsAmount);
+
+				if(size != listAmount.size()) {
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setTitle("ERROR");
+					alert.setHeaderText("No se pudo actualizar las cantidades de los productos");
+					alert.setContentText("Agregó un número incorrecto de cantidades (más o menos). Tiene que haber igual número de cantidades que de productos");
+					alert.showAndWait();
+				}
+			}catch (NumberFormatException e) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setHeaderText("No ingresó un número");
+				alert.setContentText("Debe ingresar un valor númerico en el campo de precio del producto");
+				alert.showAndWait();
+			}
+		}
+
+		return listAmount;
+	}
+
+
 	@FXML
 	public void mouseClickedListProduct(MouseEvent event) {
 
@@ -1806,6 +1992,30 @@ public class LaCasaDoradaGUI {
 		updatePriceProduct.setText(price);
 	}
 
+	@FXML
+	public void mouseClickedListOrder(MouseEvent event) {
+
+		ArrayList<Product> products = new ArrayList<>();
+		ArrayList<Integer> amounts = new ArrayList<>();
+
+		String state = listOrders.get(tvListOrders.getSelectionModel().getSelectedIndex()).getState().toString();
+		products = listOrders.get(tvListOrders.getSelectionModel().getSelectedIndex()).getProducts();
+		amounts = listOrders.get(tvListOrders.getSelectionModel().getSelectedIndex()).getAmount();
+		String client = listOrders.get(tvListOrders.getSelectionModel().getSelectedIndex()).getOrderClient().getName();
+		String employee = listOrders.get(tvListOrders.getSelectionModel().getSelectedIndex()).getOrderEmployee().getName();
+		String obsOrder = listOrders.get(tvListOrders.getSelectionModel().getSelectedIndex()).getFieldOfObservations();
+
+		String productMessage = productsToMessage(products);
+		String amountMessage = amountsToMessage(amounts);
+
+		estateOrder.setText(state);
+		updateProductsOrder.setText(productMessage);
+		updateAmountOrder.setText(amountMessage);
+		nameClientList.setText(client);
+		nameEmployeeList.setText(employee);
+		obsOders.setText(obsOrder);
+	}
+
 	public String ingredientsToMessage(ArrayList<Ingredient> ingredient) {
 
 		String message = "";
@@ -1818,6 +2028,40 @@ public class LaCasaDoradaGUI {
 			}
 			else {
 				message += ingredient.get(i).getName();
+			}
+		}
+		return message;
+	}
+
+	public String productsToMessage(ArrayList<Product> product) {
+
+		String message = "";
+
+		for (int i = 0; i < product.size(); i++) {
+
+			if(i != product.size()-1) {
+
+				message += product.get(i).getName()+"-";
+			}
+			else {
+				message += product.get(i).getName();
+			}
+		}
+		return message;
+	}
+
+	public String amountsToMessage(ArrayList<Integer> amounts) {
+
+		String message = "";
+
+		for (int i = 0; i < amounts.size(); i++) {
+
+			if(i != amounts.size()-1) {
+
+				message += amounts.get(i)+"-";
+			}
+			else {
+				message += amounts.get(i);
 			}
 		}
 		return message;
