@@ -392,7 +392,7 @@ public class LaCasaDorada {
 
 		for (int j = 0; j <preorder.size() && !find; j++) {
 
-			if(preorder.get(j).getProduct().getName().equalsIgnoreCase(name) && preorder.get(j).getAmount() == amount) {
+			if(preorder.get(j).getProduct().getName().equalsIgnoreCase(name) && preorder.get(j).getAmount() == 				amount) {
 				find = true;
 				preOrder = preorder.get(j);
 			}
@@ -481,6 +481,27 @@ public class LaCasaDorada {
 			}
 		}
 	}
+	
+	public void deleteUser(User user) {
+
+		boolean verific = false;
+		User validation = null;
+
+		for (int i = 0; i < people.size() && !verific; i++) {
+			
+			
+			
+			if(people.get(i) instanceof User) {
+				
+				validation = (User)people.get(i);
+				
+				if(validation.getUserName().equals(user.getUserName()) && 				validation.getId().equals(user.getId())) {
+					verific = true;
+					people.remove(i);
+				}
+			}
+		}
+	}
 
 	public ArrayList<User> getUsers(){
 
@@ -534,8 +555,28 @@ public class LaCasaDorada {
 			if(people.get(i) instanceof User) {
 
 				user = (User)people.get(i);
-				if(user.getName().equalsIgnoreCase(name) && user.getLastName().equalsIgnoreCase(lastName) && user.getId().equals(id) && 					user.getUserName().equalsIgnoreCase(userName)) {
+				if(user.getName().equalsIgnoreCase(name) && user.getLastName().equalsIgnoreCase(lastName) && 					user.getId().equals(id) && user.getUserName().equalsIgnoreCase(userName)) {
 					validation = user;
+					verific = true;
+				}
+			}
+		}
+		return validation;
+	}
+	
+	public User findUser(String userName, String id) {
+
+		User user = null;
+		User validation = null;
+		boolean verific = false;
+
+		for (int i = 0; i < people.size() && !verific; i++) {
+			if(people.get(i) instanceof User) {
+
+				user = (User)people.get(i);
+				if(user.getId().equals(id) && user.getUserName().equalsIgnoreCase(userName)) {
+					validation = user;
+					verific = true;
 				}
 			}
 		}

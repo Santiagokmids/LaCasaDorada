@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="831.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="831.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <ImageView fx:id="imageBannerClient" fitHeight="135.0" fitWidth="744.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
    </top>
@@ -18,7 +18,7 @@
       <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
             <ImageView fx:id="imageWallClient" fitHeight="751.0" fitWidth="831.0" layoutX="14.0" opacity="0.09" pickOnBounds="true" preserveRatio="true" />
-            <TableView fx:id="tvClient" onMouseClicked="#mouseClickedClient" prefHeight="566.0" prefWidth="536.0">
+            <TableView fx:id="tvClient" onMouseClicked="#mouseClickedClient" prefHeight="606.0" prefWidth="536.0">
                <columns>
                   <TableColumn fx:id="tcNameClient" prefWidth="79.0" resizable="false" text="Nombre" />
                   <TableColumn fx:id="tcLastNameClient" minWidth="0.0" prefWidth="78.0" resizable="false" text="Apellidos" />
@@ -62,12 +62,12 @@
                   <Font name="Berlin Sans FB" size="18.0" />
                </font>
             </Label>
-            <Button layoutX="600.0" layoutY="421.0" mnemonicParsing="false" onAction="#modifyClient" prefHeight="53.0" prefWidth="179.0" style="-fx-background-color: #dad57c; -fx-background-radius: 22;" text="Modificar">
+            <Button layoutX="600.0" layoutY="445.0" mnemonicParsing="false" onAction="#modifyClient" prefHeight="53.0" prefWidth="179.0" style="-fx-background-color: #dad57c; -fx-background-radius: 22;" text="Modificar">
                <font>
                   <Font name="Franklin Gothic Demi" size="18.0" />
                </font>
             </Button>
-            <Button layoutX="600.0" layoutY="489.0" mnemonicParsing="false" onAction="#mainMenu" prefHeight="53.0" prefWidth="179.0" style="-fx-background-color: #dad57c; -fx-background-radius: 22;" text="Cancelar">
+            <Button layoutX="600.0" layoutY="513.0" mnemonicParsing="false" onAction="#mainMenu" prefHeight="53.0" prefWidth="179.0" style="-fx-background-color: #dad57c; -fx-background-radius: 22;" text="Cancelar">
                <font>
                   <Font name="Franklin Gothic Demi" size="18.0" />
                </font>
