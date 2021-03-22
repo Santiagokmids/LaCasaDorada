@@ -544,7 +544,22 @@ public class LaCasaDorada {
 		}
 		return type;
 	}
+	
+	public Product findTypeOfProduct(ProductType productType){
 
+		boolean find = false;
+		Product type= null;
+
+		for (int j = 0; j <product.size() && !find; j++) {
+
+			if(product.get(j).getProductType() == productType) {
+				find = true;
+				type = product.get(j);
+			}
+		}
+		return type;
+	}
+	
 	public Size findSize(String size){
 
 		boolean find = false;
@@ -593,7 +608,7 @@ public class LaCasaDorada {
 		boolean verific = false;
 
 		for (int i = 0; i < people.size() && !verific; i++) {
-			if(people.get(i) instanceof Client && people.get(i).getName().equals(client.getName()) && 				people.get(i).getLastName().equals(client.getLastName())) {
+			if(people.get(i) instanceof Client && people.get(i).getName().equals(client.getName()) && people.get(i).getLastName().equals(client.getLastName())) {
 				verific = true;
 				people.remove(i);
 			}
@@ -623,7 +638,7 @@ public class LaCasaDorada {
 
 				validation = (User)people.get(i);
 
-				if(validation.getUserName().equals(user.getUserName()) && 				validation.getId().equals(user.getId())) {
+				if(validation.getUserName().equals(user.getUserName()) && validation.getId().equals(user.getId())) {
 					verific = true;
 					people.remove(i);
 				}
@@ -639,6 +654,32 @@ public class LaCasaDorada {
 			if(product.get(i).getName().equals(productToDelete.getName())) {
 				verific = true;
 				product.remove(i);
+			}
+		}
+	}
+	
+	public void deleteProductType(ProductType productTypeDelete){
+
+		boolean verific = false;
+
+		for (int j = 0; j <productType.size() && !verific; j++) {
+
+			if(productType.get(j) == productTypeDelete) {
+				verific = true;
+				productType.remove(j);
+			}
+		}
+	}
+	
+	public void deleteIngredient(Ingredient ingredientDelete){
+
+		boolean verific = false;
+
+		for (int j = 0; j <ingredient.size() && !verific; j++) {
+
+			if(ingredient.get(j) == ingredientDelete) {
+				verific = true;
+				ingredient.remove(j);
 			}
 		}
 	}
@@ -695,7 +736,7 @@ public class LaCasaDorada {
 			if(people.get(i) instanceof User) {
 
 				user = (User)people.get(i);
-				if(user.getName().equalsIgnoreCase(name) && user.getLastName().equalsIgnoreCase(lastName) && 					user.getId().equals(id) && user.getUserName().equalsIgnoreCase(userName)) {
+				if(user.getName().equalsIgnoreCase(name) && user.getLastName().equalsIgnoreCase(lastName) && user.getId().equals(id) && user.getUserName().equalsIgnoreCase(userName)) {
 					validation = user;
 					verific = true;
 				}
@@ -816,6 +857,22 @@ public class LaCasaDorada {
 		}
 		return userInProductType;
 	}
+	
+	public Product findIngredientInProduct(Ingredient ingredientToFind) {
+
+		Product ingredientInProduct = null;
+		boolean verific = false;
+
+		for (int i = 0; i < product.size() && !verific; i++) {
+			for (int j = 0; j < product.size(); j++) {
+				if(product.get(i).getIngredients().get(j) == ingredientToFind) {
+					verific = true;
+					ingredientInProduct = product.get(i);
+				}
+			}
+		}
+		return ingredientInProduct;
+	}
 
 	public void importData(String fileName) throws IOException {
 
@@ -857,7 +914,7 @@ public class LaCasaDorada {
 			}
 		}
 	}
-
+	
 	public void saveData() throws IOException {
 
 		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(SAVE_PATH_FILE));

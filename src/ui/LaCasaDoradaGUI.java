@@ -40,6 +40,24 @@ import model.User;
 public class LaCasaDoradaGUI {
 
 	@FXML
+	private ImageView imageDeleteWallIngredient;
+
+	@FXML
+	private TextField nameDeleteIngredient;
+
+	@FXML
+	private ImageView imageDeleteBannerIngredient;
+
+	@FXML
+	private ImageView imageDeleteWallProductType;
+
+	@FXML
+	private TextField nameDeleteProductType;
+
+	@FXML
+	private ImageView imageDeleteBannerProductType;
+
+	@FXML
 	private ImageView imageDeleteWallProduct;
 
 	@FXML
@@ -83,9 +101,9 @@ public class LaCasaDoradaGUI {
 
 	@FXML
 	private TextField lastNameDeleteClient;
-	
+
 	@FXML
-    private TextField phoneDeleteClient;
+	private TextField phoneDeleteClient;
 
 	@FXML
 	private ImageView imageDeleteBanner;
@@ -2229,9 +2247,9 @@ public class LaCasaDoradaGUI {
 			Client client = laCasaDorada.findObjClient(nameDeleteClient.getText(),lastNameDeleteClient.getText(),phoneDeleteClient.getText());
 
 			if(client != null) {
-				
+
 				Order order = laCasaDorada.findClientInOrder(client);
-				
+
 				if(order != null) {
 					Alert alert = new Alert(AlertType.ERROR);
 					alert.setTitle("ERROR");
@@ -2240,6 +2258,8 @@ public class LaCasaDoradaGUI {
 					alert.showAndWait();
 				}
 				else {
+
+					laCasaDorada.deleteClient(client);
 
 					Alert alerts = new Alert(AlertType.INFORMATION);
 					alerts.setTitle("EXCELENTE");
@@ -2292,9 +2312,9 @@ public class LaCasaDoradaGUI {
 			Employee employee = laCasaDorada.findObjEmployee(idDeleteEmployee.getText());
 
 			if(employee != null) {
-				
+
 				Order order = laCasaDorada.findEmployeeInOrder(employee);
-				
+
 				if(order != null) {
 					Alert alert = new Alert(AlertType.ERROR);
 					alert.setTitle("ERROR");
@@ -2326,7 +2346,7 @@ public class LaCasaDoradaGUI {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("ERROR");
 			alert.setHeaderText("No se pudo eliminar el empleado");
-			alert.setContentText("Debe llenar el campo para eliminar el cliente");
+			alert.setContentText("Debe llenar el campo para eliminar el empleado");
 			alert.showAndWait();
 		}
 	}
@@ -2356,32 +2376,32 @@ public class LaCasaDoradaGUI {
 			User user = laCasaDorada.findUser(nameDeleteUser.getText(),idDeleteUser.getText());
 
 			if(user != null) {
-				
+
 				Order order = laCasaDorada.findUserInOrder(user);
-				
+
 				if(order != null) {
-					
+
 					Alert alert = new Alert(AlertType.ERROR);
 					alert.setTitle("ERROR");
 					alert.setHeaderText("No se pudo eliminar el usuario");
 					alert.setContentText("No se puede eliminar porque el usuario está activo en el sistema");
 					alert.showAndWait();
-					
+
 				}
 				else {
 					Product product = laCasaDorada.findUserInProduct(user);
-					
+
 					if(product != null) {
-						
+
 						Alert alert = new Alert(AlertType.ERROR);
 						alert.setTitle("ERROR");
 						alert.setHeaderText("No se pudo eliminar el usuario");
 						alert.setContentText("No se puede eliminar porque el usuario está activo en el sistema");
 						alert.showAndWait();
 					}else {
-						
+
 						Ingredient ingredient = laCasaDorada.findUserInIngredient(user);
-						
+
 						if(ingredient != null) {
 							Alert alert = new Alert(AlertType.ERROR);
 							alert.setTitle("ERROR");
@@ -2390,9 +2410,9 @@ public class LaCasaDoradaGUI {
 							alert.showAndWait();
 						}
 						else {
-							
+
 							Size size = laCasaDorada.findUserInSize(user);
-							
+
 							if(size != null) {
 								Alert alert = new Alert(AlertType.ERROR);
 								alert.setTitle("ERROR");
@@ -2401,9 +2421,9 @@ public class LaCasaDoradaGUI {
 								alert.showAndWait();
 							}
 							else {
-								
+
 								ProductType PorductType = laCasaDorada.findUserInProductType(user);
-								
+
 								if(PorductType != null) {
 									Alert alert = new Alert(AlertType.ERROR);
 									alert.setTitle("ERROR");
@@ -2456,9 +2476,9 @@ public class LaCasaDoradaGUI {
 		mainPane.getChildren().clear();
 		mainPane.setTop(load);
 		Image image = new Image("/images/Banner.jpg");
-		imageDeleteWallUser.setImage(image);
+		imageDeleteWallProduct.setImage(image);
 		Image image2 = new Image("/images/BannerCasaDorada.jpg");
-		imageDeleteBannerUser.setImage(image2);
+		imageDeleteBannerProduct.setImage(image2);
 	}
 
 	@FXML
@@ -2473,7 +2493,7 @@ public class LaCasaDoradaGUI {
 				Order order = laCasaDorada.findProductInOrder(product);
 
 				if(order != null) {
-					
+
 					Alert alert = new Alert(AlertType.ERROR);
 					alert.setTitle("ERROR");
 					alert.setHeaderText("No se pudo eliminar el producto");
@@ -2500,7 +2520,7 @@ public class LaCasaDoradaGUI {
 					Alert alerts = new Alert(AlertType.INFORMATION);
 					alerts.setTitle("EXCELENTE");
 					alerts.setHeaderText("Se ha eliminado exitosamente.");
-					alerts.setContentText("Se ha eliminado el usuario "+nameDeleteProduct.getText()+" exitosamente");
+					alerts.setContentText("Se ha eliminado el producto "+nameDeleteProduct.getText()+" exitosamente");
 					alerts.showAndWait();
 
 					mainMenu();
@@ -2517,16 +2537,16 @@ public class LaCasaDoradaGUI {
 		else {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("ERROR");
-			alert.setHeaderText("No se pudo eliminar el usuario");
-			alert.setContentText("Debe llenar los campos para eliminar el usuario");
+			alert.setHeaderText("No se pudo eliminar el producto");
+			alert.setContentText("Debe llenar el campo para eliminar el producto");
 			alert.showAndWait();
 		}
 	}
-	
+
 	@FXML
 	public void loadDeletedTypeProduct() throws IOException {
 
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("delete-pane.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("deleteProductType-pane.fxml"));
 		loader.setController(this);
 
 		Parent load = loader.load();
@@ -2535,10 +2555,124 @@ public class LaCasaDoradaGUI {
 		mainPane.getChildren().clear();
 		mainPane.setTop(load);
 		Image image = new Image("/images/Banner.jpg");
-		imageDeleteWallUser.setImage(image);
+		imageDeleteWallProductType.setImage(image);
 		Image image2 = new Image("/images/BannerCasaDorada.jpg");
-		imageDeleteBannerUser.setImage(image2);
+		imageDeleteBannerProductType.setImage(image2);
 	}
+
+	@FXML
+	void deleteProductType(ActionEvent event) throws IOException {
+
+		if(!nameDeleteProductType.getText().isEmpty()) {
+
+			ProductType productType = laCasaDorada.findType(nameDeleteProductType.getText());
+
+			if(productType != null) {
+
+				Product product = laCasaDorada.findTypeOfProduct(productType);
+
+				if(product != null) {
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setTitle("ERROR");
+					alert.setHeaderText("No se pudo eliminar el tipo de producto");
+					alert.setContentText("No se puede eliminar porque el tipo producto está activo en el sistema");
+					alert.showAndWait();
+				}
+				else {
+
+					laCasaDorada.deleteProductType(productType);
+
+					Alert alerts = new Alert(AlertType.INFORMATION);
+					alerts.setTitle("EXCELENTE");
+					alerts.setHeaderText("Se ha eliminado exitosamente.");
+					alerts.setContentText("Se ha eliminado el tipo producto "+nameDeleteProductType.getText()+" exitosamente");
+					alerts.showAndWait();
+
+					mainMenu();
+				}
+			}
+			else {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("ERROR");
+				alert.setHeaderText("No se pudo eliminar el tipo de producto");
+				alert.setContentText("No existe un tipo de producto con ese nombre");
+				alert.showAndWait();
+			}
+		}
+		else {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("ERROR");
+			alert.setHeaderText("No se pudo eliminar el tipo de producto");
+			alert.setContentText("Debe llenar el campo para eliminar el tipo de producto");
+			alert.showAndWait();
+		}
+	}
+
+	@FXML
+	public void loadDeleteIngredient() throws IOException {
+
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("deleteIngredient-pane.fxml"));
+		loader.setController(this);
+
+		Parent load = loader.load();
+		mainPane.setCenter(load);
+
+		mainPane.getChildren().clear();
+		mainPane.setTop(load);
+		Image image = new Image("/images/Banner.jpg");
+		imageDeleteWallIngredient.setImage(image);
+		Image image2 = new Image("/images/BannerCasaDorada.jpg");
+		imageDeleteBannerIngredient.setImage(image2);
+	}
+	
+	@FXML
+    void deleteIngredient(ActionEvent event) throws IOException {
+		
+		if(!nameDeleteIngredient.getText().isEmpty()) {
+			
+			Ingredient ingredient = laCasaDorada.findIngredient(nameDeleteIngredient.getText());
+			
+			if(ingredient != null) {
+				
+				Product product = laCasaDorada.findIngredientInProduct(ingredient);
+				
+				if(product != null) {
+					
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setTitle("ERROR");
+					alert.setHeaderText("No se pudo eliminar el ingrediente");
+					alert.setContentText("No se puede eliminar porque el ingrediente está activo en el sistema");
+					alert.showAndWait();
+				}
+				else {
+					
+					laCasaDorada.deleteIngredient(ingredient);
+
+					Alert alerts = new Alert(AlertType.INFORMATION);
+					alerts.setTitle("EXCELENTE");
+					alerts.setHeaderText("Se ha eliminado exitosamente.");
+					alerts.setContentText("Se ha eliminado el ingrediente "+nameDeleteIngredient.getText()+" exitosamente");
+					alerts.showAndWait();
+
+					mainMenu();
+				}
+			}
+			else {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("ERROR");
+				alert.setHeaderText("No se pudo eliminar el ingrediente");
+				alert.setContentText("No existe un ingrediente con ese nombre");
+				alert.showAndWait();
+			}
+		}
+		else {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("ERROR");
+			alert.setHeaderText("No se pudo eliminar el ingrediente");
+			alert.setContentText("Debe llenar el campo para eliminar el ingrediente");
+			alert.showAndWait();
+		}
+    }
 	
 	@FXML
 	public void listIngredient(ActionEvent event) throws IOException {
