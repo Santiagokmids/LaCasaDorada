@@ -43,7 +43,7 @@
                   <Font name="Berlin Sans FB" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="nameClientList" layoutX="577.0" layoutY="260.0" prefHeight="25.0" prefWidth="240.0" />
+            <TextField fx:id="nameClientList" layoutX="577.0" layoutY="260.0" prefHeight="29.0" prefWidth="240.0" />
             <Button layoutX="605.0" layoutY="451.0" mnemonicParsing="false" onAction="#modifyListOrders" prefHeight="53.0" prefWidth="179.0" style="-fx-background-color: #dad57c; -fx-background-radius: 22;" text="Modificar">
                <font>
                   <Font name="Franklin Gothic Demi" size="18.0" />
