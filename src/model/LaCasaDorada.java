@@ -762,6 +762,32 @@ public class LaCasaDorada {
 			}
 		}
 	}
+	
+	public void disableProduct(Order orderDisable){
+
+		boolean verific = false;
+
+		for (int j = 0; j <order.size() && !verific; j++) {
+
+			if(order.get(j) == orderDisable) {
+				verific = true;
+				order.get(j).setStates(State.DISABLED);
+			}
+		}
+	}
+	
+	public void disableUser(User user){
+
+		boolean verific = false;
+
+		for (int j = 0; j <people.size() && !verific; j++) {
+
+			if(people.get(j) == user) {
+				verific = true;
+				people.get(j).setState(State.DISABLED);
+			}
+		}
+	}
 
 	public ArrayList<User> getUsers(){
 
@@ -769,7 +795,7 @@ public class LaCasaDorada {
 
 		for (int j = 0; j < people.size(); j++) {
 
-			if(people.get(j) instanceof User ) {
+			if(people.get(j) instanceof User && people.get(j).getState() != State.DISABLED) {
 
 				users.add((User)people.get(j));
 			}
@@ -783,7 +809,7 @@ public class LaCasaDorada {
 
 		for (int j = 0; j < people.size(); j++) {
 
-			if(people.get(j) instanceof Client ) {
+			if(people.get(j) instanceof Client && people.get(j).getState() != State.DISABLED) {
 
 				clients.add((Client)people.get(j));
 			}
@@ -797,7 +823,7 @@ public class LaCasaDorada {
 
 		for (int j = 0; j < people.size(); j++) {
 
-			if(people.get(j) instanceof Employee ) {
+			if(people.get(j) instanceof Employee && people.get(j).getState() != State.DISABLED) {
 
 				employee.add((Employee)people.get(j));
 			}
@@ -1053,7 +1079,16 @@ public class LaCasaDorada {
 	}
 
 	public ArrayList<Product> getProduct() {
-		return product;
+		
+		ArrayList<Product>products = new ArrayList<>();
+		
+		for (int i = 0; i < product.size(); i++) {
+			
+			if(product.get(i).getState() != State.DISABLED) {
+				products.add(product.get(i));
+			}
+		}
+		return products;
 	}
 
 	public void setProduct(ArrayList<Product> product) {
@@ -1061,7 +1096,16 @@ public class LaCasaDorada {
 	}
 
 	public ArrayList<ProductType> getProductType() {
-		return productType;
+		
+		ArrayList<ProductType>type = new ArrayList<>();
+
+		for (int i = 0; i < productType.size(); i++) {
+
+			if(productType.get(i).getState() != State.DISABLED) {
+				type.add(productType.get(i));
+			}
+		}
+		return type;
 	}
 
 	public void setProductType(ArrayList<ProductType> productType) {
@@ -1069,7 +1113,16 @@ public class LaCasaDorada {
 	}
 
 	public ArrayList<Ingredient> getIngredient() {
-		return ingredient;
+		
+		ArrayList<Ingredient>ingredients = new ArrayList<>();
+
+		for (int i = 0; i < ingredient.size(); i++) {
+
+			if(ingredient.get(i).getState() != State.DISABLED) {
+				ingredients.add(ingredient.get(i));
+			}
+		}
+		return ingredients;
 	}
 
 	public void setIngredient(ArrayList<Ingredient> ingredient) {
@@ -1077,7 +1130,16 @@ public class LaCasaDorada {
 	}
 
 	public ArrayList<Order> getOrder() {
-		return order;
+		
+		ArrayList<Order>orders = new ArrayList<>();
+
+		for (int i = 0; i < order.size(); i++) {
+
+			if(order.get(i).getStates() != State.DISABLED) {
+				orders.add(order.get(i));
+			}
+		}
+		return orders;
 	}
 
 	public void setOrder(ArrayList<Order> order) {
@@ -1093,7 +1155,16 @@ public class LaCasaDorada {
 	}
 
 	public ArrayList<Size> getSizes() {
-		return sizes;
+		
+		ArrayList<Size>size = new ArrayList<>();
+
+		for (int i = 0; i < sizes.size(); i++) {
+
+			if(sizes.get(i).getState() != State.DISABLED) {
+				size.add(sizes.get(i));
+			}
+		}
+		return size;
 	}
 
 	public void setSizes(ArrayList<Size> sizes) {
