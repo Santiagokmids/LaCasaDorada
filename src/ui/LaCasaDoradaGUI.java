@@ -35,10 +35,20 @@ import model.PreOrder;
 import model.Product;
 import model.ProductType;
 import model.Size;
+import model.State;
 import model.StateOrder;
 import model.User;
 
 public class LaCasaDoradaGUI {
+	
+	@FXML
+    private ImageView imageDisabledWallProductType;
+
+    @FXML
+    private TextField nameDisabledProductType;
+
+    @FXML
+    private ImageView imageDisabledBannerProductType;
 
 	@FXML
     private ImageView imageDisabledWallSize;
@@ -2958,7 +2968,7 @@ public class LaCasaDoradaGUI {
 	@FXML
 	public void loadDisabledIngredient() throws IOException {
 
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("disableIngredient-pane.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("disabledIngredient-pane.fxml"));
 		loader.setController(this);
 
 		Parent load = loader.load();
@@ -2974,22 +2984,33 @@ public class LaCasaDoradaGUI {
 	}
 
 	@FXML
-	void disabledIngredient(ActionEvent event) throws IOException {
+	public void disabledIngredient(ActionEvent event) throws IOException {
 
 		if(!nameDisabledIngredient.getText().isEmpty()) {
 
 			Ingredient ingredient = laCasaDorada.findIngredient(nameDisabledIngredient.getText());
 
 			if(ingredient != null) {
-				laCasaDorada.disableIngredient(ingredient);
+				
+				if(ingredient.getState() == State.DISABLED) {
+					
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setTitle("ERROR");
+					alert.setHeaderText("No se pudo deshabilitar el ingrediente");
+					alert.setContentText("El ingrediente ya se encuentra deshabilitado");
+					alert.showAndWait();
+				}
+				else {
+					laCasaDorada.disableIngredient(ingredient);
 
-				Alert alerts = new Alert(AlertType.INFORMATION);
-				alerts.setTitle("EXCELENTE");
-				alerts.setHeaderText("Se ha deshabilitado exitosamente.");
-				alerts.setContentText("Se ha deshabilitado el producto "+nameDisabledIngredient.getText()+" exitosamente");
-				alerts.showAndWait();
+					Alert alerts = new Alert(AlertType.INFORMATION);
+					alerts.setTitle("EXCELENTE");
+					alerts.setHeaderText("Se ha deshabilitado exitosamente.");
+					alerts.setContentText("Se ha deshabilitado el producto "+nameDisabledIngredient.getText()+" exitosamente");
+					alerts.showAndWait();
 
-				mainMenu();
+					mainMenu();
+				}
 			}
 		}
 		else {
@@ -3005,7 +3026,7 @@ public class LaCasaDoradaGUI {
 	@FXML
 	public void loadDisabledSize() throws IOException {
 
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("disableIngredient-pane.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("disableSize-pane.fxml"));
 		loader.setController(this);
 
 		Parent load = loader.load();
@@ -3021,7 +3042,7 @@ public class LaCasaDoradaGUI {
 	}
 	
 	@FXML
-    void disabledSize(ActionEvent event) throws IOException {
+    public void disabledSize(ActionEvent event) throws IOException {
 		
 		if(!nameDisabledSize.getText().isEmpty()) {
 			
@@ -3029,15 +3050,25 @@ public class LaCasaDoradaGUI {
 			
 			if(size != null) {
 				
-				laCasaDorada.disableSize(size);
-				
-				Alert alerts = new Alert(AlertType.INFORMATION);
-				alerts.setTitle("EXCELENTE");
-				alerts.setHeaderText("Se ha deshabilitado exitosamente.");
-				alerts.setContentText("Se ha deshabilitado el tamaño de producto "+nameDisabledSize.getText()+" exitosamente");
-				alerts.showAndWait();
+				if(size.getState() == State.DISABLED) {
 
-				mainMenu();
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setTitle("ERROR");
+					alert.setHeaderText("No se pudo deshabilitar el tamaño del producto");
+					alert.setContentText("El tamaño del producto ya se encuentra deshabilitado");
+					alert.showAndWait();
+				}
+				else {
+					laCasaDorada.disableSize(size);
+					
+					Alert alerts = new Alert(AlertType.INFORMATION);
+					alerts.setTitle("EXCELENTE");
+					alerts.setHeaderText("Se ha deshabilitado exitosamente.");
+					alerts.setContentText("Se ha deshabilitado el tamaño de producto "+nameDisabledSize.getText()+" exitosamente");
+					alerts.showAndWait();
+
+					mainMenu();
+				}
 			}
 		}
 		else {
@@ -3045,6 +3076,63 @@ public class LaCasaDoradaGUI {
 			alert.setTitle("ERROR");
 			alert.setHeaderText("No se pudo deshabilitar el tamaño de producto");
 			alert.setContentText("Debe llenar el campo para deshabilitar el tamaño de producto");
+			alert.showAndWait();
+		}
+    }
+	
+	@FXML
+	public void loadDisabledProductType() throws IOException {
+
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("disabledProductType-pane.fxml"));
+		loader.setController(this);
+
+		Parent load = loader.load();
+		mainPane.setCenter(load);
+
+		mainPane.getChildren().clear();
+		mainPane.setTop(load);
+		
+		Image image = new Image("/images/Banner.jpg");
+		imageDisabledWallProductType.setImage(image);
+		Image image2 = new Image("/images/BannerCasaDorada.jpg");
+		imageDisabledBannerProductType.setImage(image2);
+	}
+	
+	@FXML
+    public void disabledProductType(ActionEvent event) throws IOException {
+		
+		if(!nameDisabledProductType.getText().isEmpty()) {
+			
+			ProductType productType = laCasaDorada.findType(nameDisabledProductType.getText());
+			
+			if(productType != null) {
+				
+				if(productType.getState() == State.DISABLED) {
+
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setTitle("ERROR");
+					alert.setHeaderText("No se pudo deshabilitar el tipo de producto");
+					alert.setContentText("El tipo de producto ya se encuentra deshabilitado");
+					alert.showAndWait();
+				}
+				else {
+					laCasaDorada.disableType(productType);
+					
+					Alert alerts = new Alert(AlertType.INFORMATION);
+					alerts.setTitle("EXCELENTE");
+					alerts.setHeaderText("Se ha deshabilitado exitosamente.");
+					alerts.setContentText("Se ha deshabilitado el tipo de producto "+nameDisabledProductType.getText()+" exitosamente");
+					alerts.showAndWait();
+
+					mainMenu();
+				}
+			}
+		}
+		else {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("ERROR");
+			alert.setHeaderText("No se pudo deshabilitar el tipo de producto");
+			alert.setContentText("Debe llenar el campo para deshabilitar el tipo de producto");
 			alert.showAndWait();
 		}
     }
