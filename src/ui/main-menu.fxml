@@ -55,7 +55,6 @@
           </Menu>
             <Menu mnemonicParsing="false" text="Habilitar">
                <items>
-<<<<<<< HEAD
                   <MenuItem mnemonicParsing="false" onAction="#loadEnabledClient" text="Cliente" />
                   <MenuItem mnemonicParsing="false" onAction="#loadEnabledEmployee" text="Empleado" />
                   <MenuItem mnemonicParsing="false" onAction="#loadEnabledUser" text="Usuario" />
@@ -63,7 +62,6 @@
                   <MenuItem mnemonicParsing="false" onAction="#loadDisabledProduct" text="Producto" />
                   <MenuItem mnemonicParsing="false" onAction="#loadDisabledProductType" text="Tipo de Producto" />
                   <MenuItem mnemonicParsing="false" onAction="#loadDisabledIngredient" text="Ingrediente" />
-=======
                   <MenuItem mnemonicParsing="false" onAction="#loadDisabledClient" text="Cliente" />
                   <MenuItem mnemonicParsing="false" onAction="#loadDisabledEmployee" text="Empleado" />
                   <MenuItem mnemonicParsing="false" onAction="#loadDisabledUser" text="Usuario" />
@@ -71,7 +69,6 @@
                   <MenuItem mnemonicParsing="false" onAction="#loadEnableProduct" text="Producto" />
                   <MenuItem mnemonicParsing="false" onAction="#loadEnableProductType" text="Tipo de Producto" />
                   <MenuItem mnemonicParsing="false" onAction="#loadEnableIngredient" text="Ingrediente" />
->>>>>>> 2c57ce608fb7332def921fd68b359f05c5364d69
                   <MenuItem mnemonicParsing="false" onAction="#loadEnableSize" text="Tamaño de producto" />
                </items>
             </Menu>
