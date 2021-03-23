@@ -18,7 +18,7 @@
                   <Font name="Bernard MT Condensed" size="36.0" />
                </font>
             </Label>
-            <Button layoutX="240.0" layoutY="315.0" mnemonicParsing="false" onAction="#enableSize" prefHeight="53.0" prefWidth="139.0" style="-fx-background-color: #dad57c; -fx-background-radius: 22;" text="Deshabilitar">
+            <Button layoutX="240.0" layoutY="315.0" mnemonicParsing="false" onAction="#enableSize" prefHeight="53.0" prefWidth="139.0" style="-fx-background-color: #dad57c; -fx-background-radius: 22;" text="Habilitar">
                <font>
                   <Font name="Franklin Gothic Demi" size="18.0" />
                </font>
