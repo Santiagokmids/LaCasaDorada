@@ -688,6 +688,19 @@ public class LaCasaDorada {
 		}
 	}
 	
+	public void enableIngredient(Ingredient ingredientDisable){
+
+		boolean verific = false;
+
+		for (int j = 0; j <ingredient.size() && !verific; j++) {
+
+			if(ingredient.get(j) == ingredientDisable) {
+				verific = true;
+				ingredient.get(j).setState(State.ENABLE);
+			}
+		}
+	}
+	
 	public void disableClient(Client clientDisable){
 
 		boolean verific = false;
@@ -764,11 +777,24 @@ public class LaCasaDorada {
 
 		boolean verific = false;
 
-		for (int j = 0; j <ingredient.size() && !verific; j++) {
+		for (int j = 0; j <sizes.size() && !verific; j++) {
 
 			if(sizes.get(j) == sizeDisable) {
 				verific = true;
 				sizes.get(j).setState(State.DISABLED);
+			}
+		}
+	}
+	
+	public void enableSize(Size sizeDisable){
+
+		boolean verific = false;
+
+		for (int j = 0; j <sizes.size() && !verific; j++) {
+
+			if(sizes.get(j) == sizeDisable) {
+				verific = true;
+				sizes.get(j).setState(State.ENABLE);
 			}
 		}
 	}
@@ -786,6 +812,19 @@ public class LaCasaDorada {
 		}
 	}
 	
+	public void enableType(ProductType productTypeDisable){
+
+		boolean verific = false;
+
+		for (int j = 0; j <productType.size() && !verific; j++) {
+
+			if(productType.get(j) == productTypeDisable) {
+				verific = true;
+				productType.get(j).setState(State.ENABLE);
+			}
+		}
+	}
+	
 	public void disableProduct(Product productDisable){
 
 		boolean verific = false;
@@ -799,7 +838,20 @@ public class LaCasaDorada {
 		}
 	}
 	
-	public void disableOrder(Order orderDisable){
+	public void enableProduct(Product productDisable){
+
+		boolean verific = false;
+
+		for (int j = 0; j <product.size() && !verific; j++) {
+
+			if(product.get(j) == productDisable) {
+				verific = true;
+				product.get(j).setState(State.ENABLE);
+			}
+		}
+	}
+	
+	public void disableProduct(Order orderDisable){
 
 		boolean verific = false;
 
@@ -821,6 +873,19 @@ public class LaCasaDorada {
 			if(order.get(j) == orderEnable) {
 				verific = true;
 				order.get(j).setStates(State.ENABLE);
+			}
+		}
+	}
+	
+	public void disableOrder(Order orderDisable){
+
+		boolean verific = false;
+
+		for (int j = 0; j <order.size() && !verific; j++) {
+
+			if(order.get(j) == orderDisable) {
+				verific = true;
+				order.get(j).setStates(State.DISABLED);
 			}
 		}
 	}

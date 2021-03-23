@@ -40,6 +40,42 @@ import model.StateOrder;
 import model.User;
 
 public class LaCasaDoradaGUI {
+	
+	@FXML
+    private ImageView imageEnableWallProduct;
+
+    @FXML
+    private TextField nameEnableProduct;
+
+    @FXML
+    private ImageView imageEnableBannerProduct;
+	
+	@FXML
+    private ImageView imageEnableWallProductType;
+
+    @FXML
+    private TextField nameEnableProductType;
+
+    @FXML
+    private ImageView imageEnableBannerProductType;
+
+	@FXML
+	private ImageView imageEnableWallIngredient;
+
+	@FXML
+	private TextField nameEnableIngredient;
+
+	@FXML
+	private ImageView imageEnableBannerIngredient;
+
+	@FXML
+	private ImageView imageEnableWallSize;
+
+	@FXML
+	private TextField nameEnableSize;
+
+	@FXML
+	private ImageView imageEnableBannerSize;
 
 	@FXML
 	private TextField nameUserDisable;
@@ -4033,7 +4069,7 @@ public class LaCasaDoradaGUI {
 	@FXML
 	public void loadEnableSize() throws IOException {
 
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("disableSize-pane.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("enableSize-pane.fxml"));
 		loader.setController(this);
 
 		Parent load = loader.load();
@@ -4043,35 +4079,35 @@ public class LaCasaDoradaGUI {
 		mainPane.setTop(load);
 
 		Image image = new Image("/images/Banner.jpg");
-		imageDisabledWallSize.setImage(image);
+		imageEnableWallSize.setImage(image);
 		Image image2 = new Image("/images/BannerCasaDorada.jpg");
-		imageDisabledBannerSize.setImage(image2);
+		imageEnableBannerSize.setImage(image2);
 	}
 
 	@FXML
 	public void enableSize(ActionEvent event) throws IOException {
 
-		if(!nameDisabledSize.getText().isEmpty()) {
+		if(!nameEnableSize.getText().isEmpty()) {
 
-			Size size = laCasaDorada.findSize(nameDisabledSize.getText());
+			Size size = laCasaDorada.findSize(nameEnableSize.getText());
 
 			if(size != null) {
 
-				if(size.getState() == State.DISABLED) {
+				if(size.getState() == State.ENABLE) {
 
 					Alert alert = new Alert(AlertType.ERROR);
 					alert.setTitle("ERROR");
-					alert.setHeaderText("No se pudo deshabilitar el tamaño del producto");
-					alert.setContentText("El tamaño del producto ya se encuentra deshabilitado");
+					alert.setHeaderText("No se pudo habilitar el tamaño del producto");
+					alert.setContentText("El tamaño del producto ya se encuentra habilitado");
 					alert.showAndWait();
 				}
 				else {
-					laCasaDorada.disableSize(size);
+					laCasaDorada.enableSize(size);
 
 					Alert alerts = new Alert(AlertType.INFORMATION);
 					alerts.setTitle("EXCELENTE");
-					alerts.setHeaderText("Se ha deshabilitado exitosamente.");
-					alerts.setContentText("Se ha deshabilitado el tamaño de producto "+nameDisabledSize.getText()+" exitosamente");
+					alerts.setHeaderText("Se ha habilitado exitosamente.");
+					alerts.setContentText("Se ha habilitado el tamaño de producto "+nameEnableSize.getText()+" exitosamente");
 					alerts.showAndWait();
 
 					mainMenu();
@@ -4080,7 +4116,7 @@ public class LaCasaDoradaGUI {
 			else {
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("ERROR");
-				alert.setHeaderText("No se pudo deshabilitar el tamaño de producto");
+				alert.setHeaderText("No se pudo habilitar el tamaño de producto");
 				alert.setContentText("No existe un tamaño de producto con ese nombre");
 				alert.showAndWait();
 			}
@@ -4088,16 +4124,16 @@ public class LaCasaDoradaGUI {
 		else {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("ERROR");
-			alert.setHeaderText("No se pudo deshabilitar el tamaño de producto");
-			alert.setContentText("Debe llenar el campo para deshabilitar el tamaño de producto");
+			alert.setHeaderText("No se pudo habilitar el tamaño de producto");
+			alert.setContentText("Debe llenar el campo para habilitar el tamaño de producto");
 			alert.showAndWait();
 		}
 	}
 
 	@FXML
-	public void loadDisabledIngredient() throws IOException {
+	public void loadEnableIngredient() throws IOException {
 
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("disabledIngredient-pane.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("enableIngredient-pane.fxml"));
 		loader.setController(this);
 
 		Parent load = loader.load();
@@ -4107,35 +4143,35 @@ public class LaCasaDoradaGUI {
 		mainPane.setTop(load);
 
 		Image image = new Image("/images/Banner.jpg");
-		imageDisabledWallIngredient.setImage(image);
+		imageEnableWallIngredient.setImage(image);
 		Image image2 = new Image("/images/BannerCasaDorada.jpg");
-		imageDisabledBannerIngredient.setImage(image2);
+		imageEnableBannerIngredient.setImage(image2);
 	}
 
 	@FXML
-	public void disabledIngredient(ActionEvent event) throws IOException {
+	public void enableIngredient(ActionEvent event) throws IOException {
 
-		if(!nameDisabledIngredient.getText().isEmpty()) {
+		if(!nameEnableIngredient.getText().isEmpty()) {
 
-			Ingredient ingredient = laCasaDorada.findIngredient(nameDisabledIngredient.getText());
+			Ingredient ingredient = laCasaDorada.findIngredient(nameEnableIngredient.getText());
 
 			if(ingredient != null) {
 
-				if(ingredient.getState() == State.DISABLED) {
+				if(ingredient.getState() == State.ENABLE) {
 
 					Alert alert = new Alert(AlertType.ERROR);
 					alert.setTitle("ERROR");
-					alert.setHeaderText("No se pudo deshabilitar el ingrediente");
-					alert.setContentText("El ingrediente ya se encuentra deshabilitado");
+					alert.setHeaderText("No se pudo habilitar el ingrediente");
+					alert.setContentText("El ingrediente ya se encuentra habilitado");
 					alert.showAndWait();
 				}
 				else {
-					laCasaDorada.disableIngredient(ingredient);
+					laCasaDorada.enableIngredient(ingredient);
 
 					Alert alerts = new Alert(AlertType.INFORMATION);
 					alerts.setTitle("EXCELENTE");
-					alerts.setHeaderText("Se ha deshabilitado exitosamente.");
-					alerts.setContentText("Se ha deshabilitado el producto "+nameDisabledIngredient.getText()+" exitosamente");
+					alerts.setHeaderText("Se ha habilitado exitosamente.");
+					alerts.setContentText("Se ha habilitado el producto "+nameEnableIngredient.getText()+" exitosamente");
 					alerts.showAndWait();
 
 					mainMenu();
@@ -4144,7 +4180,7 @@ public class LaCasaDoradaGUI {
 			else {
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("ERROR");
-				alert.setHeaderText("No se pudo deshabilitar el ingrediente");
+				alert.setHeaderText("No se pudo habilitar el ingrediente");
 				alert.setContentText("No existe un ingrediente con ese nombre");
 				alert.showAndWait();
 			}
@@ -4153,16 +4189,16 @@ public class LaCasaDoradaGUI {
 
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("ERROR");
-			alert.setHeaderText("No se pudo deshabilitar el ingrediente");
-			alert.setContentText("Debe llenar el campo para deshabilitar el ingrediente");
+			alert.setHeaderText("No se pudo habilitar el ingrediente");
+			alert.setContentText("Debe llenar el campo para habilitar el ingrediente");
 			alert.showAndWait();
 		}
 	}
 
 	@FXML
-	public void loadDisabledProductType() throws IOException {
+	public void loadEnableProductType() throws IOException {
 
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("disabledProductType-pane.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("enableProductType-pane.fxml"));
 
 		loader.setController(this);
 
@@ -4173,35 +4209,35 @@ public class LaCasaDoradaGUI {
 		mainPane.setTop(load);
 
 		Image image = new Image("/images/Banner.jpg");
-		imageDisabledWallProductType.setImage(image);
+		imageEnableWallProductType.setImage(image);
 		Image image2 = new Image("/images/BannerCasaDorada.jpg");
-		imageDisabledBannerProductType.setImage(image2);
+		imageEnableBannerProductType.setImage(image2);
 	}
 
 	@FXML
-	public void disabledProductType(ActionEvent event) throws IOException {
+	public void enableProductType(ActionEvent event) throws IOException {
 
-		if(!nameDisabledProductType.getText().isEmpty()) {
+		if(!nameEnableProductType.getText().isEmpty()) {
 
-			ProductType productType = laCasaDorada.findType(nameDisabledProductType.getText());
+			ProductType productType = laCasaDorada.findType(nameEnableProductType.getText());
 
 			if(productType != null) {
 
-				if(productType.getState() == State.DISABLED) {
+				if(productType.getState() == State.ENABLE) {
 
 					Alert alert = new Alert(AlertType.ERROR);
 					alert.setTitle("ERROR");
-					alert.setHeaderText("No se pudo deshabilitar el tipo de producto");
-					alert.setContentText("El tipo de producto ya se encuentra deshabilitado");
+					alert.setHeaderText("No se pudo habilitar el tipo de producto");
+					alert.setContentText("El tipo de producto ya se encuentra habilitado");
 					alert.showAndWait();
 				}
 				else {
-					laCasaDorada.disableType(productType);
+					laCasaDorada.enableType(productType);
 
 					Alert alerts = new Alert(AlertType.INFORMATION);
 					alerts.setTitle("EXCELENTE");
-					alerts.setHeaderText("Se ha deshabilitado exitosamente.");
-					alerts.setContentText("Se ha deshabilitado el tipo de producto "+nameDisabledProductType.getText()+" exitosamente");
+					alerts.setHeaderText("Se ha habilitado exitosamente.");
+					alerts.setContentText("Se ha habilitado el tipo de producto "+nameEnableProductType.getText()+" exitosamente");
 					alerts.showAndWait();
 
 					mainMenu();
@@ -4219,16 +4255,16 @@ public class LaCasaDoradaGUI {
 		else {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("ERROR");
-			alert.setHeaderText("No se pudo deshabilitar el tipo de producto");
-			alert.setContentText("Debe llenar el campo para deshabilitar el tipo de producto");
+			alert.setHeaderText("No se pudo habilitar el tipo de producto");
+			alert.setContentText("Debe llenar el campo para habilitar el tipo de producto");
 			alert.showAndWait();
 		}
 	}
 
 	@FXML
-	public void loadDisabledProduct(ActionEvent event) throws IOException {
+	public void loadEnableProduct(ActionEvent event) throws IOException {
 
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("disabledProduct-pane.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("enableProduct-pane.fxml"));
 
 		loader.setController(this);
 
@@ -4239,36 +4275,36 @@ public class LaCasaDoradaGUI {
 		mainPane.setTop(load);
 
 		Image image = new Image("/images/Banner.jpg");
-		imageDisabledWallProduct.setImage(image);
+		imageEnableWallProduct.setImage(image);
 		Image image2 = new Image("/images/BannerCasaDorada.jpg");
-		imageDisabledBannerProduct.setImage(image2);
+		imageEnableBannerProduct.setImage(image2);
 	}
 
 	@FXML
-	public void disabledProduct(ActionEvent event) throws IOException {
+	public void enableProduct(ActionEvent event) throws IOException {
 
-		if(!nameDisabledProduct.getText().isEmpty()) {
+		if(!nameEnableProduct.getText().isEmpty()) {
 
-			Product product = laCasaDorada.findProducts(nameDisabledProduct.getText());
+			Product product = laCasaDorada.findProducts(nameEnableProduct.getText());
 
 			if(product != null) {
 
-				if(product.getState() == State.DISABLED) {
+				if(product.getState() == State.ENABLE) {
 
 					Alert alert = new Alert(AlertType.ERROR);
 					alert.setTitle("ERROR");
-					alert.setHeaderText("No se pudo deshabilitar el producto");
-					alert.setContentText("El producto ya se encuentra deshabilitado");
+					alert.setHeaderText("No se pudo habilitar el producto");
+					alert.setContentText("El producto ya se encuentra habilitado");
 					alert.showAndWait();
 				}
 				else {
 
-					laCasaDorada.disableProduct(product);
+					laCasaDorada.enableProduct(product);
 
 					Alert alerts = new Alert(AlertType.INFORMATION);
 					alerts.setTitle("EXCELENTE");
-					alerts.setHeaderText("Se ha deshabilitado exitosamente.");
-					alerts.setContentText("Se ha deshabilitado el producto "+nameDisabledProduct.getText()+" exitosamente");
+					alerts.setHeaderText("Se ha habilitado exitosamente.");
+					alerts.setContentText("Se ha habilitado el producto "+nameEnableProduct.getText()+" exitosamente");
 					alerts.showAndWait();
 
 					mainMenu();
@@ -4277,7 +4313,7 @@ public class LaCasaDoradaGUI {
 			else {
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("ERROR");
-				alert.setHeaderText("No se pudo deshabilitar el producto");
+				alert.setHeaderText("No se pudo habilitar el producto");
 				alert.setContentText("No existe un producto con ese nombre");
 				alert.showAndWait();
 			}
@@ -4285,8 +4321,8 @@ public class LaCasaDoradaGUI {
 		else {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("ERROR");
-			alert.setHeaderText("No se pudo deshabilitar el producto");
-			alert.setContentText("Debe llenar el campo para deshabilitar el producto");
+			alert.setHeaderText("No se pudo habilitar el producto");
+			alert.setContentText("Debe llenar el campo para habilitar el producto");
 			alert.showAndWait();
 		}
 	}
