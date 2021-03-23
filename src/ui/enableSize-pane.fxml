@@ -12,13 +12,13 @@
    <center>
       <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fx:id="imageDisabledWallSize" fitHeight="723.0" fitWidth="831.0" layoutY="7.0" opacity="0.09" pickOnBounds="true" />
-            <Label layoutX="182.0" layoutY="99.0" text="Deshabilitar Tamaño de Producto" textFill="#dad57c">
+            <ImageView fx:id="imageEnableWallSize" fitHeight="723.0" fitWidth="831.0" layoutY="7.0" opacity="0.09" pickOnBounds="true" />
+            <Label layoutX="240.0" layoutY="99.0" text="Habilitar Tamaño de Producto" textFill="#dad57c">
                <font>
                   <Font name="Bernard MT Condensed" size="36.0" />
                </font>
             </Label>
-            <Button layoutX="240.0" layoutY="315.0" mnemonicParsing="false" onAction="#disabledSize" prefHeight="53.0" prefWidth="139.0" style="-fx-background-color: #dad57c; -fx-background-radius: 22;" text="Habilitar">
+            <Button layoutX="240.0" layoutY="315.0" mnemonicParsing="false" onAction="#enableSize" prefHeight="53.0" prefWidth="139.0" style="-fx-background-color: #dad57c; -fx-background-radius: 22;" text="Deshabilitar">
                <font>
                   <Font name="Franklin Gothic Demi" size="18.0" />
                </font>
@@ -33,11 +33,11 @@
                   <Font name="Berlin Sans FB" size="29.0" />
                </font>
             </Label>
-            <TextField fx:id="nameDisabledSize" layoutX="370.0" layoutY="201.0" prefHeight="37.0" prefWidth="249.0" />
+            <TextField fx:id="nameEnableSize" layoutX="370.0" layoutY="201.0" prefHeight="37.0" prefWidth="249.0" />
          </children>
       </Pane>
    </center>
    <top>
-      <ImageView fx:id="imageDisabledBannerSize" fitHeight="129.0" fitWidth="832.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+      <ImageView fx:id="imageEnableBannerSize" fitHeight="129.0" fitWidth="832.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
    </top>
 </BorderPane>

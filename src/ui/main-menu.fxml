@@ -59,9 +59,9 @@
                   <MenuItem mnemonicParsing="false" onAction="#loadDisabledEmployee" text="Empleado" />
                   <MenuItem mnemonicParsing="false" onAction="#loadDisabledUser" text="Usuario" />
                   <MenuItem mnemonicParsing="false" onAction="#loadDisabledOrder" text="Pedido" />
-                  <MenuItem mnemonicParsing="false" onAction="#loadDisabledProduct" text="Producto" />
-                  <MenuItem mnemonicParsing="false" onAction="#loadDisabledProductType" text="Tipo de Producto" />
-                  <MenuItem mnemonicParsing="false" onAction="#loadDisabledIngredient" text="Ingrediente" />
+                  <MenuItem mnemonicParsing="false" onAction="#loadEnableProduct" text="Producto" />
+                  <MenuItem mnemonicParsing="false" onAction="#loadEnableProductType" text="Tipo de Producto" />
+                  <MenuItem mnemonicParsing="false" onAction="#loadEnableIngredient" text="Ingrediente" />
                   <MenuItem mnemonicParsing="false" onAction="#loadEnableSize" text="Tamaño de producto" />
                </items>
             </Menu>
