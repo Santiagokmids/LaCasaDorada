@@ -3609,9 +3609,9 @@ public class LaCasaDoradaGUI {
 		mainPane.setTop(load);
 
 		Image image = new Image("/images/Banner.jpg");
-		imageEnabledBannerOrder.setImage(image);
+		imageEnabledWallOrder.setImage(image);
 		Image image2 = new Image("/images/BannerCasaDorada.jpg");
-		imageEnabledWallOrder.setImage(image2);
+		imageEnabledBannerOrder.setImage(image2);
 	}
 
 
