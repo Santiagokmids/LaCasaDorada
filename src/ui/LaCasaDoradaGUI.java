@@ -3297,6 +3297,7 @@ public class LaCasaDoradaGUI {
 			imageDeleteSize.setImage(image2);
 		}
 	}
-
+	
+	
 	
 }
