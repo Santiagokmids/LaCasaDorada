@@ -632,6 +632,19 @@ public class LaCasaDoradaGUI {
 	@FXML
 	private TextField updateNameType;
 
+	@FXML
+	private ImageView imageEnabledWallClient;
+
+	@FXML
+	private TextField nameEnabledClient;
+
+	@FXML
+	private TextField lastNameEnabledClient;
+
+	@FXML
+	private ImageView imageEnabledBannerClient;
+
+
 	public static ObservableList<Product> listProduct;
 	public static ObservableList<Ingredient> listOfIngredient;
 	public static ObservableList<Order> listOrders;
@@ -3458,7 +3471,7 @@ public class LaCasaDoradaGUI {
 
 	@FXML
 	public void loadEnabledClient(ActionEvent event) throws IOException {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("disabledClient.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("enabledClient.fxml"));
 		loader.setController(this);
 
 		Parent load = loader.load();
@@ -3468,50 +3481,31 @@ public class LaCasaDoradaGUI {
 		mainPane.setTop(load);
 		Image image = new Image("/images/Banner.jpg");
 
-		imageDisabledWallClient.setImage(image);
+		imageEnabledWallClient.setImage(image);
 		Image image2 = new Image("/images/BannerCasaDorada.jpg");
-		imageDisabledBannerClient.setImage(image2);
+		imageEnabledBannerClient.setImage(image2);
 	}
-
+	
 	@FXML
-	public void loadDisabledOrder(ActionEvent event) throws IOException {
-
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("disabledOrder-pane.fxml"));
-
-		loader.setController(this);
-
-		Parent load = loader.load();
-		mainPane.setCenter(load);
-
-		mainPane.getChildren().clear();
-		mainPane.setTop(load);
-
-		Image image = new Image("/images/Banner.jpg");
-		imageDisabledWallOrder.setImage(image);
-		Image image2 = new Image("/images/BannerCasaDorada.jpg");
-		imageDisabledBannerOrder.setImage(image2);
-	}
-
-	@FXML
-	public void disabledClient(ActionEvent event) throws IOException {
+	public void enabledClient(ActionEvent event) throws IOException {
 
 		Alert alert = new Alert(AlertType.ERROR);
 		alert.setTitle("ERROR");
 
-		if(!nameDisabledClient.getText().isEmpty() && !lastNameDisabledClient.getText().isEmpty()) {
+		if(!nameEnabledClient.getText().isEmpty() && !lastNameEnabledClient.getText().isEmpty()) {
 
 			Client client = laCasaDorada.findObjClient(nameDisabledClient.getText(),lastNameDisabledClient.getText());
 
 			if(client != null) {
 
-				if(client.getState() == State.DISABLED) {
+				if(client.getState() == State.ENABLE) {
 
 					alert.setHeaderText("No se pudo deshabilitar el cliente");
 					alert.setContentText("El cliente ya se encuentra deshabilitado");
 				}
 				else {
 
-					laCasaDorada.disableClient(client);
+					laCasaDorada.enableClient(client);
 
 					Alert alerts = new Alert(AlertType.INFORMATION);
 					alerts.setTitle("EXCELENTE");
@@ -3535,6 +3529,26 @@ public class LaCasaDoradaGUI {
 		}
 
 	}
+
+	@FXML
+	public void loadDisabledOrder(ActionEvent event) throws IOException {
+
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("disabledOrder-pane.fxml"));
+
+		loader.setController(this);
+
+		Parent load = loader.load();
+		mainPane.setCenter(load);
+
+		mainPane.getChildren().clear();
+		mainPane.setTop(load);
+
+		Image image = new Image("/images/Banner.jpg");
+		imageDisabledWallOrder.setImage(image);
+		Image image2 = new Image("/images/BannerCasaDorada.jpg");
+		imageDisabledBannerOrder.setImage(image2);
+	}
+
 
 	@FXML
 	public void disabledOrder(ActionEvent event) throws IOException {
