@@ -4001,5 +4001,265 @@ public class LaCasaDoradaGUI {
 
 		}
 	}
+	
+	@FXML
+	public void loadEnableSize() throws IOException {
 
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("disableSize-pane.fxml"));
+		loader.setController(this);
+
+		Parent load = loader.load();
+		mainPane.setCenter(load);
+
+		mainPane.getChildren().clear();
+		mainPane.setTop(load);
+
+		Image image = new Image("/images/Banner.jpg");
+		imageDisabledWallSize.setImage(image);
+		Image image2 = new Image("/images/BannerCasaDorada.jpg");
+		imageDisabledBannerSize.setImage(image2);
+	}
+
+	@FXML
+	public void enableSize(ActionEvent event) throws IOException {
+
+		if(!nameDisabledSize.getText().isEmpty()) {
+
+			Size size = laCasaDorada.findSize(nameDisabledSize.getText());
+
+			if(size != null) {
+
+				if(size.getState() == State.DISABLED) {
+
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setTitle("ERROR");
+					alert.setHeaderText("No se pudo deshabilitar el tamaño del producto");
+					alert.setContentText("El tamaño del producto ya se encuentra deshabilitado");
+					alert.showAndWait();
+				}
+				else {
+					laCasaDorada.disableSize(size);
+
+					Alert alerts = new Alert(AlertType.INFORMATION);
+					alerts.setTitle("EXCELENTE");
+					alerts.setHeaderText("Se ha deshabilitado exitosamente.");
+					alerts.setContentText("Se ha deshabilitado el tamaño de producto "+nameDisabledSize.getText()+" exitosamente");
+					alerts.showAndWait();
+
+					mainMenu();
+				}
+			}
+			else {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("ERROR");
+				alert.setHeaderText("No se pudo deshabilitar el tamaño de producto");
+				alert.setContentText("No existe un tamaño de producto con ese nombre");
+				alert.showAndWait();
+			}
+		}
+		else {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("ERROR");
+			alert.setHeaderText("No se pudo deshabilitar el tamaño de producto");
+			alert.setContentText("Debe llenar el campo para deshabilitar el tamaño de producto");
+			alert.showAndWait();
+		}
+	}
+	
+	@FXML
+	public void loadDisabledIngredient() throws IOException {
+
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("disabledIngredient-pane.fxml"));
+		loader.setController(this);
+
+		Parent load = loader.load();
+		mainPane.setCenter(load);
+
+		mainPane.getChildren().clear();
+		mainPane.setTop(load);
+
+		Image image = new Image("/images/Banner.jpg");
+		imageDisabledWallIngredient.setImage(image);
+		Image image2 = new Image("/images/BannerCasaDorada.jpg");
+		imageDisabledBannerIngredient.setImage(image2);
+	}
+
+	@FXML
+	public void disabledIngredient(ActionEvent event) throws IOException {
+
+		if(!nameDisabledIngredient.getText().isEmpty()) {
+
+			Ingredient ingredient = laCasaDorada.findIngredient(nameDisabledIngredient.getText());
+
+			if(ingredient != null) {
+
+				if(ingredient.getState() == State.DISABLED) {
+
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setTitle("ERROR");
+					alert.setHeaderText("No se pudo deshabilitar el ingrediente");
+					alert.setContentText("El ingrediente ya se encuentra deshabilitado");
+					alert.showAndWait();
+				}
+				else {
+					laCasaDorada.disableIngredient(ingredient);
+
+					Alert alerts = new Alert(AlertType.INFORMATION);
+					alerts.setTitle("EXCELENTE");
+					alerts.setHeaderText("Se ha deshabilitado exitosamente.");
+					alerts.setContentText("Se ha deshabilitado el producto "+nameDisabledIngredient.getText()+" exitosamente");
+					alerts.showAndWait();
+
+					mainMenu();
+				}
+			}
+			else {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("ERROR");
+				alert.setHeaderText("No se pudo deshabilitar el ingrediente");
+				alert.setContentText("No existe un ingrediente con ese nombre");
+				alert.showAndWait();
+			}
+		}
+		else {
+
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("ERROR");
+			alert.setHeaderText("No se pudo deshabilitar el ingrediente");
+			alert.setContentText("Debe llenar el campo para deshabilitar el ingrediente");
+			alert.showAndWait();
+		}
+	}
+	
+	@FXML
+	public void loadDisabledProductType() throws IOException {
+
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("disabledProductType-pane.fxml"));
+
+		loader.setController(this);
+
+		Parent load = loader.load();
+		mainPane.setCenter(load);
+
+		mainPane.getChildren().clear();
+		mainPane.setTop(load);
+
+		Image image = new Image("/images/Banner.jpg");
+		imageDisabledWallProductType.setImage(image);
+		Image image2 = new Image("/images/BannerCasaDorada.jpg");
+		imageDisabledBannerProductType.setImage(image2);
+	}
+
+	@FXML
+	public void disabledProductType(ActionEvent event) throws IOException {
+
+		if(!nameDisabledProductType.getText().isEmpty()) {
+
+			ProductType productType = laCasaDorada.findType(nameDisabledProductType.getText());
+
+			if(productType != null) {
+
+				if(productType.getState() == State.DISABLED) {
+
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setTitle("ERROR");
+					alert.setHeaderText("No se pudo deshabilitar el tipo de producto");
+					alert.setContentText("El tipo de producto ya se encuentra deshabilitado");
+					alert.showAndWait();
+				}
+				else {
+					laCasaDorada.disableType(productType);
+
+					Alert alerts = new Alert(AlertType.INFORMATION);
+					alerts.setTitle("EXCELENTE");
+					alerts.setHeaderText("Se ha deshabilitado exitosamente.");
+					alerts.setContentText("Se ha deshabilitado el tipo de producto "+nameDisabledProductType.getText()+" exitosamente");
+					alerts.showAndWait();
+
+					mainMenu();
+				}
+			}
+			else {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("ERROR");
+				alert.setHeaderText("No se pudo deshabilitar el tipo de producto");
+				alert.setContentText("No existe un tipo de producto con ese nombre");
+				alert.showAndWait();
+			}
+
+		}
+		else {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("ERROR");
+			alert.setHeaderText("No se pudo deshabilitar el tipo de producto");
+			alert.setContentText("Debe llenar el campo para deshabilitar el tipo de producto");
+			alert.showAndWait();
+		}
+	}
+	
+	@FXML
+	public void loadDisabledProduct(ActionEvent event) throws IOException {
+
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("disabledProduct-pane.fxml"));
+
+		loader.setController(this);
+
+		Parent load = loader.load();
+		mainPane.setCenter(load);
+
+		mainPane.getChildren().clear();
+		mainPane.setTop(load);
+
+		Image image = new Image("/images/Banner.jpg");
+		imageDisabledWallProduct.setImage(image);
+		Image image2 = new Image("/images/BannerCasaDorada.jpg");
+		imageDisabledBannerProduct.setImage(image2);
+	}
+
+	@FXML
+	public void disabledProduct(ActionEvent event) throws IOException {
+
+		if(!nameDisabledProduct.getText().isEmpty()) {
+
+			Product product = laCasaDorada.findProducts(nameDisabledProduct.getText());
+
+			if(product != null) {
+
+				if(product.getState() == State.DISABLED) {
+
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setTitle("ERROR");
+					alert.setHeaderText("No se pudo deshabilitar el producto");
+					alert.setContentText("El producto ya se encuentra deshabilitado");
+					alert.showAndWait();
+				}
+				else {
+
+					laCasaDorada.disableProduct(product);
+
+					Alert alerts = new Alert(AlertType.INFORMATION);
+					alerts.setTitle("EXCELENTE");
+					alerts.setHeaderText("Se ha deshabilitado exitosamente.");
+					alerts.setContentText("Se ha deshabilitado el producto "+nameDisabledProduct.getText()+" exitosamente");
+					alerts.showAndWait();
+
+					mainMenu();
+				}
+			}
+			else {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("ERROR");
+				alert.setHeaderText("No se pudo deshabilitar el producto");
+				alert.setContentText("No existe un producto con ese nombre");
+				alert.showAndWait();
+			}
+		}
+		else {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("ERROR");
+			alert.setHeaderText("No se pudo deshabilitar el producto");
+			alert.setContentText("Debe llenar el campo para deshabilitar el producto");
+			alert.showAndWait();
+		}
+	}
 }
