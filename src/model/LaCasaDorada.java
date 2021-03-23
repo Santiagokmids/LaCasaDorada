@@ -141,9 +141,9 @@ public class LaCasaDorada {
 	}
 
 	//create size
-	public void createSize(String size) {
+	public void createSize(String size, Modifiers modifiers ) {
 
-		Size allSizes = new Size(size);
+		Size allSizes = new Size(size, modifiers);
 		sizes.add(allSizes);
 	}
 
@@ -661,6 +661,19 @@ public class LaCasaDorada {
 			}
 		}
 	}
+	
+	public void deleteSize(Size sizeToDelete){
+
+		boolean verific = false;
+
+		for (int j = 0; j <sizes.size() && !verific; j++) {
+
+			if(sizes.get(j) == sizeToDelete) {
+				verific = true;
+				sizes.remove(j);
+			}
+		}
+	}
 
 	public void disableIngredient(Ingredient ingredientDisable){
 
@@ -876,6 +889,22 @@ public class LaCasaDorada {
 			}
 		}
 		return ingredientInProduct;
+	}
+	
+	public Product findSizeInProduct(Size sizeToFind) {
+
+		Product sizeInProduct = null;
+		boolean verific = false;
+
+		for (int i = 0; i < product.size() && !verific; i++) {
+			for (int j = 0; j < product.size(); j++) {
+				if(product.get(i).getSizes() == sizeToFind) {
+					verific = true;
+					sizeInProduct = product.get(i);
+				}
+			}
+		}
+		return sizeInProduct;
 	}
 
 	public void importData(String fileName) throws IOException {

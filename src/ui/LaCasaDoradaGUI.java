@@ -543,6 +543,30 @@ public class LaCasaDoradaGUI {
 
 	@FXML
 	private ImageView imageDeleteOrder;
+	
+	@FXML
+    private ImageView imageDeleteWallSize;
+
+    @FXML
+    private TextField nameDeleteSize;
+
+    @FXML
+    private ImageView imageDeleteSize;
+    
+    @FXML
+    private ImageView imageBannerListSize;
+
+    @FXML
+    private ImageView imageWallListSize;
+
+    @FXML
+    private TableView<Size> tvListSize;
+
+    @FXML
+    private TableColumn<Size, String> tcNameSize;
+
+    @FXML
+    private TextField updateNameSize;
 
 
 	@FXML
@@ -557,6 +581,7 @@ public class LaCasaDoradaGUI {
 	public static ObservableList<Ingredient> listIngredients;
 	public static ObservableList<Client> listClient;
 	public static ObservableList<Employee> listEmployee;
+	public static ObservableList<Size> listSizes;
 	public static ObservableList<ProductType> listType;
 	public static Modifiers usersModifiers;
 	public static ObservableList<Product> listOfProducts;
@@ -936,7 +961,7 @@ public class LaCasaDoradaGUI {
 				alerts.setContentText("Se ha añadido el tamaño "+txtSize.getText()+" exitosamente");
 				alerts.showAndWait();
 
-				laCasaDorada.createSize(txtSize.getText());
+				laCasaDorada.createSize(txtSize.getText(), usersModifiers);
 				mainMenu();
 
 			}else {
@@ -2699,7 +2724,7 @@ public class LaCasaDoradaGUI {
 					alerts.setTitle("EXCELENTE");
 
 					Alert alert1 = new Alert(AlertType.CONFIRMATION);
-					alert1.setHeaderText("¿Está seguro de eliminar el el ingrediente "+nameDeleteIngredient.getText()+"?.");
+					alert1.setHeaderText("¿Está seguro de eliminar el ingrediente "+nameDeleteIngredient.getText()+"?.");
 					Optional<ButtonType> result = alert1.showAndWait();
 
 					if(result.get() == ButtonType.OK) {
@@ -2891,6 +2916,90 @@ public class LaCasaDoradaGUI {
 
 		updateNameType.setText(name);
 	}
+	
+	@FXML
+	public void listSizes(ActionEvent event) throws IOException {
+
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("listSize.fxml"));
+
+		loader.setController(this);
+		Parent load = loader.load();
+
+		mainPane.getChildren().clear();
+		mainPane.setTop(load);
+
+		Image image = new Image("/images/Banner.jpg");
+		imageBannerListSize.setImage(image);
+		Image image2 = new Image("/images/BannerCasaDorada.jpg");
+		imageBannerListSize.setImage(image2);
+
+		inicializateTableViewSize();
+	}
+
+	public void inicializateTableViewSize() {
+		listSizes = FXCollections.observableArrayList(laCasaDorada.getSizes());
+
+		tvListSize.setItems(listSizes);
+		tcNameSize.setCellValueFactory(new PropertyValueFactory<Size,String>("size"));
+	}
+
+	@FXML
+	public void modifyListSize(ActionEvent event) {
+
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.setTitle("ERROR");
+
+		if(tvListSize.getSelectionModel().isEmpty()) {
+
+			alert.setHeaderText("No se pudo actualizar el Tamaño");
+			alert.setContentText("Debe seleccionar uno de la lista");
+			alert.showAndWait();
+		}
+		else {
+
+			boolean verify = false;
+
+			String size = listSizes.get(tvListSize.getSelectionModel().getSelectedIndex()).getSize();
+
+			Size sizes = laCasaDorada.findSize(size);
+
+
+			if(!updateNameSize.getText().isEmpty() && !updateNameSize.getText().equalsIgnoreCase(size)) {
+				size = updateNameSize.getText();
+				verify = true;
+				sizes.getUsersCreators().setLastModifier(usersModifiers.getCreateObject());
+				sizes.setSize(size);
+			}
+
+			listSizes.set(tvListSize.getSelectionModel().getSelectedIndex(),new Size(size,sizes.getUsersCreators()));
+
+			updateNameSize.setText("");
+
+			if(!verify) {
+
+				alert.setTitle("ERROR");
+				alert.setHeaderText("No se pudo actualizar la información.");
+				alert.setContentText(null);
+				alert.showAndWait();
+			}
+			else {
+				Alert alert1 = new Alert(AlertType.INFORMATION);
+				alert1.setHeaderText("Se actualizó el tamaño");
+				alert1.setContentText("El tamaño actualizó el nombre.");
+				alert1.showAndWait();
+			}
+
+		}
+	}
+
+	@FXML
+	public void mouseClickedListSize(MouseEvent event) {
+
+		String size = listSizes.get(tvListSize.getSelectionModel().getSelectedIndex()).getSize();
+
+		updateNameSize.setText(size);
+	}
+
 
 	@FXML
 	public void loadDeleteOrder() throws IOException {
@@ -2974,7 +3083,7 @@ public class LaCasaDoradaGUI {
 	}
 
 	@FXML
-	void disabledIngredient(ActionEvent event) throws IOException {
+	public void disabledIngredient(ActionEvent event) throws IOException {
 
 		if(!nameDisabledIngredient.getText().isEmpty()) {
 
@@ -3021,7 +3130,7 @@ public class LaCasaDoradaGUI {
 	}
 	
 	@FXML
-    void disabledSize(ActionEvent event) throws IOException {
+    public void disabledSize(ActionEvent event) throws IOException {
 		
 		if(!nameDisabledSize.getText().isEmpty()) {
 			
@@ -3048,4 +3157,76 @@ public class LaCasaDoradaGUI {
 			alert.showAndWait();
 		}
     }
+	
+	@FXML
+	public void loadDeleteSize() throws IOException {
+
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("deleteSize.fxml"));
+		loader.setController(this);
+
+		Parent load = loader.load();
+		mainPane.setCenter(load);
+
+		mainPane.getChildren().clear();
+		mainPane.setTop(load);
+
+		Image image = new Image("/images/Banner.jpg");
+		imageDeleteWallSize.setImage(image);
+		Image image2 = new Image("/images/BannerCasaDorada.jpg");
+		imageDeleteSize.setImage(image2);
+	}
+	
+	@FXML
+	public void deletedSize(ActionEvent event) throws IOException {
+
+		if(!nameDeleteSize.getText().isEmpty()) {
+
+			Size size = laCasaDorada.findSize(nameDeleteSize.getText());
+
+			if(size != null) {
+
+				Product product = laCasaDorada.findSizeInProduct(size);
+
+				if(product != null) {
+
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setTitle("ERROR");
+					alert.setHeaderText("No se pudo eliminar el tamaño");
+					alert.setContentText("No se puede eliminar porque el tamaño está activo en el sistema");
+					alert.showAndWait();
+				}
+				else {
+
+					Alert alerts = new Alert(AlertType.INFORMATION);
+					alerts.setTitle("EXCELENTE");
+
+					Alert alert1 = new Alert(AlertType.CONFIRMATION);
+					alert1.setHeaderText("¿Está seguro de eliminar el tamaño "+nameDeleteSize.getText()+"?.");
+					Optional<ButtonType> result = alert1.showAndWait();
+
+					if(result.get() == ButtonType.OK) {
+
+						alerts.setHeaderText("Se ha eliminado exitosamente.");
+						alerts.showAndWait();
+						laCasaDorada.deleteSize(size);
+						mainMenu();
+					}			
+				}
+			}
+			else {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("ERROR");
+				alert.setHeaderText("No se pudo eliminar el tamaño");
+				alert.setContentText("No existe un tamaño con ese nombre");
+				alert.showAndWait();
+			}
+		}
+		else {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("ERROR");
+			alert.setHeaderText("No se pudo eliminar el tamaño");
+			alert.setContentText("Debe llenar el campo para eliminar el tamaño");
+			alert.showAndWait();
+		}
+	}
 }
