@@ -62,7 +62,7 @@
                   <MenuItem mnemonicParsing="false" onAction="#loadDisabledProduct" text="Producto" />
                   <MenuItem mnemonicParsing="false" onAction="#loadDisabledProductType" text="Tipo de Producto" />
                   <MenuItem mnemonicParsing="false" onAction="#loadDisabledIngredient" text="Ingrediente" />
-                  <MenuItem mnemonicParsing="false" onAction="#loadDisabledSize" text="Tamaño de producto" />
+                  <MenuItem mnemonicParsing="false" onAction="#loadEnableSize" text="Tamaño de producto" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Listar y Actualizar">
