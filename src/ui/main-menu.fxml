@@ -38,7 +38,7 @@
                   <MenuItem mnemonicParsing="false" onAction="#loadDeletedProduct" text="Producto" />
                   <MenuItem mnemonicParsing="false" onAction="#loadDeletedTypeProduct" text="Tipo de Producto" />
                   <MenuItem mnemonicParsing="false" onAction="#loadDeleteIngredient" text="Ingrediente" />
-                  <MenuItem mnemonicParsing="false" text="Tamaño de Producto" />
+                  <MenuItem mnemonicParsing="false" onAction="#loadDeleteSize" text="Tamaño de Producto" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Deshabilitar">
@@ -62,6 +62,7 @@
                   <MenuItem mnemonicParsing="false" onAction="#listProduct" text="Producto" />
                   <MenuItem mnemonicParsing="false" onAction="#listType" text="Tipo de Producto" />
                   <MenuItem mnemonicParsing="false" onAction="#listIngredient" text="Ingrediente" />
+                  <MenuItem mnemonicParsing="false" onAction="#listSizes" text="Tamaño del Producto" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Acerca de" />

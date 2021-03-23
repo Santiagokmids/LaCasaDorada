@@ -9,9 +9,10 @@ public class Size {
 	//Relations
 	private Modifiers usersCreators;
 
-	public Size(String size) {
+	public Size(String size, Modifiers usersCreators) {
 		this.size = size;
 		this.state = State.ENABLE;
+		this.usersCreators = usersCreators;
 	}
 	
 	public String getSize() {

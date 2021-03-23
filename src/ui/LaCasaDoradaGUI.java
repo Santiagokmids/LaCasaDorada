@@ -40,27 +40,27 @@ import model.StateOrder;
 import model.User;
 
 public class LaCasaDoradaGUI {
-	
-	@FXML
-    private ImageView imageDisabledWallProductType;
-
-    @FXML
-    private TextField nameDisabledProductType;
-
-    @FXML
-    private ImageView imageDisabledBannerProductType;
 
 	@FXML
-    private ImageView imageDisabledWallSize;
+	private ImageView imageDisabledWallProductType;
 
-    @FXML
-    private TextField nameDisabledSize;
-
-    @FXML
-    private ImageView imageDisabledBannerSize;
-	
 	@FXML
-    private ImageView imageDisabledWallIngredient;
+	private TextField nameDisabledProductType;
+
+	@FXML
+	private ImageView imageDisabledBannerProductType;
+
+	@FXML
+	private ImageView imageDisabledWallSize;
+
+	@FXML
+	private TextField nameDisabledSize;
+
+	@FXML
+	private ImageView imageDisabledBannerSize;
+
+	@FXML
+	private ImageView imageDisabledWallIngredient;
 
 	@FXML
 	private TextField nameDisabledIngredient;
@@ -554,6 +554,30 @@ public class LaCasaDoradaGUI {
 	@FXML
 	private ImageView imageDeleteOrder;
 
+	@FXML
+	private ImageView imageDeleteWallSize;
+
+	@FXML
+	private TextField nameDeleteSize;
+
+	@FXML
+	private ImageView imageDeleteSize;
+
+	@FXML
+	private ImageView imageBannerListSize;
+
+	@FXML
+	private ImageView imageWallListSize;
+
+	@FXML
+	private TableView<Size> tvListSize;
+
+	@FXML
+	private TableColumn<Size, String> tcNameSize;
+
+	@FXML
+	private TextField updateNameSize;
+
 
 	@FXML
 	private TextField updateNameType;
@@ -567,6 +591,7 @@ public class LaCasaDoradaGUI {
 	public static ObservableList<Ingredient> listIngredients;
 	public static ObservableList<Client> listClient;
 	public static ObservableList<Employee> listEmployee;
+	public static ObservableList<Size> listSizes;
 	public static ObservableList<ProductType> listType;
 	public static Modifiers usersModifiers;
 	public static ObservableList<Product> listOfProducts;
@@ -946,7 +971,7 @@ public class LaCasaDoradaGUI {
 				alerts.setContentText("Se ha añadido el tamaño "+txtSize.getText()+" exitosamente");
 				alerts.showAndWait();
 
-				laCasaDorada.createSize(txtSize.getText());
+				laCasaDorada.createSize(txtSize.getText(), usersModifiers);
 				mainMenu();
 
 			}else {
@@ -2709,7 +2734,7 @@ public class LaCasaDoradaGUI {
 					alerts.setTitle("EXCELENTE");
 
 					Alert alert1 = new Alert(AlertType.CONFIRMATION);
-					alert1.setHeaderText("¿Está seguro de eliminar el el ingrediente "+nameDeleteIngredient.getText()+"?.");
+					alert1.setHeaderText("¿Está seguro de eliminar el ingrediente "+nameDeleteIngredient.getText()+"?.");
 					Optional<ButtonType> result = alert1.showAndWait();
 
 					if(result.get() == ButtonType.OK) {
@@ -2903,6 +2928,89 @@ public class LaCasaDoradaGUI {
 	}
 
 	@FXML
+	public void listSizes(ActionEvent event) throws IOException {
+
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("listSize.fxml"));
+
+		loader.setController(this);
+		Parent load = loader.load();
+
+		mainPane.getChildren().clear();
+		mainPane.setTop(load);
+
+		Image image = new Image("/images/Banner.jpg");
+		imageBannerListSize.setImage(image);
+		Image image2 = new Image("/images/BannerCasaDorada.jpg");
+		imageBannerListSize.setImage(image2);
+
+		inicializateTableViewSize();
+	}
+
+	public void inicializateTableViewSize() {
+		listSizes = FXCollections.observableArrayList(laCasaDorada.getSizes());
+
+		tvListSize.setItems(listSizes);
+		tcNameSize.setCellValueFactory(new PropertyValueFactory<Size,String>("size"));
+	}
+
+	@FXML
+	public void modifyListSize(ActionEvent event) {
+
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.setTitle("ERROR");
+
+		if(tvListSize.getSelectionModel().isEmpty()) {
+
+			alert.setHeaderText("No se pudo actualizar el Tamaño");
+			alert.setContentText("Debe seleccionar uno de la lista");
+			alert.showAndWait();
+		}
+		else {
+
+			boolean verify = false;
+
+			String size = listSizes.get(tvListSize.getSelectionModel().getSelectedIndex()).getSize();
+
+			Size sizes = laCasaDorada.findSize(size);
+
+
+			if(!updateNameSize.getText().isEmpty() && !updateNameSize.getText().equalsIgnoreCase(size)) {
+				size = updateNameSize.getText();
+				verify = true;
+				sizes.getUsersCreators().setLastModifier(usersModifiers.getCreateObject());
+				sizes.setSize(size);
+			}
+
+			listSizes.set(tvListSize.getSelectionModel().getSelectedIndex(),new Size(size,sizes.getUsersCreators()));
+
+			updateNameSize.setText("");
+
+			if(!verify) {
+
+				alert.setTitle("ERROR");
+				alert.setHeaderText("No se pudo actualizar la información.");
+				alert.setContentText(null);
+				alert.showAndWait();
+			}
+			else {
+				Alert alert1 = new Alert(AlertType.INFORMATION);
+				alert1.setHeaderText("Se actualizó el tamaño");
+				alert1.setContentText("El tamaño actualizó el nombre.");
+				alert1.showAndWait();
+			}
+
+		}
+	}
+
+	@FXML
+	public void mouseClickedListSize(MouseEvent event) {
+
+		String size = listSizes.get(tvListSize.getSelectionModel().getSelectedIndex()).getSize();
+
+		updateNameSize.setText(size);
+	}
+
+	@FXML
 	public void loadDeleteOrder() throws IOException {
 
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("deleteOrder.fxml"));
@@ -2964,6 +3072,60 @@ public class LaCasaDoradaGUI {
 			alert.showAndWait();
 		}
 	}
+	
+	@FXML
+	public void deletedSize(ActionEvent event) throws IOException {
+
+		if(!nameDeleteSize.getText().isEmpty()) {
+
+			Size size = laCasaDorada.findSize(nameDeleteSize.getText());
+
+			if(size != null) {
+
+				Product product = laCasaDorada.findSizeInProduct(size);
+
+				if(product != null) {
+
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setTitle("ERROR");
+					alert.setHeaderText("No se pudo eliminar el tamaño");
+					alert.setContentText("No se puede eliminar porque el tamaño está activo en el sistema");
+					alert.showAndWait();
+				}
+				else {
+
+					Alert alerts = new Alert(AlertType.INFORMATION);
+					alerts.setTitle("EXCELENTE");
+
+					Alert alert1 = new Alert(AlertType.CONFIRMATION);
+					alert1.setHeaderText("¿Está seguro de eliminar el tamaño "+nameDeleteSize.getText()+"?.");
+					Optional<ButtonType> result = alert1.showAndWait();
+
+					if(result.get() == ButtonType.OK) {
+
+						alerts.setHeaderText("Se ha eliminado exitosamente.");
+						alerts.showAndWait();
+						laCasaDorada.deleteSize(size);
+						mainMenu();
+					}			
+				}
+			}
+			else {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("ERROR");
+				alert.setHeaderText("No se pudo eliminar el tamaño");
+				alert.setContentText("No existe un tamaño con ese nombre");
+				alert.showAndWait();
+			}
+		}
+		else {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("ERROR");
+			alert.setHeaderText("No se pudo eliminar el tamaño");
+			alert.setContentText("Debe llenar el campo para eliminar el tamaño");
+			alert.showAndWait();
+		}
+	}
 
 	@FXML
 	public void loadDisabledIngredient() throws IOException {
@@ -2991,9 +3153,9 @@ public class LaCasaDoradaGUI {
 			Ingredient ingredient = laCasaDorada.findIngredient(nameDisabledIngredient.getText());
 
 			if(ingredient != null) {
-				
+
 				if(ingredient.getState() == State.DISABLED) {
-					
+
 					Alert alert = new Alert(AlertType.ERROR);
 					alert.setTitle("ERROR");
 					alert.setHeaderText("No se pudo deshabilitar el ingrediente");
@@ -3021,8 +3183,8 @@ public class LaCasaDoradaGUI {
 			alert.setContentText("Debe llenar el campo para deshabilitar el ingrediente");
 			alert.showAndWait();
 		}
-    }
-	
+	}
+
 	@FXML
 	public void loadDisabledSize() throws IOException {
 
@@ -3034,22 +3196,22 @@ public class LaCasaDoradaGUI {
 
 		mainPane.getChildren().clear();
 		mainPane.setTop(load);
-		
+
 		Image image = new Image("/images/Banner.jpg");
 		imageDisabledWallSize.setImage(image);
 		Image image2 = new Image("/images/BannerCasaDorada.jpg");
 		imageDisabledBannerSize.setImage(image2);
 	}
-	
+
 	@FXML
-    public void disabledSize(ActionEvent event) throws IOException {
-		
+	public void disabledSize(ActionEvent event) throws IOException {
+
 		if(!nameDisabledSize.getText().isEmpty()) {
-			
+
 			Size size = laCasaDorada.findSize(nameDisabledSize.getText());
-			
+
 			if(size != null) {
-				
+
 				if(size.getState() == State.DISABLED) {
 
 					Alert alert = new Alert(AlertType.ERROR);
@@ -3060,7 +3222,7 @@ public class LaCasaDoradaGUI {
 				}
 				else {
 					laCasaDorada.disableSize(size);
-					
+
 					Alert alerts = new Alert(AlertType.INFORMATION);
 					alerts.setTitle("EXCELENTE");
 					alerts.setHeaderText("Se ha deshabilitado exitosamente.");
@@ -3078,12 +3240,13 @@ public class LaCasaDoradaGUI {
 			alert.setContentText("Debe llenar el campo para deshabilitar el tamaño de producto");
 			alert.showAndWait();
 		}
-    }
-	
+	}
+
 	@FXML
 	public void loadDisabledProductType() throws IOException {
 
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("disabledProductType-pane.fxml"));
+
 		loader.setController(this);
 
 		Parent load = loader.load();
@@ -3091,22 +3254,22 @@ public class LaCasaDoradaGUI {
 
 		mainPane.getChildren().clear();
 		mainPane.setTop(load);
-		
+
 		Image image = new Image("/images/Banner.jpg");
 		imageDisabledWallProductType.setImage(image);
 		Image image2 = new Image("/images/BannerCasaDorada.jpg");
 		imageDisabledBannerProductType.setImage(image2);
 	}
-	
+
 	@FXML
-    public void disabledProductType(ActionEvent event) throws IOException {
-		
+	public void disabledProductType(ActionEvent event) throws IOException {
+
 		if(!nameDisabledProductType.getText().isEmpty()) {
-			
+
 			ProductType productType = laCasaDorada.findType(nameDisabledProductType.getText());
-			
+
 			if(productType != null) {
-				
+
 				if(productType.getState() == State.DISABLED) {
 
 					Alert alert = new Alert(AlertType.ERROR);
@@ -3117,7 +3280,7 @@ public class LaCasaDoradaGUI {
 				}
 				else {
 					laCasaDorada.disableType(productType);
-					
+
 					Alert alerts = new Alert(AlertType.INFORMATION);
 					alerts.setTitle("EXCELENTE");
 					alerts.setHeaderText("Se ha deshabilitado exitosamente.");
@@ -3127,13 +3290,13 @@ public class LaCasaDoradaGUI {
 					mainMenu();
 				}
 			}
+
+			Image image = new Image("/images/Banner.jpg");
+			imageDeleteWallSize.setImage(image);
+			Image image2 = new Image("/images/BannerCasaDorada.jpg");
+			imageDeleteSize.setImage(image2);
 		}
-		else {
-			Alert alert = new Alert(AlertType.ERROR);
-			alert.setTitle("ERROR");
-			alert.setHeaderText("No se pudo deshabilitar el tipo de producto");
-			alert.setContentText("Debe llenar el campo para deshabilitar el tipo de producto");
-			alert.showAndWait();
-		}
-    }
+	}
+
+	
 }
