@@ -3733,5 +3733,4 @@ public class LaCasaDoradaGUI {
 		alert.setContentText("Luis Miguel Ossa Arias y Santiago Trochez \nUniversidad Icesi \n29/03/2021");
 		alert.showAndWait();
 	}
-
 }
