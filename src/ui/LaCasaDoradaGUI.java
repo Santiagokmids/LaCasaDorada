@@ -42,6 +42,27 @@ import model.User;
 public class LaCasaDoradaGUI {
 	
 	@FXML
+    private TextField nameUserDisable;
+	
+	@FXML
+    private ImageView imageDisabledWallUser;
+
+    @FXML
+    private TextField nameDisabledUser;
+
+    @FXML
+    private ImageView imageDisabledBannerUser;
+	
+	@FXML
+    private ImageView imageDisabledWallOrder;
+
+    @FXML
+    private TextField nameDisabledOrder;
+
+    @FXML
+    private ImageView imageDisabledBannerOrder;
+	
+	@FXML
     private ImageView imageDisabledWallProduct;
 
     @FXML
@@ -3366,7 +3387,7 @@ public class LaCasaDoradaGUI {
 	
 	@FXML
     public void disabledProduct(ActionEvent event) throws IOException {
-		
+
 		if(!nameDisabledProduct.getText().isEmpty()) {
 			
 			Product product = laCasaDorada.findProducts(nameDisabledProduct.getText());
@@ -3407,6 +3428,138 @@ public class LaCasaDoradaGUI {
 			alert.setTitle("ERROR");
 			alert.setHeaderText("No se pudo deshabilitar el producto");
 			alert.setContentText("Debe llenar el campo para deshabilitar el producto");
+			alert.showAndWait();
+		}
+    }
+
+	@FXML
+    public void loadDisabledOrder(ActionEvent event) throws IOException {
+		
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("disabledOrder-pane.fxml"));
+
+		loader.setController(this);
+
+		Parent load = loader.load();
+		mainPane.setCenter(load);
+
+		mainPane.getChildren().clear();
+		mainPane.setTop(load);
+
+		Image image = new Image("/images/Banner.jpg");
+		imageDisabledWallOrder.setImage(image);
+		Image image2 = new Image("/images/BannerCasaDorada.jpg");
+		imageDisabledBannerOrder.setImage(image2);
+    }
+	
+	@FXML
+    public void disabledOrder(ActionEvent event) throws IOException {
+
+		if(!nameDisabledOrder.getText().isEmpty()) {
+			
+			Order order = laCasaDorada.findOrder(nameDisabledOrder.getText());
+			
+			if(order != null) {
+				
+				if(order.getStates() == State.DISABLED) {
+					
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setTitle("ERROR");
+					alert.setHeaderText("No se pudo deshabilitar el pedido");
+					alert.setContentText("El pedido ya se encuentra deshabilitado");
+					alert.showAndWait();
+				}
+				else {
+					
+					laCasaDorada.disableProduct(order);
+					
+					Alert alerts = new Alert(AlertType.INFORMATION);
+					alerts.setTitle("EXCELENTE");
+					alerts.setHeaderText("Se ha deshabilitado exitosamente.");
+					alerts.setContentText("Se ha deshabilitado el pedido "+nameDisabledOrder.getText()+" exitosamente");
+					alerts.showAndWait();
+
+					mainMenu();
+				}
+			}
+			else {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("ERROR");
+				alert.setHeaderText("No se pudo deshabilitar el pedido");
+				alert.setContentText("No existe un pedido con ese código");
+				alert.showAndWait();
+			}
+		}
+		else {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("ERROR");
+			alert.setHeaderText("No se pudo deshabilitar el pedido");
+			alert.setContentText("Debe llenar el campo para deshabilitar el pedido");
+			alert.showAndWait();
+		}
+    }
+
+	@FXML
+    public void loadDisabledUser(ActionEvent event) throws IOException {
+		
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("disabledUser-pane.fxml"));
+
+		loader.setController(this);
+
+		Parent load = loader.load();
+		mainPane.setCenter(load);
+
+		mainPane.getChildren().clear();
+		mainPane.setTop(load);
+
+		Image image = new Image("/images/Banner.jpg");
+		imageDisabledWallUser.setImage(image);
+		Image image2 = new Image("/images/BannerCasaDorada.jpg");
+		imageDisabledBannerUser.setImage(image2);
+    }
+	
+	@FXML
+    public void disabledUser(ActionEvent event) throws IOException {
+
+		if(!nameDisabledUser.getText().isEmpty() && !nameUserDisable.getText().isEmpty()) {
+			
+			User user = laCasaDorada.findUser(nameUserDisable.getText(),nameDisabledUser.getText());
+			
+			if(user != null) {
+				
+				if(user.getState() == State.DISABLED) {
+					
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setTitle("ERROR");
+					alert.setHeaderText("No se pudo deshabilitar el usuario");
+					alert.setContentText("El usuario ya se encuentra deshabilitado");
+					alert.showAndWait();
+				}
+				else {
+					
+					laCasaDorada.disableUser(user);
+					
+					Alert alerts = new Alert(AlertType.INFORMATION);
+					alerts.setTitle("EXCELENTE");
+					alerts.setHeaderText("Se ha deshabilitado exitosamente.");
+					alerts.setContentText("Se ha deshabilitado el usuario "+nameDisabledUser.getText()+" exitosamente");
+					alerts.showAndWait();
+
+					mainMenu();
+				}
+			}
+			else {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("ERROR");
+				alert.setHeaderText("No se pudo deshabilitar el usuario");
+				alert.setContentText("No existe un usuario con ese nombre de usuario y/o número de identificación");
+				alert.showAndWait();
+			}
+		}
+		else {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("ERROR");
+			alert.setHeaderText("No se pudo deshabilitar el usuario");
+			alert.setContentText("Debe llenar los campos para deshabilitar el usuario");
 			alert.showAndWait();
 		}
     }

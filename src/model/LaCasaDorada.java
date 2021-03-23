@@ -726,6 +726,32 @@ public class LaCasaDorada {
 			}
 		}
 	}
+	
+	public void disableProduct(Order orderDisable){
+
+		boolean verific = false;
+
+		for (int j = 0; j <order.size() && !verific; j++) {
+
+			if(order.get(j) == orderDisable) {
+				verific = true;
+				order.get(j).setStates(State.DISABLED);
+			}
+		}
+	}
+	
+	public void disableUser(User user){
+
+		boolean verific = false;
+
+		for (int j = 0; j <people.size() && !verific; j++) {
+
+			if(people.get(j) == user) {
+				verific = true;
+				people.get(j).setState(State.DISABLED);
+			}
+		}
+	}
 
 	public ArrayList<User> getUsers(){
 
