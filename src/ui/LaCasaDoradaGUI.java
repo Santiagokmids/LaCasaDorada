@@ -40,24 +40,24 @@ import model.StateOrder;
 import model.User;
 
 public class LaCasaDoradaGUI {
-	
+
 	@FXML
-    private ImageView imageEnableWallProduct;
+	private ImageView imageEnableWallProduct;
 
-    @FXML
-    private TextField nameEnableProduct;
-
-    @FXML
-    private ImageView imageEnableBannerProduct;
-	
 	@FXML
-    private ImageView imageEnableWallProductType;
+	private TextField nameEnableProduct;
 
-    @FXML
-    private TextField nameEnableProductType;
+	@FXML
+	private ImageView imageEnableBannerProduct;
 
-    @FXML
-    private ImageView imageEnableBannerProductType;
+	@FXML
+	private ImageView imageEnableWallProductType;
+
+	@FXML
+	private TextField nameEnableProductType;
+
+	@FXML
+	private ImageView imageEnableBannerProductType;
 
 	@FXML
 	private ImageView imageEnableWallIngredient;
@@ -1383,14 +1383,13 @@ public class LaCasaDoradaGUI {
 
 			if(selectIngredient.getValue() != null && !selectIngredient.getValue().equalsIgnoreCase(name)) {
 				name = selectIngredient.getValue();
+				ingredient = laCasaDorada.findIngredient(name);
 				verific = true;
 			}
 
 			if(verific) {
 
-				ingredient.setName(name);
-
-				listIngredients.set(tvProduct.getSelectionModel().getSelectedIndex(),new Ingredient(name, usersModifiers));
+				listIngredients.set(tvProduct.getSelectionModel().getSelectedIndex(),new Ingredient(ingredient.getName(),ingredient.getUsersCreators()));
 
 				Alert alerts = new Alert(AlertType.INFORMATION);
 				alerts.setTitle("EXCELENTE");
@@ -1404,39 +1403,55 @@ public class LaCasaDoradaGUI {
 				alert.showAndWait();
 			}
 
-			selectIngredient.setValue(null);
+			selectIngredient.setValue(name);
 		}
 	}
 
 	@FXML
-	public void mouseClickedProduct(MouseEvent event) {
+	public void mouseClickedProduct(MouseEvent event)  {
 
-		String name = listIngredients.get(tvProduct.getSelectionModel().getSelectedIndex()).getName();
+		if(tvProduct.getSelectionModel().isEmpty()) {
+			Alert alerts = new Alert(AlertType.WARNING);
+			alerts.setTitle("CUIDADO");
+			alerts.setHeaderText("No se seleccionó ningún dato de la tabla.");
+			alerts.setContentText(null);
+			alerts.showAndWait();
 
-		selectIngredient.setValue(name);
+		}else {
+			String name = listIngredients.get(tvProduct.getSelectionModel().getSelectedIndex()).getName();
+
+			selectIngredient.setValue(name);
+		}
 	}
 
 	@FXML
 	public void ordersProducts(ActionEvent event)throws IOException {
 
 		int amounts = 0;
+		try {
+			if(!amount.getText().equals("") && !amount.getText().equals("0")) {
+				amounts = Integer.parseInt(amount.getText());
 
-		if(!amount.getText().equals("") && !amount.getText().equals("0")) {
-			amounts = Integer.parseInt(amount.getText());
+			}else {
+				amounts = 1;
+			}
 
-		}else {
-			amounts = 1;
-		}
-
-		if(selectProduct.getValue() != null) {
-			Product product = laCasaDorada.findProducts(selectProduct.getValue());
-			observableList.add(new PreOrder(product, amounts));
-		}
-		else {
+			if(selectProduct.getValue() != null) {
+				Product product = laCasaDorada.findProducts(selectProduct.getValue());
+				observableList.add(new PreOrder(product, amounts));
+			}
+			else {
+				Alert alert = new Alert(AlertType.WARNING);
+				alert.setTitle("CUIDADO");
+				alert.setHeaderText("No se pudo añadir un producto a la lista");
+				alert.setContentText("Necesita elegir un producto para añadirlo a la lista");
+				alert.showAndWait();
+			}
+		}catch(NumberFormatException nfe) {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle("CUIDADO");
-			alert.setHeaderText("No se pudo aladir un producto a la lista");
-			alert.setContentText("Necesita elegir un producto para añadirlo a la lista");
+			alert.setHeaderText("No se pudo añadir una cantidad a la lista");
+			alert.setContentText("Ingresó valores NO númericos.");
 			alert.showAndWait();
 		}
 
@@ -1468,17 +1483,30 @@ public class LaCasaDoradaGUI {
 
 			Product product = laCasaDorada.findProducts(name);
 			PreOrder preorder = laCasaDorada.findPreOrders(name, amounts);
-
-			if(selectProduct.getValue() != null) {
+			
+			if(selectProduct.getValue() != null && !selectProduct.getValue().equalsIgnoreCase(name)) {
 				name = selectProduct.getValue();
+				product = laCasaDorada.findProducts(selectProduct.getValue());
 				verific = true;
 			}
+			
+			try {
+				int validation = Integer.parseInt(amount.getText());
 
-			if(!amount.getText().isEmpty()) {
-				amounts = Integer.parseInt(amount.getText());
-				verificAmount = true;
+				if(!amount.getText().isEmpty() && validation != amounts) {
+					
+					amounts = validation;
+					verificAmount = true;
+					System.out.println(amounts+" beforeeee");
+				}
+			
+			}catch(NumberFormatException nfe) {
+
+				alert.setHeaderText("NO se pudo actualizar la cantidad.");
+				alert.setContentText("Ingres+o valore No númericos");
+				alert.showAndWait();
 			}
-
+			
 			Alert alerts = new Alert(AlertType.INFORMATION);
 			alerts.setTitle("EXCELENTE");
 
@@ -1486,16 +1514,13 @@ public class LaCasaDoradaGUI {
 				alerts.setHeaderText("Se han reemplazado los datos.");
 				alerts.setContentText("Se ha reemplazado el producto y su cantidad.");
 				alerts.showAndWait();
-
-				product.setName(name);
+				
 				preorder.setAmount(amounts);
 
 			}else if(verific) {
 				alerts.setHeaderText("Se ha reemplazado el producto.");
 				alerts.setContentText(null);
 				alerts.showAndWait();
-
-				product.setName(name);
 
 			}else if(verificAmount) {
 				alerts.setHeaderText("Se ha reemplazado la cantidad del producto.");
@@ -1512,19 +1537,28 @@ public class LaCasaDoradaGUI {
 
 			observableList.set(tvOrder.getSelectionModel().getSelectedIndex(),new PreOrder(product,amounts));
 
-			selectIngredient.setValue(null);
+			selectIngredient.setValue(name);
 		}
 	}
 
 	@FXML
 	public void mouseClickedOrder(MouseEvent event) {
 
-		String product = observableList.get(tvOrder.getSelectionModel().getSelectedIndex()).getProduct().getName();
-		Integer amounts = observableList.get(tvOrder.getSelectionModel().getSelectedIndex()).getAmount();
+		if(tvOrder.getSelectionModel().isEmpty()) {
+			Alert alerts = new Alert(AlertType.WARNING);
+			alerts.setTitle("CUIDADO");
+			alerts.setHeaderText("No se seleccionó ningún dato de la tabla.");
+			alerts.setContentText(null);
+			alerts.showAndWait();
 
-		selectProduct.setValue(product);
-		String total = amounts.toString();
-		amount.setText(total);
+		}else{  
+			String product = observableList.get(tvOrder.getSelectionModel().getSelectedIndex()).getProduct().getName();
+			Integer amounts = observableList.get(tvOrder.getSelectionModel().getSelectedIndex()).getAmount();
+
+			selectProduct.setValue(product);
+			String total = amounts.toString();
+			amount.setText(total);
+		}
 	}
 
 	@FXML
@@ -1759,15 +1793,25 @@ public class LaCasaDoradaGUI {
 	@FXML
 	public void mouseClickedUser(MouseEvent event) {
 
-		String name = listUsers.get(tvUser.getSelectionModel().getSelectedIndex()).getName();
-		String lastName = listUsers.get(tvUser.getSelectionModel().getSelectedIndex()).getLastName();
-		String id = listUsers.get(tvUser.getSelectionModel().getSelectedIndex()).getId();
-		String userName = listUsers.get(tvUser.getSelectionModel().getSelectedIndex()).getUserName();
+		if(tvUser.getSelectionModel().isEmpty()) {
+			Alert alerts = new Alert(AlertType.WARNING);
+			alerts.setTitle("CUIDADO");
+			alerts.setHeaderText("No se seleccionó ningún dato de la tabla.");
+			alerts.setContentText(null);
+			alerts.showAndWait();
 
-		updateName.setText(name);
-		updateLasName.setText(lastName);
-		updateId.setText(id);
-		updateUser.setText(userName);
+		}else {
+
+			String name = listUsers.get(tvUser.getSelectionModel().getSelectedIndex()).getName();
+			String lastName = listUsers.get(tvUser.getSelectionModel().getSelectedIndex()).getLastName();
+			String id = listUsers.get(tvUser.getSelectionModel().getSelectedIndex()).getId();
+			String userName = listUsers.get(tvUser.getSelectionModel().getSelectedIndex()).getUserName();
+
+			updateName.setText(name);
+			updateLasName.setText(lastName);
+			updateId.setText(id);
+			updateUser.setText(userName);
+		}
 	}
 
 	@FXML
@@ -1856,19 +1900,28 @@ public class LaCasaDoradaGUI {
 	@FXML
 	public void mouseClickedClient(MouseEvent event) {
 
-		String name = listClient.get(tvClient.getSelectionModel().getSelectedIndex()).getName();
-		String lastName = listClient.get(tvClient.getSelectionModel().getSelectedIndex()).getLastName();
-		String id = listClient.get(tvClient.getSelectionModel().getSelectedIndex()).getId();
-		String address = listClient.get(tvClient.getSelectionModel().getSelectedIndex()).getAddress();
-		String telephone = listClient.get(tvClient.getSelectionModel().getSelectedIndex()).getTelephone();
-		String obsClient= listClient.get(tvClient.getSelectionModel().getSelectedIndex()).getFieldOfObservations();
+		if(tvClient.getSelectionModel().isEmpty()) {
+			Alert alerts = new Alert(AlertType.WARNING);
+			alerts.setTitle("CUIDADO");
+			alerts.setHeaderText("No se seleccionó ningún dato de la tabla.");
+			alerts.setContentText(null);
+			alerts.showAndWait();
 
-		updateNameClient.setText(name);
-		updateLasNameClient.setText(lastName);
-		updateIdClient.setText(id);
-		updateAddressClient.setText(address);
-		updateTelephoneClient.setText(telephone);
-		updateObsClient.setText(obsClient);
+		}else {
+			String name = listClient.get(tvClient.getSelectionModel().getSelectedIndex()).getName();
+			String lastName = listClient.get(tvClient.getSelectionModel().getSelectedIndex()).getLastName();
+			String id = listClient.get(tvClient.getSelectionModel().getSelectedIndex()).getId();
+			String address = listClient.get(tvClient.getSelectionModel().getSelectedIndex()).getAddress();
+			String telephone = listClient.get(tvClient.getSelectionModel().getSelectedIndex()).getTelephone();
+			String obsClient= listClient.get(tvClient.getSelectionModel().getSelectedIndex()).getFieldOfObservations();
+
+			updateNameClient.setText(name);
+			updateLasNameClient.setText(lastName);
+			updateIdClient.setText(id);
+			updateAddressClient.setText(address);
+			updateTelephoneClient.setText(telephone);
+			updateObsClient.setText(obsClient);
+		}
 	}
 
 	@FXML
@@ -1938,13 +1991,22 @@ public class LaCasaDoradaGUI {
 	@FXML
 	public void mouseClickedEmployee(MouseEvent event) {
 
-		String name = listEmployee.get(tvEmployee.getSelectionModel().getSelectedIndex()).getName();
-		String lastName = listEmployee.get(tvEmployee.getSelectionModel().getSelectedIndex()).getLastName();
-		String id = listEmployee.get(tvEmployee.getSelectionModel().getSelectedIndex()).getId();
+		if(tvEmployee.getSelectionModel().isEmpty()) {
+			Alert alerts = new Alert(AlertType.WARNING);
+			alerts.setTitle("CUIDADO");
+			alerts.setHeaderText("No se seleccionó ningún dato de la tabla.");
+			alerts.setContentText(null);
+			alerts.showAndWait();
 
-		updateNameEmployee.setText(name);
-		updateLastNameEmployee.setText(lastName);
-		updateIdEmployee.setText(id);
+		}else{
+			String name = listEmployee.get(tvEmployee.getSelectionModel().getSelectedIndex()).getName();
+			String lastName = listEmployee.get(tvEmployee.getSelectionModel().getSelectedIndex()).getLastName();
+			String id = listEmployee.get(tvEmployee.getSelectionModel().getSelectedIndex()).getId();
+
+			updateNameEmployee.setText(name);
+			updateLastNameEmployee.setText(lastName);
+			updateIdEmployee.setText(id);
+		}
 	}
 
 	@FXML
@@ -2054,7 +2116,11 @@ public class LaCasaDoradaGUI {
 					state = stateOrderList.getValue();
 					states = true;
 					order.getUsersCreators().setLastModifier(usersModifiers.getCreateObject());
+					
 				}
+				
+			}else if(laCasaDorada.searchState(state,stateOrderList.getValue()) == 0) {
+				states = true;
 			}
 
 			if(!updateProductsOrder.getText().isEmpty() && objListProducts(updateProductsOrder.getText()).size() != 0 && products != objListProducts(updateProductsOrder.getText())) {
@@ -2319,45 +2385,65 @@ public class LaCasaDoradaGUI {
 	@FXML
 	public void mouseClickedListProduct(MouseEvent event) {
 
-		ArrayList<Ingredient> ingredients = new ArrayList<>();
+		if(tvListProduct.getSelectionModel().isEmpty()) {
+			Alert alerts = new Alert(AlertType.WARNING);
+			alerts.setTitle("CUIDADO");
+			alerts.setHeaderText("No se seleccionó ningún dato de la tabla.");
+			alerts.setContentText(null);
+			alerts.showAndWait();
 
-		String name = listOfProducts.get(tvListProduct.getSelectionModel().getSelectedIndex()).getName();
-		ingredients = listOfProducts.get(tvListProduct.getSelectionModel().getSelectedIndex()).getIngredients();
-		String type = listOfProducts.get(tvListProduct.getSelectionModel().getSelectedIndex()).getProductType().getName();
-		String size = listOfProducts.get(tvListProduct.getSelectionModel().getSelectedIndex()).getSizes().getSize();
-		String price = listOfProducts.get(tvListProduct.getSelectionModel().getSelectedIndex()).getPrice().toString();
+		}else{
+			ArrayList<Ingredient> ingredients = new ArrayList<>();
 
-		String ingredientMessage = ingredientsToMessage(ingredients);
+			String name = listOfProducts.get(tvListProduct.getSelectionModel().getSelectedIndex()).getName();
+			ingredients = listOfProducts.get(tvListProduct.getSelectionModel().getSelectedIndex()).getIngredients();
+			String type = listOfProducts.get(tvListProduct.getSelectionModel().getSelectedIndex()).getProductType().getName();
+			String size = listOfProducts.get(tvListProduct.getSelectionModel().getSelectedIndex()).getSizes().getSize();
+			String price = listOfProducts.get(tvListProduct.getSelectionModel().getSelectedIndex()).getPrice().toString();
 
-		updateNameProduct.setText(name);
-		updateIngredientProduct.setText(ingredientMessage);
-		updateTypeProduct.setValue(type);
-		comboSizeProduct.setValue(size);
-		updatePriceProduct.setText(price);
+			String ingredientMessage = ingredientsToMessage(ingredients);
+
+			updateNameProduct.setText(name);
+			updateIngredientProduct.setText(ingredientMessage);
+			updateTypeProduct.setValue(type);
+			comboSizeProduct.setValue(size);
+			updatePriceProduct.setText(price);
+		}
+
 	}
 
 	@FXML
 	public void mouseClickedListOrder(MouseEvent event) {
 
-		ArrayList<Product> products = new ArrayList<>();
-		ArrayList<Integer> amounts = new ArrayList<>();
+		if(tvListOrders.getSelectionModel().isEmpty()) {
+			Alert alerts = new Alert(AlertType.WARNING);
+			alerts.setTitle("CUIDADO");
+			alerts.setHeaderText("No se seleccionó ningún dato de la tabla.");
+			alerts.setContentText(null);
+			alerts.showAndWait();
 
-		String state = listOrders.get(tvListOrders.getSelectionModel().getSelectedIndex()).getState().toString();
-		products = listOrders.get(tvListOrders.getSelectionModel().getSelectedIndex()).getProducts();
-		amounts = listOrders.get(tvListOrders.getSelectionModel().getSelectedIndex()).getAmount();
-		String client = listOrders.get(tvListOrders.getSelectionModel().getSelectedIndex()).getOrderClient().getName();
-		String employee = listOrders.get(tvListOrders.getSelectionModel().getSelectedIndex()).getOrderEmployee().getName();
-		String obsOrder = listOrders.get(tvListOrders.getSelectionModel().getSelectedIndex()).getFieldOfObservations();
+		}else{ 
+			ArrayList<Product> products = new ArrayList<>();
+			ArrayList<Integer> amounts = new ArrayList<>();
 
-		String productMessage = productsToMessage(products);
-		String amountMessage = amountsToMessage(amounts);
+			String state = listOrders.get(tvListOrders.getSelectionModel().getSelectedIndex()).getState().toString();
+			products = listOrders.get(tvListOrders.getSelectionModel().getSelectedIndex()).getProducts();
+			amounts = listOrders.get(tvListOrders.getSelectionModel().getSelectedIndex()).getAmount();
+			String client = listOrders.get(tvListOrders.getSelectionModel().getSelectedIndex()).getOrderClient().getName();
+			String employee = listOrders.get(tvListOrders.getSelectionModel().getSelectedIndex()).getOrderEmployee().getName();
+			String obsOrder = listOrders.get(tvListOrders.getSelectionModel().getSelectedIndex()).getFieldOfObservations();
 
-		stateOrderList.setValue(state);
-		updateProductsOrder.setText(productMessage);
-		updateAmountOrder.setText(amountMessage);
-		nameClientList.setText(client);
-		nameEmployeeList.setText(employee);
-		obsOders.setText(obsOrder);
+			String productMessage = productsToMessage(products);
+			String amountMessage = amountsToMessage(amounts);
+
+			stateOrderList.setValue(state);
+			updateProductsOrder.setText(productMessage);
+			updateAmountOrder.setText(amountMessage);
+			nameClientList.setText(client);
+			nameEmployeeList.setText(employee);
+			obsOders.setText(obsOrder);
+		}
+
 	}
 
 	public String ingredientsToMessage(ArrayList<Ingredient> ingredient) {
@@ -2967,9 +3053,18 @@ public class LaCasaDoradaGUI {
 	@FXML
 	public void mouseClickedListIngredient(MouseEvent event) {
 
-		String name = listOfIngredient.get(tvListIngredient.getSelectionModel().getSelectedIndex()).getName();
+		if(tvListIngredient.getSelectionModel().isEmpty()) {
+			Alert alerts = new Alert(AlertType.WARNING);
+			alerts.setTitle("CUIDADO");
+			alerts.setHeaderText("No se seleccionó ningún dato de la tabla.");
+			alerts.setContentText(null);
+			alerts.showAndWait();
 
-		updateNameIngredient.setText(name);
+		}else{  
+			String name = listOfIngredient.get(tvListIngredient.getSelectionModel().getSelectedIndex()).getName();
+
+			updateNameIngredient.setText(name);
+		}
 	}
 
 	@FXML
@@ -3050,9 +3145,17 @@ public class LaCasaDoradaGUI {
 	@FXML
 	public void mouseClickedListType(MouseEvent event) {
 
-		String name = listType.get(tvListType.getSelectionModel().getSelectedIndex()).getName();
+		if(tvListType.getSelectionModel().isEmpty()) {
+			Alert alerts = new Alert(AlertType.WARNING);
+			alerts.setTitle("CUIDADO");
+			alerts.setHeaderText("No se seleccionó ningún dato de la tabla.");
+			alerts.setContentText(null);
+			alerts.showAndWait();
 
-		updateNameType.setText(name);
+		}else{  
+			String name = listType.get(tvListType.getSelectionModel().getSelectedIndex()).getName();
+			updateNameType.setText(name);
+		}
 	}
 
 	@FXML
@@ -3131,11 +3234,20 @@ public class LaCasaDoradaGUI {
 	}
 
 	@FXML
-	public void mouseClickedListSize(MouseEvent event) {
+	public void mouseClickedListSize(MouseEvent event)  {
 
-		String size = listSizes.get(tvListSize.getSelectionModel().getSelectedIndex()).getSize();
+		if(tvListSize.getSelectionModel().isEmpty()) {
+			Alert alerts = new Alert(AlertType.WARNING);
+			alerts.setTitle("CUIDADO");
+			alerts.setHeaderText("No se seleccionó ningún dato de la tabla.");
+			alerts.setContentText(null);
+			alerts.showAndWait();
 
-		updateNameSize.setText(size);
+		}else{  
+			String size = listSizes.get(tvListSize.getSelectionModel().getSelectedIndex()).getSize();
+
+			updateNameSize.setText(size);
+		}
 	}
 
 	@FXML

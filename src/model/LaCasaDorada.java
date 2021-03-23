@@ -241,6 +241,9 @@ public class LaCasaDorada {
 			}
 			else if(state2.equalsIgnoreCase("CANCELADO")) {
 				verific = cancelado;
+				
+			}else if(state.equalsIgnoreCase(state2)) {
+				verific = 0;
 			}
 		} 
 
@@ -254,6 +257,9 @@ public class LaCasaDorada {
 			}
 			else if(state2.equalsIgnoreCase("CANCELADO")) {
 				verific = cancelado;
+				
+			}else if(state.equalsIgnoreCase(state2)) {
+				verific = 0;
 			}
 		}
 
@@ -264,6 +270,9 @@ public class LaCasaDorada {
 			}
 			else if(state2.equalsIgnoreCase("CANCELADO")) {
 				verific = cancelado;
+				
+			}else if(state.equalsIgnoreCase(state2)) {
+				verific = 0;
 			}
 		}
 
@@ -271,6 +280,9 @@ public class LaCasaDorada {
 
 			if(state2.equalsIgnoreCase("CANCELADO")) {
 				verific = cancelado;
+				
+			}else if(state.equalsIgnoreCase(state2)) {
+				verific = 0;
 			}
 		}
 
