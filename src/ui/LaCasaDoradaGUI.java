@@ -3365,7 +3365,7 @@ public class LaCasaDoradaGUI {
 			alert.showAndWait();
 		}
 	}
-
+	
 	@FXML
     public void loadDisabledProduct(ActionEvent event) throws IOException {
 		
