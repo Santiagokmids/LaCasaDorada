@@ -3730,7 +3730,7 @@ public class LaCasaDoradaGUI {
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("CRÉDITOS");
 		alert.setHeaderText("TRABAJO REALIZADO POR: ");
-		alert.setContentText("Luis Miguel Ossa Arias y Santiago Trochez \nUniversidad Icesi \n29/03/2021");
+		alert.setContentText("Luis Miguel Ossa Arias y Santiago Trochez Velasco\nUniversidad Icesi \n29/03/2021");
 		alert.showAndWait();
 	}
 }
