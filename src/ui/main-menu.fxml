@@ -47,7 +47,7 @@
                   <MenuItem mnemonicParsing="false" text="Empleado" />
                   <MenuItem mnemonicParsing="false" text="Usuario" />
                   <MenuItem mnemonicParsing="false" text="Pedido" />
-                  <MenuItem mnemonicParsing="false" text="Producto" />
+                  <MenuItem mnemonicParsing="false" onAction="#loadDisabledProduct" text="Producto" />
                   <MenuItem mnemonicParsing="false" onAction="#loadDisabledProductType" text="Tipo de Producto" />
                   <MenuItem mnemonicParsing="false" onAction="#loadDisabledIngredient" text="Ingrediente" />
                   <MenuItem mnemonicParsing="false" onAction="#loadDisabledSize" text="Tamaño de producto" />
