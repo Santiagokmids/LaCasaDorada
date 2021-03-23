@@ -706,6 +706,24 @@ public class LaCasaDorada {
 		}
 	}
 	
+	public void enableClient(Client clientEnable){
+
+		boolean verific = false;
+		Client client = null;
+
+		for (int j = 0; j <people.size() && !verific; j++) {
+
+			if(people.get(j) instanceof Client) {
+				verific = true;
+				client = (Client) people.get(j);
+				
+				if(client == clientEnable) {
+					clientEnable.setState(State.ENABLE);
+				}
+			}
+		}
+	}
+	
 	public void disableEmployee(Employee employeeDisable){
 
 		boolean verific = false;
@@ -718,6 +736,24 @@ public class LaCasaDorada {
 				
 				if(employee == employeeDisable) {
 					employeeDisable.setState(State.DISABLED);
+					verific = true;
+				}
+			}
+		}
+	}
+	
+	public void enableEmployee(Employee employeeEnable){
+
+		boolean verific = false;
+		Employee employee = null;
+
+		for (int j = 0; j <people.size() && !verific; j++) {
+
+			if(people.get(j) instanceof Employee) {
+				employee = (Employee) people.get(j);
+				
+				if(employee == employeeEnable) {
+					employeeEnable.setState(State.ENABLE);
 					verific = true;
 				}
 			}
@@ -763,7 +799,7 @@ public class LaCasaDorada {
 		}
 	}
 	
-	public void disableProduct(Order orderDisable){
+	public void disableOrder(Order orderDisable){
 
 		boolean verific = false;
 
@@ -772,6 +808,19 @@ public class LaCasaDorada {
 			if(order.get(j) == orderDisable) {
 				verific = true;
 				order.get(j).setStates(State.DISABLED);
+			}
+		}
+	}
+	
+	public void enableOrder(Order orderEnable){
+
+		boolean verific = false;
+
+		for (int j = 0; j <order.size() && !verific; j++) {
+
+			if(order.get(j) == orderEnable) {
+				verific = true;
+				order.get(j).setStates(State.ENABLE);
 			}
 		}
 	}
@@ -785,6 +834,19 @@ public class LaCasaDorada {
 			if(people.get(j) == user) {
 				verific = true;
 				people.get(j).setState(State.DISABLED);
+			}
+		}
+	}
+	
+	public void enableUser(User user){
+
+		boolean verific = false;
+
+		for (int j = 0; j <people.size() && !verific; j++) {
+
+			if(people.get(j) == user) {
+				verific = true;
+				people.get(j).setState(State.ENABLE);
 			}
 		}
 	}
