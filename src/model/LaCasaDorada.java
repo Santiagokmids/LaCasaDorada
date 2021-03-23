@@ -107,7 +107,7 @@ public class LaCasaDorada {
 		return state;
 	}
 
-	//Create preorder
+	//Create Modifiers
 	public Modifiers create(User creator, User modifier) {
 
 		Modifiers modifiers = new Modifiers(creator, modifier);
@@ -688,6 +688,42 @@ public class LaCasaDorada {
 		}
 	}
 	
+	public void disableClient(Client clientDisable){
+
+		boolean verific = false;
+		Client client = null;
+
+		for (int j = 0; j <people.size() && !verific; j++) {
+
+			if(people.get(j) instanceof Client) {
+				verific = true;
+				client = (Client) people.get(j);
+				
+				if(client == clientDisable) {
+					clientDisable.setState(State.DISABLED);
+				}
+			}
+		}
+	}
+	
+	public void disableEmployee(Employee employeeDisable){
+
+		boolean verific = false;
+		Employee employee = null;
+
+		for (int j = 0; j <people.size() && !verific; j++) {
+
+			if(people.get(j) instanceof Employee) {
+				employee = (Employee) people.get(j);
+				
+				if(employee == employeeDisable) {
+					employeeDisable.setState(State.DISABLED);
+					verific = true;
+				}
+			}
+		}
+	}
+	
 	public void disableSize(Size sizeDisable){
 
 		boolean verific = false;
@@ -799,6 +835,25 @@ public class LaCasaDorada {
 
 				user = (User)people.get(i);
 				if(user.getId().equals(id) && user.getUserName().equalsIgnoreCase(userName)) {
+					validation = user;
+					verific = true;
+				}
+			}
+		}
+		return validation;
+	}
+	
+	public User findUsersModifiers(String userName, String password) {
+
+		User user = null;
+		User validation = null;
+		boolean verific = false;
+
+		for (int i = 0; i < people.size() && !verific; i++) {
+			if(people.get(i) instanceof User) {
+
+				user = (User)people.get(i);
+				if(user.getPassword().equalsIgnoreCase(password) && user.getUserName().equalsIgnoreCase(userName)) {
 					validation = user;
 					verific = true;
 				}
