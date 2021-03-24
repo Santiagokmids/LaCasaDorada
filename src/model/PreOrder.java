@@ -1,7 +1,10 @@
 package model;
 
-public class PreOrder {
+public class PreOrder{
 	
+	/**
+	 * 
+	 */
 	//Attributes
 	private Product product;
 	private Integer amount;

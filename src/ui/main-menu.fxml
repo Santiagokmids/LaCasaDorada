@@ -93,7 +93,7 @@
             <Cursor fx:constant="DEFAULT" />
          </cursor>
          <bottom>
-            <Label alignment="CENTER" contentDisplay="BOTTOM" graphicTextGap="5.0" prefHeight="38.0" prefWidth="141.0" textFill="#e6c169" textOverrun="WORD_ELLIPSIS" BorderPane.alignment="TOP_CENTER">
+            <Label fx:id="clock" alignment="CENTER" contentDisplay="BOTTOM" graphicTextGap="5.0" prefHeight="38.0" prefWidth="254.0" textFill="WHITE" textOverrun="WORD_ELLIPSIS" BorderPane.alignment="TOP_CENTER">
                <font>
                   <Font name="Bernard MT Condensed" size="30.0" />
                </font>

@@ -11,21 +11,20 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import model.LaCasaDorada;
 
-public class Main extends Application{
+public class Main extends Application {
 	
 	private LaCasaDorada laCasaDorada;
 	private LaCasaDoradaGUI laCasaDoradaGUI;
 	
 	public Main() {
 		
-		//boolean loadInformation;
-		
+		boolean loadInformation;
 		laCasaDorada = new LaCasaDorada();
 		laCasaDoradaGUI = new LaCasaDoradaGUI(laCasaDorada);
 		
-		/*try {
+		try {
 			loadInformation = laCasaDorada.loadData();
-			System.out.println("Load information:"+loadInformation);
+			
 		} catch (ClassNotFoundException | IOException e) {
 			e.printStackTrace();
 			loadInformation = false;
@@ -38,14 +37,14 @@ public class Main extends Application{
 		    alert.setTitle("La Casa Dorada");
 		    alert.setContentText("Error cargando el archivo");
 		    alert.showAndWait();
-		}*/
+		}
 	}
 	
 	public static void main(String[] args) {
-
 		launch(args);
+		
 	}
-
+	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		
@@ -62,5 +61,7 @@ public class Main extends Application{
 		primaryStage.show();
 		laCasaDoradaGUI.loadBanner();
 	}
+
+	
 
 }

@@ -3,6 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -18,7 +19,15 @@ public class LaCasaDorada {
 
 	//Constants
 
-	public final static String SAVE_PATH_FILE = "data/data.lcd";
+	public final static String SAVE_PATH_FILE_CLIENT = "data/dataClient.txt";
+	public final static String SAVE_PATH_FILE_EMPLOYEE = "data/dataEmployee.lcd";
+	public final static String SAVE_PATH_FILE_USER = "data/dataUser.lcd";
+	public final static String SAVE_PATH_FILE_ORDER = "data/dataOrder.lcd";
+	public final static String SAVE_PATH_FILE_PRODUCT = "data/dataProduct.lcd";
+	public final static String SAVE_PATH_FILE_INGREDIENT = "data/dataIngredient.lcd";
+	public final static String SAVE_PATH_FILE_TYPE = "data/dataType.lcd";
+	public final static String SAVE_PATH_FILE_SIZE = "data/dataSize.lcd";
+
 	public final static String SEPARATOR = ";";
 
 	//Relations
@@ -43,38 +52,43 @@ public class LaCasaDorada {
 
 	//create client
 	public void create(String name, String lastName, String id, String address, String telephone, String fieldObservations,
-			Modifiers modifiers) {
+			Modifiers modifiers) throws IOException {
 
 		Client client = new Client(name, lastName, id, address, telephone, fieldObservations, modifiers);
 		people.add(client);
+		saveData();
 	}
 
 	//create employee
-	public void create(String name, String lastName, String id, Modifiers usersModifiers) {
+	public void create(String name, String lastName, String id, Modifiers usersModifiers) throws IOException {
 
 		Employee employee = new Employee(name, lastName, id, usersModifiers);
 		people.add(employee);
+		saveData();
 	}
 
 	//create User
-	public void create(String name, String lastName, String id, String userName, String password, Modifiers usersModifiers) {
+	public void create(String name, String lastName, String id, String userName, String password, Modifiers usersModifiers) throws IOException {
 
 		User user = new User(name, lastName, id, userName, password, usersModifiers);
 		people.add(user);
+		saveData();
 	}
 
 	//Create ingredient
-	public void create(String name, Modifiers userModifiers) {
+	public void create(String name, Modifiers userModifiers) throws IOException {
 
 		Ingredient ingredients = new Ingredient(name, userModifiers);
 		ingredient.add(ingredients);
+		saveData();
 	}
 
 	//Create product
-	public void create(String name, ArrayList<Ingredient> ingredients, ProductType productType, Size sizes, double price, Modifiers userModifiers) {
+	public void create(String name, ArrayList<Ingredient> ingredients, ProductType productType, Size sizes, double price, Modifiers userModifiers) throws IOException {
 
 		Product products = new Product(name,ingredients,productType, sizes, price, userModifiers);
 		product.add(products);
+		saveData();
 	}
 
 	//Create preorder
@@ -116,7 +130,7 @@ public class LaCasaDorada {
 
 	//create order
 	public boolean create(StateOrder state, ArrayList<Integer> amount, Date date, String fieldOfObservations, Client orderClient,
-			ArrayList<Product>products, Employee ordEmployee, Modifiers userModifiers) {
+			ArrayList<Product>products, Employee ordEmployee, Modifiers userModifiers) throws IOException {
 
 		boolean orders = true, validation = true;
 		int aleatorio = 0;
@@ -132,6 +146,7 @@ public class LaCasaDorada {
 			if(!validation) {
 				Order newOrder = new Order(code, state, amount, date, fieldOfObservations, orderClient, products, ordEmployee, userModifiers);
 				order.add(newOrder);
+				saveData();
 
 			}else {
 				orders = false;
@@ -141,10 +156,11 @@ public class LaCasaDorada {
 	}
 
 	//create size
-	public void createSize(String size, Modifiers modifiers ) {
+	public void createSize(String size, Modifiers modifiers ) throws IOException {
 
 		Size allSizes = new Size(size, modifiers);
 		sizes.add(allSizes);
+		saveData();
 	}
 
 	public boolean findSizes(String size){
@@ -241,7 +257,7 @@ public class LaCasaDorada {
 			}
 			else if(state2.equalsIgnoreCase("CANCELADO")) {
 				verific = cancelado;
-				
+
 			}else if(state.equalsIgnoreCase(state2)) {
 				verific = 0;
 			}
@@ -257,7 +273,7 @@ public class LaCasaDorada {
 			}
 			else if(state2.equalsIgnoreCase("CANCELADO")) {
 				verific = cancelado;
-				
+
 			}else if(state.equalsIgnoreCase(state2)) {
 				verific = 0;
 			}
@@ -270,7 +286,7 @@ public class LaCasaDorada {
 			}
 			else if(state2.equalsIgnoreCase("CANCELADO")) {
 				verific = cancelado;
-				
+
 			}else if(state.equalsIgnoreCase(state2)) {
 				verific = 0;
 			}
@@ -280,7 +296,7 @@ public class LaCasaDorada {
 
 			if(state2.equalsIgnoreCase("CANCELADO")) {
 				verific = cancelado;
-				
+
 			}else if(state.equalsIgnoreCase(state2)) {
 				verific = 0;
 			}
@@ -673,7 +689,7 @@ public class LaCasaDorada {
 			}
 		}
 	}
-	
+
 	public void deleteSize(Size sizeToDelete){
 
 		boolean verific = false;
@@ -699,7 +715,7 @@ public class LaCasaDorada {
 			}
 		}
 	}
-	
+
 	public void enableIngredient(Ingredient ingredientDisable){
 
 		boolean verific = false;
@@ -712,7 +728,7 @@ public class LaCasaDorada {
 			}
 		}
 	}
-	
+
 	public void disableClient(Client clientDisable){
 
 		boolean verific = false;
@@ -723,14 +739,14 @@ public class LaCasaDorada {
 			if(people.get(j) instanceof Client) {
 				verific = true;
 				client = (Client) people.get(j);
-				
+
 				if(client == clientDisable) {
 					clientDisable.setState(State.DISABLED);
 				}
 			}
 		}
 	}
-	
+
 	public void enableClient(Client clientEnable){
 
 		boolean verific = false;
@@ -741,14 +757,14 @@ public class LaCasaDorada {
 			if(people.get(j) instanceof Client) {
 				verific = true;
 				client = (Client) people.get(j);
-				
+
 				if(client == clientEnable) {
 					clientEnable.setState(State.ENABLE);
 				}
 			}
 		}
 	}
-	
+
 	public void disableEmployee(Employee employeeDisable){
 
 		boolean verific = false;
@@ -758,7 +774,7 @@ public class LaCasaDorada {
 
 			if(people.get(j) instanceof Employee) {
 				employee = (Employee) people.get(j);
-				
+
 				if(employee == employeeDisable) {
 					employeeDisable.setState(State.DISABLED);
 					verific = true;
@@ -766,7 +782,7 @@ public class LaCasaDorada {
 			}
 		}
 	}
-	
+
 	public void enableEmployee(Employee employeeEnable){
 
 		boolean verific = false;
@@ -776,7 +792,7 @@ public class LaCasaDorada {
 
 			if(people.get(j) instanceof Employee) {
 				employee = (Employee) people.get(j);
-				
+
 				if(employee == employeeEnable) {
 					employeeEnable.setState(State.ENABLE);
 					verific = true;
@@ -784,7 +800,7 @@ public class LaCasaDorada {
 			}
 		}
 	}
-	
+
 	public void disableSize(Size sizeDisable){
 
 		boolean verific = false;
@@ -797,7 +813,7 @@ public class LaCasaDorada {
 			}
 		}
 	}
-	
+
 	public void enableSize(Size sizeDisable){
 
 		boolean verific = false;
@@ -810,7 +826,7 @@ public class LaCasaDorada {
 			}
 		}
 	}
-	
+
 	public void disableType(ProductType productTypeDisable){
 
 		boolean verific = false;
@@ -823,7 +839,7 @@ public class LaCasaDorada {
 			}
 		}
 	}
-	
+
 	public void enableType(ProductType productTypeDisable){
 
 		boolean verific = false;
@@ -836,7 +852,7 @@ public class LaCasaDorada {
 			}
 		}
 	}
-	
+
 	public void disableProduct(Product productDisable){
 
 		boolean verific = false;
@@ -849,7 +865,7 @@ public class LaCasaDorada {
 			}
 		}
 	}
-	
+
 	public void enableProduct(Product productDisable){
 
 		boolean verific = false;
@@ -862,7 +878,7 @@ public class LaCasaDorada {
 			}
 		}
 	}
-	
+
 	public void disableProduct(Order orderDisable){
 
 		boolean verific = false;
@@ -875,7 +891,7 @@ public class LaCasaDorada {
 			}
 		}
 	}
-	
+
 	public void enableOrder(Order orderEnable){
 
 		boolean verific = false;
@@ -888,7 +904,7 @@ public class LaCasaDorada {
 			}
 		}
 	}
-	
+
 	public void disableOrder(Order orderDisable){
 
 		boolean verific = false;
@@ -901,7 +917,7 @@ public class LaCasaDorada {
 			}
 		}
 	}
-	
+
 	public void disableUser(User user){
 
 		boolean verific = false;
@@ -914,7 +930,7 @@ public class LaCasaDorada {
 			}
 		}
 	}
-	
+
 	public void enableUser(User user){
 
 		boolean verific = false;
@@ -1007,7 +1023,7 @@ public class LaCasaDorada {
 		}
 		return validation;
 	}
-	
+
 	public User findUsersModifiers(String userName, String password) {
 
 		User user = null;
@@ -1136,7 +1152,7 @@ public class LaCasaDorada {
 		}
 		return ingredientInProduct;
 	}
-	
+
 	public Product findSizeInProduct(Size sizeToFind) {
 
 		Product sizeInProduct = null;
@@ -1185,30 +1201,45 @@ public class LaCasaDorada {
 				pw.println(client.getName()+client.getLastName()+client.getId()+client.getState()+client.getAddress()+client.getTelephone()+client.getFieldOfObservations());
 			}
 		}
+		pw.close();
 	}
 
 	public void saveData() throws IOException {
 
-		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(SAVE_PATH_FILE));
-		oos.writeObject(people);
+		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(SAVE_PATH_FILE_CLIENT));
+		oos.writeObject(getClients());
+
+		ObjectOutputStream emp = new ObjectOutputStream(new FileOutputStream(SAVE_PATH_FILE_EMPLOYEE));
+		emp.writeObject(getEmployee());
+
+		ObjectOutputStream use = new ObjectOutputStream(new FileOutputStream(SAVE_PATH_FILE_USER));
+		use.writeObject(getUsers());
+
+		ObjectOutputStream pro = new ObjectOutputStream(new FileOutputStream(SAVE_PATH_FILE_PRODUCT));
+		pro.writeObject(product);
+
+		ObjectOutputStream type = new ObjectOutputStream(new FileOutputStream(SAVE_PATH_FILE_TYPE));
+		type.writeObject(productType);
+
+		ObjectOutputStream size = new ObjectOutputStream(new FileOutputStream(SAVE_PATH_FILE_SIZE));
+		size.writeObject(sizes);
+
+		ObjectOutputStream ing = new ObjectOutputStream(new FileOutputStream(SAVE_PATH_FILE_INGREDIENT));
+		ing.writeObject(ingredient);
+
+		ObjectOutputStream ord = new ObjectOutputStream(new FileOutputStream(SAVE_PATH_FILE_ORDER));
+		ord.writeObject(order);
+
 		oos.close();
+		emp.close();
+		use.close();
+		pro.close();
+		type.close();
+		size.close();
+		ing.close();
+		ord.close();
 	}
-
-	@SuppressWarnings("unchecked")
-	public boolean loadData()  throws IOException, ClassNotFoundException{
-
-		File f = new File(SAVE_PATH_FILE);
-		boolean loaded = false;
-
-		if(f.exists()) {
-			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
-			people = (ArrayList<People>)ois.readObject();
-			ois.close();
-			loaded = true;
-		}
-		return loaded;
-	}
-
+	
 	public ArrayList<People> getPeople() {
 		return people;
 	}
@@ -1218,11 +1249,11 @@ public class LaCasaDorada {
 	}
 
 	public ArrayList<Product> getProduct() {
-		
+
 		ArrayList<Product>products = new ArrayList<>();
-		
+
 		for (int i = 0; i < product.size(); i++) {
-			
+
 			if(product.get(i).getState() != State.DISABLED) {
 				products.add(product.get(i));
 			}
@@ -1235,7 +1266,7 @@ public class LaCasaDorada {
 	}
 
 	public ArrayList<ProductType> getProductType() {
-		
+
 		ArrayList<ProductType>type = new ArrayList<>();
 
 		for (int i = 0; i < productType.size(); i++) {
@@ -1252,7 +1283,7 @@ public class LaCasaDorada {
 	}
 
 	public ArrayList<Ingredient> getIngredient() {
-		
+
 		ArrayList<Ingredient>ingredients = new ArrayList<>();
 
 		for (int i = 0; i < ingredient.size(); i++) {
@@ -1269,7 +1300,7 @@ public class LaCasaDorada {
 	}
 
 	public ArrayList<Order> getOrder() {
-		
+
 		ArrayList<Order>orders = new ArrayList<>();
 
 		for (int i = 0; i < order.size(); i++) {
@@ -1294,7 +1325,7 @@ public class LaCasaDorada {
 	}
 
 	public ArrayList<Size> getSizes() {
-		
+
 		ArrayList<Size>size = new ArrayList<>();
 
 		for (int i = 0; i < sizes.size(); i++) {
@@ -1309,4 +1340,108 @@ public class LaCasaDorada {
 	public void setSizes(ArrayList<Size> sizes) {
 		this.sizes = sizes;
 	}
+
+	@SuppressWarnings({ "unchecked" })
+	public boolean loadData() throws IOException, ClassNotFoundException{
+		boolean loaded = false;
+		File cli = new File(SAVE_PATH_FILE_CLIENT);
+
+		if(cli.exists()){
+			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(cli));
+			ArrayList<Client> clients = (ArrayList<Client>)ois.readObject();
+
+			for (int i = 0; i < clients.size(); i++) {
+				people.add(clients.get(i));
+			}
+			ois.close();
+			loaded = true;
+			
+			File emp = new File(SAVE_PATH_FILE_EMPLOYEE);
+
+			if(emp.exists()){
+				ObjectInputStream employ = new ObjectInputStream(new FileInputStream(emp));
+				ArrayList<Employee> employee = (ArrayList<Employee>)employ.readObject();
+
+				for (int i = 0; i < employee.size(); i++) {
+					people.add(employee.get(i));
+				}
+				employ.close();
+				loaded = true;
+			}
+		}
+		File user = new File(SAVE_PATH_FILE_USER);
+
+		if(user.exists()){
+			ObjectInputStream use = new ObjectInputStream(new FileInputStream(user));
+			ArrayList<User> users = (ArrayList<User>)use.readObject();
+			int cont = 0;
+			for (int i = 0; i < users.size(); i++) {
+				
+				for (int j = 0; j < people.size(); j++) {
+					
+					if(people.get(i) != users.get(i)) {
+						cont++;
+						if(cont == people.size() ) {
+							people.add(users.get(i));
+						}
+					}
+				}
+			}
+			use.close();
+			loaded = true;
+		}
+		
+		File ingre = new File(SAVE_PATH_FILE_INGREDIENT);
+
+		if(ingre.exists()){
+			ObjectInputStream ingredien = new ObjectInputStream(new FileInputStream(ingre));
+			ingredient = (ArrayList<Ingredient>)ingredien.readObject();
+
+			ingredien.close();
+			loaded = true;
+		}
+		
+		File ord = new File(SAVE_PATH_FILE_ORDER);
+
+		if(ord.exists()){
+			ObjectInputStream orde = new ObjectInputStream(new FileInputStream(ord));
+			order = (ArrayList<Order>)orde.readObject();
+
+			orde.close();
+			loaded = true;
+		}
+		
+		File prod = new File(SAVE_PATH_FILE_PRODUCT);
+
+		if(prod.exists()){
+			ObjectInputStream produc = new ObjectInputStream(new FileInputStream(prod));
+			product = (ArrayList<Product>)produc.readObject();
+
+			produc.close();
+			loaded = true;
+		}
+		
+		File siz = new File(SAVE_PATH_FILE_SIZE);
+		
+		if(siz.exists()){
+			ObjectInputStream size = new ObjectInputStream(new FileInputStream(siz));
+			sizes = (ArrayList<Size>)size.readObject();
+
+			size.close();
+			loaded = true;
+		}
+		
+		File typ = new File(SAVE_PATH_FILE_TYPE);
+
+		if(typ.exists()){
+			ObjectInputStream type = new ObjectInputStream(new FileInputStream(typ));
+			productType = (ArrayList<ProductType>)type.readObject();
+
+			type.close();
+			loaded = true;
+		}
+		
+		return loaded;
+	}
+
 }

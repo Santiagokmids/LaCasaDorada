@@ -1,11 +1,16 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Product {
+public class Product implements Serializable {
 
 	//Attributes
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1;
 	private String name;
 	private ArrayList<Ingredient> ingredients;
 	private ProductType productType;

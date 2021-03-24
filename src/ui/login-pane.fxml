@@ -17,10 +17,10 @@
             <Insets top="20.0" />
          </BorderPane.margin></ImageView>
    </top>
-   <left>
+   <center>
       <Pane prefHeight="740.0" prefWidth="740.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fx:id="imageWall" fitHeight="621.0" fitWidth="841.0" layoutX="-9.0" layoutY="-1.0" opacity="0.09" pickOnBounds="true" />
+            <ImageView fx:id="imageWall" fitHeight="621.0" fitWidth="888.0" layoutX="-9.0" layoutY="-1.0" opacity="0.09" pickOnBounds="true" />
             <Label alignment="CENTER" layoutX="282.0" layoutY="26.0" prefHeight="45.0" prefWidth="292.0" text="Iniciar Sesión" textFill="#dad57c">
                <font>
                   <Font name="Bernard MT Condensed" size="36.0" />
@@ -52,7 +52,12 @@
                   <Font name="Franklin Gothic Demi" size="18.0" />
                </font>
             </Button>
+            <Label fx:id="clock" alignment="CENTER" layoutX="539.0" layoutY="553.0" prefHeight="36.0" prefWidth="284.0" textFill="WHITE">
+               <font>
+                  <Font name="Bookshelf Symbol 7" size="28.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
-   </left>
+   </center>
 </BorderPane>

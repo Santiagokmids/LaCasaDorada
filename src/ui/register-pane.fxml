@@ -59,12 +59,12 @@
                   <Font name="Bernard MT Condensed" size="36.0" />
                </font>
             </Label>
-            <Button layoutX="228.0" layoutY="442.0" mnemonicParsing="false" onAction="#registerUser" prefHeight="53.0" prefWidth="140.0" style="-fx-background-color: #dad57c; -fx-background-radius: 22;" text="Crear cuenta">
+            <Button layoutX="251.0" layoutY="454.0" mnemonicParsing="false" onAction="#registerUser" prefHeight="53.0" prefWidth="140.0" style="-fx-background-color: #dad57c; -fx-background-radius: 22;" text="Crear cuenta">
                <font>
                   <Font name="Franklin Gothic Demi" size="18.0" />
                </font>
             </Button>
-            <Button layoutX="418.0" layoutY="442.0" mnemonicParsing="false" onAction="#inicializateProgram" prefHeight="53.0" prefWidth="140.0" style="-fx-background-color: #dad57c; -fx-background-radius: 22;" text="Cancelar">
+            <Button layoutX="441.0" layoutY="454.0" mnemonicParsing="false" onAction="#inicializateProgram" prefHeight="53.0" prefWidth="140.0" style="-fx-background-color: #dad57c; -fx-background-radius: 22;" text="Cancelar">
                <font>
                   <Font name="Franklin Gothic Demi" size="18.0" />
                </font>

@@ -1,9 +1,15 @@
 package model;
 
-public class ProductType {
+import java.io.Serializable;
+
+public class ProductType implements Serializable{
 	
 	//Attributes
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1;
 	private String name;
 	private State state;
 	

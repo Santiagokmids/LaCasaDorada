@@ -1,7 +1,13 @@
 package model;
 
-public class Modifiers {
+import java.io.Serializable;
+
+public class Modifiers implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1;
 	//Attributes
 	private User createObject;
 	private User lastModifier;

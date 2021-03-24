@@ -16,6 +16,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -39,7 +40,7 @@ import model.State;
 import model.StateOrder;
 import model.User;
 
-public class LaCasaDoradaGUI {
+public class LaCasaDoradaGUI{
 
 	@FXML
 	private ImageView imageEnableWallProduct;
@@ -710,6 +711,9 @@ public class LaCasaDoradaGUI {
 	@FXML
 	private ImageView imageEnabledBannerOrder;
 
+	@FXML
+	public Label clock;
+	
 	public static ObservableList<Product> listProduct;
 	public static ObservableList<Ingredient> listOfIngredient;
 	public static ObservableList<Order> listOrders;
@@ -722,11 +726,12 @@ public class LaCasaDoradaGUI {
 	public static ObservableList<ProductType> listType;
 	public static Modifiers usersModifiers;
 	public static ObservableList<Product> listOfProducts;
+	public String message = "";
 
 	public LaCasaDoradaGUI(LaCasaDorada laCasaDorada) {
 		this.laCasaDorada = laCasaDorada;
 	}
-
+	
 	public void inicializateTableViewUsers() {
 
 		listUsers = FXCollections.observableArrayList(laCasaDorada.getUsers());
@@ -821,7 +826,7 @@ public class LaCasaDoradaGUI {
 		imageWall.setImage(image);
 		Image image2 = new Image("/images/BannerCasaDorada.jpg");
 		imageBanner.setImage(image2);
-	} 		
+	}
 
 	@FXML
 	public void inicializateProgram(ActionEvent event) throws IOException {
@@ -1483,30 +1488,30 @@ public class LaCasaDoradaGUI {
 
 			Product product = laCasaDorada.findProducts(name);
 			PreOrder preorder = laCasaDorada.findPreOrders(name, amounts);
-			
+
 			if(selectProduct.getValue() != null && !selectProduct.getValue().equalsIgnoreCase(name)) {
 				name = selectProduct.getValue();
 				product = laCasaDorada.findProducts(selectProduct.getValue());
 				verific = true;
 			}
-			
+
 			try {
 				int validation = Integer.parseInt(amount.getText());
 
 				if(!amount.getText().isEmpty() && validation != amounts) {
-					
+
 					amounts = validation;
 					verificAmount = true;
 					System.out.println(amounts+" beforeeee");
 				}
-			
+
 			}catch(NumberFormatException nfe) {
 
 				alert.setHeaderText("NO se pudo actualizar la cantidad.");
 				alert.setContentText("Ingres+o valore No númericos");
 				alert.showAndWait();
 			}
-			
+
 			Alert alerts = new Alert(AlertType.INFORMATION);
 			alerts.setTitle("EXCELENTE");
 
@@ -1514,7 +1519,7 @@ public class LaCasaDoradaGUI {
 				alerts.setHeaderText("Se han reemplazado los datos.");
 				alerts.setContentText("Se ha reemplazado el producto y su cantidad.");
 				alerts.showAndWait();
-				
+
 				preorder.setAmount(amounts);
 
 			}else if(verific) {
@@ -2116,9 +2121,9 @@ public class LaCasaDoradaGUI {
 					state = stateOrderList.getValue();
 					states = true;
 					order.getUsersCreators().setLastModifier(usersModifiers.getCreateObject());
-					
+
 				}
-				
+
 			}else if(laCasaDorada.searchState(state,stateOrderList.getValue()) == 0) {
 				states = true;
 			}

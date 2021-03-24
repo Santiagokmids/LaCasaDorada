@@ -1,12 +1,17 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Order {
+public class Order implements Serializable{
 	
 	//Attributes
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1;
 	private String code;
 	private StateOrder state;
 	private ArrayList<Integer> amount;
