@@ -19,9 +19,10 @@ public class LaCasaDorada {
 
 	//Constants
 
-	public final static String SAVE_PATH_FILE_CLIENT = "data/dataClient.txt";
-	public final static String SAVE_PATH_FILE_EMPLOYEE = "data/dataEmployee.lcd";
+	public final static String SAVE_PATH_FILE_PEOPLE = "data/dataPeople.txt";
+	/*public final static String SAVE_PATH_FILE_EMPLOYEE = "data/dataEmployee.lcd";
 	public final static String SAVE_PATH_FILE_USER = "data/dataUser.lcd";
+	*/
 	public final static String SAVE_PATH_FILE_ORDER = "data/dataOrder.lcd";
 	public final static String SAVE_PATH_FILE_PRODUCT = "data/dataProduct.lcd";
 	public final static String SAVE_PATH_FILE_INGREDIENT = "data/dataIngredient.lcd";
@@ -1206,15 +1207,15 @@ public class LaCasaDorada {
 
 	public void saveData() throws IOException {
 
-		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(SAVE_PATH_FILE_CLIENT));
-		oos.writeObject(getClients());
+		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(SAVE_PATH_FILE_PEOPLE));
+		oos.writeObject(people);
 
-		ObjectOutputStream emp = new ObjectOutputStream(new FileOutputStream(SAVE_PATH_FILE_EMPLOYEE));
+		/*ObjectOutputStream emp = new ObjectOutputStream(new FileOutputStream(SAVE_PATH_FILE_EMPLOYEE));
 		emp.writeObject(getEmployee());
 
 		ObjectOutputStream use = new ObjectOutputStream(new FileOutputStream(SAVE_PATH_FILE_USER));
 		use.writeObject(getUsers());
-
+		*/
 		ObjectOutputStream pro = new ObjectOutputStream(new FileOutputStream(SAVE_PATH_FILE_PRODUCT));
 		pro.writeObject(product);
 
@@ -1231,15 +1232,13 @@ public class LaCasaDorada {
 		ord.writeObject(order);
 
 		oos.close();
-		emp.close();
-		use.close();
 		pro.close();
 		type.close();
 		size.close();
 		ing.close();
 		ord.close();
 	}
-	
+
 	public ArrayList<People> getPeople() {
 		return people;
 	}
@@ -1344,53 +1343,15 @@ public class LaCasaDorada {
 	@SuppressWarnings({ "unchecked" })
 	public boolean loadData() throws IOException, ClassNotFoundException{
 		boolean loaded = false;
-		File cli = new File(SAVE_PATH_FILE_CLIENT);
+		File cli = new File(SAVE_PATH_FILE_PEOPLE);
 
 		if(cli.exists()){
 			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(cli));
-			ArrayList<Client> clients = (ArrayList<Client>)ois.readObject();
-
-			for (int i = 0; i < clients.size(); i++) {
-				people.add(clients.get(i));
-			}
+			people = (ArrayList<People>)ois.readObject();
 			ois.close();
 			loaded = true;
-			
-			File emp = new File(SAVE_PATH_FILE_EMPLOYEE);
-
-			if(emp.exists()){
-				ObjectInputStream employ = new ObjectInputStream(new FileInputStream(emp));
-				ArrayList<Employee> employee = (ArrayList<Employee>)employ.readObject();
-
-				for (int i = 0; i < employee.size(); i++) {
-					people.add(employee.get(i));
-				}
-				employ.close();
-				loaded = true;
-			}
 		}
-		File user = new File(SAVE_PATH_FILE_USER);
 
-		if(user.exists()){
-			ObjectInputStream use = new ObjectInputStream(new FileInputStream(user));
-			ArrayList<User> users = (ArrayList<User>)use.readObject();
-			int cont = 0;
-			for (int i = 0; i < users.size(); i++) {
-				
-				for (int j = 0; j < people.size(); j++) {
-					
-					if(people.get(i) != users.get(i)) {
-						cont++;
-						if(cont == people.size() ) {
-							people.add(users.get(i));
-						}
-					}
-				}
-			}
-			use.close();
-			loaded = true;
-		}
-		
 		File ingre = new File(SAVE_PATH_FILE_INGREDIENT);
 
 		if(ingre.exists()){
@@ -1400,7 +1361,7 @@ public class LaCasaDorada {
 			ingredien.close();
 			loaded = true;
 		}
-		
+
 		File ord = new File(SAVE_PATH_FILE_ORDER);
 
 		if(ord.exists()){
@@ -1410,7 +1371,7 @@ public class LaCasaDorada {
 			orde.close();
 			loaded = true;
 		}
-		
+
 		File prod = new File(SAVE_PATH_FILE_PRODUCT);
 
 		if(prod.exists()){
@@ -1420,9 +1381,9 @@ public class LaCasaDorada {
 			produc.close();
 			loaded = true;
 		}
-		
+
 		File siz = new File(SAVE_PATH_FILE_SIZE);
-		
+
 		if(siz.exists()){
 			ObjectInputStream size = new ObjectInputStream(new FileInputStream(siz));
 			sizes = (ArrayList<Size>)size.readObject();
@@ -1430,7 +1391,7 @@ public class LaCasaDorada {
 			size.close();
 			loaded = true;
 		}
-		
+
 		File typ = new File(SAVE_PATH_FILE_TYPE);
 
 		if(typ.exists()){
@@ -1440,7 +1401,7 @@ public class LaCasaDorada {
 			type.close();
 			loaded = true;
 		}
-		
+
 		return loaded;
 	}
 
