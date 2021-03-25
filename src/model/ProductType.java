@@ -18,12 +18,13 @@ public class ProductType implements Serializable{
 
 	/**
 	 * @param name
+	 * @param state 
 	 * @param userModifiers 
 	 */
-	public ProductType(String name, Modifiers usersCreators) {
+	public ProductType(String name, Modifiers usersCreators, State state) {
 		this.setUsersCreators(usersCreators);
 		this.name = name;
-		setState(State.ENABLE);
+		this.state = state;
 	}
 
 	public String getName() {

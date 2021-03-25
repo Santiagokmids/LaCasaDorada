@@ -15,7 +15,7 @@ public class Size implements Serializable{
 	//Relations
 	private Modifiers usersCreators;
 
-	public Size(String size, Modifiers usersCreators) {
+	public Size(String size, Modifiers usersCreators, State state) {
 		this.size = size;
 		this.state = State.ENABLE;
 		this.usersCreators = usersCreators;
