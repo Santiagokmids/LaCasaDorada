@@ -1783,14 +1783,13 @@ public class LaCasaDoradaGUI{
 				alerts.setContentText("La contraseña del usuario ha sido actualizada exitosamente");
 				alerts.showAndWait();
 			}
-			
-			laCasaDorada.saveData();
-
 
 			user.setName(name);
 			user.setLastName(lastName);
 			user.setId(id);
 			user.setUserName(userName);
+			
+			laCasaDorada.saveData();
 			
 			listUsers.set(tvUser.getSelectionModel().getSelectedIndex(),new User(name,lastName,id,userName,user.getPassword(),user.getUsersCreators()));
 
