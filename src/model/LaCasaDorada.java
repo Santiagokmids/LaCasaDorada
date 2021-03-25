@@ -1215,12 +1215,6 @@ public class LaCasaDorada {
 		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(SAVE_PATH_FILE_PEOPLE));
 		oos.writeObject(people);
 
-		/*ObjectOutputStream emp = new ObjectOutputStream(new FileOutputStream(SAVE_PATH_FILE_EMPLOYEE));
-		emp.writeObject(getEmployee());
-
-		ObjectOutputStream use = new ObjectOutputStream(new FileOutputStream(SAVE_PATH_FILE_USER));
-		use.writeObject(getUsers());
-		*/
 		ObjectOutputStream pro = new ObjectOutputStream(new FileOutputStream(SAVE_PATH_FILE_PRODUCT));
 		pro.writeObject(product);
 
@@ -1348,6 +1342,7 @@ public class LaCasaDorada {
 	@SuppressWarnings({ "unchecked" })
 	public boolean loadData() throws IOException, ClassNotFoundException{
 		boolean loaded = false;
+		
 		File cli = new File(SAVE_PATH_FILE_PEOPLE);
 
 		if(cli.exists()){

@@ -80,7 +80,7 @@
             <Menu mnemonicParsing="false" text="Importar o Exportar">
                <items>
                   <MenuItem mnemonicParsing="false" text="Importar" />
-                  <MenuItem mnemonicParsing="false" text="Empleado" />
+                  <MenuItem mnemonicParsing="false" text="Exportar" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Acerca de">
