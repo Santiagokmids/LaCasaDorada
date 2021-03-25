@@ -1508,7 +1508,7 @@ public class LaCasaDoradaGUI{
 			}catch(NumberFormatException nfe) {
 
 				alert.setHeaderText("NO se pudo actualizar la cantidad.");
-				alert.setContentText("Ingres+o valore No númericos");
+				alert.setContentText("Ingresó valore No númericos");
 				alert.showAndWait();
 			}
 
@@ -1697,7 +1697,7 @@ public class LaCasaDoradaGUI{
 	}
 
 	@FXML
-	public void modifyUser(ActionEvent event) {
+	public void modifyUser(ActionEvent event) throws IOException {
 
 		boolean verific = false;
 		boolean verificPassword = false;
@@ -1781,7 +1781,8 @@ public class LaCasaDoradaGUI{
 				alerts.setContentText("La contraseña del usuario ha sido actualizada exitosamente");
 				alerts.showAndWait();
 			}
-
+			
+			laCasaDorada.saveData();
 
 			listUsers.set(tvUser.getSelectionModel().getSelectedIndex(),new User(name,lastName,id,userName,user.getPassword(),user.getUsersCreators()));
 
@@ -1840,7 +1841,7 @@ public class LaCasaDoradaGUI{
 	}
 
 	@FXML
-	public void modifyClient(ActionEvent event) {
+	public void modifyClient(ActionEvent event) throws IOException {
 
 		if(tvClient.getSelectionModel().isEmpty()) {
 
@@ -1859,8 +1860,8 @@ public class LaCasaDoradaGUI{
 			String telephone = listClient.get(tvClient.getSelectionModel().getSelectedIndex()).getTelephone();
 			String obsClient= listClient.get(tvClient.getSelectionModel().getSelectedIndex()).getFieldOfObservations();
 
-			Client client= laCasaDorada.findObjClient(name,lastName);
-
+			Client client = laCasaDorada.findObjClient(name,lastName);
+			
 			if(!updateNameClient.getText().isEmpty() && !updateNameClient.getText().equals(name)) {
 				name = updateNameClient.getText();
 				client.getUsersCreators().setLastModifier(usersModifiers.getCreateObject());
@@ -1890,7 +1891,9 @@ public class LaCasaDoradaGUI{
 			client.setLastName(lastName);
 			client.setId(id);
 			client.setAddress(address);
-
+			
+			laCasaDorada.saveData();
+			
 			listClient.set(tvClient.getSelectionModel().getSelectedIndex(),new Client(name,lastName,id,address,telephone,obsClient,client.getUsersCreators()));
 
 			updateNameClient.setText("");
@@ -1950,7 +1953,7 @@ public class LaCasaDoradaGUI{
 	}
 
 	@FXML
-	public void modifyEmployee(ActionEvent event) {
+	public void modifyEmployee(ActionEvent event) throws IOException {
 
 		if(tvEmployee.getSelectionModel().isEmpty()) {
 
@@ -1984,6 +1987,8 @@ public class LaCasaDoradaGUI{
 			employee.setName(name);
 			employee.setLastName(lastName);
 			employee.setId(id);
+			
+			laCasaDorada.saveData();
 
 			listEmployee.set(tvEmployee.getSelectionModel().getSelectedIndex(),new Employee(name,lastName,id,employee.getUsersCreators()));
 
@@ -2086,7 +2091,7 @@ public class LaCasaDoradaGUI{
 	}
 
 	@FXML
-	public void modifyListOrders(ActionEvent event) {
+	public void modifyListOrders(ActionEvent event) throws IOException {
 
 		Alert alert = new Alert(AlertType.ERROR);
 		alert.setTitle("ERROR");
@@ -2165,6 +2170,8 @@ public class LaCasaDoradaGUI{
 				order.setOrderClient(laCasaDorada.findObjClient(client));
 				order.setOrderEmployee(laCasaDorada.findEmployee(employee));
 				order.setFieldOfObservations(obsOrder);
+				
+				laCasaDorada.saveData();
 
 				listOrders.set(tvListOrders.getSelectionModel().getSelectedIndex(),new Order(code,laCasaDorada.findState(state),amounts,
 						order.getDate(),obsOrder,laCasaDorada.findObjClient(client),products,laCasaDorada.findEmployee(employee),order.getUsersCreators()));
@@ -2214,7 +2221,7 @@ public class LaCasaDoradaGUI{
 	} 
 
 	@FXML
-	public void modifyListProduct(ActionEvent event) {
+	public void modifyListProduct(ActionEvent event) throws IOException {
 
 		if(tvListProduct.getSelectionModel().isEmpty()) {
 
@@ -2280,6 +2287,8 @@ public class LaCasaDoradaGUI{
 						alert.setContentText("Se ha actualizado la información del producto.");
 						alert.showAndWait();
 					}
+					
+					laCasaDorada.saveData();
 
 					listOfProducts.set(tvListProduct.getSelectionModel().getSelectedIndex(),new Product(name,ingredients,laCasaDorada.findType(type),laCasaDorada.findSize(size),priceNum,product.getUsersCreators()));
 
@@ -2551,6 +2560,8 @@ public class LaCasaDoradaGUI{
 						alerts.setHeaderText("Se ha eliminado exitosamente.");
 						alerts.showAndWait();
 						laCasaDorada.deleteClient(client);
+						laCasaDorada.saveData();
+						
 						mainMenu();
 
 					}else {
@@ -2628,6 +2639,8 @@ public class LaCasaDoradaGUI{
 
 							alerts.setHeaderText("Se ha eliminado exitosamente.");
 							alerts.showAndWait();
+							laCasaDorada.saveData();
+							
 							laCasaDorada.deleteEmployee(employee);
 							mainMenu();
 						}
@@ -2741,6 +2754,8 @@ public class LaCasaDoradaGUI{
 											alerts.setHeaderText("Se ha eliminado exitosamente.");
 											alerts.showAndWait();
 											laCasaDorada.deleteUser(user);
+											laCasaDorada.saveData();
+											
 											mainMenu();
 										}
 									}
@@ -2819,6 +2834,8 @@ public class LaCasaDoradaGUI{
 						alerts.setHeaderText("Se ha eliminado exitosamente.");
 						alerts.showAndWait();
 						laCasaDorada.deleteProduct(product);
+						laCasaDorada.saveData();
+						
 						mainMenu();
 					}				
 				}
@@ -2826,8 +2843,8 @@ public class LaCasaDoradaGUI{
 			else {
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("ERROR");
-				alert.setHeaderText("No se pudo eliminar el usuario");
-				alert.setContentText("No existe un usuario con ese nombre de usuario y/o número de identificación");
+				alert.setHeaderText("No se pudo eliminar el producto");
+				alert.setContentText("No existe un producto con ese nombre");
 				alert.showAndWait();
 			}
 		}
@@ -2889,6 +2906,8 @@ public class LaCasaDoradaGUI{
 						alerts.setHeaderText("Se ha eliminado exitosamente.");
 						alerts.showAndWait();
 						laCasaDorada.deleteProductType(productType);
+						laCasaDorada.saveData();
+						
 						mainMenu();
 					}				
 
@@ -2940,6 +2959,8 @@ public class LaCasaDoradaGUI{
 				Product product = laCasaDorada.findIngredientInProduct(ingredient);
 
 				if(product != null) {
+					
+					System.out.println(product.getName());
 
 					Alert alert = new Alert(AlertType.ERROR);
 					alert.setTitle("ERROR");
@@ -2961,6 +2982,8 @@ public class LaCasaDoradaGUI{
 						alerts.setHeaderText("Se ha eliminado exitosamente.");
 						alerts.showAndWait();
 						laCasaDorada.deleteIngredient(ingredient);
+						laCasaDorada.saveData();
+						
 						mainMenu();
 					}			
 				}
@@ -3009,7 +3032,7 @@ public class LaCasaDoradaGUI{
 	}
 
 	@FXML
-	public void modifyListIngredient(ActionEvent event) {
+	public void modifyListIngredient(ActionEvent event) throws IOException {
 
 		Alert alert = new Alert(AlertType.ERROR);
 		alert.setTitle("ERROR");
@@ -3035,6 +3058,8 @@ public class LaCasaDoradaGUI{
 				ingredient.getUsersCreators().setLastModifier(usersModifiers.getCreateObject());
 				ingredient.setName(name);
 			}
+			
+			laCasaDorada.saveData();
 
 			listOfIngredient.set(tvListIngredient.getSelectionModel().getSelectedIndex(),new Ingredient(name,ingredient.getUsersCreators()));
 
@@ -3099,7 +3124,7 @@ public class LaCasaDoradaGUI{
 	}
 
 	@FXML
-	public void modifyListType(ActionEvent event) {
+	public void modifyListType(ActionEvent event) throws IOException {
 
 		Alert alert = new Alert(AlertType.ERROR);
 		alert.setTitle("ERROR");
@@ -3125,6 +3150,8 @@ public class LaCasaDoradaGUI{
 				type.getUsersCreators().setLastModifier(usersModifiers.getCreateObject());
 				type.setName(name);
 			}
+			
+			laCasaDorada.saveData();
 
 			listType.set(tvListType.getSelectionModel().getSelectedIndex(),new ProductType(name,type.getUsersCreators()));
 
@@ -3190,7 +3217,7 @@ public class LaCasaDoradaGUI{
 	}
 
 	@FXML
-	public void modifyListSize(ActionEvent event) {
+	public void modifyListSize(ActionEvent event) throws IOException {
 
 		Alert alert = new Alert(AlertType.ERROR);
 		alert.setTitle("ERROR");
@@ -3216,6 +3243,8 @@ public class LaCasaDoradaGUI{
 				sizes.getUsersCreators().setLastModifier(usersModifiers.getCreateObject());
 				sizes.setSize(size);
 			}
+			
+			laCasaDorada.saveData();
 
 			listSizes.set(tvListSize.getSelectionModel().getSelectedIndex(),new Size(size,sizes.getUsersCreators()));
 
@@ -3293,6 +3322,9 @@ public class LaCasaDoradaGUI{
 					alerts.setHeaderText("Se ha eliminado exitosamente.");
 					alerts.showAndWait();
 					laCasaDorada.deleteOrder(order);
+					
+					laCasaDorada.saveData();
+					
 					mainMenu();
 
 				}else {
@@ -3427,6 +3459,8 @@ public class LaCasaDoradaGUI{
 				}
 				else {
 					laCasaDorada.disableIngredient(ingredient);
+					
+					laCasaDorada.saveData();
 
 					Alert alerts = new Alert(AlertType.INFORMATION);
 					alerts.setTitle("EXCELENTE");
@@ -3492,6 +3526,8 @@ public class LaCasaDoradaGUI{
 				}
 				else {
 					laCasaDorada.disableSize(size);
+				
+					laCasaDorada.saveData();
 
 					Alert alerts = new Alert(AlertType.INFORMATION);
 					alerts.setTitle("EXCELENTE");
@@ -3557,6 +3593,8 @@ public class LaCasaDoradaGUI{
 				}
 				else {
 					laCasaDorada.disableType(productType);
+					
+					laCasaDorada.saveData();
 
 					Alert alerts = new Alert(AlertType.INFORMATION);
 					alerts.setTitle("EXCELENTE");
@@ -3624,6 +3662,8 @@ public class LaCasaDoradaGUI{
 				else {
 
 					laCasaDorada.disableProduct(product);
+					
+					laCasaDorada.saveData();
 
 					Alert alerts = new Alert(AlertType.INFORMATION);
 					alerts.setTitle("EXCELENTE");
@@ -3688,6 +3728,8 @@ public class LaCasaDoradaGUI{
 				else {
 
 					laCasaDorada.enableClient(client);
+					
+					laCasaDorada.saveData();
 
 					Alert alerts = new Alert(AlertType.INFORMATION);
 					alerts.setTitle("EXCELENTE");
@@ -3752,6 +3794,8 @@ public class LaCasaDoradaGUI{
 				else {
 
 					laCasaDorada.enableOrder(order);
+					
+					laCasaDorada.saveData();
 
 					Alert alerts = new Alert(AlertType.INFORMATION);
 					alerts.setTitle("EXCELENTE");
@@ -3818,6 +3862,8 @@ public class LaCasaDoradaGUI{
 				else {
 
 					laCasaDorada.enableEmployee(employee);
+					
+					laCasaDorada.saveData();
 
 					Alert alerts = new Alert(AlertType.INFORMATION);
 					alerts.setTitle("EXCELENTE");
@@ -3881,6 +3927,8 @@ public class LaCasaDoradaGUI{
 				else {
 
 					laCasaDorada.enableUser(user);
+					
+					laCasaDorada.saveData();
 
 					Alert alerts = new Alert(AlertType.INFORMATION);
 					alerts.setTitle("EXCELENTE");
@@ -3971,6 +4019,8 @@ public class LaCasaDoradaGUI{
 				else {
 
 					laCasaDorada.disableClient(client);
+					
+					laCasaDorada.saveData();
 
 					Alert alerts = new Alert(AlertType.INFORMATION);
 					alerts.setTitle("EXCELENTE");
@@ -4015,6 +4065,8 @@ public class LaCasaDoradaGUI{
 				else {
 
 					laCasaDorada.disableOrder(order);
+					
+					laCasaDorada.saveData();
 
 					Alert alerts = new Alert(AlertType.INFORMATION);
 					alerts.setTitle("EXCELENTE");
@@ -4102,6 +4154,8 @@ public class LaCasaDoradaGUI{
 					else {
 
 						laCasaDorada.disableEmployee(employee);
+						
+						laCasaDorada.saveData();
 
 						Alert alerts = new Alert(AlertType.INFORMATION);
 						alerts.setTitle("EXCELENTE");
@@ -4154,6 +4208,8 @@ public class LaCasaDoradaGUI{
 					else {
 
 						laCasaDorada.disableUser(user);
+						
+						laCasaDorada.saveData();
 
 						Alert alerts = new Alert(AlertType.INFORMATION);
 						alerts.setTitle("EXCELENTE");
@@ -4220,6 +4276,8 @@ public class LaCasaDoradaGUI{
 				}
 				else {
 					laCasaDorada.enableSize(size);
+					
+					laCasaDorada.saveData();
 
 					Alert alerts = new Alert(AlertType.INFORMATION);
 					alerts.setTitle("EXCELENTE");
@@ -4285,6 +4343,8 @@ public class LaCasaDoradaGUI{
 				else {
 					laCasaDorada.enableIngredient(ingredient);
 
+					laCasaDorada.saveData();
+					
 					Alert alerts = new Alert(AlertType.INFORMATION);
 					alerts.setTitle("EXCELENTE");
 					alerts.setHeaderText("Se ha habilitado exitosamente.");
@@ -4350,6 +4410,8 @@ public class LaCasaDoradaGUI{
 				}
 				else {
 					laCasaDorada.enableType(productType);
+					
+					laCasaDorada.saveData();
 
 					Alert alerts = new Alert(AlertType.INFORMATION);
 					alerts.setTitle("EXCELENTE");
@@ -4417,6 +4479,8 @@ public class LaCasaDoradaGUI{
 				else {
 
 					laCasaDorada.enableProduct(product);
+					
+					laCasaDorada.saveData();
 
 					Alert alerts = new Alert(AlertType.INFORMATION);
 					alerts.setTitle("EXCELENTE");

@@ -200,7 +200,7 @@ public class LaCasaDorada {
 		for (int j = 0; j < order.size() && !find; j++) {
 			for (int i = 0; i < order.size(); i++) {
 
-				if(order.get(i).getProducts().get(j) == product){
+				if(order.get(i).getProducts().get(j).getName().equals(product.getName())){
 					find = true;
 					orderToSend = order.get(i);
 				}
@@ -391,7 +391,7 @@ public class LaCasaDorada {
 		return client;
 	}
 
-	public Client findObjClient(String name, String lastName){
+	public Client findObjClient(String name, String lastName) throws IOException{
 
 		Client client = null;
 		boolean find = false;
@@ -544,7 +544,7 @@ public class LaCasaDorada {
 
 		for (int j = 0; j <product.size() && !find; j++) {
 
-			if(product.get(j).getProductType() == productType) {
+			if(product.get(j).getProductType().getName().equals(productType.getName())) {
 				find = true;
 				type = product.get(j);
 			}
@@ -1093,6 +1093,7 @@ public class LaCasaDorada {
 
 		for (int i = 0; i < product.size() && !verific; i++) {
 			if(product.get(i).getUsersCreators().getCreateObject() == user || product.get(i).getUsersCreators().getLastModifier() == user) {
+				verific = true;
 				userInProduct = product.get(i);
 			}
 		}
@@ -1106,6 +1107,7 @@ public class LaCasaDorada {
 
 		for (int i = 0; i < ingredient.size() && !verific; i++) {
 			if(ingredient.get(i).getUsersCreators().getCreateObject() == user || ingredient.get(i).getUsersCreators().getLastModifier() == user) {
+				verific = true;
 				userInIngredient = ingredient.get(i);
 			}
 		}
@@ -1119,6 +1121,7 @@ public class LaCasaDorada {
 
 		for (int i = 0; i < sizes.size() && !verific; i++) {
 			if(sizes.get(i).getUsersCreators().getCreateObject() == user || sizes.get(i).getUsersCreators().getLastModifier() == user) {
+				verific = true;
 				userInSize = sizes.get(i);
 			}
 		}
@@ -1132,6 +1135,7 @@ public class LaCasaDorada {
 
 		for (int i = 0; i < productType.size() && !verific; i++) {
 			if(productType.get(i).getUsersCreators().getCreateObject() == user || productType.get(i).getUsersCreators().getLastModifier() == user) {
+				verific = true;
 				userInProductType = productType.get(i);
 			}
 		}
@@ -1144,8 +1148,11 @@ public class LaCasaDorada {
 		boolean verific = false;
 
 		for (int i = 0; i < product.size() && !verific; i++) {
-			for (int j = 0; j < product.size(); j++) {
-				if(product.get(i).getIngredients().get(j) == ingredientToFind) {
+			for (int j = 0; j < product.get(i).getIngredients().size() && !verific; j++) {
+				
+				System.out.println(product.get(i).getIngredients().get(j).getName()+"    "+ingredientToFind.getName());
+				if(product.get(i).getIngredients().get(j).getName().equals(ingredientToFind.getName())) {
+					System.out.println("XDXDXD");
 					verific = true;
 					ingredientInProduct = product.get(i);
 				}
@@ -1160,11 +1167,9 @@ public class LaCasaDorada {
 		boolean verific = false;
 
 		for (int i = 0; i < product.size() && !verific; i++) {
-			for (int j = 0; j < product.size(); j++) {
-				if(product.get(i).getSizes() == sizeToFind) {
-					verific = true;
-					sizeInProduct = product.get(i);
-				}
+			if(product.get(i).getSizes().getSize().equals(sizeToFind.getSize())) {
+				verific = true;
+				sizeInProduct = product.get(i);
 			}
 		}
 		return sizeInProduct;
