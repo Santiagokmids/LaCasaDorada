@@ -77,6 +77,12 @@
                   <MenuItem mnemonicParsing="false" onAction="#listSizes" text="Tamaño del Producto" />
                </items>
             </Menu>
+            <Menu mnemonicParsing="false" text="Importar o Exportar">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Importar" />
+                  <MenuItem mnemonicParsing="false" text="Empleado" />
+               </items>
+            </Menu>
             <Menu mnemonicParsing="false" text="Acerca de">
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#aboutTeam" text="Créditos" />
