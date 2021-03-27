@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.Random;
 
 import java.io.BufferedReader;
@@ -1288,6 +1289,35 @@ public class LaCasaDorada{
 		}
 
 		pw.close();
+	}
+	
+	public void exportProduct(String fileName) throws FileNotFoundException{
+		
+		PrintWriter pw = new PrintWriter(fileName);
+
+		pw.println("PRODUCTO"+SEPARATOR+"No. DE PRODUCTOS COMPRADOS"+SEPARATOR+"TOTAL PAGADO");
+
+		for(int i = 0; i < product.size();i++){
+
+			Product productList = product.get(i);
+			
+			pw.println(productList.getName());
+		}
+
+		pw.close();
+	}
+	
+	public int sizeProductOrder(Product productToFind) {
+	
+		int numProduct = 0;
+		
+		for (int i = 0; i < product.size(); i++) {
+			if() {
+				
+			}
+		}
+		
+		return numProduct;
 	}
 
 	public int findAmountProduct(String employee) {
