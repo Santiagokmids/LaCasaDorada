@@ -87,6 +87,7 @@
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#loadExportOrders" text="Pedidos" />
                   <MenuItem mnemonicParsing="false" onAction="#loadExportEmployee" text="Empleados" />
+                  <MenuItem mnemonicParsing="false" onAction="#loadExportProduct" text="Productos" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Acerca de">

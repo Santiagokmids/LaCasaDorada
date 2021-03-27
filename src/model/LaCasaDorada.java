@@ -2,7 +2,6 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.Random;
 
 import java.io.BufferedReader;
@@ -1291,7 +1290,7 @@ public class LaCasaDorada{
 		pw.close();
 	}
 	
-	public void exportProduct(String fileName) throws FileNotFoundException{
+	public void exportDataProduct(String fileName) throws FileNotFoundException{
 		
 		PrintWriter pw = new PrintWriter(fileName);
 
@@ -1301,7 +1300,9 @@ public class LaCasaDorada{
 
 			Product productList = product.get(i);
 			
-			pw.println(productList.getName());
+			double numProduct = sizeProductOrder(productList);
+			
+			pw.println(productList.getName()+" "+productList.getNameSize()+SEPARATOR+numProduct+SEPARATOR+(numProduct*productList.getPrice()));
 		}
 
 		pw.close();
@@ -1311,9 +1312,14 @@ public class LaCasaDorada{
 	
 		int numProduct = 0;
 		
-		for (int i = 0; i < product.size(); i++) {
-			if() {
+		for (int j = 0; j < order.size(); j++) {
+			
+			for (int i = 0; i < order.get(j).getProducts().size(); i++) {
 				
+				if(order.get(j).getProducts().get(i).getName().equals(productToFind.getName()) && order.get(j).getProducts().get(i).getNameSize().equals(productToFind.getNameSize())) {
+					
+					numProduct += order.get(j).getAmount().get(j);
+				}
 			}
 		}
 		
