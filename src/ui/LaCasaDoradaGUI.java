@@ -1874,7 +1874,7 @@ public class LaCasaDoradaGUI{
 		imageWallClient.setImage(image);
 		Image image2 = new Image("/images/BannerCasaDorada.jpg");
 		imageBannerClient.setImage(image2);
-
+		
 		inicializateTableViewClients();
 	}
 

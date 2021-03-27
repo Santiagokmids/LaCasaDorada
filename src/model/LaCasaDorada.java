@@ -55,7 +55,33 @@ public class LaCasaDorada{
 			Modifiers modifiers, State state) throws IOException {
 
 		Client client = new Client(name, lastName, id, address, telephone, fieldObservations, modifiers, state);
-		people.add(client);
+
+
+		if(getClients().isEmpty()) {
+			people.add(client);
+		}
+		else {
+
+			int i = people.size()-1;
+			boolean verify = false;
+
+			while(i > 0 && !verify) {
+				
+				
+				
+				if(people.get(i) instanceof Client) {
+					Client clientToCompare = findObjClient(people.get(i).getName());
+					
+					
+					
+					if(clientToCompare.compareTo(client) > 0) {
+						verify = true;
+					}
+				}
+				i--;
+			}
+			people.add(i,client);
+		}
 		saveData();
 	}
 
@@ -1148,7 +1174,7 @@ public class LaCasaDorada{
 
 		for (int i = 0; i < product.size() && !verific; i++) {
 			for (int j = 0; j < product.get(i).getIngredients().size() && !verific; j++) {
-				
+
 				System.out.println(product.get(i).getIngredients().get(j).getName()+"    "+ingredientToFind.getName());
 				if(product.get(i).getIngredients().get(j).getName().equals(ingredientToFind.getName())) {
 					System.out.println("XDXDXD");
@@ -1173,17 +1199,17 @@ public class LaCasaDorada{
 		}
 		return sizeInProduct;
 	}
-	
+
 	public State findStates(String state) {
 
 		State states = null;
 
 		if(state.equalsIgnoreCase(State.ENABLE.toString())) {
 			states = State.ENABLE;
-			
+
 		}else if(state.equalsIgnoreCase(State.DISABLED.toString())) {
 			states = State.DISABLED;
-			
+
 		}
 		return states;
 	}
@@ -1201,7 +1227,7 @@ public class LaCasaDorada{
 			Client client = findObjClient(parts[0]);
 
 			State state = findStates(parts[6]);
-			
+
 			create(parts[0],parts[1],parts[2],parts[3],parts[4],parts[5],client.getUsersCreators(),state);
 			line = br.readLine();
 		}
@@ -1228,28 +1254,28 @@ public class LaCasaDorada{
 		}
 		pw.close();
 	}
-	
-	@FXML
-	 public void exportDataOrders(String fileName, String separator) throws FileNotFoundException{
-		 PrintWriter pw = new PrintWriter(fileName+".csv");
-		 
-		 pw.println("CODIGO DEL PEDIDO"+separator+"NOMBRE DEL CLIENTE QUE LO RECIBE"+separator+"DIRECCIÓN"+separator+"TELEFONO"+separator+
-				 "NOMBRE DEL EMPLEADO QUE LO ENTREGA"+separator+"ESTADO DEL PEDIDO"+separator+"FECHA DE CREACIÓN"+separator+"OBSERVACIONES"+separator+
-				 "NOMBRE DEL PRODUCTO"+separator+"CANTIDAD DEL PRODUCTO"+separator+"PRECIO DEL PRODUCTO");
-				 
-		 for(int i=0;i<getOrder().size();i++){
-			 
-			 Order order = getOrder().get(i);
-			 Client client = findObjClient(order.getNameClient());
-			 Employee employee = findEmployee(order.getNameEmployee());
-			 pw.println(order.getCode()+separator+client.getName()+separator+client.getAddress()+separator+client.getTelephone()+separator+
-					 employee.getName()+separator+order.getState()+separator+order.getDateDay()+separator+order.getFieldOfObservations()+separator+
-					 order.getNameProduct()+separator+order.getAmountProduct()+separator+order.getPriceProduct());
-		 }
 
-		    pw.close();
-	 }
-	 
+	@FXML
+	public void exportDataOrders(String fileName, String separator) throws FileNotFoundException{
+		PrintWriter pw = new PrintWriter(fileName+".csv");
+
+		pw.println("CODIGO DEL PEDIDO"+separator+"NOMBRE DEL CLIENTE QUE LO RECIBE"+separator+"DIRECCIÓN"+separator+"TELEFONO"+separator+
+				"NOMBRE DEL EMPLEADO QUE LO ENTREGA"+separator+"ESTADO DEL PEDIDO"+separator+"FECHA DE CREACIÓN"+separator+"OBSERVACIONES"+separator+
+				"NOMBRE DEL PRODUCTO"+separator+"CANTIDAD DEL PRODUCTO"+separator+"PRECIO DEL PRODUCTO");
+
+		for(int i=0;i<getOrder().size();i++){
+
+			Order order = getOrder().get(i);
+			Client client = findObjClient(order.getNameClient());
+			Employee employee = findEmployee(order.getNameEmployee());
+			pw.println(order.getCode()+separator+client.getName()+separator+client.getAddress()+separator+client.getTelephone()+separator+
+					employee.getName()+separator+order.getState()+separator+order.getDateDay()+separator+order.getFieldOfObservations()+separator+
+					order.getNameProduct()+separator+order.getAmountProduct()+separator+order.getPriceProduct());
+		}
+
+		pw.close();
+	}
+
 
 	public void saveData() throws IOException {
 
@@ -1383,7 +1409,7 @@ public class LaCasaDorada{
 	@SuppressWarnings({ "unchecked" })
 	public boolean loadData() throws IOException, ClassNotFoundException{
 		boolean loaded = false;
-		
+
 		File cli = new File(SAVE_PATH_FILE_PEOPLE);
 
 		if(cli.exists()){
@@ -1445,5 +1471,26 @@ public class LaCasaDorada{
 
 		return loaded;
 	}
+	/*
+	public void sortByNameAndLastName() {
 
+		Comparator<Client> nameAndLastNameComparator = new Comparator<Client>() {
+
+			@Override
+			public int compare(Client c1, Client c2) {
+
+				int verific = 0;
+
+				if(c1.getLastName().compareTo(c2.getLastName()) > 0) {
+					verific = 1;
+				}
+				else if(c1.getLastName().compareTo(c2.getLastName()) < 0) {
+					verific = -1;
+				}
+				return verific;
+			}
+		};
+		Collections.sort(client,);
+	}
+	 */
 }

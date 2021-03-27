@@ -76,5 +76,4 @@ public abstract class People implements Serializable{
 		usersCreators.setCreateObject(user);
 		usersCreators.setLastModifier(user2);
 	}
-	
 }
