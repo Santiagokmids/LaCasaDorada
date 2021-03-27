@@ -2,6 +2,7 @@ package ui;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Optional;
@@ -4563,6 +4564,11 @@ public class LaCasaDoradaGUI{
 		imageWallExportOrd.setImage(image);
 		Image image2 = new Image("/images/BannerCasaDorada.jpg");
 		imageBannerExportOrd.setImage(image2);
+
+		LocalDate today = LocalDate.now();
+
+		lastDay.setValue(today);
+		lastDay.setDisable(true);
 	}
 	
 	@FXML
@@ -4575,17 +4581,16 @@ public class LaCasaDoradaGUI{
 		if(f != null) {
 			
 			Alert alert = new Alert(AlertType.INFORMATION);
-			alert.setTitle("Export Contacts");
+			alert.setTitle("Exportar Pedidos");
 			  
 			try {
-				
+
 				try {
 					
 					Integer.parseInt(firtsHour.getText());
 					Integer.parseInt(firtsMin.getText());
 					Integer.parseInt(lastHour.getText());
 					Integer.parseInt(lastMin.getText());
-					
 					
 					if(!separator.getText().isEmpty()) {
 						laCasaDorada.exportDataOrders(f.getAbsolutePath(),separator.getText());
@@ -4599,8 +4604,10 @@ public class LaCasaDoradaGUI{
 						alert.showAndWait();
 					}
 				}catch(NumberFormatException nfe){
-					alert.setContentText("Tiene que ingresar un número para representar la hora");
-					alert.showAndWait();
+					Alert alert1 = new Alert(AlertType.ERROR);
+					alert1.setTitle("Exportar Pedidos");
+					alert1.setContentText("Tiene que ingresar un número para representar la hora");
+					alert1.showAndWait();
 				}
 				  
 			} catch (IOException e) {

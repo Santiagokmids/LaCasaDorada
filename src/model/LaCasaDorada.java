@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 
-import javafx.fxml.FXML;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -1255,7 +1253,6 @@ public class LaCasaDorada{
 		pw.close();
 	}
 
-	@FXML
 	public void exportDataOrders(String fileName, String separator) throws FileNotFoundException{
 		PrintWriter pw = new PrintWriter(fileName+".csv");
 
@@ -1276,6 +1273,54 @@ public class LaCasaDorada{
 		pw.close();
 	}
 
+	public void exportDataEmployees(String fileName) throws FileNotFoundException{
+		PrintWriter pw = new PrintWriter(fileName+".csv");
+
+		pw.println("NOMBRE DEL EMPLEADO"+SEPARATOR+"No. DE PEDIDOS ENTREGADOS"+SEPARATOR+"PRECIO TOTAL POR PEDIDOS");
+
+		for(int i = 0; i < getEmployee().size();i++){
+
+			Employee employee = findEmployee(getEmployee().get(i).getName());
+			int amount = findAmountProduct(employee.getName());
+			Double prices = findPricestProduct(employee.getName());
+			
+			pw.println(employee.getName()+SEPARATOR+amount+prices);
+		}
+
+		pw.close();
+	}
+
+	public int findAmountProduct(String employee) {
+
+		boolean verific = false;
+		int cont = 0;
+		
+		for (int i = 0; i < order.size() && !verific; i++) {
+			if(order.get(i).getNameEmployee().equals(employee)) {
+				cont++;
+			}
+			
+		}
+		return cont;
+	}
+
+	public Double findPricestProduct(String employee) {
+
+		boolean verific = false;
+		Double cont = 0.0;
+		
+		for (int i = 0; i < order.size() && !verific; i++) {
+			if(order.get(i).getNameEmployee().equals(employee)) {
+				
+				for (int j = 0; j < order.get(i).getProducts().size(); j++) {
+					double price = (order.get(i).getProducts().get(i).getPrice() * order.get(i).getAmount().get(i));
+					cont += price;
+				}
+			}
+			
+		}
+		return cont;
+	}
 
 	public void saveData() throws IOException {
 
