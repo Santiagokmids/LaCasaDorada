@@ -886,7 +886,7 @@ public class LaCasaDoradaGUI{
 					alerts.setContentText("Se ha registrado a "+nameUser.getText()+" exitosamente");
 					alerts.showAndWait();
 					
-					laCasaDorada.create(name.getText(), lastName.getText(), id.getText(), nameUser.getText(), password.getText(),null);
+					laCasaDorada.create(name.getText(), lastName.getText(), id.getText(), nameUser.getText(), password.getText(),null,State.ENABLE);
 
 					loadLogin();
 
@@ -930,7 +930,7 @@ public class LaCasaDoradaGUI{
 					alerts.setContentText("Se ha registrado a "+nameUser.getText()+" exitosamente");
 					alerts.showAndWait();
 
-					laCasaDorada.create(name.getText(), lastName.getText(), id.getText(), nameUser.getText(), password.getText(), usersModifiers);
+					laCasaDorada.create(name.getText(), lastName.getText(), id.getText(), nameUser.getText(), password.getText(), usersModifiers,State.ENABLE);
 					mainMenu();
 
 				}else {
@@ -985,7 +985,7 @@ public class LaCasaDoradaGUI{
 				
 				if(user.getUsersCreators() == null) {
 					laCasaDorada.deleteUser(user);
-					laCasaDorada.create(newUser.getName(), newUser.getLastName(), newUser.getId(), newUser.getUserName(), newUser.getPassword(), usersModifiers);
+					laCasaDorada.create(newUser.getName(), newUser.getLastName(), newUser.getId(), newUser.getUserName(), newUser.getPassword(), usersModifiers,State.ENABLE);
 					
 				}
 				mainMenu();
@@ -1047,7 +1047,7 @@ public class LaCasaDoradaGUI{
 				alerts.showAndWait();
 
 				laCasaDorada.create(nameClient.getText(), lastNameClient.getText(), idClient.getText(),
-						adressClient.getText(), telephoneClient.getText(), fieldObservations.getText(),usersModifiers);
+						adressClient.getText(), telephoneClient.getText(), fieldObservations.getText(),usersModifiers,State.ENABLE);
 				mainMenu();
 
 			}else {
@@ -1067,7 +1067,7 @@ public class LaCasaDoradaGUI{
 			alerts.showAndWait();
 
 			laCasaDorada.create(nameClient.getText(), lastNameClient.getText(), idClient.getText(),
-					adressClient.getText(), telephoneClient.getText(), fieldObservations.getText(), usersModifiers);
+					adressClient.getText(), telephoneClient.getText(), fieldObservations.getText(), usersModifiers,State.ENABLE);
 			mainMenu();
 		}
 		else {
@@ -1110,7 +1110,7 @@ public class LaCasaDoradaGUI{
 				alerts.setContentText("Se ha añadido el tamaño "+txtSize.getText()+" exitosamente");
 				alerts.showAndWait();
 
-				laCasaDorada.createSize(txtSize.getText(), usersModifiers);
+				laCasaDorada.createSize(txtSize.getText(), usersModifiers,State.ENABLE);
 				mainMenu();
 
 			}else {
@@ -1151,7 +1151,7 @@ public class LaCasaDoradaGUI{
 				alerts.setContentText("Se ha registrado a "+nameEmployee.getText()+" exitosamente");
 				alerts.showAndWait();
 
-				laCasaDorada.create(nameEmployee.getText(),lastNameEmployee.getText(),idEmployee.getText(), usersModifiers);
+				laCasaDorada.create(nameEmployee.getText(),lastNameEmployee.getText(),idEmployee.getText(), usersModifiers,State.ENABLE);
 
 				mainMenu();
 			}else if(verific) {
@@ -1287,7 +1287,7 @@ public class LaCasaDoradaGUI{
 					}
 
 					ProductType type = laCasaDorada.findType(selectType.getValue());	
-					laCasaDorada.create(nameOfProduct.getText(), ingredients, type, sizes, price,usersModifiers);
+					laCasaDorada.create(nameOfProduct.getText(), ingredients, type, sizes, price,usersModifiers,State.ENABLE);
 
 					mainMenu();
 
@@ -1357,7 +1357,7 @@ public class LaCasaDoradaGUI{
 	@FXML
 	public void ingredientProduct(ActionEvent event)throws IOException {
 		if(selectIngredient.getValue() != null) {
-			listIngredients.add(new Ingredient(laCasaDorada.findIngredient(selectIngredient.getValue()).getName(), usersModifiers));
+			listIngredients.add(new Ingredient(laCasaDorada.findIngredient(selectIngredient.getValue()).getName(), usersModifiers,State.ENABLE));
 		}
 		else {
 			Alert alert = new Alert(AlertType.WARNING);
@@ -1400,7 +1400,7 @@ public class LaCasaDoradaGUI{
 
 			if(verific) {
 
-				listIngredients.set(tvProduct.getSelectionModel().getSelectedIndex(),new Ingredient(ingredient.getName(),ingredient.getUsersCreators()));
+				listIngredients.set(tvProduct.getSelectionModel().getSelectedIndex(),new Ingredient(ingredient.getName(),ingredient.getUsersCreators(),State.ENABLE));
 
 				Alert alerts = new Alert(AlertType.INFORMATION);
 				alerts.setTitle("EXCELENTE");
@@ -1605,7 +1605,7 @@ public class LaCasaDoradaGUI{
 				alerts.setContentText("Se ha agregado el ingrediente "+nameIngredient.getText()+" exitosamente");
 				alerts.showAndWait();
 
-				laCasaDorada.create(nameIngredient.getText(),usersModifiers);
+				laCasaDorada.create(nameIngredient.getText(),usersModifiers,State.ENABLE);
 				mainMenu();
 			}
 			else if(verific) {
@@ -1659,7 +1659,7 @@ public class LaCasaDoradaGUI{
 				alerts.setContentText("Se ha agregado el tipo de producto "+typeProduct.getText()+" exitosamente");
 				alerts.showAndWait();
 
-				laCasaDorada.createTypeProduct(typeProduct.getText(), usersModifiers);
+				laCasaDorada.createTypeProduct(typeProduct.getText(), usersModifiers,State.ENABLE);
 				mainMenu();
 			}
 			else if(verific) {
@@ -1791,7 +1791,7 @@ public class LaCasaDoradaGUI{
 			
 			laCasaDorada.saveData();
 			
-			listUsers.set(tvUser.getSelectionModel().getSelectedIndex(),new User(name,lastName,id,userName,user.getPassword(),user.getUsersCreators()));
+			listUsers.set(tvUser.getSelectionModel().getSelectedIndex(),new User(name,lastName,id,userName,user.getPassword(),user.getUsersCreators(),State.ENABLE));
 
 			updateName.setText("");
 			updateLasName.setText("");
@@ -1901,7 +1901,7 @@ public class LaCasaDoradaGUI{
 			
 			laCasaDorada.saveData();
 			
-			listClient.set(tvClient.getSelectionModel().getSelectedIndex(),new Client(name,lastName,id,address,telephone,obsClient,client.getUsersCreators()));
+			listClient.set(tvClient.getSelectionModel().getSelectedIndex(),new Client(name,lastName,id,address,telephone,obsClient,client.getUsersCreators(),State.ENABLE));
 
 			updateNameClient.setText("");
 			updateLasNameClient.setText("");
@@ -1997,7 +1997,7 @@ public class LaCasaDoradaGUI{
 			
 			laCasaDorada.saveData();
 
-			listEmployee.set(tvEmployee.getSelectionModel().getSelectedIndex(),new Employee(name,lastName,id,employee.getUsersCreators()));
+			listEmployee.set(tvEmployee.getSelectionModel().getSelectedIndex(),new Employee(name,lastName,id,employee.getUsersCreators(),State.ENABLE));
 
 			updateNameEmployee.setText("");
 			updateLastNameEmployee.setText("");
@@ -2297,7 +2297,7 @@ public class LaCasaDoradaGUI{
 					
 					laCasaDorada.saveData();
 
-					listOfProducts.set(tvListProduct.getSelectionModel().getSelectedIndex(),new Product(name,ingredients,laCasaDorada.findType(type),laCasaDorada.findSize(size),priceNum,product.getUsersCreators()));
+					listOfProducts.set(tvListProduct.getSelectionModel().getSelectedIndex(),new Product(name,ingredients,laCasaDorada.findType(type),laCasaDorada.findSize(size),priceNum,product.getUsersCreators(),State.ENABLE));
 
 					updateNameProduct.setText("");
 					updateIngredientProduct.setText("");
@@ -3068,7 +3068,7 @@ public class LaCasaDoradaGUI{
 			
 			laCasaDorada.saveData();
 
-			listOfIngredient.set(tvListIngredient.getSelectionModel().getSelectedIndex(),new Ingredient(name,ingredient.getUsersCreators()));
+			listOfIngredient.set(tvListIngredient.getSelectionModel().getSelectedIndex(),new Ingredient(name,ingredient.getUsersCreators(),State.ENABLE));
 
 			updateNameIngredient.setText("");
 
@@ -3160,7 +3160,7 @@ public class LaCasaDoradaGUI{
 			
 			laCasaDorada.saveData();
 
-			listType.set(tvListType.getSelectionModel().getSelectedIndex(),new ProductType(name,type.getUsersCreators()));
+			listType.set(tvListType.getSelectionModel().getSelectedIndex(),new ProductType(name,type.getUsersCreators(),State.ENABLE));
 
 			updateNameType.setText("");
 
@@ -3253,7 +3253,7 @@ public class LaCasaDoradaGUI{
 			
 			laCasaDorada.saveData();
 
-			listSizes.set(tvListSize.getSelectionModel().getSelectedIndex(),new Size(size,sizes.getUsersCreators()));
+			listSizes.set(tvListSize.getSelectionModel().getSelectedIndex(),new Size(size,sizes.getUsersCreators(),State.ENABLE));
 
 			updateNameSize.setText("");
 

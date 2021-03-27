@@ -26,9 +26,10 @@ public class Product implements Serializable {
 	 * @param price
 	 * @param ingredients
 	 * @param usersCreators 
+	 * @param state2 
 	 * @param ingredientType
 	 */
-	public Product(String name, ArrayList<Ingredient> ingredients, ProductType productType, Size sizes, double price, Modifiers usersCreators) {
+	public Product(String name, ArrayList<Ingredient> ingredients, ProductType productType, Size sizes, double price, Modifiers usersCreators, State state) {
 
 		this.name = name;
 		this.ingredients = ingredients;
@@ -36,7 +37,7 @@ public class Product implements Serializable {
 		this.sizes = sizes; 
 		this.price = price;
 		this.usersCreators = usersCreators;
-		this.state = State.ENABLE;
+		this.state = state;
 	}
 
 	public String getName() {

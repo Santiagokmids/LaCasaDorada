@@ -11,8 +11,8 @@ public class User extends Employee {
 	private String userName;
 	private String password; 
 
-	public User(String name, String lastName, String id, String userName, String password, Modifiers usersModifiers) {
-		super(name, lastName, id, usersModifiers);
+	public User(String name, String lastName, String id, String userName, String password, Modifiers usersModifiers, State state) {
+		super(name, lastName, id, usersModifiers,state);
 		this.userName = userName;
 		this.password = password;
 	}

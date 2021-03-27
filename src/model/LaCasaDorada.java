@@ -20,9 +20,6 @@ public class LaCasaDorada {
 	//Constants
 
 	public final static String SAVE_PATH_FILE_PEOPLE = "data/dataPeople.txt";
-	/*public final static String SAVE_PATH_FILE_EMPLOYEE = "data/dataEmployee.lcd";
-	public final static String SAVE_PATH_FILE_USER = "data/dataUser.lcd";
-	*/
 	public final static String SAVE_PATH_FILE_ORDER = "data/dataOrder.lcd";
 	public final static String SAVE_PATH_FILE_PRODUCT = "data/dataProduct.lcd";
 	public final static String SAVE_PATH_FILE_INGREDIENT = "data/dataIngredient.lcd";
@@ -53,41 +50,41 @@ public class LaCasaDorada {
 
 	//create client
 	public void create(String name, String lastName, String id, String address, String telephone, String fieldObservations,
-			Modifiers modifiers) throws IOException {
+			Modifiers modifiers, State state) throws IOException {
 
-		Client client = new Client(name, lastName, id, address, telephone, fieldObservations, modifiers);
+		Client client = new Client(name, lastName, id, address, telephone, fieldObservations, modifiers, state);
 		people.add(client);
 		saveData();
 	}
 
 	//create employee
-	public void create(String name, String lastName, String id, Modifiers usersModifiers) throws IOException {
+	public void create(String name, String lastName, String id, Modifiers usersModifiers, State state) throws IOException {
 
-		Employee employee = new Employee(name, lastName, id, usersModifiers);
+		Employee employee = new Employee(name, lastName, id, usersModifiers,state);
 		people.add(employee);
 		saveData();
 	}
 
 	//create User
-	public void create(String name, String lastName, String id, String userName, String password, Modifiers usersModifiers) throws IOException {
+	public void create(String name, String lastName, String id, String userName, String password, Modifiers usersModifiers,State state) throws IOException {
 
-		User user = new User(name, lastName, id, userName, password, usersModifiers);
+		User user = new User(name, lastName, id, userName, password, usersModifiers,state);
 		people.add(user);
 		saveData();
 	}
 
 	//Create ingredient
-	public void create(String name, Modifiers userModifiers) throws IOException {
+	public void create(String name, Modifiers userModifiers, State state) throws IOException {
 
-		Ingredient ingredients = new Ingredient(name, userModifiers);
+		Ingredient ingredients = new Ingredient(name, userModifiers,state);
 		ingredient.add(ingredients);
 		saveData();
 	}
 
 	//Create product
-	public void create(String name, ArrayList<Ingredient> ingredients, ProductType productType, Size sizes, double price, Modifiers userModifiers) throws IOException {
+	public void create(String name, ArrayList<Ingredient> ingredients, ProductType productType, Size sizes, double price, Modifiers userModifiers, State state) throws IOException {
 
-		Product products = new Product(name,ingredients,productType, sizes, price, userModifiers);
+		Product products = new Product(name,ingredients,productType, sizes, price, userModifiers,state);
 		product.add(products);
 		saveData();
 	}
@@ -105,9 +102,9 @@ public class LaCasaDorada {
 	}
 
 	//Create type product
-	public void createTypeProduct(String name, Modifiers userModifiers) {
+	public void createTypeProduct(String name, Modifiers userModifiers, State state) {
 
-		ProductType typeProduct = new ProductType(name, userModifiers);
+		ProductType typeProduct = new ProductType(name, userModifiers,state);
 		productType.add(typeProduct);
 	}
 
@@ -157,9 +154,9 @@ public class LaCasaDorada {
 	}
 
 	//create size
-	public void createSize(String size, Modifiers modifiers ) throws IOException {
+	public void createSize(String size, Modifiers modifiers, State state) throws IOException {
 
-		Size allSizes = new Size(size, modifiers);
+		Size allSizes = new Size(size, modifiers,state);
 		sizes.add(allSizes);
 		saveData();
 	}
@@ -1174,6 +1171,20 @@ public class LaCasaDorada {
 		}
 		return sizeInProduct;
 	}
+	
+	public State findStates(String state) {
+
+		State states = null;
+
+		if(state.equalsIgnoreCase(State.ENABLE.toString())) {
+			states = State.ENABLE;
+			
+		}else if(state.equalsIgnoreCase(State.DISABLED.toString())) {
+			states = State.DISABLED;
+			
+		}
+		return states;
+	}
 
 	public void importData(String fileName) throws IOException {
 
@@ -1187,7 +1198,9 @@ public class LaCasaDorada {
 
 			Client client = findObjClient(parts[0]);
 
-			create(parts[0],parts[1],parts[2],parts[3],parts[4],parts[5],client.getUsersCreators());
+			State state = findStates(parts[6]);
+			
+			create(parts[0],parts[1],parts[2],parts[3],parts[4],parts[5],client.getUsersCreators(),state);
 			line = br.readLine();
 		}
 
@@ -1203,7 +1216,12 @@ public class LaCasaDorada {
 			if(people.get(i) instanceof Client) {
 
 				Client client = (Client) people.get(i);
-				pw.println(client.getName()+client.getLastName()+client.getId()+client.getState()+client.getAddress()+client.getTelephone()+client.getFieldOfObservations());
+				pw.println(client.getName()+SEPARATOR+client.getLastName()+SEPARATOR+client.getId()+SEPARATOR+client.getAddress()+SEPARATOR+client.getState()+SEPARATOR+client.getTelephone()+SEPARATOR+client.getFieldOfObservations());
+			}
+			else if(people.get(i) instanceof Employee) {
+
+				Client client = (Client) people.get(i);
+				pw.println(client.getName()+SEPARATOR+client.getLastName()+SEPARATOR+client.getId()+SEPARATOR+client.getState()+SEPARATOR+client.getAddress()+SEPARATOR+client.getTelephone()+SEPARATOR+client.getFieldOfObservations());
 			}
 		}
 		pw.close();

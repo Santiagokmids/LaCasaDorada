@@ -21,10 +21,10 @@ public class Ingredient implements Serializable{
 	//Relations
 	private Modifiers usersCreators;
 	
-	public Ingredient(String name, Modifiers usersCreators) {
+	public Ingredient(String name, Modifiers usersCreators, State state) {
 		this.usersCreators = usersCreators;
 		this.name = name;
-		this.state = State.ENABLE;
+		this.state = state;
 	}
 
 	public String getName() {

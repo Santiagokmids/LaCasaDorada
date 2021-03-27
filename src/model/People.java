@@ -18,11 +18,11 @@ public abstract class People implements Serializable{
 	//Relations
 	private Modifiers usersCreators;
 	
-	public People(String name, String lastName, String id, Modifiers usersCreators) {
+	public People(String name, String lastName, String id, Modifiers usersCreators, State state) {
 		this.name = name;
 		this.lastName = lastName;
 		this.id = id;
-		this.state = State.ENABLE;
+		this.state = state;
 		this.usersCreators = usersCreators;
 	}
 
