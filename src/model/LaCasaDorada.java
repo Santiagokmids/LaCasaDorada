@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 
-import javafx.fxml.FXML;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -1148,7 +1146,7 @@ public class LaCasaDorada{
 
 		for (int i = 0; i < product.size() && !verific; i++) {
 			for (int j = 0; j < product.get(i).getIngredients().size() && !verific; j++) {
-				
+
 				System.out.println(product.get(i).getIngredients().get(j).getName()+"    "+ingredientToFind.getName());
 				if(product.get(i).getIngredients().get(j).getName().equals(ingredientToFind.getName())) {
 					System.out.println("XDXDXD");
@@ -1173,17 +1171,17 @@ public class LaCasaDorada{
 		}
 		return sizeInProduct;
 	}
-	
+
 	public State findStates(String state) {
 
 		State states = null;
 
 		if(state.equalsIgnoreCase(State.ENABLE.toString())) {
 			states = State.ENABLE;
-			
+
 		}else if(state.equalsIgnoreCase(State.DISABLED.toString())) {
 			states = State.DISABLED;
-			
+
 		}
 		return states;
 	}
@@ -1201,7 +1199,7 @@ public class LaCasaDorada{
 			Client client = findObjClient(parts[0]);
 
 			State state = findStates(parts[6]);
-			
+
 			create(parts[0],parts[1],parts[2],parts[3],parts[4],parts[5],client.getUsersCreators(),state);
 			line = br.readLine();
 		}
@@ -1228,28 +1226,75 @@ public class LaCasaDorada{
 		}
 		pw.close();
 	}
-	
-	@FXML
-	 public void exportDataOrders(String fileName, String separator) throws FileNotFoundException{
-		 PrintWriter pw = new PrintWriter(fileName+".csv");
-		 
-		 pw.println("CODIGO DEL PEDIDO"+separator+"NOMBRE DEL CLIENTE QUE LO RECIBE"+separator+"DIRECCIÓN"+separator+"TELEFONO"+separator+
-				 "NOMBRE DEL EMPLEADO QUE LO ENTREGA"+separator+"ESTADO DEL PEDIDO"+separator+"FECHA DE CREACIÓN"+separator+"OBSERVACIONES"+separator+
-				 "NOMBRE DEL PRODUCTO"+separator+"CANTIDAD DEL PRODUCTO"+separator+"PRECIO DEL PRODUCTO");
-				 
-		 for(int i=0;i<getOrder().size();i++){
-			 
-			 Order order = getOrder().get(i);
-			 Client client = findObjClient(order.getNameClient());
-			 Employee employee = findEmployee(order.getNameEmployee());
-			 pw.println(order.getCode()+separator+client.getName()+separator+client.getAddress()+separator+client.getTelephone()+separator+
-					 employee.getName()+separator+order.getState()+separator+order.getDateDay()+separator+order.getFieldOfObservations()+separator+
-					 order.getNameProduct()+separator+order.getAmountProduct()+separator+order.getPriceProduct());
-		 }
 
-		    pw.close();
-	 }
-	 
+	public void exportDataOrders(String fileName, String separator) throws FileNotFoundException{
+		PrintWriter pw = new PrintWriter(fileName+".csv");
+
+		pw.println("CODIGO DEL PEDIDO"+separator+"NOMBRE DEL CLIENTE QUE LO RECIBE"+separator+"DIRECCIÓN"+separator+"TELEFONO"+separator+
+				"NOMBRE DEL EMPLEADO QUE LO ENTREGA"+separator+"ESTADO DEL PEDIDO"+separator+"FECHA DE CREACIÓN"+separator+"OBSERVACIONES"+separator+
+				"NOMBRE DEL PRODUCTO"+separator+"CANTIDAD DEL PRODUCTO"+separator+"PRECIO DEL PRODUCTO");
+
+		for(int i=0;i<getOrder().size();i++){
+
+			Order order = getOrder().get(i);
+			Client client = findObjClient(order.getNameClient());
+			Employee employee = findEmployee(order.getNameEmployee());
+			pw.println(order.getCode()+separator+client.getName()+separator+client.getAddress()+separator+client.getTelephone()+separator+
+					employee.getName()+separator+order.getState()+separator+order.getDateDay()+separator+order.getFieldOfObservations()+separator+
+					order.getNameProduct()+separator+order.getAmountProduct()+separator+order.getPriceProduct());
+		}
+
+		pw.close();
+	}
+
+	public void exportDataEmployees(String fileName) throws FileNotFoundException{
+		PrintWriter pw = new PrintWriter(fileName+".csv");
+
+		pw.println("NOMBRE DEL EMPLEADO"+SEPARATOR+"No. DE PEDIDOS ENTREGADOS"+SEPARATOR+"PRECIO TOTAL POR PEDIDOS");
+
+		for(int i = 0; i < getEmployee().size();i++){
+
+			Employee employee = findEmployee(getEmployee().get(i).getName());
+			int amount = findAmountProduct(employee.getName());
+			Double prices = findPricestProduct(employee.getName());
+			
+			pw.println(employee.getName()+SEPARATOR+amount+prices);
+		}
+
+		pw.close();
+	}
+
+	public int findAmountProduct(String employee) {
+
+		boolean verific = false;
+		int cont = 0;
+		
+		for (int i = 0; i < order.size() && !verific; i++) {
+			if(order.get(i).getNameEmployee().equals(employee)) {
+				cont++;
+			}
+			
+		}
+		return cont;
+	}
+
+	public Double findPricestProduct(String employee) {
+
+		boolean verific = false;
+		Double cont = 0.0;
+		
+		for (int i = 0; i < order.size() && !verific; i++) {
+			if(order.get(i).getNameEmployee().equals(employee)) {
+				
+				for (int j = 0; j < order.get(i).getProducts().size(); j++) {
+					double price = (order.get(i).getProducts().get(i).getPrice() * order.get(i).getAmount().get(i));
+					cont += price;
+				}
+			}
+			
+		}
+		return cont;
+	}
 
 	public void saveData() throws IOException {
 
@@ -1383,7 +1428,7 @@ public class LaCasaDorada{
 	@SuppressWarnings({ "unchecked" })
 	public boolean loadData() throws IOException, ClassNotFoundException{
 		boolean loaded = false;
-		
+
 		File cli = new File(SAVE_PATH_FILE_PEOPLE);
 
 		if(cli.exists()){
