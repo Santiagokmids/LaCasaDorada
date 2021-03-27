@@ -45,6 +45,30 @@ import model.StateOrder;
 import model.User;
 
 public class LaCasaDoradaGUI{
+	
+	@FXML
+    private ImageView imageBannerExportProduct;
+
+    @FXML
+    private ImageView imageWallExportProduct;
+
+    @FXML
+    private DatePicker firstDateProduct;
+
+    @FXML
+    private DatePicker lastDayProduct;
+
+    @FXML
+    private TextField firstHourProduct;
+
+    @FXML
+    private TextField firstMinProduct;
+
+    @FXML
+    private TextField lastHourProduct;
+
+    @FXML
+    private TextField lastMinProduct;
 
 	@FXML
 	private ImageView imageEnableWallProduct;
@@ -4717,6 +4741,78 @@ public class LaCasaDoradaGUI{
 
 			} catch (IOException e) {
 				alert.setContentText("Los empleados no han sido exportados");
+				alert.showAndWait();
+			}
+		}
+	}
+	
+	@FXML
+	public void loadExportProduct(ActionEvent event) throws IOException {
+
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("exportProduct.fxml"));
+
+		loader.setController(this);
+
+		Parent load = loader.load();
+		mainPane.setCenter(load);
+
+		mainPane.getChildren().clear();
+		mainPane.setTop(load);
+
+		Image image = new Image("/images/Banner.jpg");
+		imageWallExportProduct.setImage(image);
+		Image image2 = new Image("/images/BannerCasaDorada.jpg");
+		imageBannerExportProduct.setImage(image2);
+
+		LocalDate today = LocalDate.now();
+
+		lastDayProduct.setValue(today);
+		lastDayProduct.setDisable(true);
+	}
+	
+	@FXML
+	public void exportProduct(ActionEvent event) {
+
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Abrir archivo de recursos");
+		File f = fileChooser.showSaveDialog(mainPane.getScene().getWindow());
+
+		if(f != null) {
+
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Exportar Productos");
+			
+			Alert alert1 = new Alert(AlertType.ERROR);
+			alert1.setTitle("Exportar Productos");
+
+			try {
+
+				try {
+					
+					if(firstDateProduct.getValue() != null) {
+
+						Integer.parseInt(firstHourProduct.getText());
+						Integer.parseInt(firstMinProduct.getText());
+						Integer.parseInt(lastHourProduct.getText());
+						Integer.parseInt(lastMinProduct.getText());
+
+						laCasaDorada.exportDataProduct(f.getAbsolutePath());
+						alert.setContentText("Los prodcutos han sido exportados exitosmente!");
+						alert.showAndWait();
+						
+					}else {
+						alert1.setContentText("Tiene que ingresar una fecha inicial");
+						alert1.showAndWait();
+					}
+
+				}catch(NumberFormatException nfe){
+					
+					alert1.setContentText("Tiene que ingresar un número para representar la hora");
+					alert1.showAndWait();
+				}
+
+			} catch (IOException e) {
+				alert.setContentText("Los productos no han sido exportados");
 				alert.showAndWait();
 			}
 		}
