@@ -4586,9 +4586,6 @@ public class LaCasaDoradaGUI{
 					Integer.parseInt(lastHour.getText());
 					Integer.parseInt(lastMin.getText());
 					
-					if(firtsDate.getValue().toString() ComparableTo lastDay.getValue().toString()) {
-						
-					}
 					
 					if(!separator.getText().isEmpty()) {
 						laCasaDorada.exportDataOrders(f.getAbsolutePath(),separator.getText());
