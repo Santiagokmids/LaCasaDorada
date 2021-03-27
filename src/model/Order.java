@@ -90,6 +90,23 @@ public class Order implements Serializable{
 		return message;
 	}
 	
+
+	public String getPriceProduct() {
+		String message = "";
+		
+		for (int i = 0; i < getProducts().size(); i++) {
+			
+			if(i != getProducts().size() - 1) {
+				message += getProducts().get(i).getPrice()+"\n";
+				
+			}else {
+				message += getProducts().get(i).getPrice();
+			}
+		}
+		
+		return message;
+	}
+	
 	public String getAmountProduct() {
 		String message = "";
 		

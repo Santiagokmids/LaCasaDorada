@@ -1,5 +1,6 @@
 package ui;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,6 +17,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
@@ -26,6 +28,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.FileChooser;
 import model.Client;
 import model.Employee;
 import model.Ingredient;
@@ -710,6 +713,34 @@ public class LaCasaDoradaGUI{
 
 	@FXML
 	private ImageView imageEnabledBannerOrder;
+
+	@FXML
+	private ImageView imageBannerExportOrd;
+
+	@FXML
+	private ImageView imageWallExportOrd;
+
+	@FXML
+	private TextField separator;
+	
+	@FXML
+    private DatePicker firtsDate;
+
+    @FXML
+    private DatePicker lastDay;
+
+    @FXML
+    private TextField firtsHour;
+
+    @FXML
+    private TextField firtsMin;
+
+    @FXML
+    private TextField lastHour;
+
+    @FXML
+    private TextField lastMin;
+
 
 	@FXML
 	public Label clock;
@@ -1898,6 +1929,7 @@ public class LaCasaDoradaGUI{
 			client.setLastName(lastName);
 			client.setId(id);
 			client.setAddress(address);
+			client.setFieldOfObservations(obsClient);
 			
 			laCasaDorada.saveData();
 			
@@ -2294,11 +2326,10 @@ public class LaCasaDoradaGUI{
 						alert.setContentText("Se ha actualizado la información del producto.");
 						alert.showAndWait();
 					}
-					
-					laCasaDorada.saveData();
 
 					listOfProducts.set(tvListProduct.getSelectionModel().getSelectedIndex(),new Product(name,ingredients,laCasaDorada.findType(type),laCasaDorada.findSize(size),priceNum,product.getUsersCreators(),State.ENABLE));
-
+					
+					laCasaDorada.saveData();
 					updateNameProduct.setText("");
 					updateIngredientProduct.setText("");
 					updateTypeProduct.setValue("");
@@ -4512,6 +4543,73 @@ public class LaCasaDoradaGUI{
 			alert.setHeaderText("No se pudo habilitar el producto");
 			alert.setContentText("Debe llenar el campo para habilitar el producto");
 			alert.showAndWait();
+		}
+	}
+	
+	@FXML
+	public void loadExportOrders(ActionEvent event) throws IOException {
+
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("exportOrder-pane.fxml"));
+
+		loader.setController(this);
+
+		Parent load = loader.load();
+		mainPane.setCenter(load);
+
+		mainPane.getChildren().clear();
+		mainPane.setTop(load);
+
+		Image image = new Image("/images/Banner.jpg");
+		imageWallExportOrd.setImage(image);
+		Image image2 = new Image("/images/BannerCasaDorada.jpg");
+		imageBannerExportOrd.setImage(image2);
+	}
+	
+	@FXML
+	public void exportOrders(ActionEvent event) {
+		
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Abrir archivo de recursos");
+		File f = fileChooser.showSaveDialog(mainPane.getScene().getWindow());
+		  
+		if(f != null) {
+			
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Export Contacts");
+			  
+			try {
+				
+				try {
+					
+					Integer.parseInt(firtsHour.getText());
+					Integer.parseInt(firtsMin.getText());
+					Integer.parseInt(lastHour.getText());
+					Integer.parseInt(lastMin.getText());
+					
+					if(firtsDate.getValue().toString() ComparableTo lastDay.getValue().toString()) {
+						
+					}
+					
+					if(!separator.getText().isEmpty()) {
+						laCasaDorada.exportDataOrders(f.getAbsolutePath(),separator.getText());
+						alert.setContentText("Los pedidos han sido exportados exitosmente!");
+						alert.showAndWait();
+						
+					}else {
+						separator.setText(";");
+						laCasaDorada.exportDataOrders(f.getAbsolutePath(),separator.getText());
+						alert.setContentText("Los pedidos han sido exportados exitosmente!");
+						alert.showAndWait();
+					}
+				}catch(NumberFormatException nfe){
+					alert.setContentText("Tiene que ingresar un número para representar la hora");
+					alert.showAndWait();
+				}
+				  
+			} catch (IOException e) {
+				alert.setContentText("Los pedidos no han sido exportados");
+				alert.showAndWait();
+			}
 		}
 	}
 }

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 
+import javafx.fxml.FXML;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -1226,6 +1228,28 @@ public class LaCasaDorada {
 		}
 		pw.close();
 	}
+	
+	@FXML
+	 public void exportDataOrders(String fileName, String separator) throws FileNotFoundException{
+		 PrintWriter pw = new PrintWriter(fileName+".csv");
+		 
+		 pw.println("CODIGO DEL PEDIDO"+separator+"NOMBRE DEL CLIENTE QUE LO RECIBE"+separator+"DIRECCIÓN"+separator+"TELEFONO"+separator+
+				 "NOMBRE DEL EMPLEADO QUE LO ENTREGA"+separator+"ESTADO DEL PEDIDO"+separator+"FECHA DE CREACIÓN"+separator+"OBSERVACIONES"+separator+
+				 "NOMBRE DEL PRODUCTO"+separator+"CANTIDAD DEL PRODUCTO"+separator+"PRECIO DEL PRODUCTO");
+				 
+		 for(int i=0;i<getOrder().size();i++){
+			 
+			 Order order = getOrder().get(i);
+			 Client client = findObjClient(order.getNameClient());
+			 Employee employee = findEmployee(order.getNameEmployee());
+			 pw.println(order.getCode()+separator+client.getName()+separator+client.getAddress()+separator+client.getTelephone()+separator+
+					 employee.getName()+separator+order.getState()+separator+order.getDateDay()+separator+order.getFieldOfObservations()+separator+
+					 order.getNameProduct()+separator+order.getAmountProduct()+separator+order.getPriceProduct());
+		 }
+
+		    pw.close();
+	 }
+	 
 
 	public void saveData() throws IOException {
 
