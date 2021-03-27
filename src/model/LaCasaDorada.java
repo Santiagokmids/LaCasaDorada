@@ -1196,7 +1196,6 @@ public class LaCasaDorada {
 
 	public void exportData(String fileName) throws FileNotFoundException {
 
-		@SuppressWarnings("resource")
 		PrintWriter pw = new PrintWriter(fileName);
 
 		for (int i = 0; i < people.size(); i++) {
