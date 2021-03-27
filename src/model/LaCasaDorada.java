@@ -1221,7 +1221,7 @@ public class LaCasaDorada{
 
 		while(line != null) {
 
-			String[] parts = line.split(SEPARATOR);
+			String[] parts = line.split(",");
 
 
 			Client client = findObjClient(parts[0]);
