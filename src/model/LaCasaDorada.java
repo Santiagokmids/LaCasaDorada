@@ -53,7 +53,33 @@ public class LaCasaDorada{
 			Modifiers modifiers, State state) throws IOException {
 
 		Client client = new Client(name, lastName, id, address, telephone, fieldObservations, modifiers, state);
-		people.add(client);
+
+
+		if(getClients().isEmpty()) {
+			people.add(client);
+		}
+		else {
+
+			int i = people.size()-1;
+			boolean verify = false;
+
+			while(i > 0 && !verify) {
+				
+				
+				
+				if(people.get(i) instanceof Client) {
+					Client clientToCompare = findObjClient(people.get(i).getName());
+					
+					
+					
+					if(clientToCompare.compareTo(client) > 0) {
+						verify = true;
+					}
+				}
+				i--;
+			}
+			people.add(i,client);
+		}
 		saveData();
 	}
 
@@ -1490,5 +1516,26 @@ public class LaCasaDorada{
 
 		return loaded;
 	}
+	/*
+	public void sortByNameAndLastName() {
 
+		Comparator<Client> nameAndLastNameComparator = new Comparator<Client>() {
+
+			@Override
+			public int compare(Client c1, Client c2) {
+
+				int verific = 0;
+
+				if(c1.getLastName().compareTo(c2.getLastName()) > 0) {
+					verific = 1;
+				}
+				else if(c1.getLastName().compareTo(c2.getLastName()) < 0) {
+					verific = -1;
+				}
+				return verific;
+			}
+		};
+		Collections.sort(client,);
+	}
+	 */
 }
