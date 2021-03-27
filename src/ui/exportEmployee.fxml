@@ -22,7 +22,7 @@
                   <Font name="Bernard MT Condensed" size="36.0" />
                </font>
             </Label>
-            <Button layoutX="206.0" layoutY="461.0" mnemonicParsing="false" onAction="#exportOrders" prefHeight="53.0" prefWidth="193.0" style="-fx-background-color: #dad57c; -fx-background-radius: 22;" text="Exportar Empleados">
+            <Button layoutX="206.0" layoutY="461.0" mnemonicParsing="false" onAction="#exportEmployee" prefHeight="53.0" prefWidth="193.0" style="-fx-background-color: #dad57c; -fx-background-radius: 22;" text="Exportar Empleados">
                <font>
                   <Font name="Franklin Gothic Demi" size="18.0" />
                </font>

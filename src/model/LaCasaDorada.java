@@ -1275,7 +1275,7 @@ public class LaCasaDorada{
 	}
 
 	public void exportDataEmployees(String fileName) throws FileNotFoundException{
-		PrintWriter pw = new PrintWriter(fileName+".csv");
+		PrintWriter pw = new PrintWriter(fileName);
 
 		pw.println("NOMBRE DEL EMPLEADO"+SEPARATOR+"No. DE PEDIDOS ENTREGADOS"+SEPARATOR+"PRECIO TOTAL POR PEDIDOS");
 
@@ -1285,7 +1285,7 @@ public class LaCasaDorada{
 			int amount = findAmountProduct(employee.getName());
 			Double prices = findPricestProduct(employee.getName());
 			
-			pw.println(employee.getName()+SEPARATOR+amount+prices);
+			pw.println(employee.getName()+SEPARATOR+amount+SEPARATOR+prices);
 		}
 
 		pw.close();
@@ -1343,7 +1343,7 @@ public class LaCasaDorada{
 			if(order.get(i).getNameEmployee().equals(employee)) {
 				
 				for (int j = 0; j < order.get(i).getProducts().size(); j++) {
-					double price = (order.get(i).getProducts().get(i).getPrice() * order.get(i).getAmount().get(i));
+					double price = (order.get(i).getProducts().get(j).getPrice() * order.get(i).getAmount().get(j));
 					cont += price;
 				}
 			}

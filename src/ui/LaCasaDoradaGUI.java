@@ -723,29 +723,52 @@ public class LaCasaDoradaGUI{
 
 	@FXML
 	private TextField separator;
-	
+
 	@FXML
-    private DatePicker firtsDate;
+	private DatePicker firtsDate;
 
-    @FXML
-    private DatePicker lastDay;
+	@FXML
+	private DatePicker lastDay;
 
-    @FXML
-    private TextField firtsHour;
+	@FXML
+	private TextField firtsHour;
 
-    @FXML
-    private TextField firtsMin;
+	@FXML
+	private TextField firtsMin;
 
-    @FXML
-    private TextField lastHour;
+	@FXML
+	private TextField lastHour;
 
-    @FXML
-    private TextField lastMin;
+	@FXML
+	private TextField lastMin;
 
+	@FXML
+	private ImageView imageBannerExportEmp;
+
+	@FXML
+	private ImageView imageWallExportEmp;
+
+	@FXML
+	private DatePicker firstDateEmp;
+
+	@FXML
+	private DatePicker lastDayEmp;
+
+	@FXML
+	private TextField firstHourEmp;
+
+	@FXML
+	private TextField firstMinEmp;
+
+	@FXML
+	private TextField lastHourEmp;
+
+	@FXML
+	private TextField lastMinEmp;
 
 	@FXML
 	public Label clock;
-	
+
 	public static ObservableList<Product> listProduct;
 	public static ObservableList<Ingredient> listOfIngredient;
 	public static ObservableList<Order> listOrders;
@@ -762,7 +785,7 @@ public class LaCasaDoradaGUI{
 	public LaCasaDoradaGUI(LaCasaDorada laCasaDorada) {
 		this.laCasaDorada = laCasaDorada;
 	}
-	
+
 	public void inicializateTableViewUsers() {
 
 		listUsers = FXCollections.observableArrayList(laCasaDorada.getUsers());
@@ -917,7 +940,7 @@ public class LaCasaDoradaGUI{
 					alerts.setHeaderText("Se ha registrado exitosamente.");
 					alerts.setContentText("Se ha registrado a "+nameUser.getText()+" exitosamente");
 					alerts.showAndWait();
-					
+
 					laCasaDorada.create(name.getText(), lastName.getText(), id.getText(), nameUser.getText(), password.getText(),null,State.ENABLE);
 
 					loadLogin();
@@ -1014,11 +1037,11 @@ public class LaCasaDoradaGUI{
 				User user = laCasaDorada.findUsersModifiers(txtUser.getText(), txtPassword.getText());
 				User newUser = user;
 				usersModifiers = laCasaDorada.create(user, user);
-				
+
 				if(user.getUsersCreators() == null) {
 					laCasaDorada.deleteUser(user);
 					laCasaDorada.create(newUser.getName(), newUser.getLastName(), newUser.getId(), newUser.getUserName(), newUser.getPassword(), usersModifiers,State.ENABLE);
-					
+
 				}
 				mainMenu();
 
@@ -1820,9 +1843,9 @@ public class LaCasaDoradaGUI{
 			user.setLastName(lastName);
 			user.setId(id);
 			user.setUserName(userName);
-			
+
 			laCasaDorada.saveData();
-			
+
 			listUsers.set(tvUser.getSelectionModel().getSelectedIndex(),new User(name,lastName,id,userName,user.getPassword(),user.getUsersCreators(),State.ENABLE));
 
 			updateName.setText("");
@@ -1900,7 +1923,7 @@ public class LaCasaDoradaGUI{
 			String obsClient= listClient.get(tvClient.getSelectionModel().getSelectedIndex()).getFieldOfObservations();
 
 			Client client = laCasaDorada.findObjClient(name,lastName);
-			
+
 			if(!updateNameClient.getText().isEmpty() && !updateNameClient.getText().equals(name)) {
 				name = updateNameClient.getText();
 				client.getUsersCreators().setLastModifier(usersModifiers.getCreateObject());
@@ -1931,9 +1954,9 @@ public class LaCasaDoradaGUI{
 			client.setId(id);
 			client.setAddress(address);
 			client.setFieldOfObservations(obsClient);
-			
+
 			laCasaDorada.saveData();
-			
+
 			listClient.set(tvClient.getSelectionModel().getSelectedIndex(),new Client(name,lastName,id,address,telephone,obsClient,client.getUsersCreators(),State.ENABLE));
 
 			updateNameClient.setText("");
@@ -2027,7 +2050,7 @@ public class LaCasaDoradaGUI{
 			employee.setName(name);
 			employee.setLastName(lastName);
 			employee.setId(id);
-			
+
 			laCasaDorada.saveData();
 
 			listEmployee.set(tvEmployee.getSelectionModel().getSelectedIndex(),new Employee(name,lastName,id,employee.getUsersCreators(),State.ENABLE));
@@ -2210,7 +2233,7 @@ public class LaCasaDoradaGUI{
 				order.setOrderClient(laCasaDorada.findObjClient(client));
 				order.setOrderEmployee(laCasaDorada.findEmployee(employee));
 				order.setFieldOfObservations(obsOrder);
-				
+
 				laCasaDorada.saveData();
 
 				listOrders.set(tvListOrders.getSelectionModel().getSelectedIndex(),new Order(code,laCasaDorada.findState(state),amounts,
@@ -2329,7 +2352,7 @@ public class LaCasaDoradaGUI{
 					}
 
 					listOfProducts.set(tvListProduct.getSelectionModel().getSelectedIndex(),new Product(name,ingredients,laCasaDorada.findType(type),laCasaDorada.findSize(size),priceNum,product.getUsersCreators(),State.ENABLE));
-					
+
 					laCasaDorada.saveData();
 					updateNameProduct.setText("");
 					updateIngredientProduct.setText("");
@@ -2600,7 +2623,7 @@ public class LaCasaDoradaGUI{
 						alerts.showAndWait();
 						laCasaDorada.deleteClient(client);
 						laCasaDorada.saveData();
-						
+
 						mainMenu();
 
 					}else {
@@ -2679,7 +2702,7 @@ public class LaCasaDoradaGUI{
 							alerts.setHeaderText("Se ha eliminado exitosamente.");
 							alerts.showAndWait();
 							laCasaDorada.saveData();
-							
+
 							laCasaDorada.deleteEmployee(employee);
 							mainMenu();
 						}
@@ -2794,7 +2817,7 @@ public class LaCasaDoradaGUI{
 											alerts.showAndWait();
 											laCasaDorada.deleteUser(user);
 											laCasaDorada.saveData();
-											
+
 											mainMenu();
 										}
 									}
@@ -2874,7 +2897,7 @@ public class LaCasaDoradaGUI{
 						alerts.showAndWait();
 						laCasaDorada.deleteProduct(product);
 						laCasaDorada.saveData();
-						
+
 						mainMenu();
 					}				
 				}
@@ -2946,7 +2969,7 @@ public class LaCasaDoradaGUI{
 						alerts.showAndWait();
 						laCasaDorada.deleteProductType(productType);
 						laCasaDorada.saveData();
-						
+
 						mainMenu();
 					}				
 
@@ -2998,7 +3021,7 @@ public class LaCasaDoradaGUI{
 				Product product = laCasaDorada.findIngredientInProduct(ingredient);
 
 				if(product != null) {
-					
+
 					System.out.println(product.getName());
 
 					Alert alert = new Alert(AlertType.ERROR);
@@ -3022,7 +3045,7 @@ public class LaCasaDoradaGUI{
 						alerts.showAndWait();
 						laCasaDorada.deleteIngredient(ingredient);
 						laCasaDorada.saveData();
-						
+
 						mainMenu();
 					}			
 				}
@@ -3097,7 +3120,7 @@ public class LaCasaDoradaGUI{
 				ingredient.getUsersCreators().setLastModifier(usersModifiers.getCreateObject());
 				ingredient.setName(name);
 			}
-			
+
 			laCasaDorada.saveData();
 
 			listOfIngredient.set(tvListIngredient.getSelectionModel().getSelectedIndex(),new Ingredient(name,ingredient.getUsersCreators(),State.ENABLE));
@@ -3189,7 +3212,7 @@ public class LaCasaDoradaGUI{
 				type.getUsersCreators().setLastModifier(usersModifiers.getCreateObject());
 				type.setName(name);
 			}
-			
+
 			laCasaDorada.saveData();
 
 			listType.set(tvListType.getSelectionModel().getSelectedIndex(),new ProductType(name,type.getUsersCreators(),State.ENABLE));
@@ -3282,7 +3305,7 @@ public class LaCasaDoradaGUI{
 				sizes.getUsersCreators().setLastModifier(usersModifiers.getCreateObject());
 				sizes.setSize(size);
 			}
-			
+
 			laCasaDorada.saveData();
 
 			listSizes.set(tvListSize.getSelectionModel().getSelectedIndex(),new Size(size,sizes.getUsersCreators(),State.ENABLE));
@@ -3361,9 +3384,9 @@ public class LaCasaDoradaGUI{
 					alerts.setHeaderText("Se ha eliminado exitosamente.");
 					alerts.showAndWait();
 					laCasaDorada.deleteOrder(order);
-					
+
 					laCasaDorada.saveData();
-					
+
 					mainMenu();
 
 				}else {
@@ -3498,7 +3521,7 @@ public class LaCasaDoradaGUI{
 				}
 				else {
 					laCasaDorada.disableIngredient(ingredient);
-					
+
 					laCasaDorada.saveData();
 
 					Alert alerts = new Alert(AlertType.INFORMATION);
@@ -3565,7 +3588,7 @@ public class LaCasaDoradaGUI{
 				}
 				else {
 					laCasaDorada.disableSize(size);
-				
+
 					laCasaDorada.saveData();
 
 					Alert alerts = new Alert(AlertType.INFORMATION);
@@ -3632,7 +3655,7 @@ public class LaCasaDoradaGUI{
 				}
 				else {
 					laCasaDorada.disableType(productType);
-					
+
 					laCasaDorada.saveData();
 
 					Alert alerts = new Alert(AlertType.INFORMATION);
@@ -3701,7 +3724,7 @@ public class LaCasaDoradaGUI{
 				else {
 
 					laCasaDorada.disableProduct(product);
-					
+
 					laCasaDorada.saveData();
 
 					Alert alerts = new Alert(AlertType.INFORMATION);
@@ -3767,7 +3790,7 @@ public class LaCasaDoradaGUI{
 				else {
 
 					laCasaDorada.enableClient(client);
-					
+
 					laCasaDorada.saveData();
 
 					Alert alerts = new Alert(AlertType.INFORMATION);
@@ -3833,7 +3856,7 @@ public class LaCasaDoradaGUI{
 				else {
 
 					laCasaDorada.enableOrder(order);
-					
+
 					laCasaDorada.saveData();
 
 					Alert alerts = new Alert(AlertType.INFORMATION);
@@ -3901,7 +3924,7 @@ public class LaCasaDoradaGUI{
 				else {
 
 					laCasaDorada.enableEmployee(employee);
-					
+
 					laCasaDorada.saveData();
 
 					Alert alerts = new Alert(AlertType.INFORMATION);
@@ -3966,7 +3989,7 @@ public class LaCasaDoradaGUI{
 				else {
 
 					laCasaDorada.enableUser(user);
-					
+
 					laCasaDorada.saveData();
 
 					Alert alerts = new Alert(AlertType.INFORMATION);
@@ -4058,7 +4081,7 @@ public class LaCasaDoradaGUI{
 				else {
 
 					laCasaDorada.disableClient(client);
-					
+
 					laCasaDorada.saveData();
 
 					Alert alerts = new Alert(AlertType.INFORMATION);
@@ -4104,7 +4127,7 @@ public class LaCasaDoradaGUI{
 				else {
 
 					laCasaDorada.disableOrder(order);
-					
+
 					laCasaDorada.saveData();
 
 					Alert alerts = new Alert(AlertType.INFORMATION);
@@ -4193,7 +4216,7 @@ public class LaCasaDoradaGUI{
 					else {
 
 						laCasaDorada.disableEmployee(employee);
-						
+
 						laCasaDorada.saveData();
 
 						Alert alerts = new Alert(AlertType.INFORMATION);
@@ -4247,7 +4270,7 @@ public class LaCasaDoradaGUI{
 					else {
 
 						laCasaDorada.disableUser(user);
-						
+
 						laCasaDorada.saveData();
 
 						Alert alerts = new Alert(AlertType.INFORMATION);
@@ -4315,7 +4338,7 @@ public class LaCasaDoradaGUI{
 				}
 				else {
 					laCasaDorada.enableSize(size);
-					
+
 					laCasaDorada.saveData();
 
 					Alert alerts = new Alert(AlertType.INFORMATION);
@@ -4383,7 +4406,7 @@ public class LaCasaDoradaGUI{
 					laCasaDorada.enableIngredient(ingredient);
 
 					laCasaDorada.saveData();
-					
+
 					Alert alerts = new Alert(AlertType.INFORMATION);
 					alerts.setTitle("EXCELENTE");
 					alerts.setHeaderText("Se ha habilitado exitosamente.");
@@ -4449,7 +4472,7 @@ public class LaCasaDoradaGUI{
 				}
 				else {
 					laCasaDorada.enableType(productType);
-					
+
 					laCasaDorada.saveData();
 
 					Alert alerts = new Alert(AlertType.INFORMATION);
@@ -4518,7 +4541,7 @@ public class LaCasaDoradaGUI{
 				else {
 
 					laCasaDorada.enableProduct(product);
-					
+
 					laCasaDorada.saveData();
 
 					Alert alerts = new Alert(AlertType.INFORMATION);
@@ -4546,7 +4569,7 @@ public class LaCasaDoradaGUI{
 			alert.showAndWait();
 		}
 	}
-	
+
 	@FXML
 	public void loadExportOrders(ActionEvent event) throws IOException {
 
@@ -4570,48 +4593,130 @@ public class LaCasaDoradaGUI{
 		lastDay.setValue(today);
 		lastDay.setDisable(true);
 	}
-	
+
 	@FXML
 	public void exportOrders(ActionEvent event) {
-		
+
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Abrir archivo de recursos");
 		File f = fileChooser.showSaveDialog(mainPane.getScene().getWindow());
-		  
+
 		if(f != null) {
-			
+
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Exportar Pedidos");
-			  
+			
+			Alert alert1 = new Alert(AlertType.ERROR);
+			alert1.setTitle("Exportar Pedidos");
+
 			try {
 
 				try {
-					
+
 					Integer.parseInt(firtsHour.getText());
 					Integer.parseInt(firtsMin.getText());
 					Integer.parseInt(lastHour.getText());
 					Integer.parseInt(lastMin.getText());
-					
-					if(!separator.getText().isEmpty()) {
-						laCasaDorada.exportDataOrders(f.getAbsolutePath(),separator.getText());
-						alert.setContentText("Los pedidos han sido exportados exitosmente!");
-						alert.showAndWait();
+
+					if(firtsDate.getValue() != null) {
+						
+						if(!separator.getText().isEmpty()) {
+							laCasaDorada.exportDataOrders(f.getAbsolutePath(),separator.getText());
+							alert.setContentText("Los pedidos han sido exportados exitosmente!");
+							alert.showAndWait();
+
+						}else {
+							separator.setText(";");
+							laCasaDorada.exportDataOrders(f.getAbsolutePath(),separator.getText());
+							alert.setContentText("Los pedidos han sido exportados exitosmente!");
+							alert.showAndWait();
+						}
 						
 					}else {
-						separator.setText(";");
-						laCasaDorada.exportDataOrders(f.getAbsolutePath(),separator.getText());
-						alert.setContentText("Los pedidos han sido exportados exitosmente!");
-						alert.showAndWait();
+						alert1.setContentText("Tiene que ingresar una fecha inicial");
+						alert1.showAndWait();
 					}
+
 				}catch(NumberFormatException nfe){
-					Alert alert1 = new Alert(AlertType.ERROR);
-					alert1.setTitle("Exportar Pedidos");
+					
 					alert1.setContentText("Tiene que ingresar un número para representar la hora");
 					alert1.showAndWait();
 				}
-				  
+
 			} catch (IOException e) {
 				alert.setContentText("Los pedidos no han sido exportados");
+				alert.showAndWait();
+			}
+		}
+	}
+
+	@FXML
+	public void loadExportEmployee(ActionEvent event) throws IOException {
+
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("exportEmployee.fxml"));
+
+		loader.setController(this);
+
+		Parent load = loader.load();
+		mainPane.setCenter(load);
+
+		mainPane.getChildren().clear();
+		mainPane.setTop(load);
+
+		Image image = new Image("/images/Banner.jpg");
+		imageWallExportEmp.setImage(image);
+		Image image2 = new Image("/images/BannerCasaDorada.jpg");
+		imageBannerExportEmp.setImage(image2);
+
+		LocalDate today = LocalDate.now();
+
+		lastDayEmp.setValue(today);
+		lastDayEmp.setDisable(true);
+	}
+
+	@FXML
+	public void exportEmployee(ActionEvent event) {
+
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Abrir archivo de recursos");
+		File f = fileChooser.showSaveDialog(mainPane.getScene().getWindow());
+
+		if(f != null) {
+
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Exportar Empleados");
+			
+			Alert alert1 = new Alert(AlertType.ERROR);
+			alert1.setTitle("Exportar Empleados");
+
+			try {
+
+				try {
+					
+					if(firstDateEmp.getValue() != null) {
+
+						Integer.parseInt(firstHourEmp.getText());
+						Integer.parseInt(firstMinEmp.getText());
+						Integer.parseInt(lastHourEmp.getText());
+						Integer.parseInt(lastMinEmp.getText());
+
+						laCasaDorada.exportDataEmployees(f.getAbsolutePath());
+						alert.setContentText("Los empleados han sido exportados exitosmente!");
+						alert.showAndWait();
+						
+					}else {
+						alert1.setContentText("Tiene que ingresar una fecha inicial");
+						alert1.showAndWait();
+					}
+
+				}catch(NumberFormatException nfe){
+					
+					alert1.setContentText("Tiene que ingresar un número para representar la hora");
+					alert1.showAndWait();
+				}
+
+			} catch (IOException e) {
+				alert.setContentText("Los empleados no han sido exportados");
 				alert.showAndWait();
 			}
 		}
