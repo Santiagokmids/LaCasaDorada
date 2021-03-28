@@ -1647,19 +1647,21 @@ public class LaCasaDorada{
 		}
 	}
 
-	public int binarySearch(Client clientToSearch) {
+	public Client binarySearch(String name, String lastName) {
 		
 		ArrayList<Client> listClient = getClients();
 		
 		int pos = -1;
 		int i = 0;
 		int j = listClient.size()-1;
+		Client client = null;
 		
 		while(i <= j && pos < 0) {
 			int m = (i+j)/2;
 			
 			if(i == 0) {
 				pos = m;
+				client = getClients().get(pos);
 			}
 			else if(i == 0) {
 				j = m-1;
@@ -1669,6 +1671,6 @@ public class LaCasaDorada{
 			}
 		}
 		
-		return pos;
+		return client;
 	}
 }

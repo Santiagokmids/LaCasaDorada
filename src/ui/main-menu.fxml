@@ -65,6 +65,11 @@
                   <MenuItem mnemonicParsing="false" onAction="#loadEnableSize" text="Tamaño de producto" />
                </items>
             </Menu>
+            <Menu mnemonicParsing="false" text="Buscar">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#loadSearchClient" text="Cliente" />
+               </items>
+            </Menu>
             <Menu mnemonicParsing="false" text="Listar y Actualizar">
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#listClient" text="Cliente" />

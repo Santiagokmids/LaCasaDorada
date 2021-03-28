@@ -45,6 +45,18 @@ import model.StateOrder;
 import model.User;
 
 public class LaCasaDoradaGUI{
+	
+	@FXML
+    private ImageView imageWallSearch;
+
+    @FXML
+    private TextField nameSearchClient;
+
+    @FXML
+    private TextField lastNameSearchClient;
+
+    @FXML
+    private ImageView imageBannerSearch;
 
 	@FXML
 	private ImageView imageBannerExportProduct;
@@ -966,7 +978,7 @@ public class LaCasaDoradaGUI{
 					alerts.showAndWait();
 
 					laCasaDorada.create(name.getText(), lastName.getText(), id.getText(), nameUser.getText(), password.getText(),null,State.ENABLE);
-
+					
 					loadLogin();
 
 				}else {
@@ -4893,5 +4905,56 @@ public class LaCasaDoradaGUI{
 			}
 		}
 	}
+	
+	@FXML
+	public void loadSearchClient(ActionEvent event) throws IOException {
 
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("searchClient-pane.fxml"));
+
+		loader.setController(this);
+
+		Parent load = loader.load();
+		mainPane.setCenter(load);
+
+		mainPane.getChildren().clear();
+		mainPane.setTop(load);
+
+		Image image = new Image("/images/Banner.jpg");
+		imageWallSearch.setImage(image);
+		Image image2 = new Image("/images/BannerCasaDorada.jpg");
+		imageBannerSearch.setImage(image2);
+	}
+	
+	@FXML
+	public void searchClient(ActionEvent event) {
+
+		if(!nameSearchClient.getText().isEmpty() && !lastNameSearchClient.getText().isEmpty()) {
+			
+			Client client = laCasaDorada.binarySearch(nameSearchClient.getText(), lastNameSearchClient.getText());
+			
+			if(client == null) {
+				
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("ERROR");
+				alert.setHeaderText("No se encontró el cliente");
+				alert.setContentText("El Cliente que está buscando no se encuentra registrado");
+				alert.showAndWait();
+			}
+			else {
+				
+				Alert alert1 = new Alert(AlertType.INFORMATION);
+				alert1.setHeaderText("Búsqueda realizada en "+" nanosegundos");
+				alert1.setContentText("Cliente encontrado: \n"+"Nombre: "+client.getName()+"\nApellido: "+client.getLastName()+"\nNo. Identificación: "+client.getId()+"\nDirección: "+client.getAddress()+"\nTeléfono: "+client.getTelephone()+"\nObservaciones: "+client.getFieldOfObservations());
+				alert1.showAndWait();
+			}
+			
+		}
+		else {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("ERROR");
+			alert.setHeaderText("No se pudo buscar el cliente");
+			alert.setContentText("Debe llenar los campos para buscar el cliente");
+			alert.showAndWait();
+		}
+	}
 }
