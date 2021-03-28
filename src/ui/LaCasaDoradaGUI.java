@@ -2172,6 +2172,8 @@ public class LaCasaDoradaGUI{
 		for (int i = 0; i < size.size(); i++) {
 			comboSizeProduct.getItems().addAll(size.get(i).getSize());
 		}
+		
+		laCasaDorada.insertionSort();
 
 		inicializateTableViewProduct();
 	}
@@ -2376,7 +2378,12 @@ public class LaCasaDoradaGUI{
 
 					listOfProducts.set(tvListProduct.getSelectionModel().getSelectedIndex(),new Product(name,ingredients,laCasaDorada.findType(type),laCasaDorada.findSize(size),priceNum,product.getUsersCreators(),State.ENABLE));
 
+					laCasaDorada.insertionSort();
+					
+					inicializateTableViewProduct();
+					
 					laCasaDorada.saveData();
+					
 					updateNameProduct.setText("");
 					updateIngredientProduct.setText("");
 					updateTypeProduct.setValue("");
@@ -4852,6 +4859,37 @@ public class LaCasaDoradaGUI{
 
 			} catch (IOException e) {
 				alert.setContentText("Los clientes no pudieron ser importados.");
+				alert.showAndWait();
+			}
+		}
+	}
+	
+	@FXML
+	public void importProducts(ActionEvent event) {
+
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Abrir un archivo");
+		File f = fileChooser.showOpenDialog(mainPane.getScene().getWindow());
+
+		if(f != null) {
+
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Importar Productos");
+
+			try {
+
+				Alert alert1 = new Alert(AlertType.CONFIRMATION);
+				alert1.setTitle("Importando Productos");
+				alert1.setContentText("Por favor espere...");
+				alert1.showAndWait();
+
+				laCasaDorada.importDataProduct(f.getAbsolutePath(),usersModifiers);
+				alert1.close();
+				alert.setContentText("Los Productos han sido importados correctamente.");
+				alert.showAndWait();
+
+			} catch (IOException e) {
+				alert.setContentText("Los Productos no pudieron ser importados.");
 				alert.showAndWait();
 			}
 		}
