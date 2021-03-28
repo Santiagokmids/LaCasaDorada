@@ -65,13 +65,9 @@ public class LaCasaDorada{
 
 			while(i > 0 && !verify) {
 				
-				
-				
 				if(people.get(i) instanceof Client) {
 					Client clientToCompare = findObjClient(people.get(i).getName());
-					
-					
-					
+																				
 					if(clientToCompare.compareTo(client) > 0) {
 						verify = true;
 					}
@@ -122,27 +118,11 @@ public class LaCasaDorada{
 		preorder.add(preOrder);
 	}
 
-	//Update Ingredient
-	public void update(String name, int index) {
-		ingredient.get(index).setName(name);
-	}
-
 	//Create type product
 	public void createTypeProduct(String name, Modifiers userModifiers, State state) {
 
 		ProductType typeProduct = new ProductType(name, userModifiers,state);
 		productType.add(typeProduct);
-	}
-
-	//change people
-	public boolean setState(String id) {
-		boolean state = false;
-		int pos = findPosition(id);
-		if(pos != -1) {
-			people.get(pos).setState(State.DISABLED);
-			state = true;
-		}
-		return state;
 	}
 
 	//Create Modifiers
@@ -1221,12 +1201,33 @@ public class LaCasaDorada{
 
 			String[] parts = line.split(",");
 
+			State state = findStates(parts[7]);
 
-			Client client = findObjClient(parts[0]);
+			create(parts[0],parts[1],parts[2],parts[3],parts[4],parts[5],null,state);
+			line = br.readLine();
+		}
+
+		br.close();
+	}
+	
+	
+	public void importDataProduct(String fileName) throws IOException {
+
+		BufferedReader br = new BufferedReader(new FileReader(fileName));
+		String line = br.readLine();
+
+		while(line != null) {
+
+			String[] parts = line.split(",");
+			
+			//String[] ingredients = parts[1].split("-");
+
+			Product product = findObjectProduct(parts[0]);
 
 			State state = findStates(parts[6]);
+			
 
-			create(parts[0],parts[1],parts[2],parts[3],parts[4],parts[5],client.getUsersCreators(),state);
+			create(parts[0],parts[1],parts[2],parts[3],parts[4],parts[5],product.getUsersCreators(),state);
 			line = br.readLine();
 		}
 
@@ -1316,7 +1317,7 @@ public class LaCasaDorada{
 			
 			for (int i = 0; i < order.get(j).getProducts().size(); i++) {
 				
-				if(order.get(j).getProducts().get(i).getName().equals(productToFind.getName()) && order.get(j).getProducts().get(i).getNameSize().equals(productToFind.getNameSize())) {
+				if(order.get(j).getState() == StateOrder.ENTREGADO && order.get(j).getProducts().get(i).getName().equals(productToFind.getName()) && order.get(j).getProducts().get(i).getNameSize().equals(productToFind.getNameSize())) {
 					
 					numProduct += order.get(j).getAmount().get(j);
 				}
@@ -1574,4 +1575,6 @@ public class LaCasaDorada{
 		Collections.sort(client,);
 	}
 	 */
+	
+	
 }
