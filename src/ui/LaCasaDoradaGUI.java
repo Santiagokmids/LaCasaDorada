@@ -4622,7 +4622,6 @@ public class LaCasaDoradaGUI{
 		lastDay.setDisable(true);
 	}
 
-	@SuppressWarnings("deprecation")
 	@FXML
 	public void exportOrders(ActionEvent event) {
 
