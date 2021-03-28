@@ -36,6 +36,8 @@ public class Main extends Application {
 			    alert.setContentText("Error cargando el archivo");
 			    alert.showAndWait();
 			}
+			
+			loadInformation = false;
 		}
 		
 		

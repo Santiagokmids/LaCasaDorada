@@ -71,7 +71,7 @@ public class LaCasaDorada{
 				if(people.get(i) instanceof Client) {
 					Client clientToCompare = findObjClient(people.get(i).getName());
 					
-					if(clientToCompare.compareTo(client) < 0) {
+					if(clientToCompare.compareTo(client) > 0) {
 						System.out.println("entra");
 						verify = true;
 					}
