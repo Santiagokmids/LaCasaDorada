@@ -43,11 +43,6 @@ public class Client extends People implements Comparable<Client>{
 
 	@Override
 	public int compareTo(Client oC) {
-		
-		int verify = getLastName().compareTo(oC.getLastName())*(-1);
-		
-		System.out.println(verify);
-		
-		return verify;
+		return getLastName().compareTo(oC.getLastName())*(-1);
 	}
 }

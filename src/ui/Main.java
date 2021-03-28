@@ -18,26 +18,27 @@ public class Main extends Application {
 	
 	public Main() {
 		
-		boolean loadInformation;
+		boolean loadInformation = true;
 		laCasaDorada = new LaCasaDorada();
 		laCasaDoradaGUI = new LaCasaDoradaGUI(laCasaDorada);
 		
 		try {
+			
 			loadInformation = laCasaDorada.loadData();
 			
 		} catch (ClassNotFoundException | IOException e) {
 			e.printStackTrace();
-			loadInformation = false;
+			if(!loadInformation) {
+				
+				Alert alert = new Alert(AlertType.INFORMATION);
+				
+			    alert.setTitle("La Casa Dorada");
+			    alert.setContentText("Error cargando el archivo");
+			    alert.showAndWait();
+			}
 		}
 		
-		if(!loadInformation) {
-			
-			Alert alert = new Alert(AlertType.INFORMATION);
-			
-		    alert.setTitle("La Casa Dorada");
-		    alert.setContentText("Error cargando el archivo");
-		    alert.showAndWait();
-		}
+		
 	}
 	
 	public static void main(String[] args) {

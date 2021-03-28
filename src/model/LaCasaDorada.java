@@ -1,7 +1,10 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 import java.io.BufferedReader;
@@ -60,23 +63,20 @@ public class LaCasaDorada{
 		}
 		else {
 
-			int i = people.size()-1;
+			int i = 0;
 			boolean verify = false;
 
 			while(i > 0 && !verify) {
 				
-				
-				
 				if(people.get(i) instanceof Client) {
 					Client clientToCompare = findObjClient(people.get(i).getName());
 					
-					
-					
-					if(clientToCompare.compareTo(client) > 0) {
+					if(clientToCompare.compareTo(client) < 0) {
+						System.out.println("entra");
 						verify = true;
 					}
 				}
-				i--;
+				i++;
 			}
 			people.add(i,client);
 		}
@@ -1173,9 +1173,7 @@ public class LaCasaDorada{
 		for (int i = 0; i < product.size() && !verific; i++) {
 			for (int j = 0; j < product.get(i).getIngredients().size() && !verific; j++) {
 
-				System.out.println(product.get(i).getIngredients().get(j).getName()+"    "+ingredientToFind.getName());
 				if(product.get(i).getIngredients().get(j).getName().equals(ingredientToFind.getName())) {
-					System.out.println("XDXDXD");
 					verific = true;
 					ingredientInProduct = product.get(i);
 				}
@@ -1212,7 +1210,7 @@ public class LaCasaDorada{
 		return states;
 	}
 
-	public void importData(String fileName) throws IOException {
+	public void importDataClient(String fileName, Modifiers nameUserCreators) throws IOException {
 
 		BufferedReader br = new BufferedReader(new FileReader(fileName));
 		String line = br.readLine();
@@ -1221,12 +1219,30 @@ public class LaCasaDorada{
 
 			String[] parts = line.split(",");
 
-
-			Client client = findObjClient(parts[0]);
-
 			State state = findStates(parts[6]);
 
-			create(parts[0],parts[1],parts[2],parts[3],parts[4],parts[5],client.getUsersCreators(),state);
+			create(parts[0],parts[1],parts[2],parts[3],parts[4],parts[5],nameUserCreators,state);
+			line = br.readLine();
+		}
+
+		br.close();
+	}
+	
+	public void importDataOrder(String fileName,Modifiers nameUserCreators) throws IOException {
+
+		BufferedReader br = new BufferedReader(new FileReader(fileName));
+		String line = br.readLine();
+
+		while(line != null) {
+
+			String[] parts = line.split(",");
+
+			State state = findStates(parts[6]);
+			
+		//	 create(StateOrder state, ArrayList<Integer> amount, Date date, String fieldOfObservations, Client orderClient,
+			//			ArrayList<Product>products, Employee ordEmployee, Modifiers userModifiers) 
+
+			create(parts[0],parts[1],parts[2],parts[3],parts[4],parts[5],nameUserCreators,state);
 			line = br.readLine();
 		}
 
@@ -1552,26 +1568,27 @@ public class LaCasaDorada{
 
 		return loaded;
 	}
-	/*
-	public void sortByNameAndLastName() {
+	
+	/*public void sortByNameAndLastName() {
 
 		Comparator<Client> nameAndLastNameComparator = new Comparator<Client>() {
 
-			@Override
 			public int compare(Client c1, Client c2) {
 
 				int verific = 0;
-
+				
 				if(c1.getLastName().compareTo(c2.getLastName()) > 0) {
 					verific = 1;
+					System.out.println(verific+"uno");
 				}
 				else if(c1.getLastName().compareTo(c2.getLastName()) < 0) {
 					verific = -1;
+					System.out.println(verific+" doddss");
 				}
 				return verific;
 			}
 		};
-		Collections.sort(client,);
-	}
-	 */
+		Collections.sort(getClients(),nameAndLastNameComparator);
+	}*/
+	 
 }
