@@ -1285,6 +1285,8 @@ public class LaCasaDorada{
 
 		BufferedReader br = new BufferedReader(new FileReader(fileName));
 		String line = br.readLine();
+		
+		System.out.println("xd");
 
 		while(line != null) {
 
@@ -1292,22 +1294,42 @@ public class LaCasaDorada{
 
 			StateOrder stateOrder = findState(parts[1]);
 
-			String[] productsSplit1 = parts[5].split("-");
+			String[] productsSplit1 = parts[6].split("-");
+			
+			System.out.println(productsSplit1.length+" p");
+			
+			System.out.println(parts[6]);
 
+			System.out.println(parts[2]);
+			
 			String[] amountSplit = parts[2].split("-");
+			
+			System.out.println(amountSplit.length+" a");
 
 			ArrayList<Integer> amountOrder = arrayAmount(amountSplit);
 
 			ArrayList<Product> productsOrder = arrayProducts(productsSplit1);
+			
+			System.out.println(amountOrder.size()+" listA");
+			
+			System.out.println(productsOrder.size()+" listP");
 
+			System.out.println("Más antes");
+			
 			if(amountOrder.size() == productsOrder.size()) {
-				Client client = findObjClient(parts[4]);
+				Client client = findObjClient(parts[5]);
 				Employee employee = findEmployee(parts[7]);
 				Date date = convertDate(parts[3]);
 				
 				boolean validation = findOrders(parts[0]);
-
+				
+				System.out.println("Antes");
+				
+				System.out.println(validation+" "+client.getName()+" "+employee.getName());
+				
 				if(!validation && client != null && employee != null) {
+					
+					System.out.println("Después");
 
 					create(parts[0],stateOrder,amountOrder,date,parts[4],client,
 							productsOrder,employee,nameUserCreators);
@@ -1331,26 +1353,17 @@ public class LaCasaDorada{
 		}
 		return fechaDate;
 	}
-	
-	public String findCode(String code) {
-
-		String verify = "";
-
-		return verify;
-	}
 
 	public ArrayList<Product> arrayProducts(String[] productArray) {
 
 		ArrayList<Product> newArrayproduct = new ArrayList<>();
-		boolean verify = true;
 		for (int i = 0; i < productArray.length; i++) {
 			
-			for (int j = 0; j < getProduct().size() && verify; j++) {
+			for (int j = 0; j < getProduct().size(); j++) {
 				
 				if(getProduct().get(i).getName().equalsIgnoreCase(productArray[j].toString())) {
 					Product product = findProducts(productArray[j]);
 					newArrayproduct.add(product);
-					verify = false;
 				}
 			}
 		}
