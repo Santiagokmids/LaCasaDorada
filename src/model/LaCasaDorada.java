@@ -111,27 +111,11 @@ public class LaCasaDorada{
 		preorder.add(preOrder);
 	}
 
-	//Update Ingredient
-	public void update(String name, int index) {
-		ingredient.get(index).setName(name);
-	}
-
 	//Create type product
 	public void createTypeProduct(String name, Modifiers userModifiers, State state) {
 
 		ProductType typeProduct = new ProductType(name, userModifiers,state);
 		productType.add(typeProduct);
-	}
-
-	//change people
-	public boolean setState(String id) {
-		boolean state = false;
-		int pos = findPosition(id);
-		if(pos != -1) {
-			people.get(pos).setState(State.DISABLED);
-			state = true;
-		}
-		return state;
 	}
 
 	//Create Modifiers
@@ -1251,6 +1235,63 @@ public class LaCasaDorada{
 		br.close();
 	}
 
+	public void importDataProduct(String fileName, Modifiers nameUserCreators) throws IOException {
+
+		BufferedReader br = new BufferedReader(new FileReader(fileName));
+		String line = br.readLine();
+
+		while(line != null) {
+
+			String[] parts = line.split(",");
+
+			String[] ingredientsParts = parts[1].split("-");
+			
+			double price = 0;
+
+			ArrayList<Ingredient> ingredientsSplit = convertToArray(ingredientsParts);
+			
+			if(findType(parts[2]) == null) {
+				createTypeProduct(parts[2],nameUserCreators,State.ENABLE);
+			}
+			
+			ProductType newProductType = findType(parts[2]);
+			
+			if(!findSizes(parts[3])) {
+				createSize(parts[3],nameUserCreators,State.ENABLE);
+			}
+			
+			Size newSize = findSize(parts[3]);
+			
+			try {
+				price = Double.parseDouble(parts[4]);
+			} catch (NumberFormatException e) {
+			}
+
+			State state = findStates(parts[6]);
+
+			create(parts[0],ingredientsSplit,newProductType,newSize,price,nameUserCreators,state);
+			line = br.readLine();
+		}
+
+		br.close();
+	}
+
+	public ArrayList<Ingredient> convertToArray(String [] arrayToConvert) throws IOException{
+
+		ArrayList<Ingredient> newArray = new ArrayList<>();
+
+		for (int i = 0; i < arrayToConvert.length; i++) {
+
+			create(arrayToConvert[i],null,State.ENABLE);
+
+			Ingredient newIngredient = findIngredient(arrayToConvert[i]);
+
+			newArray.add(newIngredient);
+		}
+
+		return newArray;
+	}
+
 	public void exportData(String fileName) throws FileNotFoundException {
 
 		PrintWriter pw = new PrintWriter(fileName);
@@ -1572,6 +1613,9 @@ public class LaCasaDorada{
 	}
 
 	/*public void sortByNameAndLastName() {
+=======
+	public void sortByNameAndLastName() {
+>>>>>>> 68de6831589d5e8040a63605c878f9d8c8ce552d
 
 		Comparator<Client> nameAndLastNameComparator = new Comparator<Client>() {
 
@@ -1587,10 +1631,52 @@ public class LaCasaDorada{
 					verific = -1;
 					System.out.println(verific+" doddss");
 				}
+				else if(c1.getLastName().compareTo(c2.getLastName()) == 0) {
+					
+				}
 				return verific;
 			}
 		};
 		Collections.sort(getClients(),nameAndLastNameComparator);
 	}*/
 
+	public void insertionSort() {
+
+		for (int i = 1; i < product.size(); i++) {
+			for (int j = i; j > 0 && product.get(j-1).getPrice() > product.get(j).getPrice(); j--) {
+
+				Product temp = product.get(j);
+
+				product.set(j, product.get(j-1));
+				product.set(j-1,temp);
+			}
+		}
+	}
+
+	public Client binarySearch(String name, String lastName) {
+		
+		ArrayList<Client> listClient = getClients();
+		
+		int pos = -1;
+		int i = 0;
+		int j = listClient.size()-1;
+		Client client = null;
+		
+		while(i <= j && pos < 0) {
+			int m = (i+j)/2;
+			
+			if(i == 0) {
+				pos = m;
+				client = getClients().get(pos);
+			}
+			else if(i == 0) {
+				j = m-1;
+			}
+			else {
+				i = m+1;
+			}
+		}
+		
+		return client;
+	}
 }
