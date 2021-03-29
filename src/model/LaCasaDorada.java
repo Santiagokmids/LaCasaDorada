@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -1352,17 +1353,26 @@ public class LaCasaDorada{
 	public void exportDataProduct(String fileName) throws FileNotFoundException{
 
 		PrintWriter pw = new PrintWriter(fileName);
+		
+		int totalProduct = 0;
+		int totalSell = 0;
 
-		pw.println("PRODUCTO"+SEPARATOR+"No. DE PRODUCTOS COMPRADOS"+SEPARATOR+"TOTAL PAGADO");
+		pw.println("PRODUCTO"+SEPARATOR+"No. DE PRODUCTOS VENDIDOS"+SEPARATOR+"TOTAL VENDIDO POR PRODUCTO");
 
 		for(int i = 0; i < product.size();i++){
 
 			Product productList = product.get(i);
 
 			double numProduct = sizeProductOrder(productList);
+			
+			totalProduct += numProduct;
+			totalSell += numProduct*productList.getPrice();
 
 			pw.println(productList.getName()+" "+productList.getNameSize()+SEPARATOR+numProduct+SEPARATOR+(numProduct*productList.getPrice()));
 		}
+		
+		pw.println("No. DE PRODUCTOS VENDIDOS EN TOTAL "+SEPARATOR+"TOTAL VENDIDO");
+		pw.println(totalProduct+SEPARATOR+totalSell);
 
 		pw.close();
 	}
@@ -1624,6 +1634,17 @@ public class LaCasaDorada{
 			}
 		}
 	}
+	
+	public void sortByPriceProduct() {
+		Comparator<Product> priceProductComparator = new Comparator<Product>() {
+			
+			@Override
+			public int compare(Product product1,Product product2) {
+				return Double.compare(product1.getPrice(), product2.getPrice())*(-1);
+			}
+		};
+		Collections.sort(product,Collections.reverseOrder(priceProductComparator));
+	}
 
 	public Client binarySearch(String name, String lastName) {
 		
@@ -1637,18 +1658,18 @@ public class LaCasaDorada{
 		while(i <= j && pos < 0) {
 			int m = (i+j)/2;
 			
-			if(i == 0) {
+			if(listClient.get(m).compare(lastName, name) == 0) {
 				pos = m;
-				client = getClients().get(pos);
+				
+				client = listClient.get(pos);
 			}
-			else if(i == 0) {
+			else if(listClient.get(m).compare(lastName, name) > 0) {
 				j = m-1;
 			}
 			else {
 				i = m+1;
 			}
 		}
-		
 		return client;
 	}
 }

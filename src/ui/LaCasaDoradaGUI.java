@@ -2185,7 +2185,7 @@ public class LaCasaDoradaGUI{
 			comboSizeProduct.getItems().addAll(size.get(i).getSize());
 		}
 		
-		laCasaDorada.insertionSort();
+		laCasaDorada.sortByPriceProduct();
 
 		inicializateTableViewProduct();
 	}
@@ -4926,7 +4926,10 @@ public class LaCasaDoradaGUI{
 
 		if(!nameSearchClient.getText().isEmpty() && !lastNameSearchClient.getText().isEmpty()) {
 			
+			
+			long start = System.nanoTime();
 			Client client = laCasaDorada.binarySearch(nameSearchClient.getText(), lastNameSearchClient.getText());
+			long end = System.nanoTime();
 			
 			if(client == null) {
 				
@@ -4939,9 +4942,12 @@ public class LaCasaDoradaGUI{
 			else {
 				
 				Alert alert1 = new Alert(AlertType.INFORMATION);
-				alert1.setHeaderText("Búsqueda realizada en "+" nanosegundos");
+				alert1.setHeaderText("Búsqueda realizada en "+(end-start)+" nanosegundos");
 				alert1.setContentText("Cliente encontrado: \n"+"Nombre: "+client.getName()+"\nApellido: "+client.getLastName()+"\nNo. Identificación: "+client.getId()+"\nDirección: "+client.getAddress()+"\nTeléfono: "+client.getTelephone()+"\nObservaciones: "+client.getFieldOfObservations());
 				alert1.showAndWait();
+				
+				nameSearchClient.setText("");
+				lastNameSearchClient.setText("");
 			}
 			
 		}

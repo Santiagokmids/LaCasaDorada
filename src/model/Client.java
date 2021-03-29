@@ -40,6 +40,10 @@ public class Client extends People {
 	public void setFieldOfObservations(String fieldOfObservations) {
 		this.fieldOfObservations = fieldOfObservations;
 	}
+	
+	public String toString() {
+		return getName()+" "+getLastName();
+	}
 
 	@Override
 	public int compareTo(Client c1) {
@@ -48,6 +52,17 @@ public class Client extends People {
 			
 		if(verify == 0) {
 			verify = getName().compareTo(c1.getName());
+		}
+		
+		return verify;
+	}
+	
+	public int compare(String lastName, String name) {
+		
+		int verify = getLastName().compareTo(lastName);
+			
+		if(verify == 0) {
+			verify = getName().compareTo(name);
 		}
 		
 		return verify;
