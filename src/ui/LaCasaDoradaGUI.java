@@ -4885,12 +4885,13 @@ public class LaCasaDoradaGUI{
 
 			try {
 
-				Alert alert1 = new Alert(AlertType.CONFIRMATION);
+				Alert alert1 = new Alert(AlertType.NONE);
 				alert1.setTitle("Importando Productos");
 				alert1.setContentText("Por favor espere...");
 				alert1.showAndWait();
 
 				laCasaDorada.importDataProduct(f.getAbsolutePath(),usersModifiers);
+				
 				alert1.close();
 				alert.setContentText("Los Productos han sido importados correctamente.");
 				alert.showAndWait();

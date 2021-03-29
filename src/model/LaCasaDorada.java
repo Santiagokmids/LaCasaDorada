@@ -1256,17 +1256,17 @@ public class LaCasaDorada{
 			String[] productsSplit1 = parts[5].split("-");
 
 			String[] amountSplit = parts[2].split("-");
-			
+
 			ArrayList<Integer> amountOrder = arrayAmount(amountSplit);
 
 			ArrayList<Product> productsOrder = arrayProducts(productsSplit1);
-			
+
 			Client client = findObjClient(parts[4]);
-			
+
 			String code = findCode(parts[0]);
-			
+
 			Employee employee = findEmployee(parts[7]);
-			
+
 			Date date = findDate(parts[3]);
 
 			create(code,stateOrder,amountOrder,date,parts[4],client,productsOrder,employee,nameUserCreators);
@@ -1275,11 +1275,11 @@ public class LaCasaDorada{
 
 		br.close();
 	}
-	
+
 	public String findCode(String code) {
-		
+
 		String verify = "";
-		
+
 		return verify;
 	}
 
@@ -1293,9 +1293,9 @@ public class LaCasaDorada{
 
 		return newArrayproduct;
 	}
-	
+
 	public ArrayList<Integer> arrayAmount(String[] amountArray) {
-		
+
 		ArrayList<Integer> newArrayAmount = new ArrayList<>();
 
 

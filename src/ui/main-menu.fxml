@@ -85,7 +85,7 @@
             <Menu mnemonicParsing="false" text="Importar">
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#importClients" text="Clientes" />
-                  <MenuItem mnemonicParsing="false" text="Pedidos" />
+                  <MenuItem mnemonicParsing="false" onAction="#importOrders" text="Pedidos" />
                   <MenuItem mnemonicParsing="false" onAction="#importProducts" text="Productos" />
                </items>
             </Menu>
