@@ -50,4 +50,8 @@ public class Ingredient implements Serializable{
 	public void setState(State state) {
 		this.state = state;
 	}
+
+	public int compareTo(Ingredient ingredient) {
+		return getName().compareTo(ingredient.getName());
+	}
 }

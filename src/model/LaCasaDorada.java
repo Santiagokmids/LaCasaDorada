@@ -93,7 +93,29 @@ public class LaCasaDorada{
 	public void create(String name, Modifiers userModifiers, State state) throws IOException {
 
 		Ingredient ingredients = new Ingredient(name, userModifiers,state);
-		ingredient.add(ingredients);
+
+
+		if(ingredient.isEmpty()) {
+			ingredient.add(ingredients);
+		}
+		else {
+
+			int i = 0;
+			boolean verify = false;
+
+			while(i < ingredient.size() && !verify) {
+
+				Ingredient ingredient = findIngredient(getIngredient().get(i).getName());
+
+				if(ingredients.compareTo(ingredient) >= 0) {
+					verify = true;
+				}else {
+					i++;
+				}
+			}
+			ingredient.add(i,ingredients);
+		}
+
 		saveData();
 	}
 
