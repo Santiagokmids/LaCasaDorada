@@ -148,7 +148,7 @@ public class LaCasaDorada{
 		
 		for (int i = 0; i < productType.size()-1; i++) {
 			ProductType productT = productType.get(i);
-			System.out.println("i"+i+" size"+productType.size());
+
 			for (int j = i+1; j < productType.size(); j++) {
 
 				if(productType.get(j).compareTo(productT) < 0) {
@@ -1302,13 +1302,12 @@ public class LaCasaDorada{
 			
 			if(amountOrder.size() == productsOrder.size()) {
 				Client client = findObjClient(parts[4]);
-
+				Employee employee = findEmployee(parts[7]);
+				Date date = convertDate(parts[3]);
+				
 				boolean validation = findOrders(parts[0]);
 
-				if(!validation) {
-					Employee employee = findEmployee(parts[7]);
-
-					Date date = convertDate(parts[3]);
+				if(!validation && client != null && employee != null) {
 
 					create(parts[0],stateOrder,amountOrder,date,parts[4],client,
 							productsOrder,employee,nameUserCreators);

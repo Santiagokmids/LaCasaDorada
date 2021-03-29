@@ -4902,6 +4902,37 @@ public class LaCasaDoradaGUI{
 			}
 		}
 	}
+	
+	@FXML
+	public void importOrders(ActionEvent event) {
+
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Abrir un archivo");
+		File f = fileChooser.showOpenDialog(mainPane.getScene().getWindow());
+
+		if(f != null) {
+
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Importar Pedidos");
+
+			try {
+
+				Alert alert1 = new Alert(AlertType.WARNING);
+				alert1.setTitle("Importando Pedidos");
+				alert1.setContentText("Por favor espere...");
+				alert1.showAndWait();
+
+				laCasaDorada.importDataProduct(f.getAbsolutePath(),usersModifiers);
+				alert1.close();
+				alert.setContentText("Los Productos han sido importados correctamente.");
+				alert.showAndWait();
+
+			} catch (IOException e) {
+				alert.setContentText("Los Productos no pudieron ser importados.");
+				alert.showAndWait();
+			}
+		}
+	}
 
 	@FXML
 	public void loadSearchClient(ActionEvent event) throws IOException {
@@ -4926,7 +4957,6 @@ public class LaCasaDoradaGUI{
 	public void searchClient(ActionEvent event) {
 
 		if(!nameSearchClient.getText().isEmpty() && !lastNameSearchClient.getText().isEmpty()) {
-
 
 			long start = System.nanoTime();
 			Client client = laCasaDorada.binarySearch(nameSearchClient.getText(), lastNameSearchClient.getText());
