@@ -4923,13 +4923,12 @@ public class LaCasaDoradaGUI{
 				alert1.setContentText("Por favor espere...");
 				alert1.showAndWait();
 
-				laCasaDorada.importDataProduct(f.getAbsolutePath(),usersModifiers);
-				alert1.close();
-				alert.setContentText("Los Productos han sido importados correctamente.");
+				laCasaDorada.importDataOrder(f.getAbsolutePath(),usersModifiers);
+				alert.setContentText("Los Pedidos han sido importados correctamente.");
 				alert.showAndWait();
 
 			} catch (IOException e) {
-				alert.setContentText("Los Productos no pudieron ser importados.");
+				alert.setContentText("Los Pedidos no pudieron ser importados.");
 				alert.showAndWait();
 			}
 		}
