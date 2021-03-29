@@ -16,6 +16,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
 
 public class LaCasaDorada{
 
@@ -175,6 +177,28 @@ public class LaCasaDorada{
 		return orders;
 	}
 
+	//create order
+	public boolean create(String code,StateOrder state, ArrayList<Integer> amount, Date date, String fieldOfObservations, Client orderClient,
+			ArrayList<Product>products, Employee ordEmployee, Modifiers userModifiers) throws IOException {
+
+		boolean orders = true, validation = true;
+
+		while(validation) {
+			validation = findOrders(code);
+
+			if(!validation) {
+				Order newOrder = new Order(code, state, amount, date, fieldOfObservations, orderClient, products, ordEmployee, userModifiers);
+				order.add(newOrder);
+				saveData();
+
+			}else {
+				orders = false;
+			}
+		}
+		return orders;
+	}
+
+	
 	//create size
 	public void createSize(String size, Modifiers modifiers, State state) throws IOException {
 
@@ -1246,12 +1270,7 @@ public class LaCasaDorada{
 
 			String[] parts = line.split(",");
 
-			State state = findStates(parts[6]);
-
 			StateOrder stateOrder = findState(parts[1]);
-
-			//	 create(StateOrder state, ArrayList<Integer> amount, Date date, String fieldOfObservations, Client orderClient,
-			//			ArrayList<Product>products, Employee ordEmployee, Modifiers userModifiers) 
 
 			String[] productsSplit1 = parts[5].split("-");
 
@@ -1261,19 +1280,37 @@ public class LaCasaDorada{
 
 			ArrayList<Product> productsOrder = arrayProducts(productsSplit1);
 			
-			Client client = findObjClient(parts[4]);
-			
-			String code = findCode(parts[0]);
-			
-			Employee employee = findEmployee(parts[7]);
-			
-			Date date = findDate(parts[3]);
+			if(amountOrder.size() == productsOrder.size()) {
+				Client client = findObjClient(parts[4]);
 
-			create(code,stateOrder,amountOrder,date,parts[4],client,productsOrder,employee,nameUserCreators);
-			line = br.readLine();
+				boolean validation = findOrders(parts[0]);
+
+				if(!validation) {
+					Employee employee = findEmployee(parts[7]);
+
+					Date date = convertDate(parts[3]);
+
+					create(parts[0],stateOrder,amountOrder,date,parts[4],client,
+							productsOrder,employee,nameUserCreators);
+					
+					line = br.readLine();
+				}
+			}
 		}
-
 		br.close();
+	}
+	
+	public static Date convertDate(String date){
+		
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+		Date fechaDate = null;
+		try {
+			fechaDate = formato.parse(date);
+		} 
+		catch (ParseException ex) {
+			
+		}
+		return fechaDate;
 	}
 	
 	public String findCode(String code) {
@@ -1286,11 +1323,18 @@ public class LaCasaDorada{
 	public ArrayList<Product> arrayProducts(String[] productArray) {
 
 		ArrayList<Product> newArrayproduct = new ArrayList<>();
-
+		boolean verify = true;
 		for (int i = 0; i < productArray.length; i++) {
-
+			
+			for (int j = 0; j < getProduct().size() && verify; j++) {
+				
+				if(getProduct().get(i).getName().equalsIgnoreCase(productArray[j].toString())) {
+					Product product = findProducts(productArray[j]);
+					newArrayproduct.add(product);
+					verify = false;
+				}
+			}
 		}
-
 		return newArrayproduct;
 	}
 	
@@ -1298,9 +1342,9 @@ public class LaCasaDorada{
 		
 		ArrayList<Integer> newArrayAmount = new ArrayList<>();
 
-
 		for (int i = 0; i < amountArray.length; i++) {
-
+			int numberAmount = Integer.parseInt(amountArray[i]);
+			newArrayAmount.add(numberAmount);
 		}
 
 		return newArrayAmount;
