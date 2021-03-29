@@ -1612,34 +1612,6 @@ public class LaCasaDorada{
 		return loaded;
 	}
 
-	/*public void sortByNameAndLastName() {
-=======
-	public void sortByNameAndLastName() {
->>>>>>> 68de6831589d5e8040a63605c878f9d8c8ce552d
-
-		Comparator<Client> nameAndLastNameComparator = new Comparator<Client>() {
-
-			public int compare(Client c1, Client c2) {
-
-				int verific = 0;
-
-				if(c1.getLastName().compareTo(c2.getLastName()) > 0) {
-					verific = 1;
-					System.out.println(verific+"uno");
-				}
-				else if(c1.getLastName().compareTo(c2.getLastName()) < 0) {
-					verific = -1;
-					System.out.println(verific+" doddss");
-				}
-				else if(c1.getLastName().compareTo(c2.getLastName()) == 0) {
-					
-				}
-				return verific;
-			}
-		};
-		Collections.sort(getClients(),nameAndLastNameComparator);
-	}*/
-
 	public void insertionSort() {
 
 		for (int i = 1; i < product.size(); i++) {
@@ -1661,7 +1633,7 @@ public class LaCasaDorada{
 		int i = 0;
 		int j = listClient.size()-1;
 		Client client = null;
-		
+	
 		while(i <= j && pos < 0) {
 			int m = (i+j)/2;
 			
