@@ -52,8 +52,8 @@ public class ProductType implements Serializable, Comparable<ProductType>{
 	}
 
 	@Override
-	public int compareTo(ProductType o) {
-		return getName().compareTo(o.getName())*(-1);
+	public int compareTo(ProductType productT) {
+		return getName().compareTo(productT.getName());
 	}
 	
 	
