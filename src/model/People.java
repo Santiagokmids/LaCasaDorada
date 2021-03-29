@@ -2,7 +2,7 @@ package model;
 
 import java.io.Serializable;
 
-public abstract class People implements Serializable{
+public abstract class People implements Serializable, Comparable<Client>{
 	
 	//Attributes
 	

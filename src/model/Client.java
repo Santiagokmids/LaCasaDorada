@@ -1,6 +1,6 @@
 package model;
 
-public class Client extends People implements Comparable<Client>{
+public class Client extends People {
 
 	//Attributes
 
@@ -42,7 +42,14 @@ public class Client extends People implements Comparable<Client>{
 	}
 
 	@Override
-	public int compareTo(Client oC) {
-		return getLastName().compareTo(oC.getLastName())*(-1);
+	public int compareTo(Client c1) {
+		
+		int verify = getLastName().compareTo(c1.getLastName());
+			
+		if(verify == 0) {
+			verify = getName().compareTo(c1.getName());
+		}
+		
+		return verify;
 	}
 }

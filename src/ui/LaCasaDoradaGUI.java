@@ -4615,6 +4615,7 @@ public class LaCasaDoradaGUI{
 		lastDay.setDisable(true);
 	}
 
+	@SuppressWarnings("deprecation")
 	@FXML
 	public void exportOrders(ActionEvent event) {
 
@@ -4839,13 +4840,8 @@ public class LaCasaDoradaGUI{
 
 			try {
 
-				Alert alert1 = new Alert(AlertType.CONFIRMATION);
-				alert1.setTitle("Importando clientes");
-				alert1.setContentText("Por favor espere...");
-				alert1.showAndWait();
-
 				laCasaDorada.importDataClient(f.getAbsolutePath(),usersModifiers);
-				alert1.close();
+				alert.close();
 				alert.setContentText("Los clientes han sido importados correctamente.");
 				alert.showAndWait();
 
