@@ -2,7 +2,7 @@ package model;
 
 import java.io.Serializable;
 
-public class ProductType implements Serializable{
+public class ProductType implements Serializable, Comparable<ProductType>{
 	
 	//Attributes
 	
@@ -50,4 +50,11 @@ public class ProductType implements Serializable{
 	public void setState(State state) {
 		this.state = state;
 	}
+
+	@Override
+	public int compareTo(ProductType o) {
+		return getName().compareTo(o.getName())*(-1);
+	}
+	
+	
 }
