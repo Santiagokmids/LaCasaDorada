@@ -96,7 +96,6 @@ public class LaCasaDorada{
 
 		Ingredient ingredients = new Ingredient(name, userModifiers,state);
 
-
 		if(ingredient.isEmpty()) {
 			ingredient.add(ingredients);
 		}
@@ -137,12 +136,33 @@ public class LaCasaDorada{
 	}
 
 	//Create type product
-	public void createTypeProduct(String name, Modifiers userModifiers, State state) {
+	public void createTypeProduct(String name, Modifiers userModifiers, State state) throws IOException {
 
 		ProductType typeProduct = new ProductType(name, userModifiers,state);
 		productType.add(typeProduct);
+			
+		saveData();
 	}
+	
+	public void selectionType() {
+		
+		for (int i = 0; i < productType.size()-1; i++) {
+			ProductType productT = productType.get(i);
+			System.out.println("i"+i+" size"+productType.size());
+			for (int j = i+1; j < productType.size(); j++) {
 
+				if(productType.get(j).compareTo(productT) < 0) {
+					ProductType temp = productType.get(j);
+					productType.remove(j);
+					productType.add(j, productT);
+					productT = temp;
+				}
+			}
+			productType.remove(i);
+			productType.add(i, productT);
+		}
+	}
+	
 	//Create Modifiers
 	public Modifiers create(User creator, User modifier) {
 

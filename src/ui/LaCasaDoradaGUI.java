@@ -45,18 +45,18 @@ import model.StateOrder;
 import model.User;
 
 public class LaCasaDoradaGUI{
-	
+
 	@FXML
-    private ImageView imageWallSearch;
+	private ImageView imageWallSearch;
 
-    @FXML
-    private TextField nameSearchClient;
+	@FXML
+	private TextField nameSearchClient;
 
-    @FXML
-    private TextField lastNameSearchClient;
+	@FXML
+	private TextField lastNameSearchClient;
 
-    @FXML
-    private ImageView imageBannerSearch;
+	@FXML
+	private ImageView imageBannerSearch;
 
 	@FXML
 	private ImageView imageBannerExportProduct;
@@ -978,7 +978,7 @@ public class LaCasaDoradaGUI{
 					alerts.showAndWait();
 
 					laCasaDorada.create(name.getText(), lastName.getText(), id.getText(), nameUser.getText(), password.getText(),null,State.ENABLE);
-					
+
 					loadLogin();
 
 				}else {
@@ -2184,7 +2184,7 @@ public class LaCasaDoradaGUI{
 		for (int i = 0; i < size.size(); i++) {
 			comboSizeProduct.getItems().addAll(size.get(i).getSize());
 		}
-		
+
 		laCasaDorada.sortByPriceProduct();
 
 		inicializateTableViewProduct();
@@ -2391,11 +2391,11 @@ public class LaCasaDoradaGUI{
 					listOfProducts.set(tvListProduct.getSelectionModel().getSelectedIndex(),new Product(name,ingredients,laCasaDorada.findType(type),laCasaDorada.findSize(size),priceNum,product.getUsersCreators(),State.ENABLE));
 
 					laCasaDorada.insertionSort();
-					
+
 					inicializateTableViewProduct();
-					
+
 					laCasaDorada.saveData();
-					
+
 					updateNameProduct.setText("");
 					updateIngredientProduct.setText("");
 					updateTypeProduct.setValue("");
@@ -3214,7 +3214,8 @@ public class LaCasaDoradaGUI{
 		imageWallListType.setImage(image);
 		Image image2 = new Image("/images/BannerCasaDorada.jpg");
 		imageBannerListType.setImage(image2);
-
+		
+		laCasaDorada.selectionType();
 		inicializateTableViewType();
 	}
 
@@ -4870,7 +4871,7 @@ public class LaCasaDoradaGUI{
 			}
 		}
 	}
-	
+
 	@FXML
 	public void importProducts(ActionEvent event) {
 
@@ -4901,7 +4902,7 @@ public class LaCasaDoradaGUI{
 			}
 		}
 	}
-	
+
 	@FXML
 	public void loadSearchClient(ActionEvent event) throws IOException {
 
@@ -4920,19 +4921,19 @@ public class LaCasaDoradaGUI{
 		Image image2 = new Image("/images/BannerCasaDorada.jpg");
 		imageBannerSearch.setImage(image2);
 	}
-	
+
 	@FXML
 	public void searchClient(ActionEvent event) {
 
 		if(!nameSearchClient.getText().isEmpty() && !lastNameSearchClient.getText().isEmpty()) {
-			
-			
+
+
 			long start = System.nanoTime();
 			Client client = laCasaDorada.binarySearch(nameSearchClient.getText(), lastNameSearchClient.getText());
 			long end = System.nanoTime();
-			
+
 			if(client == null) {
-				
+
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("ERROR");
 				alert.setHeaderText("No se encontró el cliente");
@@ -4940,18 +4941,16 @@ public class LaCasaDoradaGUI{
 				alert.showAndWait();
 			}
 			else {
-				
+
 				Alert alert1 = new Alert(AlertType.INFORMATION);
 				alert1.setHeaderText("Búsqueda realizada en "+(end-start)+" nanosegundos");
 				alert1.setContentText("Cliente encontrado: \n"+"Nombre: "+client.getName()+"\nApellido: "+client.getLastName()+"\nNo. Identificación: "+client.getId()+"\nDirección: "+client.getAddress()+"\nTeléfono: "+client.getTelephone()+"\nObservaciones: "+client.getFieldOfObservations());
 				alert1.showAndWait();
-				
+
 				nameSearchClient.setText("");
 				lastNameSearchClient.setText("");
 			}
-			
-		}
-		else {
+		}else {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("ERROR");
 			alert.setHeaderText("No se pudo buscar el cliente");
@@ -4959,4 +4958,5 @@ public class LaCasaDoradaGUI{
 			alert.showAndWait();
 		}
 	}
+
 }
