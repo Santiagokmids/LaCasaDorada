@@ -1295,11 +1295,11 @@ public class LaCasaDorada{
 			String[] productsSplit1 = parts[5].split("-");
 
 			String[] amountSplit = parts[2].split("-");
-			
+
 			ArrayList<Integer> amountOrder = arrayAmount(amountSplit);
 
 			ArrayList<Product> productsOrder = arrayProducts(productsSplit1);
-			
+
 			if(amountOrder.size() == productsOrder.size()) {
 				Client client = findObjClient(parts[4]);
 				Employee employee = findEmployee(parts[7]);
@@ -1318,7 +1318,7 @@ public class LaCasaDorada{
 		}
 		br.close();
 	}
-	
+
 	public static Date convertDate(String date){
 		
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
@@ -1333,9 +1333,9 @@ public class LaCasaDorada{
 	}
 	
 	public String findCode(String code) {
-		
+
 		String verify = "";
-		
+
 		return verify;
 	}
 
@@ -1356,9 +1356,9 @@ public class LaCasaDorada{
 		}
 		return newArrayproduct;
 	}
-	
+
 	public ArrayList<Integer> arrayAmount(String[] amountArray) {
-		
+
 		ArrayList<Integer> newArrayAmount = new ArrayList<>();
 
 		for (int i = 0; i < amountArray.length; i++) {
