@@ -56,7 +56,7 @@ public class LaCasaDorada{
 
 		Client client = new Client(name, lastName, id, address, telephone, fieldObservations, modifiers, state);
 		people.add(client);
-		
+
 		List<Client> clients = new ArrayList<Client>();
 		clients = getClients();
 
@@ -64,12 +64,12 @@ public class LaCasaDorada{
 
 			if(people.get(i) instanceof Client) {
 				people.get(i).compareTo(client);
-				
+
 				Collections.sort(clients);
 			}
 		}
 		setClients(clients);
-		
+
 		saveData();
 	}
 
@@ -969,7 +969,7 @@ public class LaCasaDorada{
 		}
 		return clients;
 	}
-	
+
 	public List<Client> setClients(List<Client> clients){
 		int cont = 0;
 		for (int j = 0; j < people.size(); j++) {
@@ -1226,14 +1226,62 @@ public class LaCasaDorada{
 
 			State state = findStates(parts[6]);
 
+			StateOrder stateOrder = findState(parts[1]);
+
 			//	 create(StateOrder state, ArrayList<Integer> amount, Date date, String fieldOfObservations, Client orderClient,
 			//			ArrayList<Product>products, Employee ordEmployee, Modifiers userModifiers) 
 
-			create(parts[0],parts[1],parts[2],parts[3],parts[4],parts[5],nameUserCreators,state);
+			String[] productsSplit1 = parts[5].split("-");
+
+			String[] amountSplit = parts[2].split("-");
+			
+			ArrayList<Integer> amountOrder = arrayAmount(amountSplit);
+
+			ArrayList<Product> productsOrder = arrayProducts(productsSplit1);
+			
+			Client client = findObjClient(parts[4]);
+			
+			String code = findCode(parts[0]);
+			
+			Employee employee = findEmployee(parts[7]);
+			
+			Date date = findDate(parts[3]);
+
+			create(code,stateOrder,amountOrder,date,parts[4],client,productsOrder,employee,nameUserCreators);
 			line = br.readLine();
 		}
 
 		br.close();
+	}
+	
+	public String findCode(String code) {
+		
+		String verify = "";
+		
+		return verify;
+	}
+
+	public ArrayList<Product> arrayProducts(String[] productArray) {
+
+		ArrayList<Product> newArrayproduct = new ArrayList<>();
+
+		for (int i = 0; i < productArray.length; i++) {
+
+		}
+
+		return newArrayproduct;
+	}
+	
+	public ArrayList<Integer> arrayAmount(String[] amountArray) {
+		
+		ArrayList<Integer> newArrayAmount = new ArrayList<>();
+
+
+		for (int i = 0; i < amountArray.length; i++) {
+
+		}
+
+		return newArrayAmount;
 	}
 
 	public void importDataProduct(String fileName, Modifiers nameUserCreators) throws IOException {
@@ -1246,23 +1294,23 @@ public class LaCasaDorada{
 			String[] parts = line.split(",");
 
 			String[] ingredientsParts = parts[1].split("-");
-			
+
 			double price = 0;
 
 			ArrayList<Ingredient> ingredientsSplit = convertToArray(ingredientsParts);
-			
+
 			if(findType(parts[2]) == null) {
 				createTypeProduct(parts[2],nameUserCreators,State.ENABLE);
 			}
-			
+
 			ProductType newProductType = findType(parts[2]);
-			
+
 			if(!findSizes(parts[3])) {
 				createSize(parts[3],nameUserCreators,State.ENABLE);
 			}
-			
+
 			Size newSize = findSize(parts[3]);
-			
+
 			try {
 				price = Double.parseDouble(parts[4]);
 			} catch (NumberFormatException e) {
@@ -1353,7 +1401,7 @@ public class LaCasaDorada{
 	public void exportDataProduct(String fileName) throws FileNotFoundException{
 
 		PrintWriter pw = new PrintWriter(fileName);
-		
+
 		int totalProduct = 0;
 		int totalSell = 0;
 
@@ -1364,13 +1412,13 @@ public class LaCasaDorada{
 			Product productList = product.get(i);
 
 			double numProduct = sizeProductOrder(productList);
-			
+
 			totalProduct += numProduct;
 			totalSell += numProduct*productList.getPrice();
 
 			pw.println(productList.getName()+" "+productList.getNameSize()+SEPARATOR+numProduct+SEPARATOR+(numProduct*productList.getPrice()));
 		}
-		
+
 		pw.println("No. DE PRODUCTOS VENDIDOS EN TOTAL "+SEPARATOR+"TOTAL VENDIDO");
 		pw.println(totalProduct+SEPARATOR+totalSell);
 
@@ -1634,10 +1682,10 @@ public class LaCasaDorada{
 			}
 		}
 	}
-	
+
 	public void sortByPriceProduct() {
 		Comparator<Product> priceProductComparator = new Comparator<Product>() {
-			
+
 			@Override
 			public int compare(Product product1,Product product2) {
 				return Double.compare(product1.getPrice(), product2.getPrice())*(-1);
@@ -1647,20 +1695,20 @@ public class LaCasaDorada{
 	}
 
 	public Client binarySearch(String name, String lastName) {
-		
+
 		ArrayList<Client> listClient = getClients();
-		
+
 		int pos = -1;
 		int i = 0;
 		int j = listClient.size()-1;
 		Client client = null;
-	
+
 		while(i <= j && pos < 0) {
 			int m = (i+j)/2;
-			
+
 			if(listClient.get(m).compare(lastName, name) == 0) {
 				pos = m;
-				
+
 				client = listClient.get(pos);
 			}
 			else if(listClient.get(m).compare(lastName, name) > 0) {
