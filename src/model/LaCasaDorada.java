@@ -506,7 +506,8 @@ public class LaCasaDorada{
 
 		for (int j = 0; j < people.size() && !find; j++) {
 
-			if(people.get(j) instanceof Employee && people.get(j).getName().equalsIgnoreCase(id)) {
+			if(people.get(j) instanceof Employee && people.get(j).getId().equalsIgnoreCase(id) || 
+					people.get(j) instanceof User && people.get(j).getId().equalsIgnoreCase(id)) {
 				find = true;
 				employee = (Employee) people.get(j);
 			}

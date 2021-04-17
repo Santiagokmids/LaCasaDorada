@@ -602,7 +602,7 @@ public class LaCasaDoradaGUI{
 	private TableColumn<Order, String> dateOrder;
 
 	@FXML
-	private TableColumn<?, ?> obsOrdersList;
+	private TableColumn<Integer, Integer> obsOrdersList;
 
 	@FXML
 	private TextField updateNameOrder;
@@ -2067,7 +2067,7 @@ public class LaCasaDoradaGUI{
 			String lastName = listEmployee.get(tvEmployee.getSelectionModel().getSelectedIndex()).getLastName();
 			String id = listEmployee.get(tvEmployee.getSelectionModel().getSelectedIndex()).getId();
 
-			Employee employee= laCasaDorada.findObjEmployee(id);
+			Employee employee = laCasaDorada.findObjEmployee(id);
 
 			if(!updateNameEmployee.getText().isEmpty() && !updateNameEmployee.getText().equals(name)) {
 				name = updateNameEmployee.getText();
@@ -4632,7 +4632,6 @@ public class LaCasaDoradaGUI{
 		LocalDate today = LocalDate.now();
 
 		lastDay.setValue(today);
-		lastDay.setDisable(true);
 	}
 
 	@SuppressWarnings("deprecation")
@@ -4740,7 +4739,11 @@ public class LaCasaDoradaGUI{
 				try {
 
 					Date date = new Date();
-
+					if (firstDateEmp.getValue() != null) {
+						System.out.println("sí");
+					}
+					else
+						System.out.println("no");
 					if(firstDateEmp.getValue() != null && date.getDay()<=lastDayProduct.getValue().getDayOfMonth() && 
 							date.getMonth()<=lastDayProduct.getValue().getMonthValue() && date.getYear()<= lastDayProduct.getValue().getYear()) {
 
@@ -4861,7 +4864,6 @@ public class LaCasaDoradaGUI{
 			try {
 
 				laCasaDorada.importDataClient(f.getAbsolutePath(),usersModifiers);
-				alert.close();
 				alert.setContentText("Los clientes han sido importados correctamente.");
 				alert.showAndWait();
 
@@ -4886,14 +4888,8 @@ public class LaCasaDoradaGUI{
 
 			try {
 
-				Alert alert1 = new Alert(AlertType.NONE);
-				alert1.setTitle("Importando Productos");
-				alert1.setContentText("Por favor espere...");
-				alert1.showAndWait();
-
 				laCasaDorada.importDataProduct(f.getAbsolutePath(),usersModifiers);
 				
-				alert1.close();
 				alert.setContentText("Los Productos han sido importados correctamente.");
 				alert.showAndWait();
 
@@ -4917,11 +4913,6 @@ public class LaCasaDoradaGUI{
 			alert.setTitle("Importar Pedidos");
 
 			try {
-
-				Alert alert1 = new Alert(AlertType.WARNING);
-				alert1.setTitle("Importando Pedidos");
-				alert1.setContentText("Por favor espere...");
-				alert1.showAndWait();
 
 				laCasaDorada.importDataOrder(f.getAbsolutePath(),usersModifiers);
 				alert.setContentText("Los Pedidos han sido importados correctamente.");
