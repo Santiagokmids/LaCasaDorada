@@ -4,12 +4,13 @@
 
 https://drive.google.com/drive/my-drive?hl=es
 
-## Proyecto realizado con:
+* Proyecto realizado con:
 Eclipse-IDE For java developers
 
-## Lenguaje:
+* Lenguaje:
 Java
 
-## Proyecto realizado por:
+* Proyecto realizado por:
 Luis Miguel Ossa -> https://github.com/Itsumohitoride
+
 Santiago Trochez Velasco -> https://github.com/Santiagokmids
