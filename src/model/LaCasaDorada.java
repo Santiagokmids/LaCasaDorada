@@ -57,21 +57,24 @@ public class LaCasaDorada{
 			Modifiers modifiers, State state) throws IOException {
 
 		Client client = new Client(name, lastName, id, address, telephone, fieldObservations, modifiers, state);
-		people.add(client);
-
-		List<Client> clients = new ArrayList<Client>();
-		clients = getClients();
-
-		for (int i = 0; i < people.size(); i++) {
-
-			if(people.get(i) instanceof Client) {
-				people.get(i).compareTo(client);
-
-				Collections.sort(clients);
-			}
+		List<Client> listClients = getClients();
+		
+		if(listClients.isEmpty()) {
+			listClients.add(client);
+			people.add(client);
+			setClients(listClients);
 		}
-		setClients(clients);
+		else {
 
+			int i = 0;
+
+			while(i < listClients.size() && 0 < listClients.get(i).compareTo(client)) {
+				i++;
+			}
+			listClients.add(i, client);
+			people.add(client);
+			setClients(listClients);
+		}
 		saveData();
 	}
 
@@ -1286,8 +1289,6 @@ public class LaCasaDorada{
 
 		BufferedReader br = new BufferedReader(new FileReader(fileName));
 		String line = br.readLine();
-		
-		System.out.println("xd");
 
 		while(line != null) {
 
@@ -1297,25 +1298,12 @@ public class LaCasaDorada{
 
 			String[] productsSplit1 = parts[6].split("-");
 			
-			System.out.println(productsSplit1.length+" p");
-			
-			System.out.println(parts[6]);
-
-			System.out.println(parts[2]);
 			
 			String[] amountSplit = parts[2].split("-");
 			
-			System.out.println(amountSplit.length+" a");
-
 			ArrayList<Integer> amountOrder = arrayAmount(amountSplit);
 
 			ArrayList<Product> productsOrder = arrayProducts(productsSplit1);
-			
-			System.out.println(amountOrder.size()+" listA");
-			
-			System.out.println(productsOrder.size()+" listP");
-
-			System.out.println("Más antes");
 			
 			if(amountOrder.size() == productsOrder.size()) {
 				Client client = findObjClient(parts[5]);
@@ -1324,14 +1312,8 @@ public class LaCasaDorada{
 				
 				boolean validation = findOrders(parts[0]);
 				
-				System.out.println("Antes");
-				
-				System.out.println(validation+" "+client.getName()+" "+employee.getName());
-				
 				if(!validation && client != null && employee != null) {
 					
-					System.out.println("Después");
-
 					create(parts[0],stateOrder,amountOrder,date,parts[4],client,
 							productsOrder,employee,nameUserCreators);
 					
@@ -1360,7 +1342,7 @@ public class LaCasaDorada{
 		ArrayList<Product> newArrayproduct = new ArrayList<>();
 		for (int i = 0; i < productArray.length; i++) {
 			
-			for (int j = 0; j < getProduct().size(); j++) {
+			for (int j = 0; j < getProduct().size() - 1; j++) {
 				
 				if(getProduct().get(i).getName().equalsIgnoreCase(productArray[j].toString())) {
 					Product product = findProducts(productArray[j]);
@@ -1792,7 +1774,7 @@ public class LaCasaDorada{
 		};
 		Collections.sort(product,Collections.reverseOrder(priceProductComparator));
 	}
-
+	
 	public Client binarySearch(String name, String lastName) {
 
 		ArrayList<Client> listClient = getClients();

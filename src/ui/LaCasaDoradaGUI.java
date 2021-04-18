@@ -878,7 +878,6 @@ public class LaCasaDoradaGUI{
 	}
 
 	private void inicializateTableView() {
-
 		observableList = FXCollections.observableArrayList(laCasaDorada.getPreorder());
 
 		tvOrder.setItems(observableList);
@@ -4739,13 +4738,9 @@ public class LaCasaDoradaGUI{
 				try {
 
 					Date date = new Date();
-					if (firstDateEmp.getValue() != null) {
-						System.out.println("sí");
-					}
-					else
-						System.out.println("no");
-					if(firstDateEmp.getValue() != null && date.getDay()<=lastDayProduct.getValue().getDayOfMonth() && 
-							date.getMonth()<=lastDayProduct.getValue().getMonthValue() && date.getYear()<= lastDayProduct.getValue().getYear()) {
+					
+					if(firstDateEmp.getValue() != null && date.getDay()<=lastDayEmp.getValue().getDayOfMonth() && 
+							date.getMonth()<=lastDayEmp.getValue().getMonthValue() && date.getYear()<= lastDayEmp.getValue().getYear()) {
 
 						Integer.parseInt(firstHourEmp.getText());
 						Integer.parseInt(firstMinEmp.getText());
