@@ -16,4 +16,4 @@ Cambios generados en la segunda entrega del proyecto acerca de La Casa Dorada
  Cambio a la hora de ordenar clientes. Los clientes se agregan de forma ordenada.
 
 *Sexto Cambio:
- Las alertas ya no aparecen a la hora de importar archivos, lo que hace que la operación se realice sin espera alguna.
+ Las alertas ya no aparecen a la hora de importar archivos, lo que hace que la operación se realice sin ningún problema o espera.
