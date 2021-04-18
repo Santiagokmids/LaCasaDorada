@@ -1,7 +1,6 @@
 # jfx-LaCasaDorada
 
-## Cambios generados en la segunda entrega del proyecto acerca de La Casa Dorada:
-
+* Cambios generados en la segunda entrega del proyecto acerca de La Casa Dorada:
 https://drive.google.com/drive/my-drive?hl=es
 
 * Proyecto realizado con:
@@ -12,6 +11,6 @@ Java 8
 
 * Proyecto realizado por:
 
-Luis Miguel Ossa -> https://github.com/Itsumohitoride
+  Luis Miguel Ossa -> https://github.com/Itsumohitoride
 
-Santiago Trochez Velasco -> https://github.com/Santiagokmids
+  Santiago Trochez Velasco -> https://github.com/Santiagokmids
