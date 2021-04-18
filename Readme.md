@@ -8,9 +8,10 @@ https://drive.google.com/drive/my-drive?hl=es
 Eclipse-IDE For java developers
 
 * Lenguaje:
-Java
+Java 8 
 
 * Proyecto realizado por:
+
 Luis Miguel Ossa -> https://github.com/Itsumohitoride
 
 Santiago Trochez Velasco -> https://github.com/Santiagokmids
